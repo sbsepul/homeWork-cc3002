@@ -166,23 +166,521 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,intellij,intellij+all
 
+###################################	End directory ppal ###################################
 
 ## Begin of Ignore personality
 
-## Folder that not are used
-# For Tarea 1
+######## For Tarea 1 #########
+
+# Created by https://www.gitignore.io/api/java,intellij,intellij+all
+# Edit at https://www.gitignore.io/?templates=java,intellij,intellij+all
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+t1/.idea/**/workspace.xml
+t1/.idea/**/tasks.xml
+t1/.idea/**/usage.statistics.xml
+t1/.idea/**/dictionaries
+t1/.idea/**/shelf
+
+# Generated files
+t1/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+t1/.idea/**/dataSources/
+t1/.idea/**/dataSources.ids
+t1/.idea/**/dataSources.local.xml
+t1/.idea/**/sqlDataSources.xml
+t1/.idea/**/dynamic.xml
+t1/.idea/**/uiDesigner.xml
+t1/.idea/**/dbnavigator.xml
+
+# Gradle
+t1/.idea/**/gradle.xml
+t1/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+t1/cmake-build-*/
+
+# Mongo Explorer plugin
+t1/.idea/**/mongoSettings.xml
+
+# File-based project format
+t1/*.iws
+
+# IntelliJ
+t1/out/
+
+# mpeltonen/sbt-idea plugin
+t1/.idea_modules/
+
+# JIRA plugin
+t1/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+t1/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+t1/com_crashlytics_export_strings.xml
+t1/crashlytics.properties
+t1/crashlytics-build.properties
+t1/fabric.properties
+
+# Editor-based Rest Client
+t1/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+t1/.idea/caches/build_file_checksums.ser
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+t1/.idea/sonarlint
+
+### Intellij+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
 t1/.idea/
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+t1/*.iml
+t1/modules.xml
+t1/.idea/misc.xml
+t1/*.ipr
+
+# Sonarlint plugin
+
+### Java ###
+# Compiled class file
+t1/*.class
+
+# Log file
+t1/*.log
+
+# BlueJ files
+t1/*.ctxt
+
+# Mobile Tools for Java (J2ME)
+t1/.mtj.tmp/
+
+# Package Files #
+t1/*.jar
+t1/*.war
+t1/*.nar
+t1/*.ear
+t1/*.zip
+t1/*.tar.gz
+t1/*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+t1/hs_err_pid*
+
+
+## Folder that not are used
 t1/aux1/
 
 
-# For Tarea 2
+######## For Tarea 2 #########
+
+# Created by https://www.gitignore.io/api/java,intellij,intellij+all
+# Edit at https://www.gitignore.io/?templates=java,intellij,intellij+all
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+t2/.idea/**/workspace.xml
+t2/.idea/**/tasks.xml
+t2/.idea/**/usage.statistics.xml
+t2/.idea/**/dictionaries
+t2/.idea/**/shelf
+
+# Generated files
+t2/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+t2/.idea/**/dataSources/
+t2/.idea/**/dataSources.ids
+t2/.idea/**/dataSources.local.xml
+t2/.idea/**/sqlDataSources.xml
+t2/.idea/**/dynamic.xml
+t2/.idea/**/uiDesigner.xml
+t2/.idea/**/dbnavigator.xml
+
+# Gradle
+t2/.idea/**/gradle.xml
+t2/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+t2/cmake-build-*/
+
+# Mongo Explorer plugin
+t2/.idea/**/mongoSettings.xml
+
+# File-based project format
+t2/*.iws
+
+# IntelliJ
+t2/out/
+
+# mpeltonen/sbt-idea plugin
+t2/.idea_modules/
+
+# JIRA plugin
+t2/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+t2/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+t2/com_crashlytics_export_strings.xml
+t2/crashlytics.properties
+t2/crashlytics-build.properties
+t2/fabric.properties
+
+# Editor-based Rest Client
+t2/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+t2/.idea/caches/build_file_checksums.ser
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+t2/.idea/sonarlint
+
+### Intellij+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+t2/.idea/
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+t2/*.iml
+t2/modules.xml
+t2/.idea/misc.xml
+t2/*.ipr
+
+# Sonarlint plugin
+
+### Java ###
+# Compiled class file
+t2/*.class
+
+# Log file
+t2/*.log
+
+# BlueJ files
+t2/*.ctxt
+
+# Mobile Tools for Java (J2ME)
+t2/.mtj.tmp/
+
+# Package Files #
+t2/*.jar
+t2/*.war
+t2/*.nar
+t2/*.ear
+t2/*.zip
+t2/*.tar.gz
+t2/*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+t2/hs_err_pid*
 
 
 
+######## For Tarea 3 #########
 
-# For Tarea 3
 
+# Created by https://www.gitignore.io/api/java,intellij,intellij+all
+# Edit at https://www.gitignore.io/?templates=java,intellij,intellij+all
 
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+t3/.idea/**/workspace.xml
+t3/.idea/**/tasks.xml
+t3/.idea/**/usage.statistics.xml
+t3/.idea/**/dictionaries
+t3/.idea/**/shelf
+
+# Generated files
+t3/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+t3/.idea/**/dataSources/
+t3/.idea/**/dataSources.ids
+t3/.idea/**/dataSources.local.xml
+t3/.idea/**/sqlDataSources.xml
+t3/.idea/**/dynamic.xml
+t3/.idea/**/uiDesigner.xml
+t3/.idea/**/dbnavigator.xml
+
+# Gradle
+t3/.idea/**/gradle.xml
+t3/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+t3/cmake-build-*/
+
+# Mongo Explorer plugin
+t3/.idea/**/mongoSettings.xml
+
+# File-based project format
+t3/*.iws
+
+# IntelliJ
+t3/out/
+
+# mpeltonen/sbt-idea plugin
+t3/.idea_modules/
+
+# JIRA plugin
+t3/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+t3/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+t3/com_crashlytics_export_strings.xml
+t3/crashlytics.properties
+t3/crashlytics-build.properties
+t3/fabric.properties
+
+# Editor-based Rest Client
+t3/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+t3/.idea/caches/build_file_checksums.ser
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+t3/.idea/sonarlint
+
+### Intellij+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+t3/.idea/
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+t3/*.iml
+t3/modules.xml
+t3/.idea/misc.xml
+t3/*.ipr
+
+# Sonarlint plugin
+
+### Java ###
+# Compiled class file
+t3/*.class
+
+# Log file
+t3/*.log
+
+# BlueJ files
+t3/*.ctxt
+
+# Mobile Tools for Java (J2ME)
+t3/.mtj.tmp/
+
+# Package Files #
+t3/*.jar
+t3/*.war
+t3/*.nar
+t3/*.ear
+t3/*.zip
+t3/*.tar.gz
+t3/*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+t3/hs_err_pid*
 
 
 
