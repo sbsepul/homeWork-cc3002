@@ -13,6 +13,7 @@ import model.map.Location;
  * @since 1.0
  */
 public class Hero extends AbstractUnit {
+  /*We need a name, hit points */
 
   /**
    * Creates a new Unit.

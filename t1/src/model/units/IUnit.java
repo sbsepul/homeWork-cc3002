@@ -66,3 +66,4 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 }
+

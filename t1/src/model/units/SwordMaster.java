@@ -12,6 +12,8 @@ import model.map.Location;
  * @since 1.0
  */
 public class SwordMaster extends AbstractUnit {
+  private static final int ATTACK_POINTS = 0;
+  private static final int HIT_POINTS = 100;
 
   public SwordMaster(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {

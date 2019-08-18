@@ -13,6 +13,8 @@ import model.map.Location;
  * @since 1.0
  */
 public class Archer extends AbstractUnit {
+  private static final int ATTACK_POINTS = 0;
+  private static final int HIT_POINTS = 100;
 
   /**
    * Creates a new archer

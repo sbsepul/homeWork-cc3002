@@ -1,6 +1,9 @@
 package model.items;
 
+import model.map.Location;
 import model.units.IUnit;
+
+import java.util.List;
 
 /**
  * This interface represents the <i>weapons</i> that the units of the game can use.
@@ -19,30 +22,30 @@ public interface IEquipableItem {
    * @param unit
    *     the unit that will be quipped with the item
    */
-  void equipTo(IUnit unit);
+  public void equipTo(IUnit unit);
 
   /**
    * @return the unit that has currently equipped this item
    */
-  IUnit getOwner();
+  public IUnit getOwner();
 
   /**
    * @return the name of the item
    */
-  String getName();
+  public String getName();
 
   /**
    * @return the power of the item
    */
-  int getPower();
+  public int getPower();
 
   /**
    * @return the minimum range of the item
    */
-  int getMinRange();
+  public int getMinRange();
 
   /**
    * @return the maximum range of the item
    */
-  int getMaxRange();
+  public int getMaxRange();
 }

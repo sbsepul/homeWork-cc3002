@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="794.0" y="297.0">model.units.Alpaca</node>
+    <node x="269.0" y="274.0">model.units.Fighter</node>
+    <node x="0.0" y="274.0">model.units.SwordMaster</node>
+    <node x="275.0" y="655.0">model.items.Spear</node>
+    <node x="393.5" y="0.0">model.units.IUnit</node>
+    <node x="332.5" y="76.0">model.units.AbstractUnit</node>
+    <node x="444.0" y="274.0">model.units.Cleric</node>
+    <node x="376.0" y="655.0">model.items.Sword</node>
+    <node x="0.0" y="655.0">model.items.Staff</node>
+    <node x="619.0" y="274.0">model.units.Archer</node>
+    <node x="156.5" y="467.0">model.items.AbstractItem</node>
+    <node x="101.0" y="655.0">model.items.Bow</node>
+    <node x="175.0" y="297.0">model.units.Hero</node>
+    <node x="188.0" y="655.0">model.items.Axe</node>
+    <node x="149.5" y="391.0">model.items.IEquipableItem</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.items.Spear" target="model.items.AbstractItem">
+      <point x="0.0" y="-13.0" />
+      <point x="315.5" y="635.0" />
+      <point x="247.5" y="635.0" />
+      <point x="26.0" y="69.0" />
+    </edge>
+    <edge source="model.units.Archer" target="model.units.AbstractUnit">
+      <point x="0.0" y="-36.0" />
+      <point x="696.5" y="244.0" />
+      <point x="484.75" y="244.0" />
+      <point x="50.75" y="69.0" />
+    </edge>
+    <edge source="model.units.Cleric" target="model.units.AbstractUnit">
+      <point x="0.0" y="-36.0" />
+      <point x="521.5" y="254.0" />
+      <point x="450.91666666666663" y="254.0" />
+      <point x="16.91666666666663" y="69.0" />
+    </edge>
+    <edge source="model.items.Bow" target="model.items.AbstractItem">
+      <point x="0.0" y="-13.0" />
+      <point x="134.5" y="635.0" />
+      <point x="195.5" y="635.0" />
+      <point x="-26.0" y="69.0" />
+    </edge>
+    <edge source="model.items.Staff" target="model.items.AbstractItem">
+      <point x="0.0" y="-13.0" />
+      <point x="40.5" y="625.0" />
+      <point x="169.5" y="625.0" />
+      <point x="-52.0" y="69.0" />
+    </edge>
+    <edge source="model.units.AbstractUnit" target="model.units.IUnit">
+      <point x="0.0" y="-69.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.Fighter" target="model.units.AbstractUnit">
+      <point x="0.0" y="-36.0" />
+      <point x="346.5" y="254.0" />
+      <point x="417.0833333333333" y="254.0" />
+      <point x="-16.916666666666686" y="69.0" />
+    </edge>
+    <edge source="model.units.SwordMaster" target="model.units.AbstractUnit">
+      <point x="0.0" y="-36.0" />
+      <point x="77.5" y="234.0" />
+      <point x="349.41666666666663" y="234.0" />
+      <point x="-84.58333333333337" y="69.0" />
+    </edge>
+    <edge source="model.items.Axe" target="model.items.AbstractItem">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="model.items.Sword" target="model.items.AbstractItem">
+      <point x="0.0" y="-13.0" />
+      <point x="416.5" y="625.0" />
+      <point x="273.5" y="625.0" />
+      <point x="52.0" y="69.0" />
+    </edge>
+    <edge source="model.items.AbstractItem" target="model.items.IEquipableItem">
+      <point x="0.0" y="-69.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.Hero" target="model.units.AbstractUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="212.0" y="244.0" />
+      <point x="383.25" y="244.0" />
+      <point x="-50.75" y="69.0" />
+    </edge>
+    <edge source="model.units.Alpaca" target="model.units.AbstractUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="838.0" y="234.0" />
+      <point x="518.5833333333334" y="234.0" />
+      <point x="84.58333333333337" y="69.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.2000000000000002" x="864.5" y="199.91666666666663" />
+  <SelectedNodes>
+    <node>model.units.IUnit</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
