@@ -9,7 +9,7 @@ public class Basic implements IUnit{
 
   @Override
   public void equipItem(IEquipableItem item) {
-
+    this.setEquippedItem(item);
   }
 
   @Override
