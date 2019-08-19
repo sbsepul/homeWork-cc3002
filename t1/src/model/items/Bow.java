@@ -1,6 +1,9 @@
 package model.items;
 
 /**
+ * This class represents an Bow.
+ * <p>
+ * Bow don't have strong and weak
  * @author Ignacio Slater Muñoz
  * @since
  */
@@ -9,7 +12,7 @@ public class Bow extends AbstractItem {
   /**
    * Creates a new bow.
    * <p>
-   * Bows are weapons that can't attack adjacent units, so it's minimum range must me greater than
+   * Bows are weapons that can't attack adjacent units, so it's minimum range must be greater than
    * one.
    *
    * @param name

@@ -3,7 +3,7 @@ package model.items;
 /**
  * This class represents a <i>Staff</i> type item.
  * <p>
- * A staff is an item that can heal other units nut cannot counter any attack
+ * A staff is an item that can heal other units but cannot counter any attack
  *
  * @author Ignacio Slater Muñoz
  * @since 1.0
