@@ -45,4 +45,34 @@ public class Archer extends AbstractUnit {
       equippedItem = item;
     }
   }
+
+  @Override
+  public void equipItemAxes(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemSword(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemStaffs(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemSpears(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemOther(IEquipableItem item) {
+
+  }
+
+  @Override
+  public IEquipableItem getEquippedItem() {
+    return null;
+  }
 }

@@ -12,8 +12,6 @@ import model.map.Location;
  * @since 1.0
  */
 public class Cleric extends AbstractUnit {
-  private static final int ATTACK_POINTS = 0;
-  private static final int HIT_POINTS = 100;
 
   /**
    * Creates a new Unit.
@@ -34,10 +32,39 @@ public class Cleric extends AbstractUnit {
    * @param item
    *     the item to equip
    */
+
   @Override
-  public void equipItem(final IEquipableItem item) {
-    if (item instanceof Staff) {
-      equippedItem = item;
-    }
+  public void equipItemBow(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemAxes(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemSword(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemStaffs(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemSpears(IEquipableItem item) {
+
+  }
+
+  @Override
+  public void equipItemOther(IEquipableItem item) {
+
+  }
+
+  @Override
+  public IEquipableItem getEquippedItem() {
+    return null;
   }
 }

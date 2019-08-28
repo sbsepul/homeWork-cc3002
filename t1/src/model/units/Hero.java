@@ -34,10 +34,39 @@ public class Hero extends AbstractUnit {
    * @param item
    *     the item to equip
    */
-  @Override
-  public void equipItem(final IEquipableItem item) {
-    if (item instanceof Spear) {
-      equippedItem = item;
+
+    @Override
+    public void equipItemBow(IEquipableItem item) {
+
     }
-  }
+
+    @Override
+    public void equipItemAxes(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemSword(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemStaffs(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemSpears(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemOther(IEquipableItem item) {
+
+    }
+
+    @Override
+    public IEquipableItem getEquippedItem() {
+        return null;
+    }
 }

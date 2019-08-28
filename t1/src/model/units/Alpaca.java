@@ -32,11 +32,44 @@ public class Alpaca extends AbstractUnit {
   /**
    * {@inheritDoc}
    * <p>
-   * The <i>Alpaca</i> cannot equip any item.
+   * The <i>Alpaca</i> cannot equip any item. (ver como hacer eso de que no puede equipar pero si llevar)
    */
-  @Override
   public void equipItem(final IEquipableItem item) {
     // Method body intentionally left empty
   }
 
+    @Override
+    public void equipItemBow(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemAxes(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemSword(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemStaffs(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemSpears(IEquipableItem item) {
+
+    }
+
+    @Override
+    public void equipItemOther(IEquipableItem item) {
+
+    }
+
+    @Override
+    public IEquipableItem getEquippedItem() {
+        return null;
+    }
 }
