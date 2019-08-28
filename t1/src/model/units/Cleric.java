@@ -1,7 +1,6 @@
 package model.units;
 
-import model.items.IEquipableItem;
-import model.items.Staff;
+import model.items.*;
 import model.map.Location;
 
 /**
@@ -27,44 +26,40 @@ public class Cleric extends AbstractUnit {
   }
 
   /**
-   * Sets the currently equipped item of this unit.
    *
-   * @param item
-   *     the item to equip
+   * @return
    */
-
-  @Override
-  public void equipItemBow(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemAxes(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemSword(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemStaffs(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemSpears(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemOther(IEquipableItem item) {
-
-  }
-
   @Override
   public IEquipableItem getEquippedItem() {
     return null;
+  }
+
+  /**
+   *
+   * @param bow
+   */
+  @Override
+  public void equipItemBow(Bow bow) {
+
+  }
+
+  @Override
+  public void equipItemAxe(Axe axe) {
+
+  }
+
+  @Override
+  public void equipItemSpear(Spear spear) {
+
+  }
+
+  @Override
+  public void equipItemStaff(Staff staff) {
+
+  }
+
+  @Override
+  public void equipItemSword(Sword sword) {
+
   }
 }

@@ -1,6 +1,8 @@
 package model.units;
 
 import java.util.List;
+
+import model.items.*;
 import model.items.IEquipableItem;
 import model.map.Location;
 
@@ -26,32 +28,32 @@ public interface IUnit {
    * @param item
    *     the item to equip
    */
-  void equipItemBow(IEquipableItem item);
+  void equipItemBow(Bow item);
 
   /**
    *
    * @param item
    *     the item to equip
    */
-  void equipItemAxes(IEquipableItem item);
+  void equipItemAxe(Axe item);
   /**
    *
    * @param item
    *     the item to equip
    */
-  void equipItemSword(IEquipableItem item);
+  void equipItemSword(Sword item);
   /**
    *
    * @param item
    *     the item to equip
    */
-  void equipItemStaffs(IEquipableItem item);
+  void equipItemStaff(Staff item);
   /**
    *
    * @param item
    *     the item to equip
    */
-  void equipItemSpears(IEquipableItem item);
+  void equipItemSpear(Spear item);
 
   /**
    * @return hit points of the unit

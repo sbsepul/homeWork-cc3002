@@ -29,4 +29,6 @@ public class Bow extends AbstractItem {
     this.minRange = Math.max(minRange, 2);
     this.maxRange = Math.max(maxRange, this.minRange);
   }
+
+
 }

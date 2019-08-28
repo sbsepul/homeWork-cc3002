@@ -57,37 +57,6 @@ public abstract class AbstractUnit implements IUnit{
 
     /**
      *
-     * @param bow
-     */
-  abstract void equipItemBow(Bow bow);
-
-    /**
-     *
-     * @param axe
-     */
-  abstract void equipItemAxe(Axe axe);
-
-    /**
-     *
-     * @param spear
-     */
-  abstract void equipItemSpear(Spear spear);
-
-    /**
-     *
-     * @param staff
-     */
-  abstract void equipItemStaff(Staff staff);
-
-    /**
-     *
-     * @param sword
-     */
-  abstract void equipItemSword(Sword sword);
-
-
-    /**
-     *
      * @return
      */
   @Override
@@ -149,7 +118,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
     /**
-     * 
+     *
      * @param targetLocation
      */
   @Override

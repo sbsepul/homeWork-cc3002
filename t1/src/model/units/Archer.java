@@ -1,7 +1,6 @@
 package model.units;
 
-import model.items.Bow;
-import model.items.IEquipableItem;
+import model.items.*;
 import model.map.Location;
 
 /**
@@ -31,6 +30,31 @@ public class Archer extends AbstractUnit {
     super(hitPoints, movement, position, 3, items);
   }
 
+  @Override
+  public void equipItemBow(Bow item) {
+
+  }
+
+  @Override
+  public void equipItemAxe(Axe item) {
+
+  }
+
+  @Override
+  public void equipItemSword(Sword item) {
+
+  }
+
+  @Override
+  public void equipItemStaff(Staff item) {
+
+  }
+
+  @Override
+  public void equipItemSpear(Spear item) {
+
+  }
+
   /**
    * Sets the currently equipped item of this unit.
    * <p>
@@ -39,37 +63,6 @@ public class Archer extends AbstractUnit {
    * @param item
    *     the item to equip (porque tiene final?????)
    */
-  @Override
-  public void equipItemBow(final IEquipableItem item) {
-    if (item instanceof Bow) {
-      equippedItem = item;
-    }
-  }
-
-  @Override
-  public void equipItemAxes(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemSword(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemStaffs(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemSpears(IEquipableItem item) {
-
-  }
-
-  @Override
-  public void equipItemOther(IEquipableItem item) {
-
-  }
 
   @Override
   public IEquipableItem getEquippedItem() {
