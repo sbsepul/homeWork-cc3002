@@ -18,6 +18,12 @@ public interface IUnit {
   /**
    *
    * @param item
+   *     other item to equip (*****)
+   */
+  void equipItem(IEquipableItem item);
+  /**
+   *
+   * @param item
    *     the item to equip
    */
   void equipItemBow(IEquipableItem item);
@@ -48,12 +54,6 @@ public interface IUnit {
   void equipItemSpears(IEquipableItem item);
 
   /**
-   *
-   * @param item
-   *     other item to equip (*****)
-   */
-  void equipItemOther(IEquipableItem item);
-  /**
    * @return hit points of the unit
    */
   int getCurrentHitPoints();
@@ -79,7 +79,7 @@ public interface IUnit {
    * @param item
    *     the item to be equipped
    */
-  void setEquippedItem(IEquipableItem item);
+  //void setEquippedItem(IEquipableItem item);
 
   /**
    * @return the current location of the unit

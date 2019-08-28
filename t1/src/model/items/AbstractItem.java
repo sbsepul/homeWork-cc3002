@@ -35,6 +35,11 @@ public abstract class AbstractItem implements IEquipableItem {
     this.maxRange = Math.max(maxRange, this.minRange);
   }
 
+  /**
+   * Each unit will have a item different
+   * the unit only can to change his item for other equals.
+   */
+
   @Override
   public void equipTo(final IUnit unit) {
     unit.setEquippedItem(this);

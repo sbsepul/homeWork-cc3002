@@ -5,7 +5,8 @@ import static java.lang.Math.min;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.items.IEquipableItem;
+
+import model.items.*;
 import model.map.Location;
 
 /**
@@ -18,7 +19,7 @@ import model.map.Location;
  * @author Ignacio Slater Muñoz
  * @since 1.0
  */
-public abstract class AbstractUnit implements IUnit {
+public abstract class AbstractUnit implements IUnit{
 
   protected final List<IEquipableItem> items = new ArrayList<>();
   private int currentHitPoints;
@@ -46,14 +47,65 @@ public abstract class AbstractUnit implements IUnit {
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
 
+    /**
+     *
+     * @param item
+     */
+  public void equipItem(IEquipableItem item){
+      item.equipTo(this);
+  }
+
+    /**
+     *
+     * @param bow
+     */
+  abstract void equipItemBow(Bow bow);
+
+    /**
+     *
+     * @param axe
+     */
+  abstract void equipItemAxe(Axe axe);
+
+    /**
+     *
+     * @param spear
+     */
+  abstract void equipItemSpear(Spear spear);
+
+    /**
+     *
+     * @param staff
+     */
+  abstract void equipItemStaff(Staff staff);
+
+    /**
+     *
+     * @param sword
+     */
+  abstract void equipItemSword(Sword sword);
+
+
+    /**
+     *
+     * @return
+     */
   @Override
   public int getCurrentHitPoints() {
     return currentHitPoints;
   }
 
+    /**
+     *
+     * @param remove
+     */
   @Override
   public void setRemoveHitPoints(int remove) { this.currentHitPoints = this.currentHitPoints - remove; }
 
+    /**
+     *
+     * @return
+     */
   @Override
   public List<IEquipableItem> getItems() {
     return List.copyOf(items);
@@ -64,26 +116,42 @@ public abstract class AbstractUnit implements IUnit {
   //  return equippedItem;
   //}
 
-  @Override
-  public void setEquippedItem(final IEquipableItem item) {
-    this.equippedItem = item;
-  }
+  //@Override
+  //public void setEquippedItem(final IEquipableItem item) {
+  //  this.equippedItem = item;
+  //}
 
+    /**
+     *
+     * @return
+     */
   @Override
   public Location getLocation() {
     return location;
   }
 
+    /**
+     *
+     * @param location
+     */
   @Override
   public void setLocation(final Location location) {
     this.location = location;
   }
 
+    /**
+     *
+     * @return
+     */
   @Override
   public int getMovement() {
     return movement;
   }
 
+    /**
+     * 
+     * @param targetLocation
+     */
   @Override
   public void moveTo(final Location targetLocation) {
     if (getLocation().distanceTo(targetLocation) <= getMovement()
