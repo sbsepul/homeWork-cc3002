@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test set for the Archer unit.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class ArcherTest extends AbstractTestUnit {

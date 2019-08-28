@@ -13,8 +13,6 @@ import model.map.Location;
  * @since 1.0
  */
 public class Archer extends AbstractUnit {
-  private static final int ATTACK_POINTS = 0;
-  private static final int HIT_POINTS = 100;
 
   /**
    * Creates a new archer
@@ -39,10 +37,10 @@ public class Archer extends AbstractUnit {
    * The <i>Archer</i> can <b>only equip Bows</b>.
    *
    * @param item
-   *     the item to equip
+   *     the item to equip (porque tiene final?????)
    */
   @Override
-  public void equipItem(final IEquipableItem item) {
+  public void equipItemBow(final IEquipableItem item) {
     if (item instanceof Bow) {
       equippedItem = item;
     }

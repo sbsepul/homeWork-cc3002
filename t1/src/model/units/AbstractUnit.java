@@ -21,7 +21,7 @@ import model.map.Location;
 public abstract class AbstractUnit implements IUnit {
 
   protected final List<IEquipableItem> items = new ArrayList<>();
-  private final int currentHitPoints;
+  private int currentHitPoints;
   private final int movement;
   protected IEquipableItem equippedItem;
   private Location location;
@@ -52,14 +52,17 @@ public abstract class AbstractUnit implements IUnit {
   }
 
   @Override
+  public void setRemoveHitPoints(int remove) { this.currentHitPoints = this.currentHitPoints - remove; }
+
+  @Override
   public List<IEquipableItem> getItems() {
     return List.copyOf(items);
   }
 
-  @Override
-  public IEquipableItem getEquippedItem() {
-    return equippedItem;
-  }
+  //@Override
+  //public IEquipableItem getEquippedItem() {
+  //  return equippedItem;
+  //}
 
   @Override
   public void setEquippedItem(final IEquipableItem item) {
@@ -89,3 +92,4 @@ public abstract class AbstractUnit implements IUnit {
     }
   }
 }
+

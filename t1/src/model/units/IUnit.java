@@ -10,23 +10,60 @@ import model.map.Location;
  * The signature of all the common methods that a unit can execute are defined here. All units
  * except some special ones can carry at most 3 weapons.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public interface IUnit {
 
   /**
-   * Sets the currently equipped item of this unit.
    *
    * @param item
    *     the item to equip
    */
-  void equipItem(IEquipableItem item);
+  void equipItemBow(IEquipableItem item);
 
+  /**
+   *
+   * @param item
+   *     the item to equip
+   */
+  void equipItemAxes(IEquipableItem item);
+  /**
+   *
+   * @param item
+   *     the item to equip
+   */
+  void equipItemSword(IEquipableItem item);
+  /**
+   *
+   * @param item
+   *     the item to equip
+   */
+  void equipItemStaffs(IEquipableItem item);
+  /**
+   *
+   * @param item
+   *     the item to equip
+   */
+  void equipItemSpears(IEquipableItem item);
+
+  /**
+   *
+   * @param item
+   *     other item to equip (*****)
+   */
+  void equipItemOther(IEquipableItem item);
   /**
    * @return hit points of the unit
    */
   int getCurrentHitPoints();
+
+
+    /**
+     * @param remove
+     * the hit points to be remove
+     */
+  void setRemoveHitPoints(int remove);
 
   /**
    * @return the items carried by this unit

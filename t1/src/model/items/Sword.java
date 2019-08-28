@@ -1,7 +1,7 @@
 package model.items;
 
 /**
- * This class represents a sword type item.
+ * This class represents a <i>Sword</i> type item.
  * <p>
  * Swords are strong against axes and weak against spears.
  *

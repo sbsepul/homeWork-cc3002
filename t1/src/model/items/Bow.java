@@ -1,7 +1,7 @@
 package model.items;
 
 /**
- * This class represents an Bow.
+ * This class represents an <i>Bow</i>.
  * <p>
  * Bow don't have strong and weak
  * @author Ignacio Slater Muñoz

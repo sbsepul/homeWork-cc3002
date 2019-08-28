@@ -12,8 +12,6 @@ import model.map.Location;
  * @since 1.0
  */
 public class Fighter extends AbstractUnit {
-  private static final int ATTACK_POINTS = 0;
-  private static final int HIT_POINTS = 100;
 
   public Fighter(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
