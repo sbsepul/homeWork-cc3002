@@ -20,38 +20,43 @@ public interface IUnit {
   /**
    *
    * @param item
-   *     other item to equip (*****)
+   * to equip a unit with a item
    */
   void equipItem(IEquipableItem item);
+
   /**
-   *
    * @param item
-   *     the item to equip
+   * Anything item that isn't in the list
+   */
+  void equipItemOther(IEquipableItem item);
+
+  /**
+   * @param item the item to equip
    */
   void equipItemBow(Bow item);
 
   /**
    *
    * @param item
-   *     the item to equip
+   * to equip Axe
    */
   void equipItemAxe(Axe item);
   /**
    *
    * @param item
-   *     the item to equip
+   * to equip Sword
    */
   void equipItemSword(Sword item);
   /**
    *
    * @param item
-   *     the item to equip
+   * to equip Staff
    */
   void equipItemStaff(Staff item);
   /**
    *
    * @param item
-   *     the item to equip
+   * to equip Spear
    */
   void equipItemSpear(Spear item);
 
@@ -59,8 +64,6 @@ public interface IUnit {
    * @return hit points of the unit
    */
   int getCurrentHitPoints();
-
-
     /**
      * @param remove
      * the hit points to be remove

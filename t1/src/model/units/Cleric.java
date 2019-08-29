@@ -31,35 +31,26 @@ public class Cleric extends AbstractUnit {
    */
   @Override
   public IEquipableItem getEquippedItem() {
-    return null;
-  }
-
-  /**
-   *
-   * @param bow
-   */
-  @Override
-  public void equipItemBow(Bow bow) {
-
+    return equippedItem;
   }
 
   @Override
-  public void equipItemAxe(Axe axe) {
-
+  public void equipItemStaff(Staff item) {
+    equippedItem = item;
   }
 
   @Override
-  public void equipItemSpear(Spear spear) {
-
-  }
+  public void equipItemSpear(Spear item) { }
 
   @Override
-  public void equipItemStaff(Staff staff) {
-
-  }
+  public void equipItemSword(Sword item) {  }
 
   @Override
-  public void equipItemSword(Sword sword) {
+  public void equipItemOther(IEquipableItem item){ }
 
-  }
+  @Override
+  public void equipItemBow(Bow item) { }
+
+  @Override
+  public void equipItemAxe(Axe item) { }
 }

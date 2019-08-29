@@ -16,34 +16,24 @@ public class Fighter extends AbstractUnit {
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
   }
+  @Override
+  public void equipItemAxe(Axe item) { equippedItem = item;  }
 
   @Override
-  public void equipItemBow(Bow item) {
-
-  }
+  public IEquipableItem getEquippedItem() { return equippedItem; }
 
   @Override
-  public void equipItemAxe(Axe item) {
-
-  }
+  public void equipItemBow(Bow item) { }
 
   @Override
-  public void equipItemSword(Sword item) {
-
-  }
+  public void equipItemSword(Sword item) { }
 
   @Override
-  public void equipItemStaff(Staff item) {
-
-  }
+  public void equipItemStaff(Staff item) { }
 
   @Override
-  public void equipItemSpear(Spear item) {
-
-  }
+  public void equipItemSpear(Spear item) { }
 
   @Override
-  public IEquipableItem getEquippedItem() {
-    return null;
-  }
+  public void equipItemOther(IEquipableItem item) { }
 }

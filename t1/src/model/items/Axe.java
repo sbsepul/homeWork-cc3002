@@ -1,11 +1,13 @@
 package model.items;
 
+import model.units.IUnit;
+
 /**
  * This class represents an Axe.
  * <p>
  * Axes are strong against spears but weak against swords.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Axe extends AbstractItem {
@@ -25,4 +27,9 @@ public class Axe extends AbstractItem {
   public Axe(final String name, final int power, final int minRange, final int maxRange) {
     super(name, power, minRange, maxRange);
   }
+
+    @Override
+    public void equipTo(IUnit unit) {
+        unit.equipItemAxe(this);
+    }
 }

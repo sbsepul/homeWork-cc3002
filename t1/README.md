@@ -1,7 +1,24 @@
 # Model
 ## Details of implementation
 
+#### For the Attack
 
+Una unidad puede utilizar el objeto que tiene equipado sobre otra siempre y cuando la otra unidad se encuentre dentro del rango definido por el item. Cuando esto sucede se entra en un combate.
+
+
+
+Cuando se combate, la unidad que lo inició utiliza su objeto sobre la otra, y en caso que utilizar el objeto
+resulte en un ataque y que la unidad que recibió el ataque pueda atacar, entonces realizará un contrataque. Si
+en cualquier momento del combate una de las unidades participantes es derrotada, el combate finaliza.
+Para esto se necesita poder diferenciar entre 2 tipos de objetos:
+
+
+
+#### For the Items 
+
+#### For the Units
+
+#### For the Map
 
 ### Supposed
 

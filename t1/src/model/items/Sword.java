@@ -1,11 +1,13 @@
 package model.items;
 
+import model.units.IUnit;
+
 /**
  * This class represents a <i>Sword</i> type item.
  * <p>
  * Swords are strong against axes and weak against spears.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Sword extends AbstractItem {
@@ -24,5 +26,10 @@ public class Sword extends AbstractItem {
    */
   public Sword(final String name, final int power, final int minRange, final int maxRange) {
     super(name, power, minRange, maxRange);
+  }
+
+  @Override
+  public void equipTo(IUnit unit) {
+    unit.equipItemSword(this);
   }
 }

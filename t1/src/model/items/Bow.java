@@ -1,5 +1,7 @@
 package model.items;
 
+import model.units.IUnit;
+
 /**
  * This class represents an <i>Bow</i>.
  * <p>
@@ -30,5 +32,8 @@ public class Bow extends AbstractItem {
     this.maxRange = Math.max(maxRange, this.minRange);
   }
 
-
+  @Override
+  public void equipTo(IUnit unit) {
+    unit.equipItemBow(this);
+  }
 }

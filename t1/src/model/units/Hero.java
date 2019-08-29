@@ -1,15 +1,16 @@
 package model.units;
 
-import model.items.IEquipableItem;
-import model.items.Spear;
+import model.items.*;
 import model.map.Location;
+
+import javax.lang.model.element.UnknownElementException;
 
 /**
  * A <i>Hero</i> is a special kind of unit, the player that defeats this unit wins the game.
  * <p>
  * This unit <b>can only use spear weapons</b>.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Hero extends AbstractUnit {
@@ -28,45 +29,28 @@ public class Hero extends AbstractUnit {
     super(hitPoints, movement, location, 3, items);
   }
 
-  /**
-   * Sets the currently equipped item of this unit.
-   *
-   * @param item
-   *     the item to equip
-   */
+  @Override
+  public void equipItemSpear(Spear item) {
+    equippedItem = item;
+  }
 
-    @Override
-    public void equipItemBow(IEquipableItem item) {
+  @Override
+  public IEquipableItem getEquippedItem() {
+    return equippedItem;
+  }
 
-    }
+  @Override
+  public void equipItemOther(IEquipableItem item) { }
 
-    @Override
-    public void equipItemAxes(IEquipableItem item) {
+  @Override
+  public void equipItemBow(Bow item) { }
 
-    }
+  @Override
+  public void equipItemAxe(Axe item) { }
 
-    @Override
-    public void equipItemSword(IEquipableItem item) {
+  @Override
+  public void equipItemSword(Sword item) { }
 
-    }
-
-    @Override
-    public void equipItemStaffs(IEquipableItem item) {
-
-    }
-
-    @Override
-    public void equipItemSpears(IEquipableItem item) {
-
-    }
-
-    @Override
-    public void equipItemOther(IEquipableItem item) {
-
-    }
-
-    @Override
-    public IEquipableItem getEquippedItem() {
-        return null;
-    }
+  @Override
+  public void equipItemStaff(Staff item) { }
 }

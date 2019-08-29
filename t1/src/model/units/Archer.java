@@ -31,41 +31,27 @@ public class Archer extends AbstractUnit {
   }
 
   @Override
-  public void equipItemBow(Bow item) {
-
-  }
-
+  public void equipItemBow(Bow item) { equippedItem = item; }
   @Override
-  public void equipItemAxe(Axe item) {
-
-  }
-
+  public void equipItemAxe(Axe item) { }
   @Override
-  public void equipItemSword(Sword item) {
-
-  }
-
+  public void equipItemSword(Sword item) { }
   @Override
-  public void equipItemStaff(Staff item) {
-
-  }
-
+  public void equipItemStaff(Staff item) {  }
   @Override
-  public void equipItemSpear(Spear item) {
-
-  }
+  public void equipItemSpear(Spear item) {  }
+  @Override
+  public void equipItemOther(IEquipableItem item) {  }
 
   /**
    * Sets the currently equipped item of this unit.
    * <p>
    * The <i>Archer</i> can <b>only equip Bows</b>.
-   *
-   * @param item
    *     the item to equip (porque tiene final?????)
    */
 
   @Override
   public IEquipableItem getEquippedItem() {
-    return null;
+    return equippedItem;
   }
 }

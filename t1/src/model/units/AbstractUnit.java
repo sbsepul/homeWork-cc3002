@@ -16,7 +16,7 @@ import model.map.Location;
  * game, but that contains the implementation of some of the methods that are common for most
  * units.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public abstract class AbstractUnit implements IUnit{
@@ -47,34 +47,16 @@ public abstract class AbstractUnit implements IUnit{
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
 
-    /**
-     *
-     * @param item
-     */
   public void equipItem(IEquipableItem item){
       item.equipTo(this);
   }
-
-    /**
-     *
-     * @return
-     */
   @Override
   public int getCurrentHitPoints() {
     return currentHitPoints;
   }
-
-    /**
-     *
-     * @param remove
-     */
   @Override
   public void setRemoveHitPoints(int remove) { this.currentHitPoints = this.currentHitPoints - remove; }
 
-    /**
-     *
-     * @return
-     */
   @Override
   public List<IEquipableItem> getItems() {
     return List.copyOf(items);
@@ -90,37 +72,20 @@ public abstract class AbstractUnit implements IUnit{
   //  this.equippedItem = item;
   //}
 
-    /**
-     *
-     * @return
-     */
   @Override
   public Location getLocation() {
     return location;
   }
-
-    /**
-     *
-     * @param location
-     */
   @Override
   public void setLocation(final Location location) {
     this.location = location;
   }
 
-    /**
-     *
-     * @return
-     */
   @Override
   public int getMovement() {
     return movement;
   }
 
-    /**
-     *
-     * @param targetLocation
-     */
   @Override
   public void moveTo(final Location targetLocation) {
     if (getLocation().distanceTo(targetLocation) <= getMovement()
