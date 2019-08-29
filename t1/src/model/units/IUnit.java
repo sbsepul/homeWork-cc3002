@@ -4,6 +4,10 @@ import java.util.List;
 
 import model.items.*;
 import model.map.Location;
+import model.units.archer.AttackBow;
+import model.units.fighter.AttackAxe;
+import model.units.hero.AttackSpears;
+import model.units.sword.AttackSword;
 
 /**
  * This interface represents all units in the game.
@@ -107,6 +111,30 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
+  //ETAPA DE COMBATE
 
+  /**
+   *
+   * @param attackBow
+   */
+  void receiveBowAttack(AttackBow attackBow);
+
+  /**
+   *
+   * @param attackAxe
+   */
+  void receiveAxeAttack(AttackAxe attackAxe);
+
+  /**
+   *
+   * @param attackSword
+   */
+  void receiveSwordsAttack(AttackSword attackSword);
+
+  /**
+   * 
+   * @param attackSpears
+   */
+  void receiveSpearsAttack(AttackSpears attackSpears);
 }
 
