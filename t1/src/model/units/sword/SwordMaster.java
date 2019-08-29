@@ -1,7 +1,8 @@
-package model.units;
+package model.units.sword;
 
 import model.items.*;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
  * This class represents a <i>SwordMaster</i> type unit.

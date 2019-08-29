@@ -2,7 +2,7 @@ package model.items;
 
 import model.map.Location;
 import model.units.IUnit;
-import model.units.SwordMaster;
+import model.units.sword.SwordMaster;
 
 /**
  * Test set for swords

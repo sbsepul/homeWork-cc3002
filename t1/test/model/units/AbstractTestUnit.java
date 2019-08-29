@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import model.items.*;
 import model.map.Field;
 import model.map.Location;
+import model.units.alpaca.Alpaca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

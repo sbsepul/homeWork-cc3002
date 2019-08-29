@@ -1,7 +1,8 @@
-package model.units;
+package model.units.fighter;
 
 import model.items.*;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
  * This class represents a fighter type unit.

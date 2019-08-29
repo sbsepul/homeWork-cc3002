@@ -1,7 +1,8 @@
-package model.units;
+package model.units.hero;
 
 import model.items.*;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 import javax.lang.model.element.UnknownElementException;
 

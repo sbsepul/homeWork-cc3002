@@ -3,6 +3,7 @@ package model.units;
 
 import model.items.*;
 import model.map.Field;
+import model.units.alpaca.Alpaca;
 import org.junit.jupiter.api.Test;
 
 /**

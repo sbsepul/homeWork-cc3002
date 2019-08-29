@@ -1,7 +1,7 @@
 package model.items;
 
 import model.map.Location;
-import model.units.Hero;
+import model.units.hero.Hero;
 import model.units.IUnit;
 
 /**

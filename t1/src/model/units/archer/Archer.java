@@ -1,7 +1,8 @@
-package model.units;
+package model.units.archer;
 
 import model.items.*;
 import model.map.Location;
+import model.units.AbstractUnit;
 
 /**
  * This class represents an <i>Archer</i> type unit.

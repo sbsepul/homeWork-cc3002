@@ -3,7 +3,7 @@ package model.items;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import model.map.Location;
-import model.units.Archer;
+import model.units.archer.Archer;
 import model.units.IUnit;
 import org.junit.jupiter.api.Test;
 

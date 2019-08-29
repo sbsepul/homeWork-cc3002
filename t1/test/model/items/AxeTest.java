@@ -1,7 +1,7 @@
 package model.items;
 
 import model.map.Location;
-import model.units.Fighter;
+import model.units.fighter.Fighter;
 import model.units.IUnit;
 
 /**
