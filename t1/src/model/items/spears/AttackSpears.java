@@ -13,19 +13,4 @@ public class AttackSpears extends AbstractAttack {
     public void attack(IUnit unit) {
         unit.receiveSpearsAttack(this);
     }
-
-    @Override
-    public int getBaseDamage() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public IAttack getSelectAttack() {
-        return null;
-    }
 }

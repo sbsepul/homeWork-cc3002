@@ -18,14 +18,4 @@ public class AttackBow extends AbstractAttack {
     public void attack(IUnit unit) {
         unit.receiveBowAttack(this);
     }
-
-    @Override
-    public int getBaseDamage() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
 }

@@ -1,10 +1,15 @@
 package model.units;
 
 import model.items.*;
+import model.items.axe.AttackAxe;
 import model.items.axe.Axe;
+import model.items.bow.AttackBow;
 import model.items.bow.Bow;
+import model.items.spears.AttackSpears;
 import model.items.spears.Spear;
+import model.items.staff.AttackStaff;
 import model.items.staff.Staff;
+import model.items.sword.AttackSword;
 import model.items.sword.Sword;
 import model.map.Location;
 
@@ -30,13 +35,34 @@ public class Cleric extends AbstractUnit {
     super(hitPoints, movement, location, 3, items);
   }
 
-  /**
-   *
-   * @return
-   */
   @Override
   public IEquipableItem getEquippedItem() {
     return equippedItem;
+  }
+
+  @Override
+  public void receiveBowAttack(AttackBow attackBow) {
+    receiveAttack(attackBow);
+  }
+
+  @Override
+  public void receiveAxeAttack(AttackAxe attackAxe) {
+    receiveAttack(attackAxe);
+  }
+
+  @Override
+  public void receiveSwordsAttack(AttackSword attackSword) {
+    receiveAttack(attackSword);
+  }
+
+  @Override
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+    receiveAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveStaffAttack(AttackStaff attackStaff) {
+    //do nothing
   }
 
   @Override
@@ -44,6 +70,11 @@ public class Cleric extends AbstractUnit {
     equippedItem = item;
   }
 
+
+  /**
+   * equip with a item the unit
+   * @param item
+   */
   @Override
   public void equipItemSpear(Spear item) { }
 

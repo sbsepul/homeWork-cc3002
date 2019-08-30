@@ -1,10 +1,14 @@
 package model.units;
 
 import model.items.*;
+import model.items.axe.AttackAxe;
 import model.items.axe.Axe;
+import model.items.bow.AttackBow;
 import model.items.bow.Bow;
+import model.items.spears.AttackSpears;
 import model.items.spears.Spear;
 import model.items.staff.Staff;
+import model.items.sword.AttackSword;
 import model.items.sword.Sword;
 import model.map.Location;
 
@@ -40,6 +44,26 @@ public class Hero extends AbstractUnit {
   @Override
   public IEquipableItem getEquippedItem() {
     return equippedItem;
+  }
+
+  @Override
+  public void receiveBowAttack(AttackBow attackBow) {
+
+  }
+
+  @Override
+  public void receiveAxeAttack(AttackAxe attackAxe) {
+
+  }
+
+  @Override
+  public void receiveSwordsAttack(AttackSword attackSword) {
+
+  }
+
+  @Override
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+
   }
 
   @Override

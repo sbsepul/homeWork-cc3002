@@ -56,7 +56,20 @@ public class SuperClass {
 1. La interfaz de unidad es una clase que no tiene un implement, eso hay que crearlo en un nuevo archivo que tenga implement  o hay que implementarlo en la misma clase de la interfaz??
 2. Cuales son los métodos que se pueden implementar en las subclases del `AbstractUnit`, `AbstractItem`?? o mas bien, hay que crear si o si los metodos declarados en `Abstract` ?
 3. La carpeta Test debe quedar oculta? En la tarea 0 note que Intellij lo ocultaba, pero dado a que mi tarea esta de la siguiente manera:
-4. 
+
+
+
+
+
+COMBATE -------->
+
+ATAQUE --------->
+
+CONTRA <---------
+
+
+
+hay bonus x no romper liskov (hint: interfaces)
 
 ## Bibliografia
 

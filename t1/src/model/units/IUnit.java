@@ -6,6 +6,7 @@ import model.items.*;
 import model.items.axe.Axe;
 import model.items.bow.Bow;
 import model.items.spears.Spear;
+import model.items.staff.AttackStaff;
 import model.items.staff.Staff;
 import model.items.sword.Sword;
 import model.map.Location;
@@ -81,7 +82,7 @@ public interface IUnit {
    * @param item
    *     the item to be equipped
    */
-  //void setEquippedItem(IEquipableItem item);
+  void setEquippedItem(IEquipableItem item);
 
   /**
    * @return the current location of the unit
@@ -131,6 +132,8 @@ public interface IUnit {
    */
   void receiveSpearsAttack(AttackSpears attackSpears);
 
+  void receiveStaffAttack(AttackStaff attackStaff);
+
   //END COMBAT
 
 // HIT POINTS
@@ -138,11 +141,12 @@ public interface IUnit {
    * @return hit points of the unit
    */
   int getCurrentHitPoints();
+
   /**
    * @param remove
    * the hit points to be remove
    */
-  void setRemoveHitPoints(int remove);
+  //void setRemoveHitPoints(int remove);
 
 }
 

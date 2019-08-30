@@ -21,8 +21,4 @@ public interface IAttack {
      */
     String getName();
 
-    IAttack getSelectAttack();
-
-
-
 }

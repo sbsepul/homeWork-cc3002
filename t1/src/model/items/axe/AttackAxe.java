@@ -13,13 +13,4 @@ public class AttackAxe extends AbstractAttack {
         unit.receiveAxeAttack(this);
     }
 
-    @Override
-    public int getBaseDamage() {
-        return 0;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
 }

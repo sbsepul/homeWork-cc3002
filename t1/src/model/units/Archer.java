@@ -7,6 +7,7 @@ import model.items.bow.AttackBow;
 import model.items.bow.Bow;
 import model.items.spears.AttackSpears;
 import model.items.spears.Spear;
+import model.items.staff.AttackStaff;
 import model.items.staff.Staff;
 import model.items.sword.AttackSword;
 import model.items.sword.Sword;
@@ -70,5 +71,12 @@ public class Archer extends AbstractUnit {
   @Override
   public void receiveSwordsAttack(AttackSword attackSword) {}
   @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {}
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+
+  }
+
+  @Override
+  public void receiveStaffAttack(AttackStaff attackStaff) {
+    receiveCure(attackStaff);
+  }
 }
