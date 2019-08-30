@@ -1,10 +1,12 @@
-package model.units.hero;
+package model.units;
 
 import model.items.*;
+import model.items.axe.Axe;
+import model.items.bow.Bow;
+import model.items.spears.Spear;
+import model.items.staff.Staff;
+import model.items.sword.Sword;
 import model.map.Location;
-import model.units.AbstractUnit;
-
-import javax.lang.model.element.UnknownElementException;
 
 /**
  * A <i>Hero</i> is a special kind of unit, the player that defeats this unit wins the game.

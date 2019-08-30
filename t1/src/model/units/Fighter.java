@@ -1,8 +1,12 @@
-package model.units.fighter;
+package model.units;
 
 import model.items.*;
+import model.items.axe.Axe;
+import model.items.bow.Bow;
+import model.items.spears.Spear;
+import model.items.staff.Staff;
+import model.items.sword.Sword;
 import model.map.Location;
-import model.units.AbstractUnit;
 
 /**
  * This class represents a fighter type unit.

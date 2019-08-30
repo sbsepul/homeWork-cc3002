@@ -1,5 +1,6 @@
-package model.items;
+package model.items.bow;
 
+import model.items.AbstractItem;
 import model.units.IUnit;
 
 /**

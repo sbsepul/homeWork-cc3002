@@ -1,6 +1,6 @@
-package model.units.fighter;
+package model.items.axe;
 
-import model.units.AbstractAttack;
+import model.items.AbstractAttack;
 import model.units.IUnit;
 
 public class AttackAxe extends AbstractAttack {

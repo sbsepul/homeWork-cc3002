@@ -1,4 +1,6 @@
-package model.units;
+package model.items;
+
+import model.items.IAttack;
 
 public abstract class AbstractAttack implements IAttack {
     private String name;

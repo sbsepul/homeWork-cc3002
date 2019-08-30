@@ -3,11 +3,16 @@ package model.units;
 import java.util.List;
 
 import model.items.*;
+import model.items.axe.Axe;
+import model.items.bow.Bow;
+import model.items.spears.Spear;
+import model.items.staff.Staff;
+import model.items.sword.Sword;
 import model.map.Location;
-import model.units.archer.AttackBow;
-import model.units.fighter.AttackAxe;
-import model.units.hero.AttackSpears;
-import model.units.sword.AttackSword;
+import model.items.bow.AttackBow;
+import model.items.axe.AttackAxe;
+import model.items.spears.AttackSpears;
+import model.items.sword.AttackSword;
 
 /**
  * This interface represents all units in the game.
@@ -62,17 +67,6 @@ public interface IUnit {
    * to equip Spear
    */
   void equipItemSpear(Spear item);
-
-  /**
-   * @return hit points of the unit
-   */
-  int getCurrentHitPoints();
-    /**
-     * @param remove
-     * the hit points to be remove
-     */
-  void setRemoveHitPoints(int remove);
-
   /**
    * @return the items carried by this unit
    */
@@ -132,9 +126,23 @@ public interface IUnit {
   void receiveSwordsAttack(AttackSword attackSword);
 
   /**
-   * 
+   *
    * @param attackSpears
    */
   void receiveSpearsAttack(AttackSpears attackSpears);
+
+  //END COMBAT
+
+// HIT POINTS
+  /**
+   * @return hit points of the unit
+   */
+  int getCurrentHitPoints();
+  /**
+   * @param remove
+   * the hit points to be remove
+   */
+  void setRemoveHitPoints(int remove);
+
 }
 

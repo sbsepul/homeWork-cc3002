@@ -1,6 +1,7 @@
-package model.units.hero;
+package model.items.spears;
 
-import model.units.AbstractAttack;
+import model.items.AbstractAttack;
+import model.items.IAttack;
 import model.units.IUnit;
 
 public class AttackSpears extends AbstractAttack {
@@ -20,6 +21,11 @@ public class AttackSpears extends AbstractAttack {
 
     @Override
     public String getName() {
+        return null;
+    }
+
+    @Override
+    public IAttack getSelectAttack() {
         return null;
     }
 }

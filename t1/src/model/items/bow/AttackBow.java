@@ -1,11 +1,9 @@
-package model.units.archer;
+package model.items.bow;
 
-import model.units.AbstractAttack;
+import model.items.AbstractAttack;
 import model.units.IUnit;
 
-import java.util.List;
-
-public class AttackBow extends AbstractAttack{
+public class AttackBow extends AbstractAttack {
     /**
      * Creates a new attack.
      *

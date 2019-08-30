@@ -1,6 +1,6 @@
-package model.units.sword;
+package model.items.sword;
 
-import model.units.AbstractAttack;
+import model.items.AbstractAttack;
 import model.units.IUnit;
 
 public class AttackSword extends AbstractAttack {

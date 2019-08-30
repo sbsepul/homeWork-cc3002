@@ -1,8 +1,9 @@
 package model.items;
 
+import model.items.sword.Sword;
 import model.map.Location;
 import model.units.IUnit;
-import model.units.sword.SwordMaster;
+import model.units.SwordMaster;
 
 /**
  * Test set for swords

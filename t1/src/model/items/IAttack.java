@@ -1,4 +1,4 @@
-package model.units;
+package model.items;
 
 import model.units.IUnit;
 
@@ -20,6 +20,8 @@ public interface IAttack {
      * @return
      */
     String getName();
+
+    IAttack getSelectAttack();
 
 
 
