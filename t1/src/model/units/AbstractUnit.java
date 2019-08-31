@@ -75,7 +75,9 @@ public abstract class AbstractUnit implements IUnit{
    */
   @Override
   public void addItem(IEquipableItem item) {
+    if (items.size()<3){
       items.add(item);
+    }
   }
 
   /**
