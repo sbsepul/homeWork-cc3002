@@ -1,5 +1,9 @@
 package model.items;
 
+import model.items.axe.AttackAxe;
+import model.items.bow.AttackBow;
+import model.items.spears.AttackSpears;
+import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -39,7 +43,6 @@ public abstract class AbstractItem implements IEquipableItem {
    * Each unit will have a item different
    * the unit only can to change his item for other equals.
    */
-
   @Override
   public void equipTo(final IUnit unit) {
     unit.equipItemOther(this);
@@ -70,4 +73,66 @@ public abstract class AbstractItem implements IEquipableItem {
   public int getMaxRange() {
     return maxRange;
   }
+
+  //COMBAT
+  /**
+   *
+   * @param attack
+   */
+  protected void receiveAttack(IAttack attack) {
+    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage());
+    this.getOwner().setCurrentHitPoints(a);
+  }
+
+  /**
+   *
+   * @param attack
+   */
+  protected void receiveRecovery(IAttack attack) {
+    int a = (int) (this.getOwner().getCurrentHitPoints() + attack.getBaseDamage());
+    this.getOwner().setCurrentHitPoints(a);
+  }
+
+  @Override
+  public void receiveAxeAttack(AttackAxe attackAxe) { receiveAttack(attackAxe); }
+
+  @Override
+  public void receiveBowAttack(AttackBow attackBow) {
+    receiveAttack(attackBow);
+  }
+
+  @Override
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+    receiveAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveSwordsAttack(AttackSword attackSword) {
+    receiveAttack(attackSword);
+  }
+
+
+  /**
+   * Receives an attack to which this Pokémon is weak.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  protected void receiveWeaknessAttack(IAttack attack){
+    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage() * 1.5);
+    this.getOwner().setCurrentHitPoints(a);
+  };
+
+
+  /**
+   * Receives an attack to which this Pokémon is resistant.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  protected void receiveResistantAttack(IAttack attack) {
+    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage() + 20);
+    this.getOwner().setCurrentHitPoints(a);
+  }
+  //END COMBAT
 }

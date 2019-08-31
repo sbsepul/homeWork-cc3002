@@ -57,26 +57,12 @@ public class Archer extends AbstractUnit {
    * Sets the currently equipped item of this unit.
    * <p>
    * The <i>Archer</i> can <b>only equip Bows</b>.
-   *     the item to equip (porque tiene final?????)
+   *     the item to equip
    */
 
   @Override
   public IEquipableItem getEquippedItem() {
     return equippedItem;
   }
-  @Override
-  public void receiveBowAttack(AttackBow attackBow) {}
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {}
-  @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {}
-  @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
 
-  }
-
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    receiveCure(attackStaff);
-  }
 }

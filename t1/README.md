@@ -69,6 +69,14 @@ CONTRA <---------
 
 
 
+
+
+caso borde:
+
+
+
+
+
 hay bonus x no romper liskov (hint: interfaces)
 
 ## Bibliografia

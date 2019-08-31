@@ -65,6 +65,15 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
+  public void setCurrentHitPoints(int hp) {
+    this.currentHitPoints = hp;
+  }
+
+  protected void receiveAttack(IAttack attack){
+    this.currentHitPoints -= attack.getBaseDamage();
+  }
+
+  @Override
   public List<IEquipableItem> getItems() {
     return List.copyOf(items);
   }
@@ -74,60 +83,6 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void setEquippedItem(final IEquipableItem item) {    this.equippedItem = item;  }
-
-  /**
-   *
-   * @param attack
-   */
-  protected void receiveAttack(IAttack attack) { this.currentHitPoints -= attack.getBaseDamage(); }
-
-  /**
-   *
-   * @param attack
-   */
-  protected void receiveCure(IAttack attack) { this.currentHitPoints += attack.getBaseDamage(); }
-  //COMBAT
-
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) { receiveAttack(attackAxe); }
-
-  @Override
-  public void receiveBowAttack(AttackBow attackBow) {
-    receiveAttack(attackBow);
-  }
-
-  @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
-    receiveAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
-    receiveAttack(attackSword);
-  }
-
-
-  /**
-   * Receives an attack to which this Pokémon is weak.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveWeaknessAttack(IAttack attack){
-    this.currentHitPoints -= attack.getBaseDamage() * 1.5;
-  };
-
-
-  /**
-   * Receives an attack to which this Pokémon is resistant.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveResistantAttack(IAttack attack) {
-    this.currentHitPoints -= attack.getBaseDamage() - 20;
-  }
-  //END COMBAT
 
   @Override
   public Location getLocation() {

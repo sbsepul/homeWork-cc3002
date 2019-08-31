@@ -40,30 +40,6 @@ public class Cleric extends AbstractUnit {
     return equippedItem;
   }
 
-  @Override
-  public void receiveBowAttack(AttackBow attackBow) {
-    receiveAttack(attackBow);
-  }
-
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {
-    receiveAttack(attackAxe);
-  }
-
-  @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
-    receiveAttack(attackSword);
-  }
-
-  @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
-    receiveAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    //do nothing
-  }
 
   @Override
   public void equipItemStaff(Staff item) {

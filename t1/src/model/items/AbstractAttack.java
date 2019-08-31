@@ -9,9 +9,9 @@ public abstract class AbstractAttack implements IAttack {
     /**
      *
      * @param name
-     * The attack's name
+     *      The attack's name
      * @param damage
-     * The damage's points
+     *      The damage's points
      */
     protected AbstractAttack(String name, int damage){
         this.name = name;

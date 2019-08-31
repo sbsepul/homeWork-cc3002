@@ -1,5 +1,10 @@
 package model.items;
 
+import model.items.axe.AttackAxe;
+import model.items.bow.AttackBow;
+import model.items.spears.AttackSpears;
+import model.items.staff.AttackStaff;
+import model.items.sword.AttackSword;
 import model.map.Location;
 import model.units.IUnit;
 
@@ -48,4 +53,28 @@ public interface IEquipableItem {
    * @return the maximum range of the item
    */
   public int getMaxRange();
+
+  //ETAPA DE COMBATE
+
+  /**
+   *
+   * @param attackBow
+   */
+  void receiveBowAttack(AttackBow attackBow);
+
+  /**
+   *
+   * @param attackAxe
+   */
+  void receiveAxeAttack(AttackAxe attackAxe);
+
+  /**
+   *
+   * @param attackSword
+   */
+  void receiveSwordsAttack(AttackSword attackSword);
+
+  void receiveSpearsAttack(AttackSpears attackSpears);
+
+  void receiveStaffAttack(AttackStaff attackStaff);
 }

@@ -1,6 +1,10 @@
 package model.items.staff;
 
 import model.items.AbstractItem;
+import model.items.axe.AttackAxe;
+import model.items.bow.AttackBow;
+import model.items.spears.AttackSpears;
+import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -32,5 +36,29 @@ public class Staff extends AbstractItem {
   @Override
   public void equipTo(IUnit unit) {
     unit.equipItemStaff(this);
+  }
+  @Override
+  public void receiveBowAttack(AttackBow attackBow) {
+    receiveAttack(attackBow);
+  }
+
+  @Override
+  public void receiveAxeAttack(AttackAxe attackAxe) {
+    receiveAttack(attackAxe);
+  }
+
+  @Override
+  public void receiveSwordsAttack(AttackSword attackSword) {
+    receiveAttack(attackSword);
+  }
+
+  @Override
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+    receiveAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveStaffAttack(AttackStaff attackStaff) {
+    //do nothing
   }
 }

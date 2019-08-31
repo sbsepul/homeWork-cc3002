@@ -1,6 +1,10 @@
 package model.items.bow;
 
 import model.items.AbstractItem;
+import model.items.axe.AttackAxe;
+import model.items.spears.AttackSpears;
+import model.items.staff.AttackStaff;
+import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -36,5 +40,20 @@ public class Bow extends AbstractItem {
   @Override
   public void equipTo(IUnit unit) {
     unit.equipItemBow(this);
+  }
+
+  @Override
+  public void receiveBowAttack(AttackBow attackBow) {}
+  @Override
+  public void receiveAxeAttack(AttackAxe attackAxe) {}
+  @Override
+  public void receiveSwordsAttack(AttackSword attackSword) {}
+  @Override
+  public void receiveSpearsAttack(AttackSpears attackSpears) {
+
+  }
+  @Override
+  public void receiveStaffAttack(AttackStaff attackStaff) {
+    receiveRecovery(attackStaff);
   }
 }

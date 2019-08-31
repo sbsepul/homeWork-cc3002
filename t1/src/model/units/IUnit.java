@@ -106,36 +106,6 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
-  //ETAPA DE COMBATE
-
-  /**
-   *
-   * @param attackBow
-   */
-  void receiveBowAttack(AttackBow attackBow);
-
-  /**
-   *
-   * @param attackAxe
-   */
-  void receiveAxeAttack(AttackAxe attackAxe);
-
-  /**
-   *
-   * @param attackSword
-   */
-  void receiveSwordsAttack(AttackSword attackSword);
-
-  /**
-   *
-   * @param attackSpears
-   */
-  void receiveSpearsAttack(AttackSpears attackSpears);
-
-  void receiveStaffAttack(AttackStaff attackStaff);
-
-  //END COMBAT
-
 // HIT POINTS
   /**
    * @return hit points of the unit
@@ -146,7 +116,7 @@ public interface IUnit {
    * @param remove
    * the hit points to be remove
    */
-  //void setRemoveHitPoints(int remove);
+  void setCurrentHitPoints(int change);
 
 }
 
