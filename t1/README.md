@@ -20,7 +20,9 @@ los ataque magicos
 
 se decidió  una implementación agregando ataque como un atributo de los items, pues los items son los elementos debiles contra otros, mientras que las unidades solamente tienen la capacidad de equiparse con ellos, no así de tener el poder de ellos
 
-#### For the Items 
+#### For the Items
+
+ Los item van a tener la capacidad de atacar, no así las unidades que son las que reciben el daño del ataque efectuado por el arma. De esta manera se logra una independencia entre la arma que porta cada unidad y el ataque que genera. Esto se consideró dado el caso borde donde en un combate puede haber una unidad que ataque sin arma, en cuyo caso simplemente no se puede atacar. También en el caso de contrataque, si el adversario no tiene arma no deberia poder atacar.
 
 #### For the Units
 

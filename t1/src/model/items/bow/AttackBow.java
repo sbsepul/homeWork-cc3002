@@ -12,7 +12,7 @@ public class AttackBow extends AbstractAttack {
      * @param baseDamage
      *     Base damage of the attack
      */
-    public AttackBow(String name, int baseDamage) { super(name, baseDamage); }
+    public AttackBow(IEquipableItem name, int baseDamage) { super(name, baseDamage); }
 
     @Override
     public void attack(IEquipableItem item) {

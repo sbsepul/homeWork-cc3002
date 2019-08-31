@@ -9,7 +9,7 @@ public class AttackSpears extends AbstractAttack {
      * @param name
      * @param damage
      */
-    protected AttackSpears(String name, int damage) {
+    protected AttackSpears(IEquipableItem name, int damage) {
         super(name, damage);
     }
 

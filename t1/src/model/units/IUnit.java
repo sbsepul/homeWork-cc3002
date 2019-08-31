@@ -85,6 +85,12 @@ public interface IUnit {
   void setEquippedItem(IEquipableItem item);
 
   /**
+   * add a item to the unit
+   * @param item
+   */
+  void addItem(IEquipableItem item);
+
+  /**
    * @return the current location of the unit
    */
   Location getLocation();
@@ -113,7 +119,7 @@ public interface IUnit {
   int getCurrentHitPoints();
 
   /**
-   * @param remove
+   * @param change
    * the hit points to be remove
    */
   void setCurrentHitPoints(int change);

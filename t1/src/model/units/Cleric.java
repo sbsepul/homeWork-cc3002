@@ -47,6 +47,11 @@ public class Cleric extends AbstractUnit {
   }
 
 
+  @Override
+  protected void receiveRecovery(IAttack attack) {
+    super.receiveRecovery(attack);
+  }
+
   /**
    * equip with a item the unit
    * @param item
@@ -65,4 +70,6 @@ public class Cleric extends AbstractUnit {
 
   @Override
   public void equipItemAxe(Axe item) { }
+
+
 }

@@ -13,8 +13,8 @@ public class AttackAxe extends AbstractAttack {
      * @param name
      * @param damage
      */
-    protected AttackAxe(String name, int damage) {
-        super(name, damage);
+    protected AttackAxe(IEquipableItem item, int damage) {
+        super(item, damage);
     }
 
     @Override

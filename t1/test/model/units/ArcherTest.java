@@ -40,5 +40,10 @@ public class ArcherTest extends AbstractTestUnit {
     assertNull(archer.getEquippedItem());
     archer.equipItem(bow);
     assertEquals(bow, archer.getEquippedItem());
+    assertEquals(0, archer.getItems().size());
+    archer.addItem(bow);
+    assertEquals(1 , archer.getItems().size());
+    archer.equipItem(sword);
+    assertEquals(bow, archer.getEquippedItem());
   }
 }

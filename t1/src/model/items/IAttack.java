@@ -19,6 +19,6 @@ public interface IAttack {
      *
      * @return
      */
-    String getName();
+    IEquipableItem getNameItem();
 
 }

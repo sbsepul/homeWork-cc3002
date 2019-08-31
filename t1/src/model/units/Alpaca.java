@@ -45,42 +45,37 @@ public class Alpaca extends AbstractUnit {
    * The <i>Alpaca</i> cannot equip any item. (ver como hacer eso de que no puede equipar pero si llevar)
    */
   public void equipItem(final IEquipableItem item) {
-    // Method body intentionally left empty
+    super.addItem(item);
   }
   @Override
   public void equipItemOther(IEquipableItem item) {
-
+    super.addItem(item);
   }
 
   @Override
   public void equipItemBow(Bow item) {
-
+    super.addItem(item);
   }
 
   @Override
   public void equipItemAxe(Axe item) {
-
+    super.addItem(item);
   }
 
   @Override
   public void equipItemSword(Sword item) {
-
+    super.addItem(item);
   }
 
   @Override
   public void equipItemStaff(Staff item) {
-
+    super.addItem(item);
   }
 
   @Override
   public void equipItemSpear(Spear item) {
-
+    super.addItem(item);
   }
-
-  @Override
-    public IEquipableItem getEquippedItem() {
-        return null;
-    }
 
   @Override
   protected void receiveAttack(IAttack attack) {

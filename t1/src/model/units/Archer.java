@@ -41,6 +41,11 @@ public class Archer extends AbstractUnit {
   }
 
   @Override
+  protected void receiveRecovery(IAttack attack) {
+    super.receiveRecovery(attack);
+  }
+
+  @Override
   public void equipItemBow(Bow item) { equippedItem = item; }
   @Override
   public void equipItemAxe(Axe item) { }

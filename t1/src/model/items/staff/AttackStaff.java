@@ -10,7 +10,7 @@ public class AttackStaff extends AbstractAttack {
      * @param name
      * @param damage
      */
-    protected AttackStaff(String name, int damage) {
+    protected AttackStaff(IEquipableItem name, int damage) {
         super(name, damage);
     }
 

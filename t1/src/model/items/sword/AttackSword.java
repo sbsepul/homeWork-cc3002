@@ -10,7 +10,7 @@ public class AttackSword extends AbstractAttack {
      * @param name
      * @param damage
      */
-    protected AttackSword(String name, int damage) {
+    protected AttackSword(IEquipableItem name, int damage) {
         super(name, damage);
     }
 

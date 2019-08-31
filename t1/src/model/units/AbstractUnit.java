@@ -69,8 +69,29 @@ public abstract class AbstractUnit implements IUnit{
     this.currentHitPoints = hp;
   }
 
+  /**
+   * Add a element to list of items's unit
+   * @param item
+   */
+  @Override
+  public void addItem(IEquipableItem item) {
+      items.add(item);
+  }
+
+  /**
+   * when a unit don't have a army
+   * @param attack
+   */
   protected void receiveAttack(IAttack attack){
     this.currentHitPoints -= attack.getBaseDamage();
+  }
+
+  /**
+   * when a unit don't have a army
+   * @param attack
+   */
+  protected void receiveRecovery(IAttack attack){
+    this.currentHitPoints += attack.getBaseDamage();
   }
 
   @Override
@@ -82,7 +103,7 @@ public abstract class AbstractUnit implements IUnit{
   public IEquipableItem getEquippedItem() { return equippedItem; }
 
   @Override
-  public void setEquippedItem(final IEquipableItem item) {    this.equippedItem = item;  }
+  public void setEquippedItem(final IEquipableItem item) { this.equippedItem = item;  }
 
   @Override
   public Location getLocation() {
@@ -104,6 +125,13 @@ public abstract class AbstractUnit implements IUnit{
         && targetLocation.getUnit() == null) {
       setLocation(targetLocation);
     }
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints
+            && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(items)
+            && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(equippedItem);
   }
 }
 
