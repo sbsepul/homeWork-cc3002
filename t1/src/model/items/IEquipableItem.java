@@ -74,6 +74,10 @@ public interface IEquipableItem {
    */
   void receiveSwordsAttack(AttackSword attackSword);
 
+  /**
+   *
+   * @param attackSpears
+   */
   void receiveSpearsAttack(AttackSpears attackSpears);
 
   void receiveStaffAttack(AttackStaff attackStaff);

@@ -59,6 +59,6 @@ public class Sword extends AbstractItem {
   }
   @Override
   public void receiveStaffAttack(AttackStaff attackStaff) {
-    receiveCure(attackStaff);
+    receiveRecovery(attackStaff);
   }
 }

@@ -3,6 +3,7 @@ package model.items;
 import model.items.axe.AttackAxe;
 import model.items.bow.AttackBow;
 import model.items.spears.AttackSpears;
+import model.items.staff.AttackStaff;
 import model.items.sword.AttackSword;
 import model.units.IUnit;
 
@@ -99,6 +100,11 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveBowAttack(AttackBow attackBow) {
     receiveAttack(attackBow);
+  }
+
+  @Override
+  public void receiveStaffAttack(AttackStaff attackStaff) {
+    receiveAttack(attackStaff);
   }
 
   @Override

@@ -32,31 +32,6 @@ public class SwordMaster extends AbstractUnit {
   public IEquipableItem getEquippedItem() { return equippedItem; }
 
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {
-    receiveAttack(attackBow);
-  }
-
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {
-    receiveResistantAttack(attackAxe);
-  }
-
-  @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
-    receiveAttack(attackSword);
-  }
-
-  @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
-    receiveWeaknessAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    receiveCure(attackStaff);
-  }
-
-  @Override
   public void equipItemSword(Sword item) { equippedItem=item; }
   @Override
   public void equipItemOther(IEquipableItem item) { }

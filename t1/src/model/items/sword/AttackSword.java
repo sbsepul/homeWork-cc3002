@@ -1,25 +1,27 @@
 package model.items.sword;
 
 import model.items.AbstractAttack;
+import model.items.IEquipableItem;
 import model.units.IUnit;
 
 public class AttackSword extends AbstractAttack {
+    /**
+     *
+     * @param name
+     * @param damage
+     */
     protected AttackSword(String name, int damage) {
         super(name, damage);
     }
 
     @Override
-    public void attack(IUnit unit) {
-        unit.receiveSwordsAttack(this);
+    public void attack(IEquipableItem item) {
+        item.receiveSwordsAttack(this);
     }
 
     @Override
-    public int getBaseDamage() {
-        return 0;
+    public boolean equals(Object obj){
+        return obj instanceof AttackSword && super.equals(obj);
     }
 
-    @Override
-    public String getName() {
-        return null;
-    }
 }

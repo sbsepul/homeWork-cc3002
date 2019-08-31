@@ -58,8 +58,4 @@ public class Spear extends AbstractItem {
     super.receiveAxeAttack(attackAxe);
   }
 
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-
-  }
 }

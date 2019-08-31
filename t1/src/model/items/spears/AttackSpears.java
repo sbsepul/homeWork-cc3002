@@ -1,16 +1,25 @@
 package model.items.spears;
 
 import model.items.AbstractAttack;
-import model.items.IAttack;
-import model.units.IUnit;
+import model.items.IEquipableItem;
 
 public class AttackSpears extends AbstractAttack {
+    /**
+     *
+     * @param name
+     * @param damage
+     */
     protected AttackSpears(String name, int damage) {
         super(name, damage);
     }
 
+
     @Override
-    public void attack(IUnit unit) {
-        unit.receiveSpearsAttack(this);
+    public void attack(IEquipableItem item) {
+        item.receiveSpearsAttack(this);
+    }
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof AttackSpears && super.equals(obj);
     }
 }

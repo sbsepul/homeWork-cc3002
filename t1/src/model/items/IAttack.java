@@ -7,7 +7,7 @@ public interface IAttack {
      * An attack
      * @param unit
      */
-    void attack(IUnit unit);
+    void attack(IEquipableItem unit);
 
     /**
      * Getter for the base damage.
