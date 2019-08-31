@@ -14,9 +14,9 @@ import java.util.List;
  * This interface represents the <i>weapons</i> that the units of the game can use.
  * <p>
  * The signature for all the common methods of the weapons are defined here. Every weapon have a
- * base damage and is strong or weak against other type of weapons.
+ * base damage and is strong or weak against other type of weapons.<p/>
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public interface IEquipableItem {
@@ -58,27 +58,36 @@ public interface IEquipableItem {
 
   /**
    *
-   * @param attackBow
+   * @param unit that will be attacked
+   */
+  public void attack(IUnit unit);
+  /**
+   *
+   * @param attackBow is the type of damage received when a Archer attack
    */
   void receiveBowAttack(AttackBow attackBow);
 
   /**
    *
-   * @param attackAxe
+   * @param attackAxe is the type of damage received when a Fighter attack
    */
   void receiveAxeAttack(AttackAxe attackAxe);
 
   /**
    *
-   * @param attackSword
+   * @param attackSword is the type of damage received when a SwordMaster attack
    */
   void receiveSwordsAttack(AttackSword attackSword);
 
   /**
    *
-   * @param attackSpears
+   * @param attackSpears is the type of damage received when a Hero attack
    */
   void receiveSpearsAttack(AttackSpears attackSpears);
 
+  /**
+   *
+   * @param attackStaff is the type of cure received when a Staff use his power
+   */
   void receiveStaffAttack(AttackStaff attackStaff);
 }

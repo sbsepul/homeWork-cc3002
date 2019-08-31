@@ -124,5 +124,8 @@ public interface IUnit {
    */
   void setCurrentHitPoints(int change);
 
+  void receiveAttack(IAttack attack);
+
+  void receiveRecovery(int attack);
 }
 

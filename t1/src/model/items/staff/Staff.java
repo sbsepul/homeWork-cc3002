@@ -1,6 +1,7 @@
 package model.items.staff;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 import model.items.axe.AttackAxe;
 import model.items.bow.AttackBow;
 import model.items.spears.AttackSpears;
@@ -37,6 +38,16 @@ public class Staff extends AbstractItem {
   public void equipTo(IUnit unit) {
     unit.equipItemStaff(this);
   }
+
+  @Override
+  public void attack(IUnit unit) {
+    //don't attack
+  }
+
+  public void recovery(IUnit unit) {
+    unit.receiveRecovery(this.getPower());
+  }
+
   @Override
   public void receiveBowAttack(AttackBow attackBow) {
     receiveAttack(attackBow);

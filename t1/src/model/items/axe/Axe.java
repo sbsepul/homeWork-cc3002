@@ -1,6 +1,7 @@
 package model.items.axe;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 import model.items.bow.AttackBow;
 import model.items.spears.AttackSpears;
 import model.items.staff.AttackStaff;
@@ -39,6 +40,11 @@ public class Axe extends AbstractItem {
     }
 
   @Override
+  public void attack(IUnit item) {
+
+  }
+
+  @Override
   public void receiveBowAttack(AttackBow attackBow) {
     receiveAttack(attackBow);
   }
@@ -58,8 +64,4 @@ public class Axe extends AbstractItem {
     receiveResistantAttack(attackSpears);
   }
 
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    receiveRecovery(attackStaff);
-  }
 }

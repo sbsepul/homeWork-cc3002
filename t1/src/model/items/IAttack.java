@@ -2,12 +2,19 @@ package model.items;
 
 import model.units.IUnit;
 
+/**
+ * This interface represents the <i>attacks</i> that the units can use when have a weapon.
+ *
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
 public interface IAttack {
     /**
-     * An attack
+     * Attack to unit
      * @param unit
      */
-    void attack(IEquipableItem unit);
+    void attack(IUnit unit);
 
     /**
      * Getter for the base damage.
@@ -16,9 +23,9 @@ public interface IAttack {
     int getBaseDamage();
 
     /**
-     *
-     * @return
+     * Getter for recognise the item used for the unit
+     * @return Item that realize the attack
      */
-    IEquipableItem getNameItem();
+    IEquipableItem getTypeItem();
 
 }

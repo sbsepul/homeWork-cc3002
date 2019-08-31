@@ -10,7 +10,7 @@ import model.units.IUnit;
 /**
  * Abstract class that defines some common information and behaviour between all items.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public abstract class AbstractItem implements IEquipableItem {
@@ -43,6 +43,7 @@ public abstract class AbstractItem implements IEquipableItem {
   /**
    * Each unit will have a item different
    * the unit only can to change his item for other equals.
+   * @param unit
    */
   @Override
   public void equipTo(final IUnit unit) {
@@ -77,21 +78,11 @@ public abstract class AbstractItem implements IEquipableItem {
 
   //COMBAT
   /**
-   *
+   * A item can receive a Attack without damage additional
    * @param attack
    */
-  protected void receiveAttack(IAttack attack) {
-    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage());
-    this.getOwner().setCurrentHitPoints(a);
-  }
-
-  /**
-   *
-   * @param attack
-   */
-  protected void receiveRecovery(IAttack attack) {
-    int a = (int) (this.getOwner().getCurrentHitPoints() + attack.getBaseDamage());
-    this.getOwner().setCurrentHitPoints(a);
+  public void receiveAttack(IAttack attack) {
+    this.getOwner().receiveAttack(attack);
   }
 
   @Override

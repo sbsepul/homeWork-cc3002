@@ -1,6 +1,7 @@
 package model.items.spears;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 import model.items.axe.AttackAxe;
 import model.items.bow.AttackBow;
 import model.items.staff.AttackStaff;
@@ -33,9 +34,15 @@ public class Spear extends AbstractItem {
     super(name, power, minRange, maxRange);
   }
 
+
   @Override
   public void equipTo(IUnit unit) {
       unit.equipItemSpear(this);
+  }
+
+  @Override
+  public void attack(IUnit item) {
+
   }
 
   @Override

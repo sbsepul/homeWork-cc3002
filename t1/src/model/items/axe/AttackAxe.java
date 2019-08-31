@@ -10,7 +10,7 @@ public class AttackAxe extends AbstractAttack {
 
     /**
      *
-     * @param name
+     * @param item
      * @param damage
      */
     protected AttackAxe(IEquipableItem item, int damage) {

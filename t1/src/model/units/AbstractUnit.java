@@ -4,12 +4,14 @@ import static java.lang.Math.min;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import model.items.*;
 import model.items.axe.AttackAxe;
 import model.items.bow.AttackBow;
 import model.items.spears.AttackSpears;
+import model.items.staff.Staff;
 import model.items.sword.AttackSword;
 import model.map.Location;
 
@@ -28,6 +30,7 @@ public abstract class AbstractUnit implements IUnit{
   protected final List<IEquipableItem> items = new ArrayList<>();
   private int currentHitPoints;
   private final int movement;
+  private final int maxItems;
   protected IEquipableItem equippedItem;
   private Location location;
 
@@ -42,11 +45,14 @@ public abstract class AbstractUnit implements IUnit{
    *     the current position of this unit on the map
    * @param maxItems
    *     maximum amount of items this unit can carry
+   * @param items
+   *     items that the unit not use but can carry
    */
   protected AbstractUnit(final int hitPoints, final int movement,
       final Location location, final int maxItems, final IEquipableItem... items) {
     this.currentHitPoints = hitPoints;
     this.movement = movement;
+    this.maxItems = maxItems;
     this.location = location;
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
@@ -75,8 +81,9 @@ public abstract class AbstractUnit implements IUnit{
    */
   @Override
   public void addItem(IEquipableItem item) {
-    if (items.size()<3){
-      items.add(item);
+    int n = items.size();
+    if(n<this.maxItems){
+      this.items.add(item);
     }
   }
 
@@ -84,7 +91,7 @@ public abstract class AbstractUnit implements IUnit{
    * when a unit don't have a army
    * @param attack
    */
-  protected void receiveAttack(IAttack attack){
+  public void receiveAttack(IAttack attack){
     this.currentHitPoints -= attack.getBaseDamage();
   }
 
@@ -92,8 +99,8 @@ public abstract class AbstractUnit implements IUnit{
    * when a unit don't have a army
    * @param attack
    */
-  protected void receiveRecovery(IAttack attack){
-    this.currentHitPoints += attack.getBaseDamage();
+  public void receiveRecovery(int attack){
+    this.currentHitPoints += attack;
   }
 
   @Override

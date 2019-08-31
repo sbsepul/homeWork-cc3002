@@ -48,7 +48,7 @@ public class Cleric extends AbstractUnit {
 
 
   @Override
-  protected void receiveRecovery(IAttack attack) {
+  public void receiveRecovery(IAttack attack) {
     super.receiveRecovery(attack);
   }
 

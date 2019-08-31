@@ -78,7 +78,7 @@ public class Alpaca extends AbstractUnit {
   }
 
   @Override
-  protected void receiveAttack(IAttack attack) {
+  public void receiveAttack(IAttack attack) {
     super.receiveAttack(attack);
   }
 }
