@@ -12,9 +12,9 @@ import model.units.IUnit;
 public interface IAttack {
     /**
      * Attack to unit
-     * @param unit
+     * @param item
      */
-    void attack(IUnit unit);
+    void attack(IEquipableItem item);
 
     /**
      * Getter for the base damage.

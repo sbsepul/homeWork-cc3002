@@ -40,11 +40,6 @@ public class Sword extends AbstractItem {
   }
 
   @Override
-  public void attack(IUnit unit) {
-
-  }
-
-  @Override
   public void receiveBowAttack(AttackBow attackBow) {
     receiveAttack(attackBow);
   }
@@ -62,5 +57,10 @@ public class Sword extends AbstractItem {
   @Override
   public void receiveSpearsAttack(AttackSpears attackSpears) {
     receiveWeaknessAttack(attackSpears);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Sword && super.equals(obj);
   }
 }

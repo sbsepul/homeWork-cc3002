@@ -29,9 +29,6 @@ public class SwordMaster extends AbstractUnit {
   }
 
   @Override
-  public IEquipableItem getEquippedItem() { return equippedItem; }
-
-  @Override
   public void equipItemSword(Sword item) { equippedItem=item; }
   @Override
   public void equipItemOther(IEquipableItem item) { }

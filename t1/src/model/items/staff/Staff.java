@@ -39,37 +39,37 @@ public class Staff extends AbstractItem {
     unit.equipItemStaff(this);
   }
 
-  @Override
-  public void attack(IUnit unit) {
-    //don't attack
-  }
-
   public void recovery(IUnit unit) {
     unit.receiveRecovery(this.getPower());
   }
 
   @Override
   public void receiveBowAttack(AttackBow attackBow) {
-    receiveAttack(attackBow);
+    this.receiveAttack(attackBow);
   }
 
   @Override
   public void receiveAxeAttack(AttackAxe attackAxe) {
-    receiveAttack(attackAxe);
+    this.receiveAttack(attackAxe);
   }
 
   @Override
   public void receiveSwordsAttack(AttackSword attackSword) {
-    receiveAttack(attackSword);
+    this.receiveAttack(attackSword);
   }
 
   @Override
   public void receiveSpearsAttack(AttackSpears attackSpears) {
-    receiveAttack(attackSpears);
+    this.receiveAttack(attackSpears);
   }
 
   @Override
   public void receiveStaffAttack(AttackStaff attackStaff) {
     //do nothing
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Staff && super.equals(obj);
   }
 }

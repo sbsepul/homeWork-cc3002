@@ -77,6 +77,12 @@ public abstract class AbstractItem implements IEquipableItem {
   }
 
   //COMBAT
+
+  @Override
+  public void attack(IUnit other) {
+    this.attack(other);
+  }
+
   /**
    * A item can receive a Attack without damage additional
    * @param attack
@@ -118,7 +124,7 @@ public abstract class AbstractItem implements IEquipableItem {
   protected void receiveWeaknessAttack(IAttack attack){
     int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage() * 1.5);
     this.getOwner().setCurrentHitPoints(a);
-  };
+  }
 
 
   /**

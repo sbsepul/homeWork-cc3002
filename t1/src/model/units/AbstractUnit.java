@@ -88,7 +88,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   /**
-   * when a unit don't have a army
+   * Reduce hp in unit that receive a attack
    * @param attack
    */
   public void receiveAttack(IAttack attack){
@@ -96,11 +96,11 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   /**
-   * when a unit don't have a army
-   * @param attack
+   * Increase hp in unit that receive a attack
+   * @param recovery
    */
-  public void receiveRecovery(int attack){
-    this.currentHitPoints += attack;
+  public void receiveRecovery(int recovery){
+    this.currentHitPoints += recovery;
   }
 
   @Override

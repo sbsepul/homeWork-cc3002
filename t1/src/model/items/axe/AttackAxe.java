@@ -2,6 +2,7 @@ package model.items.axe;
 
 import model.items.AbstractAttack;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 /**
  * This class ...
@@ -26,4 +27,5 @@ public class AttackAxe extends AbstractAttack {
     public boolean equals(Object obj){
         return obj instanceof AttackAxe && super.equals(obj);
     }
+
 }

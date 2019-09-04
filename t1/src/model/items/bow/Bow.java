@@ -44,11 +44,6 @@ public class Bow extends AbstractItem {
   }
 
   @Override
-  public void attack(IUnit item) {
-
-  }
-
-  @Override
   public void receiveBowAttack(AttackBow attackBow) {}
   @Override
   public void receiveAxeAttack(AttackAxe attackAxe) {}
@@ -57,5 +52,9 @@ public class Bow extends AbstractItem {
   @Override
   public void receiveSpearsAttack(AttackSpears attackSpears) {
 
+  }
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Bow && super.equals(obj);
   }
 }

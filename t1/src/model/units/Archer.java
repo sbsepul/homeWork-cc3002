@@ -41,7 +41,7 @@ public class Archer extends AbstractUnit {
   }
 
   @Override
-  public void receiveRecovery(IAttack attack) {
+  public void receiveRecovery(int attack) {
     super.receiveRecovery(attack);
   }
 

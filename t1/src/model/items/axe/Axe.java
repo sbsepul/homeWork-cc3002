@@ -40,28 +40,27 @@ public class Axe extends AbstractItem {
     }
 
   @Override
-  public void attack(IUnit item) {
-
-  }
-
-  @Override
   public void receiveBowAttack(AttackBow attackBow) {
-    receiveAttack(attackBow);
+    this.receiveAttack(attackBow);
   }
 
   @Override
   public void receiveAxeAttack(AttackAxe attackAxe) {
-    receiveAttack(attackAxe);
+    this.receiveAttack(attackAxe);
   }
 
   @Override
   public void receiveSwordsAttack(AttackSword attackSword) {
-    receiveWeaknessAttack(attackSword);
+    this.receiveWeaknessAttack(attackSword);
   }
 
   @Override
   public void receiveSpearsAttack(AttackSpears attackSpears) {
-    receiveResistantAttack(attackSpears);
+    this.receiveResistantAttack(attackSpears);
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Axe && super.equals(obj);
+  }
 }
