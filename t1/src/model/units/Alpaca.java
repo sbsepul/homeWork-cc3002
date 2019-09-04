@@ -42,6 +42,11 @@ public class Alpaca extends AbstractUnit {
   public void equipItem(final IEquipableItem item) {
     super.addItem(item);
   }
+
+  @Override
+  protected void attack(IUnit enemy) {
+  }
+
   @Override
   public void equipItemOther(IEquipableItem item) {
     super.addItem(item);

@@ -44,10 +44,17 @@ public class Bow extends AbstractItem {
    */
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
-      receiveAttack(attackBow);
+    this.receiveAttack(attackBow);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackBow.getOwner().getCurrentHitPoints()>0){
+        if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
+          attackBow.getOwner().receiveAttack(attackBow);
+        }
+        else; //do nothing
+      }
+      else; //can't counterattack
     }
-
+    else; //can't attack
   }
 
   /**
@@ -56,23 +63,16 @@ public class Bow extends AbstractItem {
    */
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
-    if(this.getOwner().getLocation().isNeighbour(attackAxe.getOwner().getLocation())) {
-      receiveAttack(attackAxe);
-    }
+    this.receiveAttack(attackAxe);
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    if(this.getOwner().getLocation().isNeighbour(attackSword.getOwner().getLocation())) {
-      receiveAttack(attackSword);
-    }
+    this.receiveAttack(attackSword);
   }
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    if(this.getOwner().getLocation().isNeighbour(attackSpears.getOwner().getLocation())) {
-      receiveAttack(attackSpears);
-    }
+    this.receiveAttack(attackSpears);
   }
-
 
   @Override
   public boolean equals(Object obj) {

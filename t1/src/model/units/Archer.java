@@ -35,31 +35,26 @@ public class Archer extends AbstractUnit {
     super(hitPoints, movement, position, 3, items);
   }
 
-
   public void attack(IUnit enemy){
-    if (this.getCurrentHitPoints()>0){
-      if (this.getEquippedItem()!=null){
-        if(enemy.getEquippedItem()!=null){
-          enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
-          if(enemy.getCurrentHitPoints()>0){
-            this.getEquippedItem();
+    if (this.getCurrentHitPoints()>0) {
+      if(enemy.getCurrentHitPoints()>0){
+        if (this.getEquippedItem() != null) {
+          if(enemy.getEquippedItem()!=null){
+            //if archer isn't Neighbour of enemy
+            if (!this.getLocation().isNeighbour(enemy.getLocation())) {
+              enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
+            }
+            else ; //do nothing
           }
           else{
-            //enemy can't continue attacking
+              enemy.receiveAttack(this.getEquippedItem());
           }
         }
-        else{
-          enemy.receiveAttack(this.getEquippedItem());
-          //enemy haven't weapon, then can't continue attacking.
-        }
+        else ; // this unit haven't army
       }
-      else{
-        //do nothing
-      }
+      // enemy rip
     }
-    else{
-      //do nothing
-    }
+    // this unit rip
   }
 
   @Override

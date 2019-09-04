@@ -35,32 +35,37 @@ public class Axe extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
-      this.receiveAttack(attackBow);
-    }
+    this.receiveAttack(attackBow);
   }
 
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackAxe.getOwner().getCurrentHitPoints()>0){
+        attackAxe.getOwner().receiveAttack(this);
+      }
+    }
   }
 
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveWeaknessAttack(attackSword);
-    if(attackSword.getOwner().getCurrentHitPoints()>0){
-      attackSword.getOwner().receiveAttackResistant(this);
+    //if this owner is life yet
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackSword.getOwner().getCurrentHitPoints()>0){
+        attackSword.getOwner().receiveAttackResistant(this);
+      }
     }
   }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveResistantAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveStaffAttack(Staff attackStaff) {
-    receiveRecovery(attackStaff);
+    if(this.getOwner().getCurrentHitPoints()>0){
+    if(attackSpears.getOwner().getCurrentHitPoints()>0){
+      attackSpears.getOwner().receiveAttackWeakness(this);
+    }}
   }
 
   @Override

@@ -81,6 +81,7 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+  protected abstract void attack(IUnit enemy);
 
   /**
    * Reduce hp in unit that receive a attack

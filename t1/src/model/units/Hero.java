@@ -38,6 +38,22 @@ public class Hero extends AbstractUnit {
   }
 
   @Override
+  protected void attack(IUnit enemy) {
+    if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
+      if (this.getEquippedItem() != null) {
+        if(enemy.getEquippedItem()!=null){
+          enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
+        }
+        else{
+          enemy.receiveAttack(this.getEquippedItem());
+        }
+      }
+      // this unit haven't army
+    }
+    // this unit or enemy rip
+  }
+
+  @Override
   public IEquipableItem getEquippedItem() {
     return equippedItem;
   }

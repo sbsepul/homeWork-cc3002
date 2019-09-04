@@ -37,25 +37,34 @@ public class Sword extends AbstractItem {
   public void receiveBowAttack(Bow attackBow) {
     receiveAttack(attackBow);
   }
-
   @Override
-  public void receiveAxeAttack(Axe attackAxe) {
-    receiveResistantAttack(attackAxe);
+  public void receiveSwordsAttack(Sword attackSword) {
+    this.receiveAttack(attackSword);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackSword.getOwner().getCurrentHitPoints()>0){
+        attackSword.getOwner().receiveAttack(this);
+      }
+    }
   }
 
   @Override
-  public void receiveSwordsAttack(Sword attackSword) {
-    receiveAttack(attackSword);
+  public void receiveAxeAttack(Axe attackAxe) {
+    this.receiveResistantAttack(attackAxe);
+    if(this.getOwner().getCurrentHitPoints()>0) {
+      if(attackAxe.getOwner().getCurrentHitPoints()>0){
+        attackAxe.getOwner().receiveAttackWeakness(this);
+      }
+    }
   }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    receiveWeaknessAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveStaffAttack(Staff attackStaff) {
-    receiveRecovery(attackStaff);
+    this.receiveWeaknessAttack(attackSpears);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackSpears.getOwner().getCurrentHitPoints()>0){
+        attackSpears.getOwner().receiveAttackResistant(this);
+      }
+    }
   }
 
   @Override
