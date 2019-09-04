@@ -1,11 +1,5 @@
-package model.items.bow;
+package model.items;
 
-import model.items.AbstractItem;
-import model.items.IEquipableItem;
-import model.items.axe.AttackAxe;
-import model.items.spears.AttackSpears;
-import model.items.staff.AttackStaff;
-import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -43,16 +37,43 @@ public class Bow extends AbstractItem {
     unit.equipItemBow(this);
   }
 
+
+  /**
+   * Receive a Bow attack if the other unit not is Neighbour (2 spaces, review)
+   * @param attackBow
+   */
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {}
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {}
-  @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {}
-  @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
+  public void receiveBowAttack(Bow attackBow) {
+    if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
+      receiveAttack(attackBow);
+    }
 
   }
+
+  /**
+   * if the attacker is Neighbour, then receive attack
+   * @param attackAxe
+   */
+  @Override
+  public void receiveAxeAttack(Axe attackAxe) {
+    if(this.getOwner().getLocation().isNeighbour(attackAxe.getOwner().getLocation())) {
+      receiveAttack(attackAxe);
+    }
+  }
+  @Override
+  public void receiveSwordsAttack(Sword attackSword) {
+    if(this.getOwner().getLocation().isNeighbour(attackSword.getOwner().getLocation())) {
+      receiveAttack(attackSword);
+    }
+  }
+  @Override
+  public void receiveSpearsAttack(Spear attackSpears) {
+    if(this.getOwner().getLocation().isNeighbour(attackSpears.getOwner().getLocation())) {
+      receiveAttack(attackSpears);
+    }
+  }
+
+
   @Override
   public boolean equals(Object obj) {
     return obj instanceof Bow && super.equals(obj);

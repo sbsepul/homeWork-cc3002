@@ -1,11 +1,5 @@
-package model.items.sword;
+package model.items;
 
-import model.items.AbstractItem;
-import model.items.IEquipableItem;
-import model.items.axe.AttackAxe;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.staff.AttackStaff;
 import model.units.IUnit;
 
 /**
@@ -40,23 +34,28 @@ public class Sword extends AbstractItem {
   }
 
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {
+  public void receiveBowAttack(Bow attackBow) {
     receiveAttack(attackBow);
   }
 
   @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {
+  public void receiveAxeAttack(Axe attackAxe) {
     receiveResistantAttack(attackAxe);
   }
 
   @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
+  public void receiveSwordsAttack(Sword attackSword) {
     receiveAttack(attackSword);
   }
 
   @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
+  public void receiveSpearsAttack(Spear attackSpears) {
     receiveWeaknessAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveStaffAttack(Staff attackStaff) {
+    receiveRecovery(attackStaff);
   }
 
   @Override

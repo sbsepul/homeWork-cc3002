@@ -3,17 +3,12 @@ package model.units;
 import java.util.List;
 
 import model.items.*;
-import model.items.axe.Axe;
-import model.items.bow.Bow;
-import model.items.spears.Spear;
-import model.items.staff.AttackStaff;
-import model.items.staff.Staff;
-import model.items.sword.Sword;
+import model.items.Axe;
+import model.items.Bow;
+import model.items.Spear;
+import model.items.Staff;
+import model.items.Sword;
 import model.map.Location;
-import model.items.bow.AttackBow;
-import model.items.axe.AttackAxe;
-import model.items.spears.AttackSpears;
-import model.items.sword.AttackSword;
 
 /**
  * This interface represents all units in the game.
@@ -124,8 +119,8 @@ public interface IUnit {
    */
   void setCurrentHitPoints(int change);
 
-  void receiveAttack(IAttack attack);
+  void receiveAttack(IEquipableItem attack);
 
-  void receiveRecovery(int attack);
+  void receiveRecovery(IEquipableItem attack);
 }
 

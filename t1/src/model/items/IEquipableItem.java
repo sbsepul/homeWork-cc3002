@@ -1,14 +1,6 @@
 package model.items;
 
-import model.items.axe.AttackAxe;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.staff.AttackStaff;
-import model.items.sword.AttackSword;
-import model.map.Location;
 import model.units.IUnit;
-
-import java.util.List;
 
 /**
  * This interface represents the <i>weapons</i> that the units of the game can use.
@@ -65,29 +57,29 @@ public interface IEquipableItem {
    *
    * @param attackBow is the type of damage received when a Archer attack
    */
-  void receiveBowAttack(AttackBow attackBow);
+  void receiveBowAttack(Bow attackBow);
 
   /**
    *
    * @param attackAxe is the type of damage received when a Fighter attack
    */
-  void receiveAxeAttack(AttackAxe attackAxe);
+  void receiveAxeAttack(Axe attackAxe);
 
   /**
    *
    * @param attackSword is the type of damage received when a SwordMaster attack
    */
-  void receiveSwordsAttack(AttackSword attackSword);
+  void receiveSwordsAttack(Sword attackSword);
 
   /**
    *
    * @param attackSpears is the type of damage received when a Hero attack
    */
-  void receiveSpearsAttack(AttackSpears attackSpears);
+  void receiveSpearsAttack(Spear attackSpears);
 
   /**
    *
    * @param attackStaff is the type of cure received when a Staff use his power
    */
-  void receiveStaffAttack(AttackStaff attackStaff);
+  void receiveStaffAttack(Staff attackStaff);
 }

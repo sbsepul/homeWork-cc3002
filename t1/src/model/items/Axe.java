@@ -1,11 +1,5 @@
-package model.items.axe;
+package model.items;
 
-import model.items.AbstractItem;
-import model.items.IEquipableItem;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.staff.AttackStaff;
-import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -40,23 +34,30 @@ public class Axe extends AbstractItem {
     }
 
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {
-    this.receiveAttack(attackBow);
+  public void receiveBowAttack(Bow attackBow) {
+    if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
+      receiveAttack(attackBow);
+    }
   }
 
   @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {
+  public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);
   }
 
   @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
+  public void receiveSwordsAttack(Sword attackSword) {
     this.receiveWeaknessAttack(attackSword);
   }
 
   @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
+  public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveResistantAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveStaffAttack(Staff attackStaff) {
+    receiveRecovery(attackStaff);
   }
 
   @Override

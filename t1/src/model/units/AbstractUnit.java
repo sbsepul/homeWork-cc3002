@@ -4,15 +4,9 @@ import static java.lang.Math.min;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import model.items.*;
-import model.items.axe.AttackAxe;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.staff.Staff;
-import model.items.sword.AttackSword;
 import model.map.Location;
 
 /**
@@ -87,20 +81,21 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+
   /**
    * Reduce hp in unit that receive a attack
    * @param attack
    */
-  public void receiveAttack(IAttack attack){
-    this.currentHitPoints -= attack.getBaseDamage();
+  public void receiveAttack(IEquipableItem attack){
+    this.currentHitPoints -= attack.getPower();
   }
 
   /**
    * Increase hp in unit that receive a attack
    * @param recovery
    */
-  public void receiveRecovery(int recovery){
-    this.currentHitPoints += recovery;
+  public void receiveRecovery(IEquipableItem recovery){
+    this.currentHitPoints += recovery.getPower();
   }
 
   @Override

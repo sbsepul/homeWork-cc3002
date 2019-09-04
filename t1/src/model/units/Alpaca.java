@@ -1,16 +1,11 @@
 package model.units;
 
 import model.items.*;
-import model.items.axe.AttackAxe;
-import model.items.axe.Axe;
-import model.items.bow.AttackBow;
-import model.items.bow.Bow;
-import model.items.spears.AttackSpears;
-import model.items.spears.Spear;
-import model.items.staff.AttackStaff;
-import model.items.staff.Staff;
-import model.items.sword.AttackSword;
-import model.items.sword.Sword;
+import model.items.Axe;
+import model.items.Bow;
+import model.items.Spear;
+import model.items.Staff;
+import model.items.Sword;
 import model.map.Location;
 
 /**
@@ -78,7 +73,7 @@ public class Alpaca extends AbstractUnit {
   }
 
   @Override
-  public void receiveAttack(IAttack attack) {
+  public void receiveAttack(IEquipableItem attack) {
     super.receiveAttack(attack);
   }
 }

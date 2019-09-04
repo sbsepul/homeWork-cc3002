@@ -1,11 +1,5 @@
-package model.items.staff;
+package model.items;
 
-import model.items.AbstractItem;
-import model.items.IEquipableItem;
-import model.items.axe.AttackAxe;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -39,33 +33,24 @@ public class Staff extends AbstractItem {
     unit.equipItemStaff(this);
   }
 
-  public void recovery(IUnit unit) {
-    unit.receiveRecovery(this.getPower());
-  }
-
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {
+  public void receiveBowAttack(Bow attackBow) {
     this.receiveAttack(attackBow);
   }
 
   @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) {
+  public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);
   }
 
   @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
+  public void receiveSwordsAttack(Sword attackSword) {
     this.receiveAttack(attackSword);
   }
 
   @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
+  public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    //do nothing
   }
 
   @Override

@@ -1,16 +1,11 @@
 package model.units;
 
 import model.items.*;
-import model.items.axe.AttackAxe;
-import model.items.axe.Axe;
-import model.items.bow.AttackBow;
-import model.items.bow.Bow;
-import model.items.spears.AttackSpears;
-import model.items.spears.Spear;
-import model.items.staff.AttackStaff;
-import model.items.staff.Staff;
-import model.items.sword.AttackSword;
-import model.items.sword.Sword;
+import model.items.Axe;
+import model.items.Bow;
+import model.items.Spear;
+import model.items.Staff;
+import model.items.Sword;
 import model.map.Location;
 
 /**
@@ -40,9 +35,31 @@ public class Archer extends AbstractUnit {
     super(hitPoints, movement, position, 3, items);
   }
 
-  @Override
-  public void receiveRecovery(int attack) {
-    super.receiveRecovery(attack);
+
+  public void attack(IUnit enemy){
+    if (this.getCurrentHitPoints()>0){
+      if (this.getEquippedItem()!=null){
+        if(enemy.getEquippedItem()!=null){
+          enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
+          if(enemy.getCurrentHitPoints()>0){
+            this.receiveAttack(enemy.getEquippedItem());
+          }
+          else{
+            //enemy can't continue attacking
+          }
+        }
+        else{
+          enemy.receiveAttack(this.getEquippedItem());
+          //enemy haven't weapon, then can't continue attacking.
+        }
+      }
+      else{
+        //do nothing
+      }
+    }
+    else{
+      //do nothing
+    }
   }
 
   @Override

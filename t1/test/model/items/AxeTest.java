@@ -1,6 +1,5 @@
 package model.items;
 
-import model.items.axe.Axe;
 import model.map.Location;
 import model.units.Fighter;
 import model.units.IUnit;

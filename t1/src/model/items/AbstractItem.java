@@ -1,10 +1,5 @@
 package model.items;
 
-import model.items.axe.AttackAxe;
-import model.items.bow.AttackBow;
-import model.items.spears.AttackSpears;
-import model.items.staff.AttackStaff;
-import model.items.sword.AttackSword;
 import model.units.IUnit;
 
 /**
@@ -87,30 +82,32 @@ public abstract class AbstractItem implements IEquipableItem {
    * A item can receive a Attack without damage additional
    * @param attack
    */
-  public void receiveAttack(IAttack attack) {
+  protected void receiveAttack(IEquipableItem attack) {
     this.getOwner().receiveAttack(attack);
   }
 
-  @Override
-  public void receiveAxeAttack(AttackAxe attackAxe) { receiveAttack(attackAxe); }
+  protected void receiveRecovery(IEquipableItem attack) { this.getOwner().receiveRecovery(attack); }
 
   @Override
-  public void receiveBowAttack(AttackBow attackBow) {
+  public void receiveAxeAttack(Axe attackAxe) { receiveAttack(attackAxe); }
+
+  @Override
+  public void receiveBowAttack(Bow attackBow) {
     receiveAttack(attackBow);
   }
 
   @Override
-  public void receiveStaffAttack(AttackStaff attackStaff) {
-    receiveAttack(attackStaff);
+  public void receiveStaffAttack(Staff attackStaff) {
+    receiveRecovery(attackStaff);
   }
 
   @Override
-  public void receiveSpearsAttack(AttackSpears attackSpears) {
+  public void receiveSpearsAttack(Spear attackSpears) {
     receiveAttack(attackSpears);
   }
 
   @Override
-  public void receiveSwordsAttack(AttackSword attackSword) {
+  public void receiveSwordsAttack(Sword attackSword) {
     receiveAttack(attackSword);
   }
 
@@ -121,8 +118,8 @@ public abstract class AbstractItem implements IEquipableItem {
    * @param attack
    *     Received attack.
    */
-  protected void receiveWeaknessAttack(IAttack attack){
-    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage() * 1.5);
+  protected void receiveWeaknessAttack(IEquipableItem attack){
+    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getPower() * 1.5);
     this.getOwner().setCurrentHitPoints(a);
   }
 
@@ -133,8 +130,8 @@ public abstract class AbstractItem implements IEquipableItem {
    * @param attack
    *     Received attack.
    */
-  protected void receiveResistantAttack(IAttack attack) {
-    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getBaseDamage() + 20);
+  protected void receiveResistantAttack(IEquipableItem attack) {
+    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getPower() + 20);
     this.getOwner().setCurrentHitPoints(a);
   }
   //END COMBAT
