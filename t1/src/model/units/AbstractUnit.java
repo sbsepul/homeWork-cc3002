@@ -90,6 +90,15 @@ public abstract class AbstractUnit implements IUnit{
     this.currentHitPoints -= attack.getPower();
   }
 
+  public void receiveAttackWeakness(IEquipableItem attack){
+    this.currentHitPoints -= (int) (attack.getPower() *1.5);
+  }
+
+  public void receiveAttackResistant(IEquipableItem attack){
+    this.currentHitPoints -= attack.getPower() - 20;
+  }
+
+
   /**
    * Increase hp in unit that receive a attack
    * @param recovery

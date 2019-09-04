@@ -121,6 +121,10 @@ public interface IUnit {
 
   void receiveAttack(IEquipableItem attack);
 
+  void receiveAttackWeakness(IEquipableItem attack);
+
+  void receiveAttackResistant(IEquipableItem attack);
+
   void receiveRecovery(IEquipableItem attack);
 }
 

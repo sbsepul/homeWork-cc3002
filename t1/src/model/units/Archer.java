@@ -40,9 +40,9 @@ public class Archer extends AbstractUnit {
     if (this.getCurrentHitPoints()>0){
       if (this.getEquippedItem()!=null){
         if(enemy.getEquippedItem()!=null){
-          enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
+          enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
           if(enemy.getCurrentHitPoints()>0){
-            this.receiveAttack(enemy.getEquippedItem());
+            this.getEquippedItem();
           }
           else{
             //enemy can't continue attacking

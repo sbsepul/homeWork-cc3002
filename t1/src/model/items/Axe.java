@@ -36,7 +36,7 @@ public class Axe extends AbstractItem {
   @Override
   public void receiveBowAttack(Bow attackBow) {
     if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
-      receiveAttack(attackBow);
+      this.receiveAttack(attackBow);
     }
   }
 
@@ -48,6 +48,9 @@ public class Axe extends AbstractItem {
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveWeaknessAttack(attackSword);
+    if(attackSword.getOwner().getCurrentHitPoints()>0){
+      attackSword.getOwner().receiveAttackResistant(this);
+    }
   }
 
   @Override

@@ -30,6 +30,22 @@ public class Cleric extends AbstractUnit {
     super(hitPoints, movement, location, 3, items);
   }
 
+
+  //cleric can't attack, but can recovery a unit
+  public void attack(IUnit enemy){
+    if (this.getCurrentHitPoints()>0){
+      if (this.getEquippedItem()!=null){
+        enemy.receiveRecovery(this.getEquippedItem());
+      }
+      else{
+        //do nothing
+      }
+    }
+    else{
+      //do nothing
+    }
+  }
+
   @Override
   public IEquipableItem getEquippedItem() {
     return equippedItem;
