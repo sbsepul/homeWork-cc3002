@@ -40,11 +40,13 @@ public class SwordMaster extends AbstractUnit {
   protected void attack(IUnit enemy) {
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
       if (this.getEquippedItem() != null) {
-        if(enemy.getEquippedItem()!=null){
-          enemy.getEquippedItem().receiveSwordsAttack((Sword) this.getEquippedItem());
-        }
-        else{
-          enemy.receiveAttack(this.getEquippedItem());
+        if (this.inRange(enemy)){
+          if(enemy.getEquippedItem()!=null){
+            enemy.getEquippedItem().receiveSwordsAttack((Sword) this.getEquippedItem());
+          }
+          else{
+            enemy.receiveAttack(this.getEquippedItem());
+          }
         }
       }
       // this unit haven't army

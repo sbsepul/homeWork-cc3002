@@ -36,25 +36,25 @@ public class Archer extends AbstractUnit {
   }
 
   public void attack(IUnit enemy){
-    if (this.getCurrentHitPoints()>0) {
-      if(enemy.getCurrentHitPoints()>0){
-        if (this.getEquippedItem() != null) {
-          if(enemy.getEquippedItem()!=null){
-            //if archer isn't Neighbour of enemy
-            if (!this.getLocation().isNeighbour(enemy.getLocation())) {
-              enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
+    if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
+        if(this.getEquippedItem() != null){
+          if(this.inRange(enemy)){
+            if(enemy.getEquippedItem()!=null){
+              //if archer isn't Neighbour of enemy
+              if (!this.getLocation().isNeighbour(enemy.getLocation())) {
+                enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
+              }
+              else ; //do nothing
             }
-            else ; //do nothing
-          }
-          else{
+            else{
               enemy.receiveAttack(this.getEquippedItem());
+            }
           }
+          // this isn't in the range
         }
         else ; // this unit haven't army
-      }
-      // enemy rip
     }
-    // this unit rip
+    // this unit or enemy rip
   }
 
   @Override

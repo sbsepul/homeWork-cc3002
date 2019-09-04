@@ -126,5 +126,7 @@ public interface IUnit {
   void receiveAttackResistant(IEquipableItem attack);
 
   void receiveRecovery(IEquipableItem attack);
+
+  boolean inRange(IUnit unit);
 }
 

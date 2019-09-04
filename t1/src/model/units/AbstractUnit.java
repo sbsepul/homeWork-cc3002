@@ -64,6 +64,8 @@ public abstract class AbstractUnit implements IUnit{
     return currentHitPoints;
   }
 
+
+
   @Override
   public void setCurrentHitPoints(int hp) {
     this.currentHitPoints = hp;
@@ -106,6 +108,18 @@ public abstract class AbstractUnit implements IUnit{
    */
   public void receiveRecovery(IEquipableItem recovery){
     this.currentHitPoints += recovery.getPower();
+  }
+
+  @Override
+  public boolean inRange(IUnit unit) {
+    int maxRange = this.getEquippedItem().getMaxRange();
+    int minRange = this.getEquippedItem().getMinRange();
+    int lr = unit.getLocation().getRow();
+    int lc = unit.getLocation().getColumn();
+    if(minRange <= lr  &&  maxRange >= lr && minRange <= lc && maxRange >=lc){
+      return true;
+    }
+    return false;
   }
 
   @Override

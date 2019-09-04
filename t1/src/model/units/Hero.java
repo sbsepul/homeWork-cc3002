@@ -41,12 +41,15 @@ public class Hero extends AbstractUnit {
   protected void attack(IUnit enemy) {
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
       if (this.getEquippedItem() != null) {
-        if(enemy.getEquippedItem()!=null){
-          enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
+        if(this.inRange(enemy)){
+          if(enemy.getEquippedItem()!=null){
+            enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
+          }
+          else{
+            enemy.receiveAttack(this.getEquippedItem());
+          }
         }
-        else{
-          enemy.receiveAttack(this.getEquippedItem());
-        }
+        //this unit isn't in his army's range
       }
       // this unit haven't army
     }
@@ -57,8 +60,6 @@ public class Hero extends AbstractUnit {
   public IEquipableItem getEquippedItem() {
     return equippedItem;
   }
-
-
 
   @Override
   public void equipItemOther(IEquipableItem item) { }
