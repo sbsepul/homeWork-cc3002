@@ -1,5 +1,8 @@
 package model.items;
 
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
@@ -78,9 +81,25 @@ public abstract class AbstractItem implements IEquipableItem {
 
   //COMBAT
 
-  @Override
-  public void attack(IUnit other) {
-    this.attack(other);
+  /**
+   * Receives an attack to which this Unit is weak.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  protected void receiveWeaknessAttack(IEquipableItem attack){
+    this.getOwner().receiveAttackWeakness(attack);
+  }
+
+
+  /**
+   * Receives an attack to which this Unit is resistant.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  protected void receiveResistantAttack(IEquipableItem attack) {
+    this.getOwner().receiveAttackResistant(attack);
   }
 
   /**
@@ -91,50 +110,63 @@ public abstract class AbstractItem implements IEquipableItem {
     this.getOwner().receiveAttack(attack);
   }
 
-  protected void receiveRecovery(IEquipableItem attack) { this.getOwner().receiveRecovery(attack); }
+  @Override
+  public void receiveDarknessAttack(Darkness attackDarkness) {
+    this.receiveWeaknessAttack(attackDarkness);
+    if(attackDarkness.getOwner().getCurrentHitPoints()>0){
+      attackDarkness.getOwner().receiveAttackWeakness(this);
+    }
+  }
 
   @Override
-  public void receiveAxeAttack(Axe attackAxe) { receiveAttack(attackAxe); }
+  public void receiveLightAttack(Light attackLight) {
+    this.receiveWeaknessAttack(attackLight);
+    if(attackLight.getOwner().getCurrentHitPoints()>0){
+      attackLight.getOwner().receiveAttackWeakness(this);
+    }
+  }
+
+  @Override
+  public void receiveSoulAttack(Soul attackSoul) {
+    this.receiveWeaknessAttack(attackSoul);
+    if(attackSoul.getOwner().getCurrentHitPoints()>0){
+      attackSoul.getOwner().receiveAttackWeakness(this);
+    }
+  }
+
+  @Override
+  public void receiveAxeAttack(Axe attackAxe) {
+    this.receiveAttack(attackAxe);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackAxe.getOwner().getCurrentHitPoints()>0){
+        attackAxe.getOwner().receiveAttack(this);
+      }
+    }
+  }
+
+  @Override
+  public void receiveSpearsAttack(Spear attackSpears) {
+    this.receiveAttack(attackSpears);
+    if(attackSpears.getOwner().getCurrentHitPoints()>0){
+      attackSpears.getOwner().receiveAttack(this);
+    }
+  }
+
+  @Override
+  public void receiveSwordsAttack(Sword attackSword) {
+    this.receiveAttack(attackSword);
+    if(this.getOwner().getCurrentHitPoints()>0){
+      if(attackSword.getOwner().getCurrentHitPoints()>0){
+        attackSword.getOwner().receiveAttack(this);
+      }
+    }
+  }
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
     receiveAttack(attackBow);
   }
 
-
-  @Override
-  public void receiveSpearsAttack(Spear attackSpears) {
-    receiveAttack(attackSpears);
-  }
-
-  @Override
-  public void receiveSwordsAttack(Sword attackSword) {
-    receiveAttack(attackSword);
-  }
-
-
-  /**
-   * Receives an attack to which this Pokémon is weak.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveWeaknessAttack(IEquipableItem attack){
-    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getPower() * 1.5);
-    this.getOwner().setCurrentHitPoints(a);
-  }
-
-
-  /**
-   * Receives an attack to which this Pokémon is resistant.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveResistantAttack(IEquipableItem attack) {
-    int a = (int) (this.getOwner().getCurrentHitPoints() - attack.getPower() + 20);
-    this.getOwner().setCurrentHitPoints(a);
-  }
   //END COMBAT
 
   @Override

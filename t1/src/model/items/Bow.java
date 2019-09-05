@@ -1,5 +1,8 @@
 package model.items;
 
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
@@ -73,6 +76,21 @@ public class Bow extends AbstractItem {
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveAttack(attackSpears);
+  }
+
+  @Override
+  public void receiveDarknessAttack(Darkness attackDarkness) {
+    this.receiveWeaknessAttack(attackDarkness);
+  }
+
+  @Override
+  public void receiveLightAttack(Light attackLight) {
+    this.receiveWeaknessAttack(attackLight);
+  }
+
+  @Override
+  public void receiveSoulAttack(Soul attackSoul) {
+    this.receiveWeaknessAttack(attackSoul);
   }
 
   @Override

@@ -1,5 +1,8 @@
 package model.items;
 
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
@@ -52,13 +55,8 @@ public interface IEquipableItem {
    */
   public int getMaxRange();
 
-  //ETAPA DE COMBATE
+  /* BEGIN COMBAT SECTION */
 
-  /**
-   *
-   * @param unit that will be attacked
-   */
-  public void attack(IUnit unit);
   /**
    *
    * @param attackBow is the type of damage received when a Archer attack
@@ -83,4 +81,23 @@ public interface IEquipableItem {
    */
   void receiveSpearsAttack(Spear attackSpears);
 
+  /**
+   *
+   * @param attackDarkness
+   */
+  void receiveDarknessAttack(Darkness attackDarkness);
+
+  /**
+   *
+   * @param attackLight
+   */
+  void receiveLightAttack(Light attackLight);
+
+  /**
+   *
+   * @param attackSoul
+   */
+  void receiveSoulAttack(Soul attackSoul);
+
+  /* END COMBAT SECTION */
 }

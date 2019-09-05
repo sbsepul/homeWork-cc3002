@@ -1,5 +1,8 @@
 package model.items;
 
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
@@ -40,12 +43,7 @@ public class Sword extends AbstractItem {
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveAttack(attackSword);
-    if(this.getOwner().getCurrentHitPoints()>0){
-      if(attackSword.getOwner().getCurrentHitPoints()>0){
-        attackSword.getOwner().receiveAttack(this);
-      }
-    }
+    super.receiveSwordsAttack(attackSword);
   }
 
   @Override
@@ -67,6 +65,15 @@ public class Sword extends AbstractItem {
       }
     }
   }
+
+  @Override
+  public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
+
+  @Override
+  public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
+
+  @Override
+  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveDarknessAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {

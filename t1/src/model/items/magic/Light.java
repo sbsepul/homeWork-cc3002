@@ -14,4 +14,27 @@ public class Light extends AbstractItem {
     public Light(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+    @Override
+    public void receiveLightAttack(Light attackLight) {
+        this.receiveAttack(attackLight);
+        if(attackLight.getOwner().getCurrentHitPoints()>0){
+            attackLight.receiveAttack(this);
+        }
+    }
+
+    @Override
+    public void receiveDarknessAttack(Darkness attackDarkness) {
+        this.receiveResistantAttack(attackDarkness);
+        if(attackDarkness.getOwner().getCurrentHitPoints()>0){
+            attackDarkness.getOwner().receiveAttackWeakness(this);
+        }
+    }
+
+    @Override
+    public void receiveSoulAttack(Soul attackSoul) {
+        this.receiveWeaknessAttack(attackSoul);
+        if(attackSoul.getOwner().getCurrentHitPoints()>0){
+            attackSoul.getOwner().receiveAttackResistant(this);
+        }
+    }
 }

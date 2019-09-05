@@ -21,6 +21,7 @@ import model.map.Location;
  */
 public interface IUnit {
 
+  /* BEGIN ITEM SECTION */
   /**
    *
    * @param item
@@ -79,6 +80,10 @@ public interface IUnit {
    */
   void setEquippedItem(IEquipableItem item);
 
+  /**
+   *
+   * @return
+   */
   boolean isItemFull();
 
   /**
@@ -95,6 +100,9 @@ public interface IUnit {
    */
   IEquipableItem removeItem(int index);
 
+  /* END ITEM SECTION */
+
+  /* BEGIN LOCATION SECTION */
   /**
    * @return the current location of the unit
    */
@@ -117,7 +125,9 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
-// HIT POINTS
+  /* END LOCATION SECTION */
+
+  /* BEGIN HIT POINTS SECTION */
   /**
    * @return hit points of the unit
    */
@@ -128,6 +138,10 @@ public interface IUnit {
    * the hit points to be remove
    */
   void setCurrentHitPoints(int change);
+
+  /* END HIT POINTS SECTION */
+
+  /* BEGIN COMBAT SECTION */
 
   /**
    * A unit can receive a Attack normal
@@ -159,6 +173,8 @@ public interface IUnit {
    * @return
    */
   boolean isInRange(IUnit unit);
+
+  /* END COMBAT SECTION */
 
   /**
    * A unit can exchange his item i with other unit if and only if both have items.

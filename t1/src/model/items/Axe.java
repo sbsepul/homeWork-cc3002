@@ -1,5 +1,8 @@
 package model.items;
 
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
@@ -40,14 +43,7 @@ public class Axe extends AbstractItem {
   }
 
   @Override
-  public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveAttack(attackAxe);
-    if(this.getOwner().getCurrentHitPoints()>0){
-      if(attackAxe.getOwner().getCurrentHitPoints()>0){
-        attackAxe.getOwner().receiveAttack(this);
-      }
-    }
-  }
+  public void receiveAxeAttack(Axe attackAxe) { super.receiveAxeAttack(attackAxe); }
 
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
@@ -64,10 +60,20 @@ public class Axe extends AbstractItem {
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveResistantAttack(attackSpears);
     if(this.getOwner().getCurrentHitPoints()>0){
-    if(attackSpears.getOwner().getCurrentHitPoints()>0){
-      attackSpears.getOwner().receiveAttackWeakness(this);
-    }}
+      if(attackSpears.getOwner().getCurrentHitPoints()>0){
+        attackSpears.getOwner().receiveAttackWeakness(this);
+      }
+    }
   }
+
+  @Override
+  public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
+
+  @Override
+  public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
+
+  @Override
+  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveDarknessAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {

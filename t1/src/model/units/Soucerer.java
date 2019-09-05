@@ -23,33 +23,23 @@ public class Soucerer extends AbstractUnit{
 
     }
 
-    @Override
-    public void equipItemOther(IEquipableItem item) {
 
-    }
 
     @Override
-    public void equipItemBow(Bow item) {
-
-    }
+    public void equipItemOther(IEquipableItem item) { }
 
     @Override
-    public void equipItemAxe(Axe item) {
-
-    }
+    public void equipItemBow(Bow item) {}
 
     @Override
-    public void equipItemSword(Sword item) {
-
-    }
+    public void equipItemAxe(Axe item) {}
 
     @Override
-    public void equipItemStaff(Staff item) {
-
-    }
+    public void equipItemSword(Sword item) {}
 
     @Override
-    public void equipItemSpear(Spear item) {
+    public void equipItemStaff(Staff item) {}
 
-    }
+    @Override
+    public void equipItemSpear(Spear item) {}
 }
