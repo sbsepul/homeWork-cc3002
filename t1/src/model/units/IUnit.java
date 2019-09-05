@@ -8,6 +8,9 @@ import model.items.Bow;
 import model.items.Spear;
 import model.items.Staff;
 import model.items.Sword;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.Location;
 
 /**
@@ -34,6 +37,27 @@ public interface IUnit {
    * Anything item that isn't in the list
    */
   void equipItemOther(IEquipableItem item);
+
+  /**
+   *
+   * @param item
+   * to equip a Darkness, item magic
+   */
+  void equipItemDarkness(Darkness item);
+
+  /**
+   *
+   * @param item
+   * to equip a Light, item magic
+   */
+  void equipItemLight(Light item);
+
+  /**
+   *
+   * @param item
+   * to equip a Soul, item magic
+   */
+  void equipItemSoul(Soul item);
 
   /**
    * @param item the item to equip

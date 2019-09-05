@@ -6,6 +6,9 @@ import model.items.Bow;
 import model.items.Spear;
 import model.items.Staff;
 import model.items.Sword;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.Location;
 
 /**
@@ -70,6 +73,21 @@ public class Cleric extends AbstractUnit {
 
   @Override
   public void equipItemOther(IEquipableItem item){ }
+
+  @Override
+  public void equipItemDarkness(Darkness item) {
+
+  }
+
+  @Override
+  public void equipItemLight(Light item) {
+
+  }
+
+  @Override
+  public void equipItemSoul(Soul item) {
+
+  }
 
   @Override
   public void equipItemBow(Bow item) { }

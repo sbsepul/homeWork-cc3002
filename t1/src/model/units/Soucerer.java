@@ -24,7 +24,6 @@ public class Soucerer extends AbstractUnit{
     }
 
 
-
     @Override
     public void equipItemOther(IEquipableItem item) { }
 
