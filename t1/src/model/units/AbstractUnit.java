@@ -84,10 +84,15 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public IEquipableItem removeItem(int index) {
+  public IEquipableItem removeItem(IEquipableItem item) {
     if(!items.isEmpty()){
-      IEquipableItem itemExtracted = items.get(index);
-      return itemExtracted;
+      if(this.items.contains(item)) {
+        for(int i=0; i<this.getItems().size(); i++){
+          if(item.equals(this.getItems().get(i))){
+            return this.items.remove(i);
+          }
+        }
+      }
     }
     return null;
   }
@@ -159,19 +164,27 @@ public abstract class AbstractUnit implements IUnit{
   public void setEquippedItem(final IEquipableItem item) { this.equippedItem = item;  }
 
   @Override
-  public void exchangeItem(IUnit unit, int i, int j) {
+  public void giveItem(IUnit unit, IEquipableItem item) {
     if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
       if(!this.isItemFull() && unit.isItemFull()){
-        IEquipableItem itemA = this.removeItem(i);
+        IEquipableItem itemA = this.removeItem(item);
         if(itemA.equals(this.getEquippedItem())){
           this.setEquippedItem(null);
         }
-        IEquipableItem itemB = unit.removeItem(j);
+        unit.addItem(itemA);
+      }
+    }
+  }
+
+  @Override
+  public void receiveItem(IUnit unit, IEquipableItem item){
+    if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
+      if(!this.isItemFull() && unit.isItemFull()){
+        IEquipableItem itemB = unit.removeItem(item);
         if(itemB.equals(unit.getEquippedItem())){
-          unit.setEquippedItem(null);
+          this.setEquippedItem(null);
         }
         this.addItem(itemB);
-        unit.addItem(itemA);
       }
     }
   }

@@ -94,6 +94,11 @@ public class Bow extends AbstractItem {
   }
 
   @Override
+  public void magicAttack(IEquipableItem enemyAttack) {
+
+  }
+
+  @Override
   public boolean equals(Object obj) {
     return obj instanceof Bow && super.equals(obj);
   }

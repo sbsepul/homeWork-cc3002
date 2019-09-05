@@ -1,6 +1,7 @@
 package model.items.magic;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 
 public class Soul extends AbstractItem {
     /**
@@ -13,6 +14,10 @@ public class Soul extends AbstractItem {
      */
     public Soul(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
+    }
+
+    public void magicAttack(IEquipableItem enemyAttack){
+        enemyAttack.receiveSoulAttack(this);
     }
 
     @Override

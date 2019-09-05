@@ -73,6 +73,11 @@ public class Staff extends AbstractItem {
   }
 
   @Override
+  public void magicAttack(IEquipableItem enemyAttack) {
+
+  }
+
+  @Override
   public boolean equals(Object obj) {
     return obj instanceof Staff && super.equals(obj);
   }

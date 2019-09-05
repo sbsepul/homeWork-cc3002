@@ -122,7 +122,7 @@ public interface IUnit {
    * @param index
    * @return
    */
-  IEquipableItem removeItem(int index);
+  IEquipableItem removeItem(IEquipableItem item);
 
   /* END ITEM SECTION */
 
@@ -201,10 +201,17 @@ public interface IUnit {
   /* END COMBAT SECTION */
 
   /**
-   * A unit can exchange his item i with other unit if and only if both have items.
-   * The unit receive a Item j of the other unit.
+   * Give a item to other
    * @param unit
+   * @param item
    */
-  void exchangeItem(IUnit unit,int i, int j);
+  void giveItem(IUnit unit, IEquipableItem item);
+
+  /**
+   * Receive a item to other
+   * @param unit
+   * @param item
+   */
+  void receiveItem(IUnit unit, IEquipableItem item);
 }
 

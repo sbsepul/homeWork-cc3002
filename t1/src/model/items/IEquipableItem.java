@@ -99,5 +99,11 @@ public interface IEquipableItem {
    */
   void receiveSoulAttack(Soul attackSoul);
 
+
+  /**
+   * Only for items magics
+   * @param enemyAttack
+   */
+  void magicAttack(IEquipableItem enemyAttack);
   /* END COMBAT SECTION */
 }

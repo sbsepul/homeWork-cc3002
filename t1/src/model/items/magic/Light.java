@@ -1,6 +1,7 @@
 package model.items.magic;
 
 import model.items.AbstractItem;
+import model.items.IEquipableItem;
 
 public class Light extends AbstractItem {
     /**
@@ -14,6 +15,11 @@ public class Light extends AbstractItem {
     public Light(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+
+    public void magicAttack(IEquipableItem enemyAttack){
+        enemyAttack.receiveLightAttack(this);
+    }
+
     @Override
     public void receiveLightAttack(Light attackLight) {
         this.receiveAttack(attackLight);
