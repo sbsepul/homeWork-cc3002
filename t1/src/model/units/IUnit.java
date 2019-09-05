@@ -79,11 +79,21 @@ public interface IUnit {
    */
   void setEquippedItem(IEquipableItem item);
 
+  boolean isItemFull();
+
   /**
    * add a item to the unit
    * @param item
    */
   void addItem(IEquipableItem item);
+
+
+  /**
+   * get a item of the inventory
+   * @param index
+   * @return
+   */
+  IEquipableItem removeItem(int index);
 
   /**
    * @return the current location of the unit

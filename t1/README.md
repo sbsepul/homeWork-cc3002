@@ -45,6 +45,8 @@ se decidió  una implementación agregando ataque como un atributo de los items,
 
 #### Exchange
 
+Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas est´ en a distancia 1 entre ellas y que no se supere la cantidad máxima de objetos que puede portar.
+
 #### For the Units
 
 
@@ -114,7 +116,7 @@ caso borde:
 
 hay bonus x no romper liskov (hint: interfaces)
 
-## Bibliografia
+## References
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
 

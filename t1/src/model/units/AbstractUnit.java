@@ -66,8 +66,6 @@ public abstract class AbstractUnit implements IUnit{
     return currentHitPoints;
   }
 
-
-
   @Override
   public void setCurrentHitPoints(int hp) {
     this.currentHitPoints = hp;
@@ -85,6 +83,20 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+  @Override
+  public IEquipableItem removeItem(int index) {
+    if(!items.isEmpty()){
+      IEquipableItem itemExtracted = items.get(index);
+      return itemExtracted;
+    }
+    return null;
+  }
+
+  @Override
+  public boolean isItemFull() {
+    return this.maxItems==items.size();
+  }
+
   /**
    *
    * @param enemy
@@ -99,14 +111,21 @@ public abstract class AbstractUnit implements IUnit{
     this.currentHitPoints -= attack.getPower();
   }
 
+  /**
+   *
+   * @param attack
+   */
   public void receiveAttackWeakness(IEquipableItem attack){
     this.currentHitPoints -= (int) (attack.getPower() *1.5);
   }
 
+  /**
+   *
+   * @param attack
+   */
   public void receiveAttackResistant(IEquipableItem attack){
     this.currentHitPoints -= attack.getPower() - 20;
   }
-
 
   /**
    * Increase hp in unit that receive a attack
@@ -142,7 +161,18 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void exchangeItem(IUnit unit, int i, int j) {
     if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
-
+      if(!this.isItemFull() && unit.isItemFull()){
+        IEquipableItem itemA = this.removeItem(i);
+        if(itemA.equals(this.getEquippedItem())){
+          this.setEquippedItem(null);
+        }
+        IEquipableItem itemB = unit.removeItem(j);
+        if(itemB.equals(unit.getEquippedItem())){
+          unit.setEquippedItem(null);
+        }
+        this.addItem(itemB);
+        unit.addItem(itemA);
+      }
     }
   }
 
