@@ -48,6 +48,30 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetAlpaca = new Alpaca(50, 2, field.getCell(1, 0));
   }
 
+  public void setTargetArcher(Archer targetArcher) {
+    targetArcher = new Archer(50,2,field.getCell(2,2));
+  }
+
+  public void setTargetCleric(Cleric targetCleric) {
+    targetCleric = new Cleric(50,2,field.getCell(1,0));
+  }
+
+  public void setTargetFighter(Fighter targetFighter) {
+    targetFighter = new Fighter(50,2,field.getCell(1,0));
+  }
+
+  public void setTargetHero(Hero targetHero) {
+    targetHero = new Hero(50,2,field.getCell(1,0));
+  }
+
+  public void setTargetSorcerer(Sorcerer targetSorcerer) {
+    targetSorcerer = new Sorcerer(50,2,field.getCell(1,0));
+  }
+
+  public void setTargetSwordMaster(SwordMaster targetSwordMaster) {
+    targetSwordMaster = new SwordMaster(50,2,field.getCell(1,0));
+  }
+
   /**
    * Sets up the units and weapons to be tested
    */
@@ -110,16 +134,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public abstract IUnit getTestUnit();
 
   /**
-   * Checks if the axe is equipped correctly to the unit
-   */
-  @Override
-  @Test
-  public void equipAxeTest() {
-    assertNull(getTestUnit().getEquippedItem());
-    checkEquippedItem(getAxe());
-  }
-
-  /**
    * Tries to equip a weapon to the alpaca and verifies that it was not equipped
    *
    * @param item
@@ -130,6 +144,17 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertNull(getTestUnit().getEquippedItem());
     getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().addItem(item);
+
+  }
+
+  /**
+   * Checks if the axe is equipped correctly to the unit
+   */
+  @Override
+  @Test
+  public void equipAxeTest() {
+    checkEquippedItem(getAxe());
   }
 
   /**
@@ -271,5 +296,53 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public Alpaca getTargetAlpaca() {
     return targetAlpaca;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public Archer getTargetArcher() {
+    return targetArcher;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public Cleric getTargetCleric() {
+    return targetCleric;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public Fighter getTargetFighter() {
+    return targetFighter;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public Hero getTargetHero() {
+    return targetHero;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public Sorcerer getTargetSorcerer() {
+    return targetSorcerer;
+  }
+
+  /**
+   * @return the target Alpaca
+   */
+  @Override
+  public SwordMaster getTargetSwordMaster() {
+    return targetSwordMaster;
   }
 }

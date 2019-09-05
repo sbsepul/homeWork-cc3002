@@ -175,7 +175,7 @@ public abstract class AbstractItem implements IEquipableItem {
             && ((IEquipableItem) obj).getMinRange() == this.getMinRange()
             && ((IEquipableItem) obj).getMaxRange() == this.getMaxRange()
             && ((IEquipableItem) obj).getName() == this.getName()
-            && ((IEquipableItem) obj).getOwner() ==this.getOwner();
+            && ((IEquipableItem) obj).getOwner() == this.getOwner();
   }
 
 }

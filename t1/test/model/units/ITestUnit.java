@@ -147,4 +147,16 @@ public interface ITestUnit {
    * @return the target Alpaca
    */
   Alpaca getTargetAlpaca();
+
+  Archer getTargetArcher();
+
+  Cleric getTargetCleric();
+
+  Fighter getTargetFighter();
+
+  Hero getTargetHero();
+
+  Sorcerer getTargetSorcerer();
+
+  SwordMaster getTargetSwordMaster();
 }
