@@ -22,6 +22,12 @@ public interface IEquipableItem {
   public void equipTo(IUnit unit);
 
   /**
+   * Set the owner of the army
+   * @param unit
+   */
+  public void setOwner(IUnit unit);
+
+  /**
    * @return the unit that has currently equipped this item
    */
   public IUnit getOwner();
@@ -77,9 +83,4 @@ public interface IEquipableItem {
    */
   void receiveSpearsAttack(Spear attackSpears);
 
-  /**
-   *
-   * @param attackStaff is the type of cure received when a Staff use his power
-   */
-  void receiveStaffAttack(Staff attackStaff);
 }

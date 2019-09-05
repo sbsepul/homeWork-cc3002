@@ -32,6 +32,7 @@ public class Spear extends AbstractItem {
   @Override
   public void equipTo(IUnit unit) {
       unit.equipItemSpear(this);
+      this.setOwner(unit);
   }
 
   @Override

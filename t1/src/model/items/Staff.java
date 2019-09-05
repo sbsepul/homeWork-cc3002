@@ -31,6 +31,7 @@ public class Staff extends AbstractItem {
   @Override
   public void equipTo(IUnit unit) {
     unit.equipItemStaff(this);
+    this.setOwner(unit);
   }
 
   @Override

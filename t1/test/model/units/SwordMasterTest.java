@@ -32,4 +32,9 @@ public class SwordMasterTest extends AbstractTestUnit {
     swordMaster.equipItem(sword);
     assertEquals(sword, swordMaster.getEquippedItem());
   }
+
+  @Override
+  public void testCombat() {
+
+  }
 }

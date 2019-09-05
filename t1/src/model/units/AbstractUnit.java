@@ -56,7 +56,9 @@ public abstract class AbstractUnit implements IUnit{
    * @param item
    */
   public void equipItem(IEquipableItem item){
+    if(items.contains(item)){
       item.equipTo(this);
+    }
   }
 
   @Override
@@ -83,6 +85,10 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+  /**
+   *
+   * @param enemy
+   */
   protected abstract void attack(IUnit enemy);
 
   /**
@@ -111,7 +117,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public boolean inRange(IUnit unit) {
+  public boolean isInRange(IUnit unit) {
     int maxRange = this.getEquippedItem().getMaxRange();
     int minRange = this.getEquippedItem().getMinRange();
     int lr = unit.getLocation().getRow();
@@ -132,6 +138,13 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void setEquippedItem(final IEquipableItem item) { this.equippedItem = item;  }
+
+  @Override
+  public void exchangeItem(IUnit unit, int i, int j) {
+    if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
+
+    }
+  }
 
   @Override
   public Location getLocation() {
@@ -158,8 +171,8 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public boolean equals(Object obj) {
     return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints
-            && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(items)
-            && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(equippedItem);
+            && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(equippedItem)
+            && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(items);
   }
 }
 

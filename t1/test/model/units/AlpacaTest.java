@@ -1,5 +1,7 @@
 package model.units;
 
+import model.items.IEquipableItem;
+
 /**
  * Test set for the alpaca unit
  *
@@ -19,4 +21,18 @@ public class AlpacaTest extends AbstractTestUnit {
   public Alpaca getTestUnit() {
     return alpaca;
   }
+
+  @Override
+  public void checkEquippedItem(IEquipableItem item) {
+    super.checkEquippedItem(item);
+    item = axe;
+    super.checkEquippedItem(item);
+  }
+
+  @Override
+  public void testCombat() {
+
+  }
+
+
 }

@@ -39,17 +39,21 @@ public class ArcherTest extends AbstractTestUnit {
   public void equipBowTest() {
     assertNull(archer.getEquippedItem());
     archer.equipItem(bow);
-    assertEquals(bow, archer.getEquippedItem());
-    assertEquals(0, archer.getItems().size());
+    assertNull(archer.getEquippedItem());
     archer.addItem(bow);
-    assertEquals(1 , archer.getItems().size());
+    archer.equipItem(bow);
+    assertEquals(bow, archer.getEquippedItem());
+    assertEquals(1, archer.getItems().size());
+    archer.addItem(bow);
+    assertEquals(2 , archer.getItems().size());
     archer.equipItem(sword);
     assertEquals(bow, archer.getEquippedItem());
     archer.addItem(sword);
-    assertEquals(2 , archer.getItems().size());
-    archer.addItem(sword);
     assertEquals(3 , archer.getItems().size());
-    archer.addItem(sword);
-    assertEquals(3, archer.getItems().size());
+  }
+
+  @Override
+  public void testCombat() {
+
   }
 }

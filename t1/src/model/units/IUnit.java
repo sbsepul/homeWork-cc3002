@@ -119,14 +119,42 @@ public interface IUnit {
    */
   void setCurrentHitPoints(int change);
 
+  /**
+   * A unit can receive a Attack normal
+   * @param attack
+   */
   void receiveAttack(IEquipableItem attack);
 
+  /**
+   * A unit receive a Attack that seriously affect it
+   * @param attack
+   */
   void receiveAttackWeakness(IEquipableItem attack);
 
+  /**
+   * A unit receive a Attack that not affect it too much.
+   * @param attack
+   */
   void receiveAttackResistant(IEquipableItem attack);
 
+  /**
+   * A unit receive a Attack that recovers it
+   * @param attack
+   */
   void receiveRecovery(IEquipableItem attack);
 
-  boolean inRange(IUnit unit);
+  /**
+   * Determine if the unit enemy is in the range of army's unit that attack
+   * @param unit
+   * @return
+   */
+  boolean isInRange(IUnit unit);
+
+  /**
+   * A unit can exchange his item i with other unit if and only if both have items.
+   * The unit receive a Item j of the other unit.
+   * @param unit
+   */
+  void exchangeItem(IUnit unit,int i, int j);
 }
 

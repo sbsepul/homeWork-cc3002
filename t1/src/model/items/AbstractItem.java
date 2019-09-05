@@ -52,6 +52,11 @@ public abstract class AbstractItem implements IEquipableItem {
   }
 
   @Override
+  public void setOwner(IUnit owner) {
+    this.owner = owner;
+  }
+
+  @Override
   public String getName() {
     return name;
   }
@@ -96,10 +101,6 @@ public abstract class AbstractItem implements IEquipableItem {
     receiveAttack(attackBow);
   }
 
-  @Override
-  public void receiveStaffAttack(Staff attackStaff) {
-    receiveRecovery(attackStaff);
-  }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
@@ -135,4 +136,14 @@ public abstract class AbstractItem implements IEquipableItem {
     this.getOwner().setCurrentHitPoints(a);
   }
   //END COMBAT
+
+  @Override
+  public boolean equals(Object obj){
+    return obj instanceof IEquipableItem && ((IEquipableItem) obj).getPower()==this.getPower()
+            && ((IEquipableItem) obj).getMinRange() == this.getMinRange()
+            && ((IEquipableItem) obj).getMaxRange() == this.getMaxRange()
+            && ((IEquipableItem) obj).getName() == this.getName()
+            && ((IEquipableItem) obj).getOwner() ==this.getOwner();
+  }
+
 }

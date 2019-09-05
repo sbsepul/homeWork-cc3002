@@ -23,11 +23,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
   protected Bow bow;
-  protected Field field;
   protected Axe axe;
   protected Sword sword;
   protected Staff staff;
   protected Spear spear;
+  protected Field field;
 
   @Override
   public void setTargetAlpaca() {
@@ -177,6 +177,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public Bow getBow() {
     return bow;
+  }
+
+  public void testAddItem(){
   }
 
   /**

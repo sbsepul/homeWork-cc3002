@@ -38,7 +38,7 @@ public class Archer extends AbstractUnit {
   public void attack(IUnit enemy){
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
         if(this.getEquippedItem() != null){
-          if(this.inRange(enemy)){
+          if(this.isInRange(enemy)){
             if(enemy.getEquippedItem()!=null){
               //if archer isn't Neighbour of enemy
               if (!this.getLocation().isNeighbour(enemy.getLocation())) {
@@ -58,7 +58,9 @@ public class Archer extends AbstractUnit {
   }
 
   @Override
-  public void equipItemBow(Bow item) { equippedItem = item; }
+  public void equipItemBow(Bow item) {
+    equippedItem = item;
+  }
   @Override
   public void equipItemAxe(Axe item) { }
   @Override

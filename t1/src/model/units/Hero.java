@@ -17,7 +17,6 @@ import model.map.Location;
  * @since 1.0
  */
 public class Hero extends AbstractUnit {
-  /*We need a name, hit points */
 
   /**
    * Creates a new Unit.
@@ -41,7 +40,7 @@ public class Hero extends AbstractUnit {
   protected void attack(IUnit enemy) {
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
       if (this.getEquippedItem() != null) {
-        if(this.inRange(enemy)){
+        if(this.isInRange(enemy)){
           if(enemy.getEquippedItem()!=null){
             enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
           }

@@ -28,7 +28,7 @@ public class Fighter extends AbstractUnit {
   protected void attack(IUnit enemy) {
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
       if (this.getEquippedItem() != null) {
-        if(this.inRange(enemy)){
+        if(this.isInRange(enemy)){
           if(enemy.getEquippedItem()!=null){
             enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
           }

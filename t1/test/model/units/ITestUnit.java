@@ -103,6 +103,13 @@ public interface ITestUnit {
   @Test
   void testMovement();
 
+
+  /**
+   * Checks if the unit combat correctly
+   */
+  @Test
+  void testCombat();
+
   /**
    * @return the test field
    */

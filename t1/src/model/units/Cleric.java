@@ -35,7 +35,7 @@ public class Cleric extends AbstractUnit {
   public void attack(IUnit enemy){
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0){
       if(this.getEquippedItem()!=null){
-        if(this.inRange(enemy)){
+        if(this.isInRange(enemy)){
           enemy.receiveRecovery(this.getEquippedItem());
         }
         // this unit isn't in range

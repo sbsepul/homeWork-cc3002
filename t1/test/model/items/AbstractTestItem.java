@@ -109,9 +109,8 @@ public abstract class AbstractTestItem {
     assertNull(getTestItem().getOwner());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
-    assertEquals(unit, getTestItem().getOwner());
+    assertEquals(true , unit.equals(getTestItem().getOwner()));
   }
-
   /**
    * @return a unit that can equip the item being tested
    */
