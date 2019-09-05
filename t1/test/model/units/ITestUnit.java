@@ -7,6 +7,9 @@ import model.items.Bow;
 import model.items.Spear;
 import model.items.Staff;
 import model.items.Sword;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.Field;
 import org.junit.jupiter.api.Test;
 
@@ -96,6 +99,31 @@ public interface ITestUnit {
    * @return the test bow
    */
   Bow getBow();
+
+  @Test
+  void equipDarknessTest();
+
+  /**
+   * @return the item darkness
+   */
+  Darkness getDarkness();
+
+  @Test
+  void equipLightTest();
+
+  /**
+   * @return the item Light
+   */
+  Light getLight();
+
+  @Test
+  void equipSoulTest();
+
+  /**
+   * @return the item soul
+   */
+  Soul getSoul();
+
 
   /**
    * Checks if the unit moves correctly

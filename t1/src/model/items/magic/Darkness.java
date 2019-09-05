@@ -2,6 +2,7 @@ package model.items.magic;
 
 import model.items.AbstractItem;
 import model.items.IEquipableItem;
+import model.units.IUnit;
 
 public class Darkness extends AbstractItem {
     /**
@@ -14,6 +15,12 @@ public class Darkness extends AbstractItem {
      */
     public Darkness(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
+    }
+
+    @Override
+    public void equipTo(IUnit unit) {
+        unit.equipItemDarkness(this);
+        this.setOwner(unit);
     }
 
     public void magicAttack(IEquipableItem enemyAttack){

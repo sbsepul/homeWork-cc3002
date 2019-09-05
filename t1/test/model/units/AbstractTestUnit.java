@@ -10,6 +10,9 @@ import model.items.Bow;
 import model.items.Spear;
 import model.items.Staff;
 import model.items.Sword;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.Field;
 import model.map.Location;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,11 +25,22 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
+  protected Archer targetArcher;
+  protected Cleric targetCleric;
+  protected Fighter targetFighter;
+  protected Hero targetHero;
+  protected Sorcerer targetSorcerer;
+  protected SwordMaster targetSwordMaster;
+  /* ITEMS */
   protected Bow bow;
   protected Axe axe;
   protected Sword sword;
   protected Staff staff;
   protected Spear spear;
+  protected Darkness darkness;
+  protected Light light;
+  protected Soul soul;
+  /* END ITEMS */
   protected Field field;
 
   @Override
@@ -72,6 +86,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
     this.spear = new Spear("Spear", 10, 1, 2);
     this.staff = new Staff("Staff", 10, 1, 2);
     this.bow = new Bow("Bow", 10, 2, 3);
+    this.darkness = new Darkness( "Darkness", 10,1,2);
+    this.light = new Light( "Light", 10,1,2);
+    this.soul = new Soul( "Soul", 10,1,2);
   }
 
   /**
@@ -179,8 +196,49 @@ public abstract class AbstractTestUnit implements ITestUnit {
     return bow;
   }
 
-  public void testAddItem(){
+  @Override
+  @Test
+  public void equipDarknessTest() {
+    checkEquippedItem(getDarkness());
   }
+
+  /**
+   * @return the test darkness
+   */
+  @Override
+  public Darkness getDarkness() {
+    return darkness;
+  }
+
+  @Override
+  @Test
+  public void equipLightTest() {
+    checkEquippedItem(getLight());
+  }
+
+  /**
+   * @return the test light
+   */
+  @Override
+  public Light getLight() {
+    return light;
+  }
+
+  @Override
+  @Test
+  public void equipSoulTest() {
+    checkEquippedItem(getSoul());
+  }
+
+  /**
+   * @return the test soul
+   */
+  @Override
+  public Soul getSoul() {
+    return soul;
+  }
+
+
 
   /**
    * Checks if the unit moves correctly
