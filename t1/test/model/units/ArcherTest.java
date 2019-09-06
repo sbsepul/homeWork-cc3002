@@ -79,7 +79,7 @@ public class ArcherTest extends AbstractTestUnit {
   @Test
   @Override
   public void sameTypeUnitAttackTest() {
-    checkSameTypeUnitAttack(getTargetArcher(),bow_p,getAxe());
+    checkSameTypeUnitAttack(getTargetArcher(),bow_p,getBow());
   }
 
 }

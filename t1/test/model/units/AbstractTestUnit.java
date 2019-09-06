@@ -394,7 +394,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(30, getTestUnit().getCurrentHitPoints());
     getTargetCleric().addItem(getStaff_normal());
     getTargetCleric().equipItem(getStaff_normal());
-    assertEquals(getStaff(),getTargetCleric().getEquippedItem());
+    assertEquals(getStaff_normal(),getTargetCleric().getEquippedItem());
     getTargetCleric().attack(unit);
     assertEquals(50,unit.getCurrentHitPoints());
     getTargetCleric().attack(getTestUnit());
