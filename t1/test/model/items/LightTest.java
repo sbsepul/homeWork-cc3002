@@ -5,6 +5,13 @@ import model.map.Location;
 import model.units.IUnit;
 import model.units.Sorcerer;
 
+/**
+ * Test set for Light
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
+
 public class LightTest extends AbstractTestItem {
     private Light light;
     private Light wrongLight;

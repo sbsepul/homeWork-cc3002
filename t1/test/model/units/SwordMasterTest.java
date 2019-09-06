@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+
 /**
+ * Test set for the SwordMaster unit
+ *
  * @author Sebastian Sepulveda
  */
 public class SwordMasterTest extends AbstractTestUnit {
@@ -54,12 +57,13 @@ public class SwordMasterTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void weaknessAttack() {
-    checkWeaknessAttackTest(getTargetHero(), getSword(), getSpear());
+  public void weaknessAttackTest() {
+    checkWeaknessAttack(getTargetHero(), getSword(), getSpear());
   }
 
+  @Test
   @Override
-  public void resistantAttack() {
-    
+  public void resistantAttackTest() {
+    checkResistantAttack(getTargetFighter(), getSword(), getAxe());
   }
 }

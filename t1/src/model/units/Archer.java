@@ -16,7 +16,7 @@ import model.map.Location;
  * <p>
  * This kind of unit <b>can only use bows</b>.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Archer extends AbstractUnit {

@@ -7,7 +7,7 @@ import model.units.IUnit;
 /**
  * Test set for Axes
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 class AxeTest extends AbstractTestItem {

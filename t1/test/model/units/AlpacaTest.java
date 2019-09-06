@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * Test set for the alpaca unit
+ * Test set for the Alpaca unit
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class AlpacaTest extends AbstractTestUnit {
@@ -46,10 +46,12 @@ public class AlpacaTest extends AbstractTestUnit {
   }
 
   @Override
-  public void weaknessAttack() { }
+  public void weaknessAttackTest() {
+
+  }
 
   @Override
-  public void resistantAttack() {
+  public void resistantAttackTest() {
 
   }
 

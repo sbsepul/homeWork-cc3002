@@ -19,7 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public abstract class AbstractTestUnit implements ITestUnit {
@@ -331,7 +331,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   @Override
-  public void checkWeaknessAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
+  public void checkWeaknessAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
     assertEquals(50, getTestUnit().getCurrentHitPoints());
     assertEquals(50, unit.getCurrentHitPoints());
     getTestUnit().addItem(itemA);
@@ -352,7 +352,23 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   @Override
-  public void checkResistantAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
-
+  public void checkResistantAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, unit.getCurrentHitPoints());
+    getTestUnit().addItem(itemA);
+    getTestUnit().equipItem(itemA);
+    unit.addItem(itemB);
+    unit.equipItem(itemB);
+    assertEquals(itemA, getTestUnit().getEquippedItem());
+    assertEquals(itemB, unit.getEquippedItem());
+    getTestUnit().attack(unit);
+    //unit is resistant to getTestUnit
+    assertEquals(20, unit.getCurrentHitPoints());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    getTargetCleric().addItem(getStaff());
+    getTargetCleric().equipItem(getStaff());
+    assertEquals(getStaff(),getTargetCleric().getEquippedItem());
+    getTargetCleric().attack(unit);
+    assertEquals(50,unit.getCurrentHitPoints());
   }
 }

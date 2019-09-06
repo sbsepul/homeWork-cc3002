@@ -7,7 +7,7 @@ import model.units.SwordMaster;
 /**
  * Test set for swords
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class SwordTest extends AbstractTestItem {

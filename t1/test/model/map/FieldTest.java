@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test set for the field component of the game model.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 class FieldTest {

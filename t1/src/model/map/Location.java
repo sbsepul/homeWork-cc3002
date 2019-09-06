@@ -16,7 +16,7 @@ import model.units.IUnit;
  * chess one, but for simplicity, it will be assumed that the distance between any node and it's
  * neighbours will be always 1.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Location {

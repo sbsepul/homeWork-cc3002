@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Interface that defines the common behaviour of all the test for the units classes
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public interface ITestUnit {
@@ -172,10 +172,10 @@ public interface ITestUnit {
    * @param itemB is the defender's item
    */
 
-  void checkWeaknessAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
+  void checkWeaknessAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
   @Test
-  void weaknessAttack();
+  void weaknessAttackTest();
 
   /**
    * This check simulate a attack of a unitA counter a unitB, where
@@ -189,9 +189,9 @@ public interface ITestUnit {
    * @param itemB is the defender's item
    */
 
-  void checkResistantAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
+  void checkResistantAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
   @Test
-  void resistantAttack();
+  void resistantAttackTest();
 
 }

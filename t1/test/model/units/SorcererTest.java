@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+/**
+ * Test set for the Sorcerer unit
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
 public class SorcererTest extends AbstractTestUnit {
     private Sorcerer sorcerer;
 
@@ -82,18 +88,24 @@ public class SorcererTest extends AbstractTestUnit {
 
     @Test
     @Override
-    public void weaknessAttack() {
+    public void weaknessAttackTest() {
         // Light is weak to Soul
-        checkWeaknessAttackTest(getTargetSorcerer(),getLight(), getSoul());
+        checkWeaknessAttack(getTargetSorcerer(),getLight(), getSoul());
         // Darkness is weak to Light
-        checkWeaknessAttackTest(getTargetSorcerer(),getDarkness(), getLight());
+        checkWeaknessAttack(getTargetSorcerer(),getDarkness(), getLight());
         // Soul is weak to Darkness
-        checkWeaknessAttackTest(getTargetSorcerer(),getSoul(), getDarkness());
+        checkWeaknessAttack(getTargetSorcerer(),getSoul(), getDarkness());
     }
 
+    @Test
     @Override
-    public void resistantAttack() {
-
+    public void resistantAttackTest() {
+        // Light is resistant to Soul
+        checkResistantAttack(getTargetSorcerer(),getLight(), getDarkness());
+        // Darkness is resistant to Light
+        checkResistantAttack(getTargetSorcerer(),getDarkness(), getSoul());
+        // Soul is resistant to Darkness
+        checkResistantAttack(getTargetSorcerer(),getSoul(), getLight());
     }
 
 }

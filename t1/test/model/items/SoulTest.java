@@ -5,6 +5,13 @@ import model.map.Location;
 import model.units.IUnit;
 import model.units.Sorcerer;
 
+/**
+ * Test set for Soul
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
+
 public class SoulTest extends AbstractTestItem {
     private Soul soul;
     private Soul wrongSoul;

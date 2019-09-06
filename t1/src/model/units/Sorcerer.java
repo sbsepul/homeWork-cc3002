@@ -4,6 +4,16 @@ import model.items.*;
 import model.items.magic.*;
 import model.map.Location;
 
+/**
+ * A <i>Sorcerer</i> is a magic kind of unit, his item's attack always is weak to other item
+ * <p>
+ * This unit <b>can only use magic weapons</b>.
+ * ie. Light - Darkness - Soul
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
+
 public class Sorcerer extends AbstractUnit{
 
     /**

@@ -15,7 +15,7 @@ import model.map.Location;
  * This class represents a cleric type unit. A cleric can only use staff type weapons, which means
  * that it can receive attacks but can't counter attack any of those.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Cleric extends AbstractUnit {

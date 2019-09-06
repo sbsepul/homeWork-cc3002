@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Ignacio Slater Muñoz
+ * Test set for the Fighter unit
+ *
+ * @author Sebastian Sepulveda
  */
 public class FighterTest extends AbstractTestUnit {
 
@@ -56,12 +58,13 @@ public class FighterTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void weaknessAttack() {
-    checkWeaknessAttackTest(getTargetSwordMaster(),getAxe(),getSword());
+  public void weaknessAttackTest() {
+    checkWeaknessAttack(getTargetSwordMaster(),getAxe(),getSword());
   }
 
+  @Test
   @Override
-  public void resistantAttack() {
-
+  public void resistantAttackTest() {
+    checkResistantAttack(getTargetHero(), getAxe(), getSpear());
   }
 }

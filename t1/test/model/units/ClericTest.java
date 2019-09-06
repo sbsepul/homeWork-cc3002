@@ -7,7 +7,9 @@ import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Ignacio Slater Muñoz
+ * Test set for the Cleric unit
+ *
+ * @author Sebastian Sepulveda
  */
 public class ClericTest extends AbstractTestUnit {
 
@@ -53,10 +55,10 @@ public class ClericTest extends AbstractTestUnit {
   }
 
   @Override
-  public void weaknessAttack() {  }
+  public void weaknessAttackTest() {  }
 
   @Override
-  public void resistantAttack() {
+  public void resistantAttackTest() {
 
   }
 

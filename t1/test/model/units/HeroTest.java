@@ -7,6 +7,8 @@ import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 /**
+ * Test set for the Hero unit
+ *
  * @author Sebastian Sepulveda
  */
 public class HeroTest extends AbstractTestUnit {
@@ -54,13 +56,14 @@ public class HeroTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void weaknessAttack() {
-    checkWeaknessAttackTest(getTargetFighter(),getSpear(),getAxe());
+  public void weaknessAttackTest() {
+    checkWeaknessAttack(getTargetFighter(),getSpear(),getAxe());
   }
 
+  @Test
   @Override
-  public void resistantAttack() {
-
+  public void resistantAttackTest() {
+    checkResistantAttack(getTargetSwordMaster(),getSpear(),getSword());
   }
 
 }
