@@ -40,7 +40,7 @@ public class Spear extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-      this.receiveAttack(attackBow);
+      super.receiveBowAttack(attackBow);
   }
 
   @Override

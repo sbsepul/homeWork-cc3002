@@ -39,7 +39,7 @@ public class Sword extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    receiveAttack(attackBow);
+    super.receiveBowAttack(attackBow);
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {

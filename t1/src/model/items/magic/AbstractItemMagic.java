@@ -21,11 +21,6 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
     public AbstractItemMagic(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
-    /**
-     * Only for items magics
-     * @param enemyAttack
-     */
-    abstract protected void magicAttack(IEquipableItem enemyAttack);
 
     @Override
     public void receiveAxeAttack(Axe attackAxe) {

@@ -1,9 +1,7 @@
 package model.units;
 
 import model.items.*;
-import model.items.magic.Darkness;
-import model.items.magic.Light;
-import model.items.magic.Soul;
+import model.items.magic.*;
 import model.map.Location;
 
 public class Sorcerer extends AbstractUnit{
