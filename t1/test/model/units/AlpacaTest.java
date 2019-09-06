@@ -18,7 +18,7 @@ public class AlpacaTest extends AbstractTestUnit {
 
   @Override
   public void setTestUnit() {
-    alpaca = new Alpaca(50, 2, field.getCell(0, 0));
+    alpaca = new Alpaca(50, 2, field.getCell(1, 0));
   }
 
   @Override
@@ -38,6 +38,7 @@ public class AlpacaTest extends AbstractTestUnit {
     assertEquals(50, alpaca.getCurrentHitPoints());
     getTargetArcher().addItem(bow);
     getTargetArcher().equipItem(bow);
+    assertEquals(bow,getTargetArcher().getEquippedItem());
     alpaca.addItem(axe);
     alpaca.equipItem(axe);
     assertNull(alpaca.getEquippedItem());
@@ -46,7 +47,6 @@ public class AlpacaTest extends AbstractTestUnit {
     assertEquals(50,getTargetArcher().getCurrentHitPoints());
     alpaca.attack(getTargetArcher());
     assertEquals(50,getTargetArcher().getCurrentHitPoints());
-
   }
 
 

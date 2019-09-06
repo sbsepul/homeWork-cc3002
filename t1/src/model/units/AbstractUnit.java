@@ -1,5 +1,6 @@
 package model.units;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 import java.util.ArrayList;
@@ -146,7 +147,10 @@ public abstract class AbstractUnit implements IUnit{
     int minRange = this.getEquippedItem().getMinRange();
     int lr = unit.getLocation().getRow();
     int lc = unit.getLocation().getColumn();
-    if(minRange <= lr  &&  maxRange >= lr && minRange <= lc && maxRange >=lc){
+    int dRow =  abs(lr - this.getLocation().getRow());
+    int dColumn = abs(lc - this.getLocation().getColumn());
+    int dRelativeTotal = dRow + dColumn;
+    if(minRange <= dRelativeTotal  &&  maxRange >= dRelativeTotal){
       return true;
     }
     return false;

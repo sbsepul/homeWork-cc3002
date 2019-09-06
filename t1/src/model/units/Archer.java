@@ -55,7 +55,7 @@ public class Archer extends AbstractUnit {
           }
           // this isn't in the range
         }
-        else ; // this unit haven't army
+       // this unit haven't army
     }
     // this unit or enemy rip
   }
