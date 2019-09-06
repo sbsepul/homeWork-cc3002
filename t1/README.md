@@ -57,6 +57,25 @@ Para esta unidad el ataque no podia ser implementado por restricciones del probl
 
 #### For the Map
 
+
+
+
+
+## Tests
+
+
+
+Al momento de implementar los test de ataques se eligió una distribución para cada unidad que sería testeada. La asignación de posiciones para cada unidad fue la siguiente:
+
+
+
+| Staff   | Hero   | Archer      |
+| ------- | ------ | ----------- |
+| Fighter | Cleric | Sorcerer    |
+|         | Alpaca | SwordMaster |
+
+
+
 ### Supposed
 
 

@@ -1,6 +1,7 @@
 package model.units;
 
 import model.items.IEquipableItem;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -25,13 +26,27 @@ public class AlpacaTest extends AbstractTestUnit {
     return alpaca;
   }
 
+  @Override
+  public Archer getTargetArcher() {
+    return super.getTargetArcher();
+  }
 
+  @Test
   @Override
   public void testCombat() {
-    assertEquals(50,targetArcher.getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
     assertEquals(50, alpaca.getCurrentHitPoints());
-    targetArcher.addItem(bow);
-    targetArcher.equipItem(bow);
+    getTargetArcher().addItem(bow);
+    getTargetArcher().equipItem(bow);
+    alpaca.addItem(axe);
+    alpaca.equipItem(axe);
+    assertNull(alpaca.getEquippedItem());
+    getTargetArcher().attack(alpaca);
+    assertEquals(40, alpaca.getCurrentHitPoints());
+    assertEquals(50,getTargetArcher().getCurrentHitPoints());
+    alpaca.attack(getTargetArcher());
+    assertEquals(50,getTargetArcher().getCurrentHitPoints());
+
   }
 
 

@@ -43,36 +43,16 @@ public abstract class AbstractTestUnit implements ITestUnit {
   /* END ITEMS */
   protected Field field;
 
-  @Override
-  public void setTargetAlpaca() {
+  public void setTargets(){
     targetAlpaca = new Alpaca(50, 2, field.getCell(1, 0));
-  }
-
-  @Override
-  public void setTargetArcher() {
     targetArcher = new Archer(50,2,field.getCell(2,2));
-  }
-
-  @Override
-  public void setTargetCleric() {
     targetCleric = new Cleric(50,2,field.getCell(1,1));
-  }
-  @Override
-  public void setTargetFighter() {
     targetFighter = new Fighter(50,2,field.getCell(0,1));
-  }
-  @Override
-  public void setTargetHero() {
     targetHero = new Hero(50,2,field.getCell(1,2));
-  }
-  @Override
-  public void setTargetSorcerer() {
     targetSorcerer = new Sorcerer(50,2,field.getCell(2,1));
-  }
-  @Override
-  public void setTargetSwordMaster() {
     targetSwordMaster = new SwordMaster(50,2,field.getCell(0,0));
   }
+
 
   /**
    * Sets up the units and weapons to be tested
@@ -81,8 +61,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void setUp() {
     setField();
     setTestUnit();
-    setTargetAlpaca();
     setWeapons();
+    setTargets();
   }
 
   /**
