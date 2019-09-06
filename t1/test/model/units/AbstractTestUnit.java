@@ -36,6 +36,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Axe axe;
   protected Sword sword;
   protected Staff staff;
+  private Staff staff_normal;
   protected Spear spear;
   protected Darkness darkness;
   protected Light light;
@@ -91,6 +92,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     this.sword = new Sword("Sword", 20, 1, 2);
     this.spear = new Spear("Spear", 20, 1, 2);
     this.staff = new Staff("Staff", 30, 1, 2);
+    this.staff_normal = new Staff("Staff_Normal", 20, 1, 2);
     this.bow = new Bow("Bow", 20, 2, 3);
     this.darkness = new Darkness( "Darkness", 20,1,2);
     this.light = new Light( "Light", 20,1,2);
@@ -190,6 +192,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public Staff getStaff() {
     return staff;
   }
+
+  private Staff getStaff_normal() { return staff_normal; }
 
   @Override
   @Test
@@ -349,6 +353,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(getStaff(),getTargetCleric().getEquippedItem());
     getTargetCleric().attack(getTestUnit());
     assertEquals(50,getTestUnit().getCurrentHitPoints());
+    assertEquals(50,getTargetCleric().getCurrentHitPoints());
   }
 
   @Override
@@ -370,5 +375,32 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(getStaff(),getTargetCleric().getEquippedItem());
     getTargetCleric().attack(unit);
     assertEquals(50,unit.getCurrentHitPoints());
+    assertEquals(50,getTargetCleric().getCurrentHitPoints());
   }
+
+  @Override
+  public void checkSameTypeUnitAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, unit.getCurrentHitPoints());
+    getTestUnit().addItem(itemA);
+    getTestUnit().equipItem(itemA);
+    unit.addItem(itemB);
+    unit.equipItem(itemB);
+    assertEquals(itemA, getTestUnit().getEquippedItem());
+    assertEquals(itemB, unit.getEquippedItem());
+    getTestUnit().attack(unit);
+    //unit is resistant to getTestUnit
+    assertEquals(30, unit.getCurrentHitPoints());
+    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    getTargetCleric().addItem(getStaff_normal());
+    getTargetCleric().equipItem(getStaff_normal());
+    assertEquals(getStaff(),getTargetCleric().getEquippedItem());
+    getTargetCleric().attack(unit);
+    assertEquals(50,unit.getCurrentHitPoints());
+    getTargetCleric().attack(getTestUnit());
+    assertEquals(50,getTargetCleric().getCurrentHitPoints());
+  }
+
+
+
 }

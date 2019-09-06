@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.IEquipableItem;
+import model.items.Spear;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 public class HeroTest extends AbstractTestUnit {
 
   private Hero hero;
+  private Spear spear_p;
 
   /**
    * Set up the main unit that's going to be tested in the test set
@@ -21,6 +23,7 @@ public class HeroTest extends AbstractTestUnit {
   @Override
   public void setTestUnit() {
     hero = new Hero(50, 2, field.getCell(0, 0));
+    spear_p = new Spear("Spear_private", 20, 1,2);
   }
 
   /**
@@ -64,6 +67,12 @@ public class HeroTest extends AbstractTestUnit {
   @Override
   public void resistantAttackTest() {
     checkResistantAttack(getTargetSwordMaster(),getSpear(),getSword());
+  }
+
+  @Test
+  @Override
+  public void sameTypeUnitAttackTest() {
+    checkSameTypeUnitAttack(getTargetHero(), spear_p, getSpear());
   }
 
 }

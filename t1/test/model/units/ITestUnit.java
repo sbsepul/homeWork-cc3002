@@ -194,4 +194,8 @@ public interface ITestUnit {
   @Test
   void resistantAttackTest();
 
+  void checkSameTypeUnitAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
+
+  @Test
+  void sameTypeUnitAttackTest();
 }

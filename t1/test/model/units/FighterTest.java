@@ -3,6 +3,7 @@ package model.units;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import model.items.Axe;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class FighterTest extends AbstractTestUnit {
 
   private Fighter fighter;
+  private Axe axe_p;
 
   /**
    * Set up the main unit that's going to be tested in the test set
@@ -20,6 +22,7 @@ public class FighterTest extends AbstractTestUnit {
   @Override
   public void setTestUnit() {
     fighter = new Fighter(50, 2, field.getCell(0, 0));
+    axe_p = new Axe("Axe_private",20,1,2);
   }
 
   /**
@@ -66,5 +69,11 @@ public class FighterTest extends AbstractTestUnit {
   @Override
   public void resistantAttackTest() {
     checkResistantAttack(getTargetHero(), getAxe(), getSpear());
+  }
+
+  @Test
+  @Override
+  public void sameTypeUnitAttackTest() {
+    checkSameTypeUnitAttack(getTargetFighter(),axe_p, getAxe());
   }
 }

@@ -3,7 +3,7 @@ package model.units;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import model.items.IEquipableItem;
+import model.items.Staff;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class ClericTest extends AbstractTestUnit {
 
   private Cleric cleric;
+  private Staff staff_p;
 
   /**
    * Set up the main unit that's going to be tested in the test set
@@ -21,6 +22,7 @@ public class ClericTest extends AbstractTestUnit {
   @Override
   public void setTestUnit() {
     cleric = new Cleric(50, 2, field.getCell(0, 0));
+    staff_p = new Staff("Staff_private", 20,1,2);
   }
 
   /**
@@ -62,4 +64,8 @@ public class ClericTest extends AbstractTestUnit {
 
   }
 
+    @Override
+    public void sameTypeUnitAttackTest() {
+
+    }
 }

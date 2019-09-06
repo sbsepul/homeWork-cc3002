@@ -55,4 +55,9 @@ public class AlpacaTest extends AbstractTestUnit {
 
   }
 
+  @Override
+  public void sameTypeUnitAttackTest() {
+
+  }
+
 }
