@@ -70,11 +70,6 @@ public class Sword extends AbstractItem {
   public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
 
   @Override
-  public void magicAttack(IEquipableItem enemyAttack) {
-
-  }
-
-  @Override
   public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
 
   @Override

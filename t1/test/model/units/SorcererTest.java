@@ -20,6 +20,7 @@ public class SorcererTest extends AbstractTestUnit {
     }
 
     @Test
+    @Override
     public void equipDarknessTest() {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(darkness);
@@ -37,6 +38,7 @@ public class SorcererTest extends AbstractTestUnit {
     }
 
     @Test
+    @Override
     public void equipLightTest() {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(light);
@@ -54,6 +56,7 @@ public class SorcererTest extends AbstractTestUnit {
     }
 
     @Test
+    @Override
     public void equipSoulTest() {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(soul);

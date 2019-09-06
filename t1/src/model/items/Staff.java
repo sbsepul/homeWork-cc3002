@@ -10,7 +10,7 @@ import model.units.IUnit;
  * <p>
  * A staff is an item that can heal other units but cannot counter any attack
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since 1.0
  */
 public class Staff extends AbstractItem {
@@ -72,10 +72,6 @@ public class Staff extends AbstractItem {
     this.receiveWeaknessAttack(attackSoul);
   }
 
-  @Override
-  public void magicAttack(IEquipableItem enemyAttack) {
-
-  }
 
   @Override
   public boolean equals(Object obj) {

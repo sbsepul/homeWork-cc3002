@@ -6,7 +6,7 @@ import model.items.magic.Soul;
 import model.units.IUnit;
 
 /**
- * Abstract class that defines some common information and behaviour between all items.
+ * Abstract class that defines some common information and behaviour between all items normals.
  *
  * @author Sebastian Sepulveda
  * @since 1.0

@@ -1,10 +1,19 @@
 package model.items.magic;
 
-import model.items.AbstractItem;
-import model.items.IEquipableItem;
+import model.items.*;
 import model.units.IUnit;
 
-public class Darkness extends AbstractItem {
+/**
+ * This class represents an <i>Darkness</i>.
+ * <p>
+ * Darkness is weakness counter Light
+ * But resistant counter Soul
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
+
+public class Darkness extends AbstractItemMagic {
     /**
      * Constructor for a default item without any special behaviour.
      *
@@ -23,6 +32,7 @@ public class Darkness extends AbstractItem {
         this.setOwner(unit);
     }
 
+    @Override
     public void magicAttack(IEquipableItem enemyAttack){
         enemyAttack.receiveDarknessAttack(this);
     }

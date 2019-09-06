@@ -9,7 +9,7 @@ import model.units.IUnit;
  * This class represents an <i>Bow</i>.
  * <p>
  * Bow don't have strong and weak
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @since
  */
 public class Bow extends AbstractItem {
@@ -91,11 +91,6 @@ public class Bow extends AbstractItem {
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
     this.receiveWeaknessAttack(attackSoul);
-  }
-
-  @Override
-  public void magicAttack(IEquipableItem enemyAttack) {
-
   }
 
   @Override

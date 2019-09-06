@@ -4,7 +4,17 @@ import model.items.AbstractItem;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
-public class Light extends AbstractItem {
+/**
+ * This class represents an <i>Light</i>.
+ * <p>
+ * Light is weakness counter Soul
+ * But resistant counter Darkness
+ *
+ * @author Sebastian Sepulveda
+ * @since 1.0
+ */
+
+public class Light extends AbstractItemMagic {
     /**
      * Constructor for a default item without any special behaviour.
      *
@@ -23,6 +33,7 @@ public class Light extends AbstractItem {
         this.setOwner(unit);
     }
 
+    @Override
     public void magicAttack(IEquipableItem enemyAttack){
         enemyAttack.receiveLightAttack(this);
     }
