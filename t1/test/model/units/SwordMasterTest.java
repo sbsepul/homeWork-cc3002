@@ -1,12 +1,13 @@
 package model.units;
 
+import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  */
 public class SwordMasterTest extends AbstractTestUnit {
 
@@ -49,5 +50,16 @@ public class SwordMasterTest extends AbstractTestUnit {
   @Override
   public void testCombat() {
 
+  }
+
+  @Test
+  @Override
+  public void weaknessAttack() {
+    checkWeaknessAttackTest(getTargetHero(), getSword(), getSpear());
+  }
+
+  @Override
+  public void resistantAttack() {
+    
   }
 }

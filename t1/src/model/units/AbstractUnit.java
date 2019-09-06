@@ -52,10 +52,8 @@ public abstract class AbstractUnit implements IUnit{
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
 
-  /**
-   *
-   * @param item
-   */
+
+  @Override
   public void equipItem(IEquipableItem item){
     if(items.contains(item)){
       item.equipTo(this);
@@ -103,11 +101,6 @@ public abstract class AbstractUnit implements IUnit{
     return this.maxItems==items.size();
   }
 
-  /**
-   *
-   * @param enemy
-   */
-  protected abstract void attack(IUnit enemy);
 
   /**
    * Reduce hp in unit that receive a attack
@@ -145,12 +138,8 @@ public abstract class AbstractUnit implements IUnit{
   public boolean isInRange(IUnit unit) {
     int maxRange = this.getEquippedItem().getMaxRange();
     int minRange = this.getEquippedItem().getMinRange();
-    int lr = unit.getLocation().getRow();
-    int lc = unit.getLocation().getColumn();
-    int dRow =  abs(lr - this.getLocation().getRow());
-    int dColumn = abs(lc - this.getLocation().getColumn());
-    int dRelativeTotal = dRow + dColumn;
-    if(minRange <= dRelativeTotal  &&  maxRange >= dRelativeTotal){
+    double distance = this.getLocation().distanceTo(unit.getLocation());
+    if(minRange <= distance  &&  maxRange >= distance){
       return true;
     }
     return false;

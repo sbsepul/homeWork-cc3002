@@ -159,4 +159,39 @@ public interface ITestUnit {
   Sorcerer getTargetSorcerer();
 
   SwordMaster getTargetSwordMaster();
+
+  /**
+   * This check simulate a attack of a unitA counter a unitB, where
+   * unitA is <b>this</b>  and unitB is <s>unit</s>,
+   * itemA is for unitA and itemB is for unitB, and
+   * unitA is weak to unitB and therefore unitB is resistant to unitA
+   *
+   *
+   * @param unit that will be attacked
+   * @param itemA is the attacker's item
+   * @param itemB is the defender's item
+   */
+
+  void checkWeaknessAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
+
+  @Test
+  void weaknessAttack();
+
+  /**
+   * This check simulate a attack of a unitA counter a unitB, where
+   * unitA is <b>this</b>  and unitB is <s>unit</s>,
+   * itemA is for unitA and itemB is for unitB, and
+   * unitA is <b>resistant</b> to unitB and therefore unitB is resistant to unitA
+   *
+   *
+   * @param unit that will be attacked
+   * @param itemA is the attacker's item
+   * @param itemB is the defender's item
+   */
+
+  void checkResistantAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
+
+  @Test
+  void resistantAttack();
+
 }

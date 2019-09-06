@@ -53,4 +53,15 @@ public class FighterTest extends AbstractTestUnit {
   public void testCombat() {
 
   }
+
+  @Test
+  @Override
+  public void weaknessAttack() {
+    checkWeaknessAttackTest(getTargetSwordMaster(),getAxe(),getSword());
+  }
+
+  @Override
+  public void resistantAttack() {
+
+  }
 }

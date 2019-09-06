@@ -50,19 +50,19 @@ public class Spear extends AbstractItem {
 
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveWeaknessAttack(attackSword);
+    this.receiveResistantAttack(attackSword);
     if(this.getOwner().getCurrentHitPoints()>0){
       if(attackSword.getOwner().getCurrentHitPoints()>0){
-        attackSword.getOwner().receiveAttackResistant(this);
+        attackSword.getOwner().receiveAttackWeakness(this);
       }
     }
   }
 
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveResistantAttack(attackAxe);
+    this.receiveWeaknessAttack(attackAxe);
     if(attackAxe.getOwner().getCurrentHitPoints()>0){
-      attackAxe.getOwner().receiveAttackWeakness(this);
+      attackAxe.getOwner().receiveAttackResistant(this);
     }
   }
 

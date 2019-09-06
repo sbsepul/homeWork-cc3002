@@ -44,13 +44,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Field field;
 
   public void setTargets(){
-    targetAlpaca = new Alpaca(50, 2, field.getCell(1, 0));
-    targetArcher = new Archer(50,2,field.getCell(2,2));
+    targetAlpaca = new Alpaca(50, 2, field.getCell(1, 1));
+    targetArcher = new Archer(50,2,field.getCell(1,2));
     targetCleric = new Cleric(50,2,field.getCell(1,1));
-    targetFighter = new Fighter(50,2,field.getCell(0,1));
-    targetHero = new Hero(50,2,field.getCell(1,2));
-    targetSorcerer = new Sorcerer(50,2,field.getCell(2,1));
-    targetSwordMaster = new SwordMaster(50,2,field.getCell(0,0));
+    targetFighter = new Fighter(50,2,field.getCell(1,0));
+    targetHero = new Hero(50,2,field.getCell(0,1));
+    targetSorcerer = new Sorcerer(50,2,field.getCell(0,1));
+    targetSwordMaster = new SwordMaster(50,2,field.getCell(1,0));
   }
 
 
@@ -87,14 +87,14 @@ public abstract class AbstractTestUnit implements ITestUnit {
    */
   @Override
   public void setWeapons() {
-    this.axe = new Axe("Axe", 10, 1, 2);
-    this.sword = new Sword("Sword", 10, 1, 2);
-    this.spear = new Spear("Spear", 10, 1, 2);
-    this.staff = new Staff("Staff", 10, 1, 2);
-    this.bow = new Bow("Bow", 10, 2, 3);
-    this.darkness = new Darkness( "Darkness", 10,1,2);
-    this.light = new Light( "Light", 10,1,2);
-    this.soul = new Soul( "Soul", 10,1,2);
+    this.axe = new Axe("Axe", 20, 1, 2);
+    this.sword = new Sword("Sword", 20, 1, 2);
+    this.spear = new Spear("Spear", 20, 1, 2);
+    this.staff = new Staff("Staff", 30, 1, 2);
+    this.bow = new Bow("Bow", 20, 2, 3);
+    this.darkness = new Darkness( "Darkness", 20,1,2);
+    this.light = new Light( "Light", 20,1,2);
+    this.soul = new Soul( "Soul", 20,1,2);
   }
 
   /**
@@ -328,5 +328,31 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public SwordMaster getTargetSwordMaster() {
     return targetSwordMaster;
+  }
+
+  @Override
+  public void checkWeaknessAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, unit.getCurrentHitPoints());
+    getTestUnit().addItem(itemA);
+    getTestUnit().equipItem(itemA);
+    unit.addItem(itemB);
+    unit.equipItem(itemB);
+    assertEquals(itemA, getTestUnit().getEquippedItem());
+    assertEquals(itemB, unit.getEquippedItem());
+    getTestUnit().attack(unit);
+    //unit is resistant to getTestUnit
+    assertEquals(50, unit.getCurrentHitPoints());
+    assertEquals(20,getTestUnit().getCurrentHitPoints());
+    getTargetCleric().addItem(getStaff());
+    getTargetCleric().equipItem(getStaff());
+    assertEquals(getStaff(),getTargetCleric().getEquippedItem());
+    getTargetCleric().attack(getTestUnit());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+  }
+
+  @Override
+  public void checkResistantAttackTest(IUnit unit, IEquipableItem itemA, IEquipableItem itemB) {
+
   }
 }

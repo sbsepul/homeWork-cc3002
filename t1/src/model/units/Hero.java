@@ -40,7 +40,7 @@ public class Hero extends AbstractUnit {
   }
 
   @Override
-  protected void attack(IUnit enemy) {
+  public void attack(IUnit enemy) {
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
       if (this.getEquippedItem() != null) {
         if(this.isInRange(enemy)){

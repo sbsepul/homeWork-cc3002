@@ -161,6 +161,8 @@ public interface IUnit {
 
   /* BEGIN COMBAT SECTION */
 
+  void attack(IUnit unit);
+
   /**
    * A unit can receive a Attack normal
    * @param attack

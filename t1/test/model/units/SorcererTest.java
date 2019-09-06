@@ -1,5 +1,6 @@
 package model.units;
 
+import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -78,4 +79,21 @@ public class SorcererTest extends AbstractTestUnit {
     public void testCombat() {
 
     }
+
+    @Test
+    @Override
+    public void weaknessAttack() {
+        // Light is weak to Soul
+        checkWeaknessAttackTest(getTargetSorcerer(),getLight(), getSoul());
+        // Darkness is weak to Light
+        checkWeaknessAttackTest(getTargetSorcerer(),getDarkness(), getLight());
+        // Soul is weak to Darkness
+        checkWeaknessAttackTest(getTargetSorcerer(),getSoul(), getDarkness());
+    }
+
+    @Override
+    public void resistantAttack() {
+
+    }
+
 }

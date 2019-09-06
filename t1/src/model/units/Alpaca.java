@@ -46,7 +46,7 @@ public class Alpaca extends AbstractUnit {
   }
 
   @Override
-  protected void attack(IUnit enemy) {
+  public void attack(IUnit enemy) {
   }
 
   @Override

@@ -18,7 +18,7 @@ public class AlpacaTest extends AbstractTestUnit {
 
   @Override
   public void setTestUnit() {
-    alpaca = new Alpaca(50, 2, field.getCell(1, 0));
+    alpaca = new Alpaca(50, 2, field.getCell(0, 0));
   }
 
   @Override
@@ -26,28 +26,31 @@ public class AlpacaTest extends AbstractTestUnit {
     return alpaca;
   }
 
-  @Override
-  public Archer getTargetArcher() {
-    return super.getTargetArcher();
-  }
-
   @Test
   @Override
   public void testCombat() {
-    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    assertEquals(50, getTargetFighter().getCurrentHitPoints());
     assertEquals(50, alpaca.getCurrentHitPoints());
-    getTargetArcher().addItem(bow);
-    getTargetArcher().equipItem(bow);
-    assertEquals(bow,getTargetArcher().getEquippedItem());
-    alpaca.addItem(axe);
-    alpaca.equipItem(axe);
+    getTargetFighter().addItem(axe);
+    getTargetFighter().equipItem(axe);
+    assertEquals(axe,getTargetFighter().getEquippedItem());
+    alpaca.addItem(sword);
+    assertEquals(1, alpaca.getItems().size());
+    alpaca.equipItem(sword);
     assertNull(alpaca.getEquippedItem());
-    getTargetArcher().attack(alpaca);
-    assertEquals(40, alpaca.getCurrentHitPoints());
-    assertEquals(50,getTargetArcher().getCurrentHitPoints());
-    alpaca.attack(getTargetArcher());
-    assertEquals(50,getTargetArcher().getCurrentHitPoints());
+    getTargetFighter().attack(alpaca);
+    assertEquals(30, alpaca.getCurrentHitPoints());
+    assertEquals(50,getTargetFighter().getCurrentHitPoints());
+    alpaca.attack(getTargetFighter());
+    assertEquals(50,getTargetFighter().getCurrentHitPoints());
   }
 
+  @Override
+  public void weaknessAttack() { }
+
+  @Override
+  public void resistantAttack() {
+
+  }
 
 }
