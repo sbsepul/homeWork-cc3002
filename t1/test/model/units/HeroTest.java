@@ -75,4 +75,10 @@ public class HeroTest extends AbstractTestUnit {
     checkSameTypeUnitAttack(getTargetHero(), spear_p, getSpear());
   }
 
+  @Test
+  @Override
+  public void archerAttackTest() {
+    checkArcherAttack(spear_p);
+  }
+
 }

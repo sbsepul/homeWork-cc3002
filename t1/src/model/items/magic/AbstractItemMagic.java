@@ -25,7 +25,7 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
     @Override
     public void receiveAxeAttack(Axe attackAxe) {
         this.receiveWeaknessAttack(attackAxe);
-        if(attackAxe.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackAxe)){
             attackAxe.getOwner().receiveAttackWeakness(this);
         }
     }
@@ -33,7 +33,7 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
     @Override
     public void receiveBowAttack(Bow attackBow) {
         this.receiveWeaknessAttack(attackBow);
-        if(attackBow.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackBow)){
             attackBow.getOwner().receiveAttackWeakness(this);
         }
     }
@@ -41,7 +41,7 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
     @Override
     public void receiveSpearsAttack(Spear attackSpears) {
         this.receiveWeaknessAttack(attackSpears);
-        if(attackSpears.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackSpears)){
             attackSpears.getOwner().receiveAttackWeakness(this);
         }
     }
@@ -49,7 +49,7 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
     @Override
     public void receiveSwordsAttack(Sword attackSword) {
         this.receiveWeaknessAttack(attackSword);
-        if(attackSword.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackSword)){
             attackSword.getOwner().receiveAttackWeakness(this);
         }
     }

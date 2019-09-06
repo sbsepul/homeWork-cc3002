@@ -76,5 +76,11 @@ public class SwordMasterTest extends AbstractTestUnit {
     checkSameTypeUnitAttack(getTargetSwordMaster(), sword_p, getSword());
   }
 
+  @Test
+  @Override
+  public void archerAttackTest() {
+    checkArcherAttack(sword_p);
+  }
+
 
 }

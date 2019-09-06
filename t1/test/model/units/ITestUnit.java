@@ -194,8 +194,34 @@ public interface ITestUnit {
   @Test
   void resistantAttackTest();
 
+  /**
+   * This check simulate a attack of a unitA counter a unitB, where
+   * unitA is <b>this</b>  and unitB is <s>unit</s>,
+   * itemA is for unitA and itemB is for unitB, and
+   * unitA is <b>the same type of unit</b> to unitB. The attack don't change
+   *
+   * @param unit
+   * @param itemA
+   * @param itemB
+   */
   void checkSameTypeUnitAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
   @Test
   void sameTypeUnitAttackTest();
+
+  /**
+   * This check simulate the attack of a remote Archer to a unit normal that can't counterattack.
+   *
+   */
+  void checkArcherAttack(IEquipableItem itemA);
+
+  /**
+   * This check simulate the attack of a remote Archer to a unit magic that can't counterattack.
+   *
+   */
+  void checkArcherAttackToMagic(IEquipableItem itemA);
+
+  @Test
+  void archerAttackTest();
+
 }

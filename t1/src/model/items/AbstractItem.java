@@ -50,6 +50,11 @@ public abstract class AbstractItem implements IEquipableItem {
   }
 
   @Override
+  public boolean canAttack(IEquipableItem itemEnemy) {
+    return this.getOwner().getCurrentHitPoints()>0 && this.getOwner().isInRange(itemEnemy.getOwner());
+  }
+
+  @Override
   public IUnit getOwner() {
     return owner;
   }
@@ -113,7 +118,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
     this.receiveWeaknessAttack(attackDarkness);
-    if(attackDarkness.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackDarkness)){
       attackDarkness.getOwner().receiveAttackWeakness(this);
     }
   }
@@ -121,7 +126,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveLightAttack(Light attackLight) {
     this.receiveWeaknessAttack(attackLight);
-    if(attackLight.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackLight)){
       attackLight.getOwner().receiveAttackWeakness(this);
     }
   }
@@ -129,7 +134,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
     this.receiveWeaknessAttack(attackSoul);
-    if(attackSoul.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackSoul)){
       attackSoul.getOwner().receiveAttackWeakness(this);
     }
   }
@@ -137,7 +142,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);
-    if(this.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackAxe)){
       if(attackAxe.getOwner().getCurrentHitPoints()>0){
         attackAxe.getOwner().receiveAttack(this);
       }
@@ -147,7 +152,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveAttack(attackSpears);
-    if(attackSpears.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackSpears)){
       attackSpears.getOwner().receiveAttack(this);
     }
   }
@@ -155,7 +160,7 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveAttack(attackSword);
-    if(this.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackSword)){
       if(attackSword.getOwner().getCurrentHitPoints()>0){
         attackSword.getOwner().receiveAttack(this);
       }

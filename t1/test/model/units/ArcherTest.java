@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.Bow;
+import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,6 +37,8 @@ public class ArcherTest extends AbstractTestUnit {
 
   /**
    * Checks if the bow is equipped correctly to the unit
+   * Besides, verify that a item added isn't equipped
+   *
    */
   @Test
   @Override
@@ -63,23 +66,21 @@ public class ArcherTest extends AbstractTestUnit {
    */
   @Test
   @Override
-  public void testCombat() {
-  }
+  public void testCombat() { }
 
   @Override
-  public void weaknessAttackTest() {
-
-  }
+  public void weaknessAttackTest() { }
 
   @Override
-  public void resistantAttackTest() {
-
-  }
+  public void resistantAttackTest() { }
 
   @Test
   @Override
   public void sameTypeUnitAttackTest() {
     checkSameTypeUnitAttack(getTargetArcher(),bow_p,getBow());
   }
+
+  @Override
+  public void archerAttackTest() { }
 
 }

@@ -55,6 +55,13 @@ public interface IEquipableItem {
    */
   public int getMaxRange();
 
+  /**
+   *
+   * @param itemEnemy is the unitEnemy's item
+   * @return true if the unit can attack to other
+   */
+  public boolean canAttack(IEquipableItem itemEnemy);
+
   /* BEGIN COMBAT SECTION */
 
   /**

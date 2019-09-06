@@ -49,7 +49,7 @@ public class Axe extends AbstractItem {
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveWeaknessAttack(attackSword);
     //if this owner is life yet
-    if(this.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackSword)){
       if(attackSword.getOwner().getCurrentHitPoints()>0){
         attackSword.getOwner().receiveAttackResistant(this);
       }
@@ -59,7 +59,7 @@ public class Axe extends AbstractItem {
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveResistantAttack(attackSpears);
-    if(this.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackSpears)){
       if(attackSpears.getOwner().getCurrentHitPoints()>0){
         attackSpears.getOwner().receiveAttackWeakness(this);
       }

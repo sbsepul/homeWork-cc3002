@@ -3,6 +3,7 @@ package model.units;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import model.items.IEquipableItem;
 import model.items.Staff;
 import org.junit.jupiter.api.Test;
 
@@ -51,21 +52,21 @@ public class ClericTest extends AbstractTestUnit {
     assertEquals(3 , cleric.getItems().size());
   }
 
+
   @Override
-  public void testCombat() {
+  public void testCombat() { }
+
+  @Override
+  public void weaknessAttackTest() { }
+
+  @Override
+  public void resistantAttackTest() { }
+
+  @Override
+  public void sameTypeUnitAttackTest() { }
+
+  @Override
+  public void archerAttackTest() {
 
   }
-
-  @Override
-  public void weaknessAttackTest() {  }
-
-  @Override
-  public void resistantAttackTest() {
-
-  }
-
-    @Override
-    public void sameTypeUnitAttackTest() {
-
-    }
 }

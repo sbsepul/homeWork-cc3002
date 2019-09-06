@@ -49,14 +49,10 @@ public class Bow extends AbstractItem {
   @Override
   public void receiveBowAttack(Bow attackBow) {
     this.receiveAttack(attackBow);
-    if(this.getOwner().getCurrentHitPoints()>0){
+    if(this.canAttack(attackBow)){
       if(attackBow.getOwner().getCurrentHitPoints()>0){
-        if(!this.getOwner().getLocation().isNeighbour(attackBow.getOwner().getLocation())) {
           attackBow.getOwner().receiveAttack(attackBow);
-        }
-        else; //do nothing
       }
-      else; //can't counterattack
     }
     else; //can't attack
   }

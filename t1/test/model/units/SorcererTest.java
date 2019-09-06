@@ -124,4 +124,13 @@ public class SorcererTest extends AbstractTestUnit {
         checkSameTypeUnitAttack(getTargetSorcerer(),soul_p,getSoul());
     }
 
+    @Test
+    @Override
+    public void archerAttackTest() {
+        checkArcherAttackToMagic(light_p);
+        checkArcherAttackToMagic(darkness_p);
+        checkArcherAttackToMagic(soul_p);
+    }
+
+
 }

@@ -46,17 +46,16 @@ public class AlpacaTest extends AbstractTestUnit {
   }
 
   @Override
-  public void weaknessAttackTest() {
-
-  }
+  public void weaknessAttackTest() { }
 
   @Override
-  public void resistantAttackTest() {
-
-  }
+  public void resistantAttackTest() { }
 
   @Override
-  public void sameTypeUnitAttackTest() {
+  public void sameTypeUnitAttackTest() { }
+
+  @Override
+  public void archerAttackTest() {
 
   }
 

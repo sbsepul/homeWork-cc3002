@@ -118,7 +118,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public abstract IUnit getTestUnit();
 
   /**
-   * Tries to equip a weapon to the alpaca and verifies that it was not equipped
+   * Tries to equip a weapon to anything unit and verifies that it was not equipped
+   * Besides, verify that a item added isn't equipped, but is in the inventory
    *
    * @param item
    *     to be equipped
@@ -250,8 +251,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public Soul getSoul() {
     return soul;
   }
-
-
 
   /**
    * Checks if the unit moves correctly
@@ -401,6 +400,45 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(50,getTargetCleric().getCurrentHitPoints());
   }
 
+  @Override
+  public void checkArcherAttack(IEquipableItem itemA) {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    getTestUnit().addItem(itemA);
+    getTestUnit().equipItem(itemA);
+    getTargetArcher().addItem(getBow());
+    getTargetArcher().equipItem(getBow());
+    assertEquals(itemA, getTestUnit().getEquippedItem());
+    assertEquals(getBow(), getTargetArcher().getEquippedItem());
+    getTargetArcher().attack(getTestUnit());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    getTargetCleric().addItem(getStaff_normal());
+    getTargetCleric().equipItem(getStaff_normal());
+    assertEquals(getStaff_normal(),getTargetCleric().getEquippedItem());
+    getTargetCleric().attack(getTestUnit());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+  }
 
-
+  @Override
+  public void checkArcherAttackToMagic(IEquipableItem itemA) {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    getTestUnit().addItem(itemA);
+    getTestUnit().equipItem(itemA);
+    getTargetArcher().addItem(getBow());
+    getTargetArcher().equipItem(getBow());
+    assertEquals(itemA, getTestUnit().getEquippedItem());
+    assertEquals(getBow(), getTargetArcher().getEquippedItem());
+    getTargetArcher().attack(getTestUnit());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    assertEquals(20, getTestUnit().getCurrentHitPoints());
+    getTargetCleric().addItem(getStaff());
+    getTargetCleric().equipItem(getStaff());
+    assertEquals(getStaff(),getTargetCleric().getEquippedItem());
+    getTargetCleric().attack(getTestUnit());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+  }
 }

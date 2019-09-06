@@ -41,7 +41,7 @@ public class Light extends AbstractItemMagic {
     @Override
     public void receiveLightAttack(Light attackLight) {
         this.receiveAttack(attackLight);
-        if(attackLight.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackLight)){
             attackLight.receiveAttack(this);
         }
     }
@@ -49,7 +49,7 @@ public class Light extends AbstractItemMagic {
     @Override
     public void receiveDarknessAttack(Darkness attackDarkness) {
         this.receiveResistantAttack(attackDarkness);
-        if(attackDarkness.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackDarkness)){
             attackDarkness.getOwner().receiveAttackWeakness(this);
         }
     }
@@ -57,7 +57,7 @@ public class Light extends AbstractItemMagic {
     @Override
     public void receiveSoulAttack(Soul attackSoul) {
         this.receiveWeaknessAttack(attackSoul);
-        if(attackSoul.getOwner().getCurrentHitPoints()>0){
+        if(this.canAttack(attackSoul)){
             attackSoul.getOwner().receiveAttackResistant(this);
         }
     }

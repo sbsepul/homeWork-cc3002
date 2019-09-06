@@ -76,4 +76,10 @@ public class FighterTest extends AbstractTestUnit {
   public void sameTypeUnitAttackTest() {
     checkSameTypeUnitAttack(getTargetFighter(),axe_p, getAxe());
   }
+
+  @Test
+  @Override
+  public void archerAttackTest() {
+    checkArcherAttack(axe_p);
+  }
 }
