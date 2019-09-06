@@ -33,6 +33,18 @@ public interface ITestUnit {
 
   void setTargetAlpaca();
 
+  void setTargetArcher();
+
+  void setTargetCleric();
+
+  void setTargetHero();
+
+  void setTargetFighter();
+
+  void setTargetSorcerer();
+
+  void setTargetSwordMaster();
+
   /**
    * Creates a set of testing weapons
    */

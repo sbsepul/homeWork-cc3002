@@ -34,6 +34,16 @@ public class HeroTest extends AbstractTestUnit {
     assertNull(hero.getEquippedItem());
     hero.equipItem(spear);
     assertNull(hero.getEquippedItem());
+    hero.addItem(spear);
+    hero.equipItem(spear);
+    assertEquals(spear, hero.getEquippedItem());
+    assertEquals(1, hero.getItems().size());
+    hero.addItem(sword);
+    assertEquals(2 , hero.getItems().size());
+    hero.equipItem(axe);
+    assertEquals(spear, hero.getEquippedItem());
+    hero.addItem(staff);
+    assertEquals(3 , hero.getItems().size());
   }
 
   @Override

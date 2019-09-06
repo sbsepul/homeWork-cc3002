@@ -48,28 +48,30 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetAlpaca = new Alpaca(50, 2, field.getCell(1, 0));
   }
 
-  public void setTargetArcher(Archer targetArcher) {
+  @Override
+  public void setTargetArcher() {
     targetArcher = new Archer(50,2,field.getCell(2,2));
   }
 
-  public void setTargetCleric(Cleric targetCleric) {
-    targetCleric = new Cleric(50,2,field.getCell(1,0));
+  @Override
+  public void setTargetCleric() {
+    targetCleric = new Cleric(50,2,field.getCell(1,1));
   }
-
-  public void setTargetFighter(Fighter targetFighter) {
-    targetFighter = new Fighter(50,2,field.getCell(1,0));
+  @Override
+  public void setTargetFighter() {
+    targetFighter = new Fighter(50,2,field.getCell(0,1));
   }
-
-  public void setTargetHero(Hero targetHero) {
-    targetHero = new Hero(50,2,field.getCell(1,0));
+  @Override
+  public void setTargetHero() {
+    targetHero = new Hero(50,2,field.getCell(1,2));
   }
-
-  public void setTargetSorcerer(Sorcerer targetSorcerer) {
-    targetSorcerer = new Sorcerer(50,2,field.getCell(1,0));
+  @Override
+  public void setTargetSorcerer() {
+    targetSorcerer = new Sorcerer(50,2,field.getCell(2,1));
   }
-
-  public void setTargetSwordMaster(SwordMaster targetSwordMaster) {
-    targetSwordMaster = new SwordMaster(50,2,field.getCell(1,0));
+  @Override
+  public void setTargetSwordMaster() {
+    targetSwordMaster = new SwordMaster(50,2,field.getCell(0,0));
   }
 
   /**
@@ -145,7 +147,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
     getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
     getTestUnit().addItem(item);
-
+    assertEquals(1, getTestUnit().getItems().size());
+    getTestUnit().equipItem(item);
+    assertNull(getTestUnit().getEquippedItem());
   }
 
   /**

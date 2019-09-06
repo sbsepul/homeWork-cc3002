@@ -24,6 +24,16 @@ public class SorcererTest extends AbstractTestUnit {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(darkness);
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(darkness);
+        sorcerer.equipItem(darkness);
+        assertEquals(darkness, sorcerer.getEquippedItem());
+        assertEquals(1, sorcerer.getItems().size());
+        sorcerer.addItem(darkness);
+        assertEquals(2 , sorcerer.getItems().size());
+        sorcerer.equipItem(axe);
+        assertEquals(darkness, sorcerer.getEquippedItem());
+        sorcerer.addItem(sword);
+        assertEquals(3 , sorcerer.getItems().size());
     }
 
     @Test
@@ -31,6 +41,16 @@ public class SorcererTest extends AbstractTestUnit {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(light);
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(light);
+        sorcerer.equipItem(light);
+        assertEquals(light, sorcerer.getEquippedItem());
+        assertEquals(1, sorcerer.getItems().size());
+        sorcerer.addItem(light);
+        assertEquals(2 , sorcerer.getItems().size());
+        sorcerer.equipItem(axe);
+        assertEquals(light, sorcerer.getEquippedItem());
+        sorcerer.addItem(sword);
+        assertEquals(3 , sorcerer.getItems().size());
     }
 
     @Test
@@ -38,6 +58,16 @@ public class SorcererTest extends AbstractTestUnit {
         assertNull(sorcerer.getEquippedItem());
         sorcerer.equipItem(soul);
         assertNull(sorcerer.getEquippedItem());
+        sorcerer.addItem(soul);
+        sorcerer.equipItem(soul);
+        assertEquals(soul, sorcerer.getEquippedItem());
+        assertEquals(1, sorcerer.getItems().size());
+        sorcerer.addItem(soul);
+        assertEquals(2 , sorcerer.getItems().size());
+        sorcerer.equipItem(axe);
+        assertEquals(soul, sorcerer.getEquippedItem());
+        sorcerer.addItem(sword);
+        assertEquals(3 , sorcerer.getItems().size());
     }
 
 

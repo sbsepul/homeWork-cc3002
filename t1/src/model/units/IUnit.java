@@ -99,12 +99,6 @@ public interface IUnit {
   IEquipableItem getEquippedItem();
 
   /**
-   * @param item
-   *     the item to be equipped
-   */
-  void setEquippedItem(IEquipableItem item);
-
-  /**
    *
    * @return
    */
