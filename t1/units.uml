@@ -2,71 +2,12 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement>model.units</OriginalElement>
-  <nodes>
-    <node x="1056.0" y="1200.0">model.units.Alpaca</node>
-    <node x="1320.0" y="1211.0">model.units.Fighter</node>
-    <node x="792.0" y="1211.0">model.units.SwordMaster</node>
-    <node x="772.5" y="0.0">model.units.IUnit</node>
-    <node x="772.5" y="694.0">model.units.AbstractUnit</node>
-    <node x="528.0" y="1211.0">model.units.Cleric</node>
-    <node x="1584.0" y="1211.0">model.units.Archer</node>
-    <node x="264.0" y="1211.0">model.units.Hero</node>
-    <node x="0.0" y="1211.0">model.units.Sorcerer</node>
-  </nodes>
+  <nodes />
   <notes />
-  <edges>
-    <edge source="model.units.Archer" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="1706.0" y="1160.0" />
-      <point x="1035.2857142857142" y="1160.0" />
-      <point x="121.28571428571422" y="223.0" />
-    </edge>
-    <edge source="model.units.Cleric" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="650.0" y="1180.0" />
-      <point x="873.5714285714286" y="1180.0" />
-      <point x="-40.428571428571445" y="223.0" />
-    </edge>
-    <edge source="model.units.Sorcerer" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="122.0" y="1160.0" />
-      <point x="792.7142857142857" y="1160.0" />
-      <point x="-121.28571428571433" y="223.0" />
-    </edge>
-    <edge source="model.units.AbstractUnit" target="model.units.IUnit">
-      <point x="0.0" y="-223.0" />
-      <point x="0.0" y="322.0" />
-    </edge>
-    <edge source="model.units.SwordMaster" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="0.0" y="223.0" />
-    </edge>
-    <edge source="model.units.Fighter" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="1442.0" y="1170.0" />
-      <point x="994.8571428571428" y="1170.0" />
-      <point x="80.85714285714278" y="223.0" />
-    </edge>
-    <edge source="model.units.Hero" target="model.units.AbstractUnit">
-      <point x="0.0" y="-124.0" />
-      <point x="386.0" y="1170.0" />
-      <point x="833.1428571428571" y="1170.0" />
-      <point x="-80.85714285714289" y="223.0" />
-    </edge>
-    <edge source="model.units.Alpaca" target="model.units.AbstractUnit">
-      <point x="0.0" y="-135.0" />
-      <point x="1178.0" y="1180.0" />
-      <point x="954.4285714285713" y="1180.0" />
-      <point x="40.42857142857133" y="223.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.9" x="1050.888888888889" y="1181.888888888889" />
-  <SelectedNodes>
-    <node>model.units.IUnit</node>
-  </SelectedNodes>
-  <Categories>
-    <Category>Methods</Category>
-  </Categories>
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="500.0" y="291.5" />
+  <SelectedNodes />
+  <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>

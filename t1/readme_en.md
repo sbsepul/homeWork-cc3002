@@ -1,9 +1,6 @@
-# Modelo
-## Detalles de implementacion
+# Model
 
-
-
-
+## Details of implementation
 
 #### For the Attack
 
@@ -39,7 +36,6 @@ se decidió  una implementación agregando ataque como un atributo de los items,
 |   **Soul**   |    Darkness    |       Light        |
 | **Darkness** |     Light      |        Soul        |
 |  **Light**   |      Soul      |      Darkness      |
-
 
 #### For the Items
 
@@ -144,15 +140,4 @@ hay bonus x no romper liskov (hint: interfaces)
 ## References
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
-
 - [Double Dispatch](https://sites.google.com/site/programacionhm/conceptos/multiple-dispatch) How to use the double dispatch
-
-
-
-
-
-
-
-
-
- 
