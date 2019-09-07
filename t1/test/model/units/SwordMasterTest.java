@@ -108,5 +108,17 @@ public class SwordMasterTest extends AbstractTestUnit {
     checkArcherAttack(sword_p);
   }
 
+  @Test
+  @Override
+  public void sorcererAttackTest() {
+    checkSorcererAttack(sword_p);
+  }
+
+  @Test
+  @Override
+  public void ClericAttackTest() {
+    checkClericAttack(sword_p);
+  }
+
 
 }

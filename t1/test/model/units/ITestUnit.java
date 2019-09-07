@@ -344,4 +344,28 @@ public interface ITestUnit {
    */
   void archerAttackTest();
 
+  /**
+   * Check attack of Sorcerer with item equipped is strong counter others units
+   */
+  void checkSorcererAttack(IEquipableItem item);
+
+  void checkSorcererAttackToAlpaca();
+
+  @Test
+  /**
+   * Test Sorcerer's attack
+   */
+  void sorcererAttackTest();
+
+  /**
+   * Check attack of Cleric with Staff cure others units and does not exceed the maximum
+   */
+  void checkClericAttack(IEquipableItem item);
+
+  @Test
+  /**
+   * Test Cleric's attack
+   */
+  void ClericAttackTest();
+
 }

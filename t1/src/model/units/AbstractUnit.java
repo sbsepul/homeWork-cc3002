@@ -23,7 +23,7 @@ import model.map.Location;
 public abstract class AbstractUnit implements IUnit{
 
   protected final List<IEquipableItem> items = new ArrayList<>();
-  private int currentHitPoints;
+  private double currentHitPoints;
   private final int movement;
   private final int maxItems;
   protected IEquipableItem equippedItem;
@@ -61,7 +61,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public int getCurrentHitPoints() {
+  public double getCurrentHitPoints() {
     return currentHitPoints;
   }
 
@@ -88,6 +88,9 @@ public abstract class AbstractUnit implements IUnit{
       if(this.items.contains(item)) {
         for(int i=0; i<this.getItems().size(); i++){
           if(item.equals(this.getItems().get(i))){
+            if(item.equals(this.getEquippedItem())){
+              this.setEquippedItem(null);
+            }
             return this.items.remove(i);
           }
         }
@@ -164,9 +167,6 @@ public abstract class AbstractUnit implements IUnit{
       if(!unit.isItemFull()){
         if(this.getLocation().distanceTo(unit.getLocation())==1){
           IEquipableItem itemA = this.removeItem(item);
-          if(itemA.equals(this.getEquippedItem())){
-            this.setEquippedItem(null);
-          }
           unit.addItem(itemA);
         }
       }
@@ -175,17 +175,7 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void receiveItem(IUnit unit, IEquipableItem item){
-    if(!unit.getItems().isEmpty()){
-      if(!this.isItemFull()){
-        if(this.getLocation().distanceTo(unit.getLocation())==1){
-          IEquipableItem itemB = unit.removeItem(item);
-          if(itemB.equals(unit.getEquippedItem())){
-            unit.setEquippedItem(null);
-          }
-          this.addItem(itemB);
-        }
-      }
-    }
+    unit.giveItem(this,item);
   }
 
   @Override

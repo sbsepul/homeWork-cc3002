@@ -112,4 +112,16 @@ public class ArcherTest extends AbstractTestUnit {
   @Override
   public void archerAttackTest() { }
 
+  @Test
+  @Override
+  public void sorcererAttackTest() {
+    checkSorcererAttack(bow_p);
+  }
+
+  @Test
+  @Override
+  public void ClericAttackTest() {
+    checkClericAttack(bow_p);
+  }
+
 }

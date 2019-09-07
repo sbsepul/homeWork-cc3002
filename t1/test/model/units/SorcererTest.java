@@ -158,5 +158,16 @@ public class SorcererTest extends AbstractTestUnit {
         checkArcherAttackToMagic(soul_p);
     }
 
+    @Override
+    public void sorcererAttackTest() { }
+
+    @Test
+    @Override
+    public void ClericAttackTest() {
+        checkClericAttack(light);
+        checkClericAttack(darkness);
+        checkClericAttack(soul);
+    }
+
 
 }

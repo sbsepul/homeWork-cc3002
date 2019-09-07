@@ -93,4 +93,13 @@ public class ClericTest extends AbstractTestUnit {
 
   @Override
   public void archerAttackTest() { }
+
+  @Override
+  public void sorcererAttackTest() { }
+
+  @Test
+  @Override
+  public void ClericAttackTest() {
+    checkClericAttack(staff_p);
+  }
 }

@@ -33,6 +33,26 @@ public class Cleric extends AbstractUnit {
     super(hitPoints, movement, location, 3, items);
   }
 
+  @Override
+  public void equipItemStaff(Staff item) {
+    equippedItem = item;
+  }
+  @Override
+  public void equipItemSpear(Spear item) { }
+  @Override
+  public void equipItemSword(Sword item) {  }
+  @Override
+  public void equipItemOther(IEquipableItem item){ }
+  @Override
+  public void equipItemDarkness(Darkness item) { }
+  @Override
+  public void equipItemLight(Light item) { }
+  @Override
+  public void equipItemSoul(Soul item) { }
+  @Override
+  public void equipItemBow(Bow item) { }
+  @Override
+  public void equipItemAxe(Axe item) { }
 
   //cleric can't attack, but can recovery a unit
   public void attack(IUnit enemy){
@@ -49,51 +69,4 @@ public class Cleric extends AbstractUnit {
       // this unit or enemy rip
     }
   }
-
-  @Override
-  public IEquipableItem getEquippedItem() {
-    return equippedItem;
-  }
-
-
-  @Override
-  public void equipItemStaff(Staff item) {
-    equippedItem = item;
-  }
-
-  /**
-   * equip with a item the unit
-   * @param item
-   */
-  @Override
-  public void equipItemSpear(Spear item) { }
-
-  @Override
-  public void equipItemSword(Sword item) {  }
-
-  @Override
-  public void equipItemOther(IEquipableItem item){ }
-
-  @Override
-  public void equipItemDarkness(Darkness item) {
-
-  }
-
-  @Override
-  public void equipItemLight(Light item) {
-
-  }
-
-  @Override
-  public void equipItemSoul(Soul item) {
-
-  }
-
-  @Override
-  public void equipItemBow(Bow item) { }
-
-  @Override
-  public void equipItemAxe(Axe item) { }
-
-
 }

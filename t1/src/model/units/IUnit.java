@@ -149,7 +149,7 @@ public interface IUnit {
   /**
    * @return hit points of the unit
    */
-  int getCurrentHitPoints();
+  double getCurrentHitPoints();
 
   /**
    * @param change

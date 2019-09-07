@@ -108,4 +108,16 @@ public class HeroTest extends AbstractTestUnit {
     checkArcherAttack(spear_p);
   }
 
+  @Test
+  @Override
+  public void sorcererAttackTest() {
+    checkSorcererAttack(spear_p);
+  }
+
+  @Test
+  @Override
+  public void ClericAttackTest() {
+    checkClericAttack(spear_p);
+  }
+
 }

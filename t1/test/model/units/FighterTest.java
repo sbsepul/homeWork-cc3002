@@ -109,4 +109,16 @@ public class FighterTest extends AbstractTestUnit {
   public void archerAttackTest() {
     checkArcherAttack(axe_p);
   }
+
+  @Test
+  @Override
+  public void sorcererAttackTest() {
+    checkSorcererAttack(axe_p);
+  }
+
+  @Test
+  @Override
+  public void ClericAttackTest() {
+    checkClericAttack(axe_p);
+  }
 }

@@ -38,6 +38,28 @@ public class Archer extends AbstractUnit {
     super(hitPoints, movement, position, 3, items);
   }
 
+  @Override
+  public void equipItemBow(Bow item) {
+    equippedItem = item;
+  }
+  @Override
+  public void equipItemAxe(Axe item) { }
+  @Override
+  public void equipItemSword(Sword item) { }
+  @Override
+  public void equipItemStaff(Staff item) {  }
+  @Override
+  public void equipItemSpear(Spear item) {  }
+  @Override
+  public void equipItemOther(IEquipableItem item) {  }
+  @Override
+  public void equipItemDarkness(Darkness item) { }
+  @Override
+  public void equipItemLight(Light item) { }
+  @Override
+  public void equipItemSoul(Soul item) { }
+
+  @Override
   public void attack(IUnit enemy){
     if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
         if(this.getEquippedItem() != null){
@@ -59,47 +81,4 @@ public class Archer extends AbstractUnit {
     }
     // this unit or enemy rip
   }
-
-  @Override
-  public void equipItemBow(Bow item) {
-    equippedItem = item;
-  }
-  @Override
-  public void equipItemAxe(Axe item) { }
-  @Override
-  public void equipItemSword(Sword item) { }
-  @Override
-  public void equipItemStaff(Staff item) {  }
-  @Override
-  public void equipItemSpear(Spear item) {  }
-  @Override
-  public void equipItemOther(IEquipableItem item) {  }
-
-  @Override
-  public void equipItemDarkness(Darkness item) {
-
-  }
-
-  @Override
-  public void equipItemLight(Light item) {
-
-  }
-
-  @Override
-  public void equipItemSoul(Soul item) {
-
-  }
-
-  /**
-   * Sets the currently equipped item of this unit.
-   * <p>
-   * The <i>Archer</i> can <b>only equip Bows</b>.
-   *     the item to equip
-   */
-
-  @Override
-  public IEquipableItem getEquippedItem() {
-    return equippedItem;
-  }
-
 }
