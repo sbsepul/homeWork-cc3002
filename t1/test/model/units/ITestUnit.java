@@ -345,11 +345,9 @@ public interface ITestUnit {
   void archerAttackTest();
 
   /**
-   * Check attack of Sorcerer with item equipped is strong counter others units
+   * Check attack of Sorcerer with item equipped is strong counter all the units excepted the sorcerer equipped
    */
   void checkSorcererAttack(IEquipableItem item);
-
-  void checkSorcererAttackToAlpaca();
 
   @Test
   /**
@@ -366,6 +364,14 @@ public interface ITestUnit {
   /**
    * Test Cleric's attack
    */
-  void ClericAttackTest();
+  void clericAttackTest();
 
+  @Test
+  void receiveNormalAttackTest();
+  @Test
+  void receiveWeaknessAttackTest();
+  @Test
+  void receiveResistantAttackTest();
+  @Test
+  void receiveRecoveryAttackTest();
 }

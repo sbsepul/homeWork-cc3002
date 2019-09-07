@@ -63,27 +63,27 @@ public class ArcherTest extends AbstractTestUnit {
   @Test
   @Override
   public void giveToUnitArcherTest() {
-    assertNull(getTestUnit().getEquippedItem());
-    assertEquals(0, getTestUnit().getItems().size());
-    getTestUnit().giveItem(getTargetArcherTrade(), bow_p);
+    assertNull(archer.getEquippedItem());
+    assertEquals(0, archer.getItems().size());
+    archer.giveItem(getTargetArcherTrade(), bow_p);
     assertEquals(2, getTargetArcherTrade().getItems().size());
     assertEquals(false, getTargetArcherTrade().getItems().contains(bow_p));
-    getTestUnit().addItem(bow_p);
-    assertNull(getTestUnit().getEquippedItem());
-    assertEquals(1, getTestUnit().getItems().size());
-    assertEquals(true, getTestUnit().getItems().contains(bow_p));
-    getTestUnit().equipItem(bow_p);
-    assertEquals(bow_p, getTestUnit().getEquippedItem());
-    getTestUnit().giveItem(getTargetArcherTrade(),bow_p);
-    assertEquals(0,getTestUnit().getItems().size());
+    archer.addItem(bow_p);
+    assertNull(archer.getEquippedItem());
+    assertEquals(1, archer.getItems().size());
+    assertEquals(true, archer.getItems().contains(bow_p));
+    archer.equipItem(bow_p);
+    assertEquals(bow_p, archer.getEquippedItem());
+    archer.giveItem(getTargetArcherTrade(),bow_p);
+    assertEquals(0,archer.getItems().size());
     //verify that bow_p equipped isn't
-    assertNull(getTestUnit().getEquippedItem());
+    assertNull(archer.getEquippedItem());
     assertEquals(3,getTargetArcherTrade().getItems().size());
     assertEquals(true, getTargetArcherTrade().getItems().contains(bow_p));
-    getTestUnit().addItem(getAxeTrade());
-    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
-    getTestUnit().giveItem(getTargetArcherTrade(),getAxeTrade());
-    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    archer.addItem(getAxeTrade());
+    assertEquals(true, archer.getItems().contains(getAxeTrade()));
+    archer.giveItem(getTargetArcherTrade(),getAxeTrade());
+    assertEquals(true, archer.getItems().contains(getAxeTrade()));
     assertEquals(false,getTargetArcherTrade().getItems().contains(getAxeTrade()));
   }
 
@@ -115,12 +115,24 @@ public class ArcherTest extends AbstractTestUnit {
   @Test
   @Override
   public void sorcererAttackTest() {
-    checkSorcererAttack(bow_p);
+    //hp normal
+    assertEquals(50, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    //test unit with inventory
+    archer.addItem(bow_p);
+    archer.equipItem(bow_p);
+    getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().equipItem(getLight());
+    assertEquals(bow_p, archer.getEquippedItem());
+    assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
+    getTargetSorcerer().attack(archer);
+    assertEquals(20, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
   }
 
   @Test
   @Override
-  public void ClericAttackTest() {
+  public void clericAttackTest() {
     checkClericAttack(bow_p);
   }
 

@@ -118,7 +118,7 @@ public class FighterTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void ClericAttackTest() {
+  public void clericAttackTest() {
     checkClericAttack(axe_p);
   }
 }

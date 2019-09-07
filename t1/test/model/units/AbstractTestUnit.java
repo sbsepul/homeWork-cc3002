@@ -624,11 +624,56 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   @Override
   public void checkSorcererAttack(IEquipableItem item) {
-
+    //hp normal
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    //test unit with inventory
+    getTestUnit().addItem(item);
+    getTestUnit().equipItem(item);
+    getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().equipItem(getLight());
+    assertEquals(item, getTestUnit().getEquippedItem());
+    assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
+    getTargetSorcerer().attack(getTestUnit());
+    assertEquals(20, getTestUnit().getCurrentHitPoints());
+    assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
   }
 
+  @Test
   @Override
-  public void checkSorcererAttackToAlpaca() {
+  public void receiveNormalAttackTest() {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttack(getAxe());
+    assertEquals(50 - getAxe().getPower(), getTestUnit().getCurrentHitPoints());
+  }
 
+  @Test
+  @Override
+  public void receiveRecoveryAttackTest() {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttack(getAxe());
+    assertEquals(50- getAxe().getPower(),getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+  }
+
+  @Test
+  @Override
+  public void receiveResistantAttackTest() {
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttackResistant(getAxe());
+    double hp_new = 50 - getAxe().getPower() + 20;
+    assertEquals(hp_new, getTestUnit().getCurrentHitPoints());
+  }
+
+  @Test
+  @Override
+  public void receiveWeaknessAttackTest() {
+    assertEquals(50,getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttackWeakness(getAxe());
+    double hp_new = 50 - getAxe().getPower()*1.5;
+    assertEquals(hp_new, getTestUnit().getCurrentHitPoints());
   }
 }

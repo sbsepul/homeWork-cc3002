@@ -116,7 +116,7 @@ public class SwordMasterTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void ClericAttackTest() {
+  public void clericAttackTest() {
     checkClericAttack(sword_p);
   }
 

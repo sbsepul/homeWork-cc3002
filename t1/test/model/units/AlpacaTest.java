@@ -60,10 +60,22 @@ public class AlpacaTest extends AbstractTestUnit {
   @Test
   @Override
   public void sorcererAttackTest() {
-    checkSorcererAttackToAlpaca();
+    //hp normal
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    //test unit with inventory
+    alpaca.addItem(getAxe());
+    alpaca.equipItem(getAxe());
+    assertNull(alpaca.getEquippedItem());
+    getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().equipItem(getLight());
+    assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
+    getTargetSorcerer().attack(alpaca);
+    assertEquals(30, alpaca.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
   }
 
   @Override
-  public void ClericAttackTest() { }
+  public void clericAttackTest() { }
 
 }

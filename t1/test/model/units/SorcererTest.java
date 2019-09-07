@@ -163,7 +163,7 @@ public class SorcererTest extends AbstractTestUnit {
 
     @Test
     @Override
-    public void ClericAttackTest() {
+    public void clericAttackTest() {
         checkClericAttack(light);
         checkClericAttack(darkness);
         checkClericAttack(soul);

@@ -116,7 +116,7 @@ public class HeroTest extends AbstractTestUnit {
 
   @Test
   @Override
-  public void ClericAttackTest() {
+  public void clericAttackTest() {
     checkClericAttack(spear_p);
   }
 

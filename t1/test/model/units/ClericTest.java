@@ -94,12 +94,27 @@ public class ClericTest extends AbstractTestUnit {
   @Override
   public void archerAttackTest() { }
 
+  @Test
   @Override
-  public void sorcererAttackTest() { }
+  public void sorcererAttackTest() {
+    //hp normal
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    //test unit with inventory
+    getTestUnit().addItem(staff_p);
+    getTestUnit().equipItem(staff_p);
+    getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().equipItem(getLight());
+    assertEquals(staff_p, getTestUnit().getEquippedItem());
+    assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
+    getTargetSorcerer().attack(getTestUnit());
+    assertEquals(20, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+  }
 
   @Test
   @Override
-  public void ClericAttackTest() {
+  public void clericAttackTest() {
     checkClericAttack(staff_p);
   }
 }
