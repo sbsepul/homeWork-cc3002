@@ -41,7 +41,7 @@ public class SpearTest extends AbstractTestItem {
    */
   @Override
   public void setTestUnit() {
-    hero = new Hero(10, 5, new Location(0, 0));
+    hero = new Hero(10, 5, field.getCell(0,0));
   }
 
   @Override
@@ -64,4 +64,5 @@ public class SpearTest extends AbstractTestItem {
   public IUnit getTestUnit() {
     return hero;
   }
+
 }

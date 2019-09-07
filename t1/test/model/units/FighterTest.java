@@ -54,6 +54,33 @@ public class FighterTest extends AbstractTestUnit {
     assertEquals(3 , fighter.getItems().size());
   }
 
+  @Test
+  @Override
+  public void giveToUnitFighterTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(0, getTestUnit().getItems().size());
+    getTestUnit().giveItem(getTargetClericTrade(), axe_p);
+    assertEquals(2, getTargetClericTrade().getItems().size());
+    assertEquals(false, getTargetClericTrade().getItems().contains(axe_p));
+    getTestUnit().addItem(axe_p);
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(1, getTestUnit().getItems().size());
+    assertEquals(true, getTestUnit().getItems().contains(axe_p));
+    getTestUnit().equipItem(axe_p);
+    assertEquals(axe_p, getTestUnit().getEquippedItem());
+    getTestUnit().giveItem(getTargetClericTrade(),axe_p);
+    assertEquals(0,getTestUnit().getItems().size());
+    //verify that axe_p equipped isn't
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(3,getTargetClericTrade().getItems().size());
+    assertEquals(true, getTargetClericTrade().getItems().contains(axe_p));
+    getTestUnit().addItem(getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    getTestUnit().giveItem(getTargetClericTrade(),getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    assertEquals(false,getTargetClericTrade().getItems().contains(getAxeTrade()));
+  }
+
   @Override
   public void testCombat() {
 

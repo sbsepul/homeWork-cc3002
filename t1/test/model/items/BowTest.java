@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import model.map.Location;
 import model.units.Archer;
 import model.units.IUnit;
+import model.units.SwordMaster;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,7 +28,7 @@ public class BowTest extends AbstractTestItem {
     expectedName = "Common bow";
     expectedPower = 8;
     expectedMinRange = 2;
-    expectedMaxRange = 4;
+    expectedMaxRange = 3;
     bow = new Bow(expectedName, expectedPower, expectedMinRange, expectedMaxRange);
   }
 
@@ -44,7 +45,7 @@ public class BowTest extends AbstractTestItem {
    */
   @Override
   public void setTestUnit() {
-    archer = new Archer(10, 5, new Location(0, 0));
+    archer = new Archer(10, 5, field.getCell(0,0));
   }
 
   /**
@@ -77,4 +78,5 @@ public class BowTest extends AbstractTestItem {
   public IUnit getTestUnit() {
     return archer;
   }
+
 }

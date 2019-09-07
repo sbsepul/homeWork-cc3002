@@ -40,6 +40,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Bow bow_trade;
   protected Axe axe;
   protected Axe axe_trade;
+  protected Axe getAxe_trade;
   protected Sword sword;
   protected Staff staff;
   private Staff staff_normal;
@@ -109,6 +110,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
     this.light = new Light( "Light", 20,1,2);
     this.soul = new Soul( "Soul", 20,1,2);
     this.bow_trade = new Bow("Bow_trade",20,1,2);
+    this.getAxe_trade = new Axe("Axe_give",20,1,2);
   }
 
 
@@ -151,6 +153,12 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertNull(getTestUnit().getEquippedItem());
   }
 
+  /**
+   * Check that a unit can give a item of his inventory
+   * Verify
+   *
+   * @param unit
+   */
   @Override
   public void checkGiveItem(IUnit unit) {
     assertNull(getTestUnit().getEquippedItem());
@@ -166,11 +174,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(0,getTestUnit().getItems().size());
     assertEquals(3,unit.getItems().size());
     assertEquals(true, unit.getItems().contains(getBow()));
-    getTestUnit().addItem(getAxe());
-    assertEquals(true, getTestUnit().getItems().contains(getAxe()));
-    getTestUnit().giveItem(unit,getAxe());
-    assertEquals(true, getTestUnit().getItems().contains(getAxe()));
-    assertEquals(false,unit.getItems().contains(getAxe()));
+    getTestUnit().addItem(getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    getTestUnit().giveItem(unit,getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    assertEquals(false,unit.getItems().contains(getAxeTrade()));
   }
 
   @Test
@@ -246,6 +254,11 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public Axe getAxe() {
     return axe;
+  }
+
+  @Override
+  public Axe getAxeTrade() {
+    return getAxe_trade;
   }
 
   @Override

@@ -51,7 +51,8 @@ public abstract class AbstractItem implements IEquipableItem {
 
   @Override
   public boolean canAttack(IEquipableItem itemEnemy) {
-    return this.getOwner().getCurrentHitPoints()>0 && this.getOwner().isInRange(itemEnemy.getOwner());
+    return this.getOwner().getCurrentHitPoints()>0 && this.getOwner().isInRange(itemEnemy.getOwner())
+            && itemEnemy.getOwner().getCurrentHitPoints()>0;
   }
 
   @Override

@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import model.map.Field;
+import model.map.Location;
 import model.units.IUnit;
+import model.units.SwordMaster;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,15 +23,24 @@ public abstract class AbstractTestItem {
   protected int expectedPower;
   protected short expectedMinRange;
   protected short expectedMaxRange;
+  protected SwordMaster swordMaster;
+  protected SwordMaster wrongSwordMaster;
+  protected SwordMaster wrongSecondSwordMaster;
+  protected Sword sword_test;
+  protected Sword sword_aw;
+  protected Sword sword_bw;
 
+  protected Field field;
   /**
    * Sets up the items to be tested
    */
   @BeforeEach
   public void setUp() {
+    setField();
     setTestItem();
     setWrongRangeItem();
     setTestUnit();
+    setTestEnemy();
   }
 
   /**
@@ -45,6 +57,31 @@ public abstract class AbstractTestItem {
    * Sets the unit that will be equipped with the test item
    */
   public abstract void setTestUnit();
+
+  public void setTestEnemy(){
+    swordMaster = new SwordMaster(10,1, field.getCell(2,0));
+    wrongSwordMaster = new SwordMaster(0,1,field.getCell(0,1));
+    wrongSecondSwordMaster = new SwordMaster(10,1,field.getCell(2,2));
+    sword_test = new Sword("sword test", 10, 1,2);
+    sword_aw = new Sword("sword wrong 1", 10, 1,2);
+    sword_bw = new Sword("sword wrong 2", 10, 1,2);
+    swordMaster.addItem(sword_test);
+    swordMaster.equipItem(sword_test);
+    wrongSwordMaster.addItem(sword_aw);
+    wrongSecondSwordMaster.addItem(sword_bw);
+    wrongSecondSwordMaster.equipItem(sword_bw);
+    wrongSwordMaster.equipItem(sword_aw);
+  }
+
+  /**
+   * Set up the game field
+   */
+  public void setField() {
+    this.field = new Field();
+    this.field.addCells(true, new Location(0, 0), new Location(0, 1), new Location(0, 2),
+            new Location(1, 0), new Location(1, 1), new Location(1, 2), new Location(2, 0),
+            new Location(2, 1), new Location(2, 2));
+  }
 
   /**
    * Checks that the tested item cannot have ranges outside of certain bounds.
@@ -110,6 +147,30 @@ public abstract class AbstractTestItem {
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
     assertEquals(true , unit.equals(getTestItem().getOwner()));
+  }
+
+  public SwordMaster getTestEnemy(){
+    return swordMaster;
+  }
+
+  public SwordMaster getTestFirstEnemyWrong(){
+    return wrongSwordMaster;
+  }
+
+  public SwordMaster getTestSecondEnemyWrong(){
+    return wrongSecondSwordMaster;
+  }
+
+
+  @Test
+  public void canAttackTest(){
+    assertNull(getTestItem().getOwner());
+    IUnit unit = getTestUnit();
+    getTestItem().equipTo(unit);
+    assertEquals(false, getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));
+    assertEquals(false,getTestItem().canAttack(getTestSecondEnemyWrong().getEquippedItem()));
+    assertEquals(2, getTestItem().getOwner().getLocation().distanceTo(getTestEnemy().getLocation()));
+    assertEquals(true, getTestItem().canAttack(getTestEnemy().getEquippedItem()));
   }
   /**
    * @return a unit that can equip the item being tested

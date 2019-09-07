@@ -71,6 +71,11 @@ public interface ITestUnit {
    */
   Axe getAxe();
 
+  /**
+   * @return the test axe for trade
+   */
+  Axe getAxeTrade();
+
   @Test
   void equipSwordTest();
 
@@ -251,26 +256,31 @@ public interface ITestUnit {
    */
   void giveToUnitClericTest();
 
+  @Test
   /**
    *
    */
   void giveToUnitHeroTest();
 
+  @Test
   /**
    *
    */
   void giveToUnitFighterTest();
 
+  @Test
   /**
    *
    */
   void giveToUnitSwordMasterTest();
 
+  @Test
   /**
    *
    */
   void giveToUnitSorcererTest();
 
+  @Test
   /**
    *
    */

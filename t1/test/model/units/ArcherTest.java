@@ -60,6 +60,33 @@ public class ArcherTest extends AbstractTestUnit {
     assertEquals(3 , archer.getItems().size());
   }
 
+  @Test
+  @Override
+  public void giveToUnitArcherTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(0, getTestUnit().getItems().size());
+    getTestUnit().giveItem(getTargetArcherTrade(), bow_p);
+    assertEquals(2, getTargetArcherTrade().getItems().size());
+    assertEquals(false, getTargetArcherTrade().getItems().contains(bow_p));
+    getTestUnit().addItem(bow_p);
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(1, getTestUnit().getItems().size());
+    assertEquals(true, getTestUnit().getItems().contains(bow_p));
+    getTestUnit().equipItem(bow_p);
+    assertEquals(bow_p, getTestUnit().getEquippedItem());
+    getTestUnit().giveItem(getTargetArcherTrade(),bow_p);
+    assertEquals(0,getTestUnit().getItems().size());
+    //verify that bow_p equipped isn't
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(3,getTargetArcherTrade().getItems().size());
+    assertEquals(true, getTargetArcherTrade().getItems().contains(bow_p));
+    getTestUnit().addItem(getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    getTestUnit().giveItem(getTargetArcherTrade(),getAxeTrade());
+    assertEquals(true, getTestUnit().getItems().contains(getAxeTrade()));
+    assertEquals(false,getTargetArcherTrade().getItems().contains(getAxeTrade()));
+  }
+
   /**
    * This test use a archer, a bow, a axe
    * @Test Archer's equipped item, the attack, and the currentPoints

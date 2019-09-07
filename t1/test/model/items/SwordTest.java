@@ -1,6 +1,7 @@
 package model.items;
 
 import model.map.Location;
+import model.units.Archer;
 import model.units.IUnit;
 import model.units.SwordMaster;
 
@@ -24,7 +25,7 @@ public class SwordTest extends AbstractTestItem {
     expectedName = "Common sword";
     expectedPower = 10;
     expectedMinRange = 1;
-    expectedMaxRange = 1;
+    expectedMaxRange = 2;
     sword = new Sword(expectedName, expectedPower, expectedMinRange, expectedMaxRange);
   }
 
@@ -41,8 +42,10 @@ public class SwordTest extends AbstractTestItem {
    */
   @Override
   public void setTestUnit() {
-    swordMaster = new SwordMaster(10, 5, new Location(0, 0));
+    swordMaster = new SwordMaster(10, 5, field.getCell(0,0));
   }
+
+
 
   @Override
   public IEquipableItem getWrongTestItem() {
@@ -64,4 +67,5 @@ public class SwordTest extends AbstractTestItem {
   public IUnit getTestUnit() {
     return swordMaster;
   }
+
 }

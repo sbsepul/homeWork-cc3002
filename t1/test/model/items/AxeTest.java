@@ -3,6 +3,7 @@ package model.items;
 import model.map.Location;
 import model.units.Fighter;
 import model.units.IUnit;
+import model.units.SwordMaster;
 
 /**
  * Test set for Axes
@@ -15,6 +16,7 @@ class AxeTest extends AbstractTestItem {
   private Axe axe;
   private Axe wrongAxe;
   private Fighter fighter;
+
 
   @Override
   public void setTestItem() {
@@ -38,8 +40,9 @@ class AxeTest extends AbstractTestItem {
    */
   @Override
   public void setTestUnit() {
-    fighter = new Fighter(10, 5, new Location(0, 0));
+    fighter = new Fighter(10, 5, field.getCell(0,0));
   }
+
 
   @Override
   public IEquipableItem getWrongTestItem() {
@@ -58,4 +61,5 @@ class AxeTest extends AbstractTestItem {
   public IUnit getTestUnit() {
     return fighter;
   }
+
 }

@@ -3,6 +3,11 @@ package model.items;
 import model.map.Location;
 import model.units.Cleric;
 import model.units.IUnit;
+import model.units.SwordMaster;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Test set for staffs
@@ -41,7 +46,19 @@ public class StaffTest extends AbstractTestItem {
    */
   @Override
   public void setTestUnit() {
-    cleric = new Cleric(10, 5, new Location(0, 0));
+    cleric = new Cleric(10, 5,field.getCell(0,0));
+  }
+
+  @Test
+  @Override
+  public void canAttackTest() {
+    assertNull(getTestItem().getOwner());
+    IUnit unit = getTestUnit();
+    getTestItem().equipTo(unit);
+    assertEquals(false, getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));
+    assertEquals(false,getTestItem().canAttack(getTestSecondEnemyWrong().getEquippedItem()));
+    assertEquals(2, getTestItem().getOwner().getLocation().distanceTo(getTestEnemy().getLocation()));
+    assertEquals(false, getTestItem().canAttack(getTestEnemy().getEquippedItem()));;
   }
 
   @Override
@@ -64,4 +81,5 @@ public class StaffTest extends AbstractTestItem {
   public IUnit getTestUnit() {
     return cleric;
   }
+
 }

@@ -4,6 +4,7 @@ import model.items.magic.Light;
 import model.map.Location;
 import model.units.IUnit;
 import model.units.Sorcerer;
+import model.units.SwordMaster;
 
 /**
  * Test set for Light
@@ -33,8 +34,9 @@ public class LightTest extends AbstractTestItem {
 
     @Override
     public void setTestUnit() {
-        sorcerer = new Sorcerer(50,4,new Location(0,0));
+        sorcerer = new Sorcerer(50,4,field.getCell(0,0));
     }
+
 
     @Override
     public IEquipableItem getWrongTestItem() {
@@ -50,4 +52,5 @@ public class LightTest extends AbstractTestItem {
     public IUnit getTestUnit() {
         return sorcerer;
     }
+
 }
