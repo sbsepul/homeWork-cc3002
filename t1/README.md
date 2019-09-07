@@ -51,7 +51,9 @@ Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas
 
 
 
-##### For the Staff
+##### For the Cleric
+
+La curacion que hace se implementa como ataque, y los puntos que recupera son sin añadirles más puntos 
 
 Para esta unidad el ataque no podia ser implementado por restricciones del problema. Además como el ataque se implementó sobre los items, si un staff no tiene item entonces este no puede recuperar. SIn embargo, una unidad que no tenga arma igual puede recuperarse
 

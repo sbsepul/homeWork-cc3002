@@ -592,22 +592,34 @@ public abstract class AbstractTestUnit implements ITestUnit {
 
   @Override
   public void checkClericAttack(IEquipableItem item) {
+    //hp normal
     assertEquals(50, getTestUnit().getCurrentHitPoints());
     assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    //test unit with inventory
     getTestUnit().addItem(item);
-    getTestUnit().receiveAttack(getAxe()); // -20 points hp
+    //to damage to test unit
+    getTestUnit().receiveAttack(getAxe()); // -20 points hp, not equipped
     assertEquals(30, getTestUnit().getCurrentHitPoints());
-    getTestUnit().receiveAttack(getAxe());
+    getTestUnit().receiveAttack(getAxe()); // -20 points hp, not equipped
     assertEquals(10, getTestUnit().getCurrentHitPoints());
+    //to equip to test unit
     getTestUnit().equipItem(item);
-    getTestUnit().removeItem(item);
-    getTestUnit().setEquippedItem(null);
-    getTestUnit().receiveRecovery(getStaff_normal());
+    getTargetCleric().attack(getTestUnit());
+    assertEquals(10, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    // to equip to target Cleric
+    getTargetCleric().addItem(getStaff_normal());
+    getTargetCleric().equipItem(getStaff_normal());
+    // cleric cure to test unit
+    getTargetCleric().attack(getTestUnit());
     assertEquals(30, getTestUnit().getCurrentHitPoints());
-    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    getTestUnit().removeItem(item);
+    getTargetCleric().attack(getTestUnit());
     assertEquals(50, getTestUnit().getCurrentHitPoints());
-    getTestUnit().receiveRecovery(getStaff_normal());
+    getTargetCleric().attack(getTestUnit());
     assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTargetCleric().removeItem(getStaff_normal());
   }
 
   @Override
