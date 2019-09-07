@@ -25,15 +25,21 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractTestUnit implements ITestUnit {
 
   protected Alpaca targetAlpaca;
+  protected Alpaca targetAlpacaTrade;
   protected Archer targetArcher;
+  protected Archer targetArcherTrade;
   protected Cleric targetCleric;
+  protected Cleric targetClericTrade;
   protected Fighter targetFighter;
   protected Hero targetHero;
   protected Sorcerer targetSorcerer;
+  protected Sorcerer targetSorcerer_withItems;
   protected SwordMaster targetSwordMaster;
   /* ITEMS */
   protected Bow bow;
+  protected Bow bow_trade;
   protected Axe axe;
+  protected Axe axe_trade;
   protected Sword sword;
   protected Staff staff;
   private Staff staff_normal;
@@ -45,13 +51,17 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Field field;
 
   public void setTargets(){
-    targetAlpaca = new Alpaca(50, 2, field.getCell(1, 1));
-    targetArcher = new Archer(50,2,field.getCell(1,2));
-    targetCleric = new Cleric(50,2,field.getCell(1,1));
-    targetFighter = new Fighter(50,2,field.getCell(1,0));
-    targetHero = new Hero(50,2,field.getCell(0,1));
+    targetAlpaca = new Alpaca(50, 2, field.getCell(1, 1), axe_trade);
+    targetArcher = new Archer(50,2,field.getCell(1,2),axe_trade,light);
+    targetCleric = new Cleric(50,2,field.getCell(1,1),sword,darkness);
+    targetFighter = new Fighter(50,2,field.getCell(1,0),bow_trade,soul);
+    targetHero = new Hero(50,2,field.getCell(0,1),staff,soul);
     targetSorcerer = new Sorcerer(50,2,field.getCell(0,1));
-    targetSwordMaster = new SwordMaster(50,2,field.getCell(1,0));
+    targetSorcerer_withItems = new Sorcerer(50,2,field.getCell(0,1),axe_trade,sword);
+    targetSwordMaster = new SwordMaster(50,2,field.getCell(1,0),bow_trade,spear);
+    targetClericTrade = new Cleric(50,2,field.getCell(0,1),sword,darkness);
+    targetArcherTrade = new Archer(50,2,field.getCell(1,0),spear,staff);
+    targetAlpacaTrade = new Alpaca(50,2,field.getCell(1,0),bow_trade,light);
   }
 
 
@@ -89,6 +99,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public void setWeapons() {
     this.axe = new Axe("Axe", 20, 1, 2);
+    this.axe_trade = new Axe("Axe_trade", 20, 1, 2);
     this.sword = new Sword("Sword", 20, 1, 2);
     this.spear = new Spear("Spear", 20, 1, 2);
     this.staff = new Staff("Staff", 30, 1, 2);
@@ -97,7 +108,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
     this.darkness = new Darkness( "Darkness", 20,1,2);
     this.light = new Light( "Light", 20,1,2);
     this.soul = new Soul( "Soul", 20,1,2);
+    this.bow_trade = new Bow("Bow_trade",20,1,2);
   }
+
+
 
   /**
    * Checks that the constructor works properly.
@@ -127,12 +141,94 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Override
   public void checkEquippedItem(IEquipableItem item) {
     assertNull(getTestUnit().getEquippedItem());
+    assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().equipItem(item);
+    assertEquals(0,getTestUnit().getItems().size());
     assertNull(getTestUnit().getEquippedItem());
     getTestUnit().addItem(item);
     assertEquals(1, getTestUnit().getItems().size());
     getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
+  }
+
+  @Override
+  public void checkGiveItem(IUnit unit) {
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(0, getTestUnit().getItems().size());
+    getTestUnit().giveItem(unit, getBow());
+    assertEquals(2, unit.getItems().size());
+    assertEquals(false, unit.getItems().contains(getBow()));
+    getTestUnit().addItem(getBow());
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(1, getTestUnit().getItems().size());
+    assertEquals(true, getTestUnit().getItems().contains(getBow()));
+    getTestUnit().giveItem(unit,getBow());
+    assertEquals(0,getTestUnit().getItems().size());
+    assertEquals(3,unit.getItems().size());
+    assertEquals(true, unit.getItems().contains(getBow()));
+    getTestUnit().addItem(getAxe());
+    assertEquals(true, getTestUnit().getItems().contains(getAxe()));
+    getTestUnit().giveItem(unit,getAxe());
+    assertEquals(true, getTestUnit().getItems().contains(getAxe()));
+    assertEquals(false,unit.getItems().contains(getAxe()));
+  }
+
+  @Test
+  @Override
+  public void giveToUnitArcherTest() {
+    checkGiveItem(getTargetArcherTrade());
+  }
+
+  @Test
+  @Override
+  public void giveToUnitClericTest(){
+    checkGiveItem(getTargetClericTrade());
+  }
+
+  @Test
+  @Override
+  public void giveToUnitHeroTest() {
+    checkGiveItem(getTargetHero());
+  }
+  @Test
+  @Override
+  public void giveToUnitFighterTest() {
+    checkGiveItem(getTargetFighter());
+  }
+
+  @Test
+  @Override
+  public void giveToUnitSorcererTest() {
+    checkGiveItem(getTargetSorcerer_withItems());
+  }
+
+  @Test
+  @Override
+  public void giveToUnitSwordMasterTest() {
+    checkGiveItem(getTargetSwordMaster());
+  }
+
+  @Test
+  @Override
+  public void giveToUnitAlpacaTest() {
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(0, getTestUnit().getItems().size());
+    getTestUnit().giveItem(getTargetAlpacaTrade(), getBow());
+    assertEquals(2, getTargetAlpacaTrade().getItems().size());
+    assertEquals(false, getTargetAlpacaTrade().getItems().contains(getBow()));
+    getTestUnit().addItem(getBow());
+    assertNull(getTestUnit().getEquippedItem());
+    assertEquals(1, getTestUnit().getItems().size());
+    assertEquals(true, getTestUnit().getItems().contains(getBow()));
+    getTestUnit().giveItem(getTargetAlpacaTrade(),getBow());
+    assertEquals(0,getTestUnit().getItems().size());
+    assertEquals(3,getTargetAlpacaTrade().getItems().size());
+    assertEquals(true, getTargetAlpacaTrade().getItems().contains(getBow()));
+    getTestUnit().addItem(getAxe());
+    assertEquals(true, getTestUnit().getItems().contains(getAxe()));
+    getTestUnit().giveItem(getTargetAlpacaTrade(),getAxe());
+    assertEquals(false, getTestUnit().getItems().contains(getAxe()));
+    assertEquals(true,getTargetAlpacaTrade().getItems().contains(getAxe()));
   }
 
   /**
@@ -194,6 +290,9 @@ public abstract class AbstractTestUnit implements ITestUnit {
     return staff;
   }
 
+  /**
+   * @return the test staff normal
+   */
   private Staff getStaff_normal() { return staff_normal; }
 
   @Override
@@ -286,7 +385,15 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Alpaca for trade
+   */
+  @Override
+  public Alpaca getTargetAlpacaTrade() {
+    return targetAlpacaTrade;
+  }
+
+  /**
+   * @return the target Archer
    */
   @Override
   public Archer getTargetArcher() {
@@ -294,7 +401,15 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Archer for exchange
+   */
+  @Override
+  public Archer getTargetArcherTrade() {
+    return targetArcherTrade;
+  }
+
+  /**
+   * @return the target Cleric
    */
   @Override
   public Cleric getTargetCleric() {
@@ -302,7 +417,15 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Cleric for trade
+   */
+  @Override
+  public Cleric getTargetClericTrade() {
+    return targetClericTrade;
+  }
+
+  /**
+   * @return the target Fighter
    */
   @Override
   public Fighter getTargetFighter() {
@@ -310,7 +433,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Hero
    */
   @Override
   public Hero getTargetHero() {
@@ -318,7 +441,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Sorcerer
    */
   @Override
   public Sorcerer getTargetSorcerer() {
@@ -326,7 +449,15 @@ public abstract class AbstractTestUnit implements ITestUnit {
   }
 
   /**
-   * @return the target Alpaca
+   * @return the target Sorcerer for exchange items
+   */
+  @Override
+  public Sorcerer getTargetSorcerer_withItems() {
+    return targetSorcerer_withItems;
+  }
+
+  /**
+   * @return the target SwordMaster
    */
   @Override
   public SwordMaster getTargetSwordMaster() {

@@ -31,6 +31,9 @@ public interface ITestUnit {
    */
   void setTestUnit();
 
+  /**
+   *
+   */
   void setTargets();
 
   /**
@@ -148,15 +151,23 @@ public interface ITestUnit {
    */
   Alpaca getTargetAlpaca();
 
+  Alpaca getTargetAlpacaTrade();
+
   Archer getTargetArcher();
 
+  Archer getTargetArcherTrade();
+
   Cleric getTargetCleric();
+
+  Cleric getTargetClericTrade();
 
   Fighter getTargetFighter();
 
   Hero getTargetHero();
 
   Sorcerer getTargetSorcerer();
+
+  Sorcerer getTargetSorcerer_withItems();
 
   SwordMaster getTargetSwordMaster();
 
@@ -218,10 +229,57 @@ public interface ITestUnit {
   /**
    * This check simulate the attack of a remote Archer to a unit magic that can't counterattack.
    *
+   * @param itemA
    */
   void checkArcherAttackToMagic(IEquipableItem itemA);
 
+  /**
+   *
+   * @param unit
+   */
+  void checkGiveItem(IUnit unit);
+
   @Test
+  /**
+   *
+   */
+  void giveToUnitArcherTest();
+
+  @Test
+  /**
+   *
+   */
+  void giveToUnitClericTest();
+
+  /**
+   *
+   */
+  void giveToUnitHeroTest();
+
+  /**
+   *
+   */
+  void giveToUnitFighterTest();
+
+  /**
+   *
+   */
+  void giveToUnitSwordMasterTest();
+
+  /**
+   *
+   */
+  void giveToUnitSorcererTest();
+
+  /**
+   *
+   */
+  void giveToUnitAlpacaTest();
+
+  @Test
+  /**
+   *
+   */
   void archerAttackTest();
 
 }

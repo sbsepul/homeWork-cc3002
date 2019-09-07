@@ -101,7 +101,6 @@ public abstract class AbstractUnit implements IUnit{
     return this.maxItems==items.size();
   }
 
-
   /**
    * Reduce hp in unit that receive a attack
    * @param attack
@@ -157,30 +156,34 @@ public abstract class AbstractUnit implements IUnit{
    * Change the equippedItem for a item new
    * @param item
    */
-  protected void setEquippedItem(final IEquipableItem item) { this.equippedItem = item;  }
+  public void setEquippedItem(IEquipableItem item) { this.equippedItem = item;  }
 
   @Override
   public void giveItem(IUnit unit, IEquipableItem item) {
-    if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
-      if(!this.isItemFull() && unit.isItemFull()){
-        IEquipableItem itemA = this.removeItem(item);
-        if(itemA.equals(this.getEquippedItem())){
-          this.setEquippedItem(null);
+    if(!this.getItems().isEmpty()){
+      if(!unit.isItemFull()){
+        if(this.getLocation().distanceTo(unit.getLocation())==1){
+          IEquipableItem itemA = this.removeItem(item);
+          if(itemA.equals(this.getEquippedItem())){
+            this.setEquippedItem(null);
+          }
+          unit.addItem(itemA);
         }
-        unit.addItem(itemA);
       }
     }
   }
 
   @Override
   public void receiveItem(IUnit unit, IEquipableItem item){
-    if(!this.getItems().isEmpty() && !unit.getItems().isEmpty()){
-      if(!this.isItemFull() && unit.isItemFull()){
-        IEquipableItem itemB = unit.removeItem(item);
-        if(itemB.equals(unit.getEquippedItem())){
-          this.setEquippedItem(null);
+    if(!unit.getItems().isEmpty()){
+      if(!this.isItemFull()){
+        if(this.getLocation().distanceTo(unit.getLocation())==1){
+          IEquipableItem itemB = unit.removeItem(item);
+          if(itemB.equals(unit.getEquippedItem())){
+            unit.setEquippedItem(null);
+          }
+          this.addItem(itemB);
         }
-        this.addItem(itemB);
       }
     }
   }

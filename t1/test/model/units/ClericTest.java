@@ -66,7 +66,5 @@ public class ClericTest extends AbstractTestUnit {
   public void sameTypeUnitAttackTest() { }
 
   @Override
-  public void archerAttackTest() {
-
-  }
+  public void archerAttackTest() { }
 }

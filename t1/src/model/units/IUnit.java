@@ -209,5 +209,7 @@ public interface IUnit {
    * @param item
    */
   void receiveItem(IUnit unit, IEquipableItem item);
+
+  void setEquippedItem(IEquipableItem item);
 }
 
