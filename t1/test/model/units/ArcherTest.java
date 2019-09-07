@@ -96,7 +96,9 @@ public class ArcherTest extends AbstractTestUnit {
   public void testCombat() { }
 
   @Override
-  public void weaknessAttackTest() { }
+  public void weaknessAttackTest() {
+
+  }
 
   @Override
   public void resistantAttackTest() { }

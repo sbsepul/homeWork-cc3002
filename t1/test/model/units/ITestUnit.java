@@ -156,24 +156,54 @@ public interface ITestUnit {
    */
   Alpaca getTargetAlpaca();
 
+  /**
+   * @return the target Alpaca to Trade
+   */
   Alpaca getTargetAlpacaTrade();
 
+  /**
+   * @return the target Archer
+   */
   Archer getTargetArcher();
 
+  /**
+   * @return the target Archer to Trade
+   */
   Archer getTargetArcherTrade();
 
+  /**
+   * @return the target Cleric
+   */
   Cleric getTargetCleric();
 
+  /**
+   * @return the target Cleric to Trade
+   */
   Cleric getTargetClericTrade();
 
+  /**
+   * @return the target Fighter
+   */
   Fighter getTargetFighter();
 
+  /**
+   * @return the target Hero
+   */
   Hero getTargetHero();
 
+  /**
+   * @return the target Sorcerer
+   */
   Sorcerer getTargetSorcerer();
 
+  /**
+   * @return the target Sorcerer to trade
+   */
   Sorcerer getTargetSorcerer_withItems();
 
+  /**
+   * @return the target SwordMaster
+   */
   SwordMaster getTargetSwordMaster();
 
   /**
@@ -190,6 +220,14 @@ public interface ITestUnit {
 
   void checkWeaknessAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
+  /**
+   * Test simulate a attack of a unit's item that is resistant to the test unit's item
+   *
+   * Ex: Hero's item is resistant to SwordMaster's item, then SwordMaster implement this method
+   *      attacking to Hero
+   * Alpaca, Archer and Cleric haven't weakness, therefore don't implement this method
+   *
+   */
   @Test
   void weaknessAttackTest();
 
@@ -207,6 +245,14 @@ public interface ITestUnit {
 
   void checkResistantAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
+  /**
+   * Test simulate a attack of a unit's item that is weak to the test unit's item
+   *
+   * Ex: Fighter's item is weak to SwordMaster's item, then Fighter implement this method
+   *      attacking to SwordMaster
+   * Alpaca, Archer and Cleric haven't resistant, therefore don't implement this method
+   *
+   */
   @Test
   void resistantAttackTest();
 
@@ -222,6 +268,11 @@ public interface ITestUnit {
    */
   void checkSameTypeUnitAttack(IUnit unit, IEquipableItem itemA, IEquipableItem itemB);
 
+  /**
+   * This simulate the attack on a unit of same type, where
+   * the attack's damage is normal
+   *
+   */
   @Test
   void sameTypeUnitAttackTest();
 
@@ -234,61 +285,62 @@ public interface ITestUnit {
   /**
    * This check simulate the attack of a remote Archer to a unit magic that can't counterattack.
    *
-   * @param itemA
+   * @param itemA is the item that can to be equipped for the test unit
    */
   void checkArcherAttackToMagic(IEquipableItem itemA);
 
   /**
+   * Check that a item is given to the test unit
    *
-   * @param unit
+   * @param unit is the unit that receive the item
    */
   void checkGiveItem(IUnit unit);
 
   @Test
   /**
-   *
+   * Test to give item to Archer
    */
   void giveToUnitArcherTest();
 
   @Test
   /**
-   *
+   * Test to give item to Cleric
    */
   void giveToUnitClericTest();
 
   @Test
   /**
-   *
+   * Test to give item to Hero
    */
   void giveToUnitHeroTest();
 
   @Test
   /**
-   *
+   * Test to give item to Fighter
    */
   void giveToUnitFighterTest();
 
   @Test
   /**
-   *
+   * Test to give item to SwordMaster
    */
   void giveToUnitSwordMasterTest();
 
   @Test
   /**
-   *
+   * Test to give item to Sorcerer
    */
   void giveToUnitSorcererTest();
 
   @Test
   /**
-   *
+   * Test to give item to Alpaca
    */
   void giveToUnitAlpacaTest();
 
   @Test
   /**
-   *
+   * Test to attack to archer
    */
   void archerAttackTest();
 

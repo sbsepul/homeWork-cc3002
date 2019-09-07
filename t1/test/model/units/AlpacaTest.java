@@ -46,7 +46,9 @@ public class AlpacaTest extends AbstractTestUnit {
   }
 
   @Override
-  public void weaknessAttackTest() { }
+  public void weaknessAttackTest() {
+    // can receive a attack of weakness of Sorcerer
+  }
 
   @Override
   public void resistantAttackTest() { }
