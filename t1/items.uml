@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model.items</OriginalElement>
+  <nodes>
+    <node x="771.6597222222222" y="958.0">model.items.Spear</node>
+    <node x="532.0" y="1234.0">model.items.magic.Soul</node>
+    <node x="505.6597222222222" y="958.0">model.items.Staff</node>
+    <node x="1303.6597222222222" y="958.0">model.items.Sword</node>
+    <node x="901.0" y="430.0">model.items.AbstractItem</node>
+    <node x="266.0" y="1234.0">model.items.magic.Darkness</node>
+    <node x="1569.6597222222222" y="958.0">model.items.Bow</node>
+    <node x="0.0" y="1234.0">model.items.magic.Light</node>
+    <node x="1037.6597222222222" y="958.0">model.items.Axe</node>
+    <node x="262.6597222222222" y="1013.0">model.items.magic.AbstractItemMagic</node>
+    <node x="619.5833333333333" y="0.0">model.items.IEquipableItem</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.items.Spear" target="model.items.AbstractItem">
+      <point x="0.0" y="-113.0" />
+      <point x="894.6597222222222" y="938.0" />
+      <point x="1018.9166666666666" y="938.0" />
+      <point x="-23.58333333333337" y="234.0" />
+    </edge>
+    <edge source="model.items.Bow" target="model.items.AbstractItem">
+      <point x="0.0" y="-113.0" />
+      <point x="1692.6597222222222" y="918.0" />
+      <point x="1160.4166666666665" y="918.0" />
+      <point x="117.91666666666652" y="234.0" />
+    </edge>
+    <edge source="model.items.magic.Soul" target="model.items.magic.AbstractItemMagic">
+      <point x="0.0" y="-69.0" />
+      <point x="655.0" y="1209.0" />
+      <point x="448.4930555555555" y="1209.0" />
+      <point x="74.33333333333331" y="58.0" />
+    </edge>
+    <edge source="model.items.Staff" target="model.items.AbstractItem">
+      <point x="0.0" y="-113.0" />
+      <point x="628.6597222222222" y="928.0" />
+      <point x="971.75" y="928.0" />
+      <point x="-70.75" y="234.0" />
+    </edge>
+    <edge source="model.items.magic.AbstractItemMagic" target="model.items.AbstractItem">
+      <point x="55.75" y="-58.0" />
+      <point x="429.9097222222222" y="918.0" />
+      <point x="924.5833333333334" y="918.0" />
+      <point x="-117.91666666666663" y="234.0" />
+    </edge>
+    <edge source="model.items.Axe" target="model.items.AbstractItem">
+      <point x="0.0" y="-113.0" />
+      <point x="1160.6597222222222" y="938.0" />
+      <point x="1066.0833333333333" y="938.0" />
+      <point x="23.583333333333258" y="234.0" />
+    </edge>
+    <edge source="model.items.magic.AbstractItemMagic" target="model.items.IEquipableItem">
+      <point x="-55.75" y="-58.0" />
+      <point x="318.4097222222222" y="405.0" />
+      <point x="681.0833333333333" y="405.0" />
+      <point x="-61.5" y="190.0" />
+    </edge>
+    <edge source="model.items.magic.Light" target="model.items.magic.AbstractItemMagic">
+      <point x="0.0" y="-69.0" />
+      <point x="123.0" y="1209.0" />
+      <point x="299.82638888888886" y="1209.0" />
+      <point x="-74.33333333333331" y="58.0" />
+    </edge>
+    <edge source="model.items.Sword" target="model.items.AbstractItem">
+      <point x="0.0" y="-113.0" />
+      <point x="1426.6597222222222" y="928.0" />
+      <point x="1113.25" y="928.0" />
+      <point x="70.75" y="234.0" />
+    </edge>
+    <edge source="model.items.AbstractItem" target="model.items.IEquipableItem">
+      <point x="0.0" y="-234.0" />
+      <point x="1042.5" y="405.0" />
+      <point x="804.0833333333333" y="405.0" />
+      <point x="61.5" y="190.0" />
+    </edge>
+    <edge source="model.items.magic.Darkness" target="model.items.magic.AbstractItemMagic">
+      <point x="0.0" y="-69.0" />
+      <point x="389.0" y="1209.0" />
+      <point x="374.1597222222222" y="1209.0" />
+      <point x="0.0" y="58.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9999999999999996" x="474.0000000000002" y="271.5000000000001" />
+  <SelectedNodes>
+    <node>model.items.IEquipableItem</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
