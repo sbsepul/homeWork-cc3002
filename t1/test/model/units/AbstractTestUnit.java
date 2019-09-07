@@ -595,7 +595,19 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(50, getTestUnit().getCurrentHitPoints());
     assertEquals(50, getTargetCleric().getCurrentHitPoints());
     getTestUnit().addItem(item);
-    item.getOwner().receiveAttack(getAxe());
+    getTestUnit().receiveAttack(getAxe()); // -20 points hp
+    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttack(getAxe());
+    assertEquals(10, getTestUnit().getCurrentHitPoints());
+    getTestUnit().equipItem(item);
+    getTestUnit().removeItem(item);
+    getTestUnit().setEquippedItem(null);
+    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveRecovery(getStaff_normal());
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
   }
 
   @Override

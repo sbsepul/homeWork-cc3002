@@ -28,6 +28,7 @@ public abstract class AbstractUnit implements IUnit{
   private final int maxItems;
   protected IEquipableItem equippedItem;
   private Location location;
+  private final double maxHitPoints;
 
   /**
    * Creates a new Unit.
@@ -45,6 +46,7 @@ public abstract class AbstractUnit implements IUnit{
    */
   protected AbstractUnit(final int hitPoints, final int movement,
       final Location location, final int maxItems, final IEquipableItem... items) {
+    this.maxHitPoints = hitPoints;
     this.currentHitPoints = hitPoints;
     this.movement = movement;
     this.maxItems = maxItems;
@@ -52,22 +54,18 @@ public abstract class AbstractUnit implements IUnit{
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
 
-
   @Override
   public void equipItem(IEquipableItem item){
-    if(items.contains(item)){
-      item.equipTo(this);
+    if(item!=null){
+      if(items.contains(item)){
+        item.equipTo(this);
+      }
     }
   }
 
   @Override
   public double getCurrentHitPoints() {
     return currentHitPoints;
-  }
-
-  @Override
-  public void setCurrentHitPoints(int hp) {
-    this.currentHitPoints = hp;
   }
 
   /**
@@ -134,6 +132,9 @@ public abstract class AbstractUnit implements IUnit{
    */
   public void receiveRecovery(IEquipableItem recovery){
     this.currentHitPoints += recovery.getPower();
+    if(this.currentHitPoints>this.maxHitPoints){
+      this.currentHitPoints = this.maxHitPoints;
+    }
   }
 
   @Override
@@ -171,11 +172,6 @@ public abstract class AbstractUnit implements IUnit{
         }
       }
     }
-  }
-
-  @Override
-  public void receiveItem(IUnit unit, IEquipableItem item){
-    unit.giveItem(this,item);
   }
 
   @Override

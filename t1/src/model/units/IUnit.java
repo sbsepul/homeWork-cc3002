@@ -151,11 +151,6 @@ public interface IUnit {
    */
   double getCurrentHitPoints();
 
-  /**
-   * @param change
-   * the hit points to be remove
-   */
-  void setCurrentHitPoints(int change);
 
   /* END HIT POINTS SECTION */
 
@@ -203,13 +198,7 @@ public interface IUnit {
    */
   void giveItem(IUnit unit, IEquipableItem item);
 
-  /**
-   * Receive a item to other
-   * @param unit
-   * @param item
-   */
-  void receiveItem(IUnit unit, IEquipableItem item);
-
   void setEquippedItem(IEquipableItem item);
+
 }
 
