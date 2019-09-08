@@ -1,7 +1,32 @@
 # Modelo
-## Detalles de implementacion
+
+## Resumen
+
+Como primera etapa del proyecto se solicita implementar las entidades que servirán de base para el juego y las interacciones posibles entre dichas entidades. Las entidades que se esperan modificar en esta etapa serán **`Units`**, **`Items`** y **`Location`**, las que presentan características y restricciones que son necesarias implementar utilizando herramientas de diseño de programación dada la dependencia que tienen entre ellas y a las interacciones que realizan entre sí.
 
 
+
+[TOC]
+
+## Introducción
+
+El modelo del proyecto se comienza con la base del [Template Alpaca](https://github.com/islaterm/cc3002-alpaca-project-template), [@autor](https://github.com/islaterm) islaterm, cuyas implementaciones de diseño debían ser modificados debido a errores y malas practicas que tenía a propósito, con la finalidad de lograr al final de esta etapa un modelo correcto, usando **`DoubleDispatch`**, `polimorfismo`, `herencia`, uso del *principio de Liskov*, entre otros. 
+
+Además, se solicita para esta etapa desarrollar **combates** entre unidades, **intercambios** de items donde cada unidad puede dar y recibir objetos, y crear una nueva unidad llamada **Sorcerer** la que posee **3 items** nuevos (Light, Darkness, Soul).
+
+En el informe se relatarán las distintas etapas para la modificación del código, los métodos creados, explicación de nuevas funcionalidades y las soluciones a problemas de diseño que se realizaron utilizando los conceptos enseñados en el curso.
+
+## Detalles de implementación
+
+### Análisis preliminar
+
+Dada la existencia de errores en el código proporcionado, se listan cada uno de ellos, como también problemas pequeños e implementaciones que faltan, para una futura modificación:
+
+* *Violación del principio de Liskov*: Cada unidad del juego tiene la caracteristica que debe portar solo un tipo de item en un comienzo, o simplemente no puede portar ningún item (esta unidad es la `alpaca`). Es por ello que, en el código proporcionado, a cada unidad se le consulta por el item que porta en el método `equipItem` usando consultas de referencia (`if objA instance of objB`). Esto rompe el principio de Liskov, pues impide que el código continúe extendiéndose.
+* *Delegación*: Se solicita que cada unidad pueda realizar ataques con cada uno de sus items, si es que lo tiene equipado. Los ataques pueden presentar debilidades, fortalezas como también no tener efecto adicional. Esto es un problema de delegación, pues cada unidad no tiene la capacidad de atacar, pues este atributo es una característica del item, si la unidad tiene item y está viva junto a su contrincante, entonces puede atacar.[se explicará después](#For-the-attack) 
+* *Maximos no fijos*: Los `HitPoints`y los `items` tienen valores máximos dependiendo de cada unidad. Es por ello que es indispensable tener una variable que reconozca esto valores máximos para poder manipularlos en un futuro.    
+*   
+* 
 
 
 
@@ -26,19 +51,19 @@ se decidió  una implementación agregando ataque como un atributo de los items,
 
 
 
-|  *Item*   | *Weak against* | *Resitant against* |
-| :-------: | :------------: | :----------------: |
-|  **Axe**  |     Sword      |       Spear        |
-| **Sword** |     Spear      |        Axe         |
-| **Spear** |      Axe       |       Sword        |
+|  *Item*   | *Weak against* | *Resistant against* |
+| :-------: | :------------: | :-----------------: |
+|  **Axe**  |     Sword      |        Spear        |
+| **Sword** |     Spear      |         Axe         |
+| **Spear** |      Axe       |        Sword        |
 
 
 
-|    *Item*    | *Weak against* | *Resitant against* |
-| :----------: | :------------: | :----------------: |
-|   **Soul**   |    Darkness    |       Light        |
-| **Darkness** |     Light      |        Soul        |
-|  **Light**   |      Soul      |      Darkness      |
+|    *Item*    | *Weak against* | *Resistant against* |
+| :----------: | :------------: | :-----------------: |
+|   **Soul**   |    Darkness    |        Light        |
+| **Darkness** |     Light      |        Soul         |
+|  **Light**   |      Soul      |      Darkness       |
 
 
 #### For the Items
@@ -144,8 +169,9 @@ hay bonus x no romper liskov (hint: interfaces)
 ## References
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
-
 - [Double Dispatch](https://sites.google.com/site/programacionhm/conceptos/multiple-dispatch) How to use the double dispatch
+- [Javadoc Tool](https://www.oracle.com/technetwork/articles/java/index-137868.html) How to write doc comments for Javadoc
+- 
 
 
 
