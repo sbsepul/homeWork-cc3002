@@ -76,7 +76,10 @@ public abstract class AbstractUnit implements IUnit{
   public void addItem(IEquipableItem item) {
     int n = items.size();
     if(n<this.maxItems){
-      this.items.add(item);
+      if(item.getOwner()==null){
+        this.items.add(item);
+        item.setOwner(this);
+      }
     }
   }
 
@@ -89,6 +92,7 @@ public abstract class AbstractUnit implements IUnit{
             if(item.equals(this.getEquippedItem())){
               this.setEquippedItem(null);
             }
+            item.setOwner(null);
             return this.items.remove(i);
           }
         }
@@ -122,8 +126,11 @@ public abstract class AbstractUnit implements IUnit{
    *
    * @param attack
    */
-  public void receiveAttackResistant(IEquipableItem attack){
-    this.currentHitPoints -= attack.getPower() - 20;
+  public void receiveAttackResistant(IEquipableItem attack) {
+    double power = attack.getPower() - 20;
+    if(power>=0){
+      this.currentHitPoints -= attack.getPower() - 20;
+    }
   }
 
   /**

@@ -44,7 +44,7 @@ public class SorcererTest extends AbstractTestUnit {
         sorcerer.equipItem(darkness);
         assertEquals(darkness, sorcerer.getEquippedItem());
         assertEquals(1, sorcerer.getItems().size());
-        sorcerer.addItem(darkness);
+        sorcerer.addItem(darkness_p);
         assertEquals(2 , sorcerer.getItems().size());
         sorcerer.equipItem(axe);
         assertEquals(darkness, sorcerer.getEquippedItem());
@@ -62,7 +62,7 @@ public class SorcererTest extends AbstractTestUnit {
         sorcerer.equipItem(light);
         assertEquals(light, sorcerer.getEquippedItem());
         assertEquals(1, sorcerer.getItems().size());
-        sorcerer.addItem(light);
+        sorcerer.addItem(light_p);
         assertEquals(2 , sorcerer.getItems().size());
         sorcerer.equipItem(axe);
         assertEquals(light, sorcerer.getEquippedItem());
@@ -80,7 +80,7 @@ public class SorcererTest extends AbstractTestUnit {
         sorcerer.equipItem(soul);
         assertEquals(soul, sorcerer.getEquippedItem());
         assertEquals(1, sorcerer.getItems().size());
-        sorcerer.addItem(soul);
+        sorcerer.addItem(soul_p);
         assertEquals(2 , sorcerer.getItems().size());
         sorcerer.equipItem(axe);
         assertEquals(soul, sorcerer.getEquippedItem());

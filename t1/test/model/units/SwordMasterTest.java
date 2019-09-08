@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class SwordMasterTest extends AbstractTestUnit {
 
   private SwordMaster swordMaster;
+  private Sword sword1;
+  private Sword sword2;
+  //private Sword sword3;
   private Sword sword_p;
 
   /**
@@ -24,6 +27,9 @@ public class SwordMasterTest extends AbstractTestUnit {
   @Override
   public void setTestUnit() {
     swordMaster = new SwordMaster(50, 2, field.getCell(0, 0));
+    sword1 = new Sword("Sword1", 20,1,2);
+    sword2 = new Sword("Sword2", 20,1,2);
+    //sword3 = new Sword("Sword3", 20,1,2);
     sword_p = new Sword("Sword_private", 20,1,2);
   }
 
@@ -45,11 +51,11 @@ public class SwordMasterTest extends AbstractTestUnit {
     swordMaster.equipItem(sword);
     assertEquals(sword, swordMaster.getEquippedItem());
     assertEquals(1, swordMaster.getItems().size());
-    swordMaster.addItem(sword);
+    swordMaster.addItem(sword1);
     assertEquals(2 , swordMaster.getItems().size());
     swordMaster.equipItem(axe);
     assertEquals(sword, swordMaster.getEquippedItem());
-    swordMaster.addItem(sword);
+    swordMaster.addItem(sword2);
     assertEquals(3 , swordMaster.getItems().size());
   }
 

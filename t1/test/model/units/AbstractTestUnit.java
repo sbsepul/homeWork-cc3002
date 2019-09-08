@@ -501,6 +501,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
     getTargetCleric().attack(getTestUnit());
     assertEquals(50,getTestUnit().getCurrentHitPoints(),EPSILON);
     assertEquals(50,getTargetCleric().getCurrentHitPoints(),EPSILON);
+    unit.removeItem(itemB);
+    getTestUnit().removeItem(itemA);
   }
 
   @Override
@@ -523,6 +525,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
     getTargetCleric().attack(unit);
     assertEquals(50,unit.getCurrentHitPoints(),EPSILON);
     assertEquals(50,getTargetCleric().getCurrentHitPoints(),EPSILON);
+    unit.removeItem(itemB);
+    getTestUnit().removeItem(itemA);
   }
 
   @Override
