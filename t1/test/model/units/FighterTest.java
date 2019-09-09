@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import model.items.Axe;
+import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -120,5 +121,10 @@ public class FighterTest extends AbstractTestUnit {
   @Override
   public void clericAttackTest() {
     checkClericAttack(axe_p);
+  }
+
+  @Override
+  public IEquipableItem getTestItem() {
+    return axe_p;
   }
 }

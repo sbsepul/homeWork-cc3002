@@ -51,8 +51,6 @@ public class Archer extends AbstractUnit {
   @Override
   public void equipItemSpear(Spear item) {  }
   @Override
-  public void equipItemOther(IEquipableItem item) {  }
-  @Override
   public void equipItemDarkness(Darkness item) { }
   @Override
   public void equipItemLight(Light item) { }

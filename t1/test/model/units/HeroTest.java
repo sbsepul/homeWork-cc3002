@@ -119,5 +119,9 @@ public class HeroTest extends AbstractTestUnit {
   public void clericAttackTest() {
     checkClericAttack(spear_p);
   }
+  @Override
+  public IEquipableItem getTestItem() {
+    return spear_p;
+  }
 
 }

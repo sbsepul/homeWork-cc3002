@@ -64,29 +64,47 @@ public class Bow extends AbstractItem {
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);
+    if(this.canAttack(attackAxe)){
+      attackAxe.receiveAttack(this);
+    }
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveAttack(attackSword);
+    if(this.canAttack(attackSword)){
+      attackSword.receiveAttack(this);
+    }
   }
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
     this.receiveAttack(attackSpears);
+    if(this.canAttack(attackSpears)){
+      attackSpears.receiveAttack(this);
+    }
   }
 
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
     this.receiveWeaknessAttack(attackDarkness);
+    if(this.canAttack(attackDarkness)){
+      attackDarkness.receiveWeaknessAttack(this);
+    }
   }
 
   @Override
   public void receiveLightAttack(Light attackLight) {
     this.receiveWeaknessAttack(attackLight);
+    if(this.canAttack(attackLight)){
+      attackLight.receiveWeaknessAttack(this);
+    }
   }
 
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
     this.receiveWeaknessAttack(attackSoul);
+    if(this.canAttack(attackSoul)){
+      attackSoul.receiveWeaknessAttack(this);
+    }
   }
 
   @Override

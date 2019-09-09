@@ -367,6 +367,9 @@ public interface ITestUnit {
   void clericAttackTest();
 
   @Test
+  void alpacaReceiveAttack();
+
+  @Test
   void receiveNormalAttackTest();
   @Test
   void receiveWeaknessAttackTest();
@@ -374,4 +377,9 @@ public interface ITestUnit {
   void receiveResistantAttackTest();
   @Test
   void receiveRecoveryAttackTest();
+
+  IEquipableItem getTestItem();
+
+
+
 }

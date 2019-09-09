@@ -18,6 +18,8 @@ import model.map.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.print.attribute.standard.MediaSize;
+
 /**
  * @author Sebastian Sepulveda
  * @since 1.0
@@ -68,7 +70,6 @@ public abstract class AbstractTestUnit implements ITestUnit {
     targetArcherTrade = new Archer(50,2,field.getCell(1,0),spear,staff);
     targetAlpacaTrade = new Alpaca(50,2,field.getCell(1,0),bow_trade,light);
   }
-
 
   /**
    * Sets up the units and weapons to be tested
@@ -310,7 +311,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   /**
    * @return the test staff normal
    */
-  private Staff getStaff_normal() { return staff_normal; }
+  public Staff getStaff_normal() { return staff_normal; }
 
   @Override
   @Test
@@ -635,12 +636,41 @@ public abstract class AbstractTestUnit implements ITestUnit {
     getTestUnit().addItem(item);
     getTestUnit().equipItem(item);
     getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().addItem(getDarkness());
+    getTargetSorcerer().addItem(getSoul());
     getTargetSorcerer().equipItem(getLight());
     assertEquals(item, getTestUnit().getEquippedItem());
     assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
     getTargetSorcerer().attack(getTestUnit());
     assertEquals(20, getTestUnit().getCurrentHitPoints());
     assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
+    //combat with darkness
+    getTestUnit().receiveRecovery(getStaff());
+    getTargetSorcerer().receiveRecovery(getStaff());
+    getTargetSorcerer().changeEquippedItem(getDarkness());
+    assertEquals(getDarkness(),getTargetSorcerer().getEquippedItem());
+    getTargetSorcerer().attack(getTestUnit());
+    assertEquals(20, getTestUnit().getCurrentHitPoints());
+    assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
+    //combat with soul
+    getTestUnit().receiveRecovery(getStaff());
+    getTargetSorcerer().receiveRecovery(getStaff());
+    getTargetSorcerer().changeEquippedItem(getSoul());
+    getTargetSorcerer().attack(getTestUnit());
+    assertEquals(20, getTestUnit().getCurrentHitPoints());
+    assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
+
+  }
+  @Test
+  @Override
+  public void alpacaReceiveAttack(){
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTestUnit().addItem(getTestItem());
+    getTestUnit().equipItem(getTestItem());
+    getTestUnit().attack(getTargetAlpaca());
+    assertEquals(30, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
   }
 
   @Test
@@ -680,4 +710,5 @@ public abstract class AbstractTestUnit implements ITestUnit {
     double hp_new = 50 - getAxe().getPower()*1.5;
     assertEquals(hp_new, getTestUnit().getCurrentHitPoints());
   }
+
 }

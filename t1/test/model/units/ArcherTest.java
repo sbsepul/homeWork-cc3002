@@ -93,7 +93,30 @@ public class ArcherTest extends AbstractTestUnit {
    */
   @Test
   @Override
-  public void testCombat() { }
+  public void testCombat() {
+    getTestUnit().addItem(bow_p);
+    getTestUnit().equipItem(bow_p);
+    getTargetFighter().addItem(getAxe());
+    getTargetFighter().equipItem(getAxe());
+    getTargetHero().addItem(getSpear());
+    getTargetHero().equipItem(getSpear());
+    getTargetSwordMaster().addItem(getSword());
+    getTargetSwordMaster().equipItem(getSword());
+    //combat Fighter
+    getTargetFighter().attack(getTestUnit());
+    assertEquals(50, getTargetFighter().getCurrentHitPoints());
+    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveRecovery(getStaff_normal());
+    //combat SwordMaster
+    getTargetSwordMaster().attack(getTestUnit());
+    assertEquals(50, getTargetSwordMaster().getCurrentHitPoints());
+    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    //combat Hero
+    getTargetHero().attack(getTestUnit());
+    assertEquals(50,getTargetHero().getCurrentHitPoints());
+    assertEquals(10,getTestUnit().getCurrentHitPoints());
+
+  }
 
   @Override
   public void weaknessAttackTest() {
@@ -122,18 +145,47 @@ public class ArcherTest extends AbstractTestUnit {
     archer.addItem(bow_p);
     archer.equipItem(bow_p);
     getTargetSorcerer().addItem(getLight());
+    getTargetSorcerer().addItem(getDarkness());
+    getTargetSorcerer().addItem(getSoul());
     getTargetSorcerer().equipItem(getLight());
     assertEquals(bow_p, archer.getEquippedItem());
     assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
+    //combat with light
     getTargetSorcerer().attack(archer);
     assertEquals(20, archer.getCurrentHitPoints());
     assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    archer.receiveRecovery(getStaff());
+    assertEquals(50, archer.getCurrentHitPoints());
+    //combat with darkness
+    getTargetSorcerer().changeEquippedItem(getDarkness());
+    getTargetSorcerer().attack(archer);
+    assertEquals(20, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    archer.receiveRecovery(getStaff());
+    assertEquals(50, archer.getCurrentHitPoints());
+    //combat with soul
+    getTargetSorcerer().changeEquippedItem(getSoul());
+    getTargetSorcerer().attack(archer);
+    assertEquals(20, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    //combat archer counterAttack to sorcerer
+    getTargetArcher().addItem(getBow());
+    getTargetArcher().equipItem(getBow());
+    assertEquals(2,getTargetArcher().getLocation().distanceTo(getTargetSorcerer().getLocation()));
+    getTargetSorcerer().attack(getTargetArcher());
+    assertEquals(20,getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(20,getTargetArcher().getCurrentHitPoints());
   }
 
   @Test
   @Override
   public void clericAttackTest() {
     checkClericAttack(bow_p);
+  }
+
+  @Override
+  public IEquipableItem getTestItem() {
+    return bow_p;
   }
 
 }

@@ -19,7 +19,7 @@ En el informe se relatarán las distintas etapas para la modificación del códi
 Dada la existencia de errores en el código proporcionado, se listan cada uno de ellos, como también problemas pequeños e implementaciones que faltan, para una futura modificación:
 
 * *Violación del principio de Liskov*: Cada unidad del juego tiene la caracteristica que debe portar solo un tipo de item en un comienzo, o simplemente no puede portar ningún item (esta unidad es la `alpaca`). Es por ello que, en el código proporcionado, a cada unidad se le consulta por el item que porta en el método `equipItem` usando consultas de referencia (`if objA instance of objB`). Esto rompe el principio de Liskov, pues impide que el código continúe extendiéndose.
-* *Delegación*: Se solicita que cada unidad pueda realizar ataques con cada uno de sus items, si es que lo tiene equipado. Los ataques pueden presentar debilidades, fortalezas como también no tener efecto adicional. Esto es un problema de delegación, dado a que unidad no tiene la capacidad de atacar, pues este atributo es una característica del item, si la unidad tiene item y está viva junto a su contrincante, entonces puede atacar. Este proceso [está descrito en For the Attack](#For-the-attack) 
+* *Delegación*: Se solicita que cada unidad pueda realizar ataques con cada uno de sus items, si es que lo tiene equipado. Los ataques pueden presentar debilidades, fortalezas como también no tener efecto adicional. Esto es un problema de delegación, dado a que unidad no tiene la capacidad de atacar, pues este atributo es una característica del `item`, si la unidad tiene equipada un `item` y está viva junto a su contrincante, entonces puede atacar. Este proceso [está descrito en Combate](#Combate) 
 * *Máximos no fijos*: Los `HitPoints`y los `items` tienen valores máximos dependiendo de cada unidad. Es por ello que es indispensable tener variables que sean inicializadas en el constructor, que puedan guardar estos valores máximos para poder manipularlos en un futuro.
 
 ### Desarrollo de funcionalidades
@@ -85,20 +85,40 @@ Se consideraron los siguientes supuestos en equipar los items a una unidad:
 
 1. Una unidad del tipo `IUnit` puede equipar un tipo`IEquipableitem` según las restricciones del problema. Si el `item` no existe, entonces simplemente no se equipa. Esto se realiza implementando en cada unidad `equipItemOther`, el cual no realiza nada.
 2. Una unidad no puede equiparse de más de 1 `item`, ni tampoco puede portar un `item` que ya posee una unidad. 
+3. En el caso de la `alpaca`, la cual no puede equiparse un `item`, los métodos `equipItem<nom>` se dejan con un cuerpo vacío. 
+
+##### Nuevos métodos
+
+* Se crea el método `equals` para verificar cuando un `IEquipableitem` es igual a otro `IEquipableitem`.
+* Se crea método `isItemFull`: retorna `true` si el inventario está lleno
 
 #### Combate
 
 ##### Ataque en items
 
-Los `item` van a tener la capacidad de atacar, no así las unidades que son las que reciben el daño del ataque efectuado por el arma. De esta manera se logra una independencia entre la arma que porta cada unidad y el ataque que genera. Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene arma **no debería poder atacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar
+Los `item` van a tener la capacidad de atacar, no así las unidades que son las que reciben el daño del ataque efectuado por el `item`. De esta manera se logra una independencia entre la arma que porta cada unidad y el ataque que genera. 
 
-Una unidad puede utilizar el objeto que tiene equipado sobre otra siempre y cuando la otra unidad se encuentre dentro del rango definido por el item. Cuando esto sucede se entra en un combate.
+Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene arma **no debería poder contraatacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar.
 
+Un `unit` puede utilizar el objeto que tiene equipado sobre otra siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item`. Cuando esto sucede se entra en un combate.
 
+##### Recibir ataques
 
 Cuando se combate, la unidad que lo inició utiliza su objeto sobre la otra, y en caso que utilizar el objeto
-resulte en un ataque y que la unidad que recibió el ataque pueda atacar, entonces realizará un contrataque. Si
-en cualquier momento del combate una de las unidades participantes es derrotada, el combate finaliza.
+resulte en un ataque y que la unidad que recibió el ataque pueda atacar, entonces realizará un contrataque. Esto presenta restricciones dependiendo de la unidad que recibe el ataque. 
+
+Para una mayor claridad del proceso, se asumirá en adelante que 
+
+
+
+Si en cualquier momento del combate una de las unidades participantes es derrotada, el combate finaliza.
+
+
+
+
+
+
+
 Para esto se necesita poder diferenciar entre 2 tipos de objetos:
 
 los tipos ataque normal
@@ -223,6 +243,12 @@ caso borde:
 
 * Implementar un dd en units, dependiendo del ataque que recibe se va a cierta arma y bla.. así la recuperación deberia poder recibirse de un item staff y no de otro.
 * Completar algunos test que faltan
+
+
+
+Readme: Debe hacer un readme especificando los detalles de su implementación, los supuestos que realice y una breve explicación de cómo ejecutar el programa. Adicionalmente se le solicita dar una
+explicación general de la estructura que decidió utilizar, los patrones de dise˜ no y la razón por la cual
+los utiliza.
 
 
 

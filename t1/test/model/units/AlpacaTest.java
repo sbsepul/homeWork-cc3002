@@ -78,4 +78,85 @@ public class AlpacaTest extends AbstractTestUnit {
   @Override
   public void clericAttackTest() { }
 
+  @Override
+  public IEquipableItem getTestItem() {
+    return null;
+  }
+
+  @Test
+  public void equipItemBow(){
+    getTestUnit().addItem(getBow());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemBow(getBow());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+  @Test
+  public void equipItemAxe(){
+    getTestUnit().addItem(getAxe());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemAxe(getAxe());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+  @Test
+  public void equipItemLight(){
+    getTestUnit().addItem(getLight());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemLight(getLight());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+  @Test
+  public void equipItemDarkness(){
+    getTestUnit().addItem(getDarkness());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemDarkness(getDarkness());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+  @Test
+  public void equipItemSoul(){
+    getTestUnit().addItem(getSoul());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemSoul(getSoul());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+  @Test
+  public void equipItemSword(){
+    getTestUnit().addItem(getSword());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemSword(getSword());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+
+  @Test
+  public void equipItemStaff(){
+    getTestUnit().addItem(getStaff());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemStaff(getStaff());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+
+  @Test
+  public void equipItemSpear(){
+    getTestUnit().addItem(getSpear());
+    assertEquals(1,getTestUnit().getItems().size());
+    assertNull(getTestUnit().getEquippedItem());
+    getTestUnit().equipItemSpear(getSpear());
+    assertNull(getTestUnit().getEquippedItem());
+  }
+
+  @Test
+  @Override
+  public void alpacaReceiveAttack() {
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    getTestUnit().attack(getTargetAlpaca());
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+  }
 }

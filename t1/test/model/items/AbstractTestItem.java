@@ -164,6 +164,7 @@ public abstract class AbstractTestItem {
 
   @Test
   public void canAttackTest(){
+    assertEquals(false, getTestItem().canAttack(getTestItem()));
     assertNull(getTestItem().getOwner());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
@@ -176,4 +177,5 @@ public abstract class AbstractTestItem {
    * @return a unit that can equip the item being tested
    */
   public abstract IUnit getTestUnit();
+
 }

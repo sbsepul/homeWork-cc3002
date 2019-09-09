@@ -32,11 +32,6 @@ public interface IUnit {
    */
   void equipItem(IEquipableItem item);
 
-  /**
-   * @param item
-   * Anything item that isn't in the list
-   */
-  void equipItemOther(IEquipableItem item);
 
   /**
    *
@@ -198,7 +193,17 @@ public interface IUnit {
    */
   void giveItem(IUnit unit, IEquipableItem item);
 
+  /**
+   *
+   * @param item
+   */
   void setEquippedItem(IEquipableItem item);
+
+  /**
+   * change the item equipped in the unit if this have,
+   * for other item in the inventory
+   */
+  void changeEquippedItem(IEquipableItem item);
 
 }
 

@@ -31,7 +31,7 @@ public class Axe extends AbstractItem {
     super(name, power, minRange, maxRange);
   }
 
-    @Override
+  @Override
     public void equipTo(IUnit unit) {
       unit.equipItemAxe(this);
       this.setOwner(unit);

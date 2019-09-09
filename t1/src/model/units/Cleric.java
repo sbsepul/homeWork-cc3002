@@ -42,8 +42,6 @@ public class Cleric extends AbstractUnit {
   @Override
   public void equipItemSword(Sword item) {  }
   @Override
-  public void equipItemOther(IEquipableItem item){ }
-  @Override
   public void equipItemDarkness(Darkness item) { }
   @Override
   public void equipItemLight(Light item) { }

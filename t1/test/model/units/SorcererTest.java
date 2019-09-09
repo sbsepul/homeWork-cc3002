@@ -159,7 +159,43 @@ public class SorcererTest extends AbstractTestUnit {
     }
 
     @Override
-    public void sorcererAttackTest() { }
+    public void sorcererAttackTest() {
+    }
+
+    @Test
+    public void sorcererLightReceiveAttackTest(){
+        getTestUnit().addItem(light_p);
+        getTestUnit().equipItem(light_p);
+        getTargetFighter().addItem(getAxe());
+        getTargetFighter().equipItem(getAxe());
+        getTargetFighter().attack(getTestUnit());
+        assertEquals(20, getTestUnit().getCurrentHitPoints());
+        assertEquals(20,getTargetFighter().getCurrentHitPoints());
+    }
+
+    @Test
+    public void sorcererDarknessReceiveAttackTest(){
+        getTestUnit().addItem(darkness_p);
+        getTestUnit().equipItem(darkness_p);
+        getTargetSwordMaster().addItem(getSword());
+        getTargetSwordMaster().equipItem(getSword());
+        getTargetSwordMaster().attack(getTestUnit());
+        assertEquals(20, getTestUnit().getCurrentHitPoints());
+        assertEquals(20,getTargetSwordMaster().getCurrentHitPoints());
+    }
+
+    @Test
+    public void sorcererSoulReceiveAttackTest(){
+        getTestUnit().addItem(soul_p);
+        getTestUnit().equipItem(soul_p);
+        getTargetHero().addItem(getSpear());
+        getTargetHero().equipItem(getSpear());
+        getTargetHero().attack(getTestUnit());
+        assertEquals(20, getTestUnit().getCurrentHitPoints());
+        assertEquals(20,getTargetHero().getCurrentHitPoints());
+        getTestUnit().receiveRecovery(getStaff());
+        assertEquals(50, getTestUnit().getCurrentHitPoints());
+    }
 
     @Test
     @Override
@@ -167,6 +203,11 @@ public class SorcererTest extends AbstractTestUnit {
         checkClericAttack(light);
         checkClericAttack(darkness);
         checkClericAttack(soul);
+    }
+
+    @Override
+    public IEquipableItem getTestItem() {
+        return light_p;
     }
 
 

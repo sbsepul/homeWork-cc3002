@@ -126,5 +126,9 @@ public class SwordMasterTest extends AbstractTestUnit {
     checkClericAttack(sword_p);
   }
 
+  @Override
+  public IEquipableItem getTestItem() {
+    return sword_p;
+  }
 
 }

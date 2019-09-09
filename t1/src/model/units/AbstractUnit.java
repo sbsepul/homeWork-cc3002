@@ -76,9 +76,11 @@ public abstract class AbstractUnit implements IUnit{
   public void addItem(IEquipableItem item) {
     int n = items.size();
     if(n<this.maxItems){
-      if(item.getOwner()==null){
-        this.items.add(item);
-        item.setOwner(this);
+      if(item!=null){
+        if(item.getOwner()==null){
+          this.items.add(item);
+          item.setOwner(this);
+        }
       }
     }
   }
@@ -106,10 +108,18 @@ public abstract class AbstractUnit implements IUnit{
     return this.maxItems==items.size();
   }
 
+  @Override
+  public void changeEquippedItem(IEquipableItem item) {
+    if(this.getItems().contains(item)){
+      this.setEquippedItem(item);
+    }
+  }
+
   /**
    * Reduce hp in unit that receive a attack
    * @param attack
    */
+  @Override
   public void receiveAttack(IEquipableItem attack){
     this.currentHitPoints -= attack.getPower();
   }
@@ -118,6 +128,7 @@ public abstract class AbstractUnit implements IUnit{
    *
    * @param attack
    */
+  @Override
   public void receiveAttackWeakness(IEquipableItem attack){
     this.currentHitPoints -= (int) (attack.getPower() *1.5);
   }
@@ -126,6 +137,7 @@ public abstract class AbstractUnit implements IUnit{
    *
    * @param attack
    */
+  @Override
   public void receiveAttackResistant(IEquipableItem attack) {
     double power = attack.getPower() - 20;
     if(power>=0){
@@ -137,6 +149,7 @@ public abstract class AbstractUnit implements IUnit{
    * Increase hp in unit that receive a attack
    * @param recovery
    */
+  @Override
   public void receiveRecovery(IEquipableItem recovery){
     this.currentHitPoints += recovery.getPower();
     if(this.currentHitPoints>this.maxHitPoints){

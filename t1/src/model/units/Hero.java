@@ -39,8 +39,6 @@ public class Hero extends AbstractUnit {
     equippedItem = item;
   }
   @Override
-  public void equipItemOther(IEquipableItem item) { }
-  @Override
   public void equipItemDarkness(Darkness item) {  }
   @Override
   public void equipItemLight(Light item) {  }

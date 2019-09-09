@@ -48,8 +48,6 @@ public class Sorcerer extends AbstractUnit{
     public void equipItemStaff(Staff item) {}
     @Override
     public void equipItemSpear(Spear item) {}
-    @Override
-    public void equipItemOther(IEquipableItem item) { }
 
     @Override
     public void attack(IUnit enemy) {
