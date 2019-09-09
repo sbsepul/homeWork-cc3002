@@ -64,6 +64,12 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
+  public boolean initCombat(IUnit unitEnemy) {
+    return this.getCurrentHitPoints()>0 && unitEnemy.getCurrentHitPoints()>0
+            && this.getEquippedItem()!=null && this.isInRange(unitEnemy);
+  }
+
+  @Override
   public double getCurrentHitPoints() {
     return currentHitPoints;
   }

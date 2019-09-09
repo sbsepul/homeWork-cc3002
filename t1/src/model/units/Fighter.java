@@ -40,20 +40,13 @@ public class Fighter extends AbstractUnit {
   public void equipItemLight(Light item) { }
   @Override
   public void equipItemSoul(Soul item) { }
-
   @Override
   public void attack(IUnit enemy) {
-    if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
-      if (this.getEquippedItem() != null) {
-        if(this.isInRange(enemy)){
-          if(enemy.getEquippedItem()!=null){
-            enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
-          }
-          else enemy.receiveAttack(this.getEquippedItem());
-          }
-        }
-      // this unit haven't army
+    if (this.initCombat(enemy)){
+      if(enemy.getEquippedItem()!=null){
+        enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
+      }
+      else enemy.receiveAttack(this.getEquippedItem());
     }
-    // this unit or enemy rip
   }
 }

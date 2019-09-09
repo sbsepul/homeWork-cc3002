@@ -51,23 +51,9 @@ public class Sorcerer extends AbstractUnit{
 
     @Override
     public void attack(IUnit enemy) {
-        if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0) {
-            if (this.getEquippedItem() != null) {
-                if(this.isInRange(enemy)){
-                    if(enemy.getEquippedItem()!=null){
-                        this.getEquippedItem().magicAttack(enemy.getEquippedItem());
-                        // en esta seccion hay que hacer un double dispatch que permita
-                        // saber al contrincante qué tipo de ataque va a recibir.
-                        // si este es mago o no  puede ser el DD
-                    }
-                    else{
-                        enemy.receiveAttack(this.getEquippedItem());
-                    }
-                }
-                // this unit isn't in the range
-            }
-            // this unit haven't army
+        if (this.initCombat(enemy)){
+            if(enemy.getEquippedItem()!=null) this.getEquippedItem().magicAttack(enemy.getEquippedItem());
+            else enemy.receiveAttack(this.getEquippedItem());
         }
-        // this unit or enemy rip
     }
 }

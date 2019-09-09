@@ -54,17 +54,6 @@ public class Cleric extends AbstractUnit {
 
   //cleric can't attack, but can recovery a unit
   public void attack(IUnit enemy){
-    if (this.getCurrentHitPoints()>0 && enemy.getCurrentHitPoints()>0){
-      if(this.getEquippedItem()!=null){
-        if(this.isInRange(enemy)){
-          enemy.receiveRecovery(this.getEquippedItem());
-        }
-        // this unit isn't in range
-      }
-      // this unit haven't army
-    }
-    else{
-      // this unit or enemy rip
-    }
+    if (this.initCombat(enemy)) enemy.receiveRecovery(this.getEquippedItem());
   }
 }

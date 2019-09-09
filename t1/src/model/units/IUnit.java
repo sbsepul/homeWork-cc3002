@@ -205,5 +205,12 @@ public interface IUnit {
    */
   void changeEquippedItem(IEquipableItem item);
 
+  /**
+   *
+   * @param unitEnemy
+   * @return
+   */
+  boolean initCombat(IUnit unitEnemy);
+
 }
 

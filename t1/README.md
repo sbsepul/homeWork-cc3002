@@ -63,7 +63,6 @@ Los llamados que se realizan con el `DoubleDispatch` se resumirá tomando de eje
     unit.equipItemBow(this);
     this.setOwner(unit);
   }
-
 ```
 
 Donde `setOwner` es un método nuevo que se tuvo que implementar para que el `item` que se espera equipar tenga como nuevo parámetro a la unidad a la que se le equipa.
@@ -100,36 +99,18 @@ Los `item` van a tener la capacidad de atacar, no así las unidades que son las 
 
 Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene arma **no debería poder contraatacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar.
 
-Un `unit` puede utilizar el objeto que tiene equipado sobre otra siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item`. Cuando esto sucede se entra en un combate.
+Un `unit A` puede utilizar el objeto que tiene equipado sobre otra `unit B` siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item A` y *ambas unidades estén vivas*. Cuando esto sucede se entra en un combate.
 
 ##### Recibir ataques
 
-Cuando se combate, la unidad que lo inició utiliza su objeto sobre la otra, y en caso que utilizar el objeto
-resulte en un ataque y que la unidad que recibió el ataque pueda atacar, entonces realizará un contrataque. Esto presenta restricciones dependiendo de la unidad que recibe el ataque. 
+El ataque y contraataque varia según el tipo de unidad. Para una mayor compresión del procedimiento de ataque y contrataque, se resumen primero las características de cada unidad y los supuestos hechos:
 
-Para una mayor claridad del proceso, se asumirá en adelante que 
+- Alpaca: No ataca. **Recibe ataque normal** de toda `unit`. 
+- Archer (item `Bow`): Ataca y recibe ataque si ambos `item` están en rango. No ataca ni contrataca si su enemigo es vecino de él. No recibe ataque si el otro `item` no lo puede atacar (no está en rango).
+- Cleric (item `Staff`): Su ataque es **recuperar**. No realiza ni recibe contraataque.
+- Para las otras unidades, se resumen las características de los `item` en las siguientes tablas:
 
-
-
-Si en cualquier momento del combate una de las unidades participantes es derrotada, el combate finaliza.
-
-
-
-
-
-
-
-Para esto se necesita poder diferenciar entre 2 tipos de objetos:
-
-los tipos ataque normal
-
-los ataque magicos
-
-
-
-se decidió  una implementación agregando ataque como un atributo de los items, pues los items son los elementos debiles contra otros, mientras que las unidades solamente tienen la capacidad de equiparse con ellos, no así de tener el poder de ellos
-
-
+**Tipos ataque normal**: Fighter (Axe), SwordMaster (Sword), Hero (Spear)
 
 |  *Item*   | *Weak against* | *Resistant against* |
 | :-------: | :------------: | :-----------------: |
@@ -137,13 +118,29 @@ se decidió  una implementación agregando ataque como un atributo de los items,
 | **Sword** |     Spear      |         Axe         |
 | **Spear** |      Axe       |        Sword        |
 
+*Atacan normal* a Alpaca, Archer, Cleric.
 
+**Tipos ataque mágicos**: Sorcerer (Light - Darkness - Soul)
 
 |    *Item*    | *Weak against* | *Resistant against* |
 | :----------: | :------------: | :-----------------: |
 |   **Soul**   |    Darkness    |        Light        |
 | **Darkness** |     Light      |        Soul         |
 |  **Light**   |      Soul      |      Darkness       |
+
+*Reciben y atacan con efecto de debilidad* a Unidades normales. Alpaca recibe ataque normal, pues no tiene `item` equipado
+
+
+
+Al momento de iniciarse un ataque por `unit A`, se debe verificar que la unidad a la cual se ataca **tiene algún `item` equipado**, en caso de no tenerlo **recibe un ataque normal**, el cual solamente descuenta `HitPoints` según el daño, sin modificación, que realiza el `item A`. Si la unidad que recibió el ataque **tiene `item` equipado**, primero recibirá el ataque y luego realizará un contrataque. 
+
+Como se mencionó anteriormente, el `item` es el que realiza el daño y el ataque en sí, por tanto, se implementa `receive<Item>Attack(IEquipableItem itemEnemy)` a cada `item` para que reciba el ataque según el `itemEnemy` que lo recibe como parámetro. De esta manera, `unit A` delega el trabajo de atacar al `item A` que tiene equipado y se realiza lo mismo con`unit B`, haciendo que el `item B` que tiene equipado sea quien reciba el ataque. De esta manera es más simple hacer un `DoubleDispatch` para los ataques recibidos
+
+<code>
+
+`item B` al recibir el ataque, deriva el daño a `unit B` según el `item A` que lo atacó. Suponiendo que `unit B` puede seguir atacando, y recibe un daño, según [las tablas anteriores](#Recibir-ataques) `item B` puede realizar distintos tipos de ataques sobre la unidad. 
+
+
 
 
 
