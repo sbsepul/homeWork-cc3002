@@ -106,15 +106,27 @@ public class ArcherTest extends AbstractTestUnit {
     getTargetFighter().attack(getTestUnit());
     assertEquals(50, getTargetFighter().getCurrentHitPoints());
     assertEquals(30,getTestUnit().getCurrentHitPoints());
+    getTargetArcher().addItem(getBow());
+    getTargetArcher().equipItem(getBow());
+    getTargetFighter().attack(getTargetArcher());
+    assertEquals(30, getTargetFighter().getCurrentHitPoints());
+    assertEquals(30,getTargetArcher().getCurrentHitPoints());
     getTestUnit().receiveRecovery(getStaff_normal());
     //combat SwordMaster
     getTargetSwordMaster().attack(getTestUnit());
     assertEquals(50, getTargetSwordMaster().getCurrentHitPoints());
     assertEquals(30,getTestUnit().getCurrentHitPoints());
+    getTargetSwordMaster().attack(getTargetArcher());
+    assertEquals(30, getTargetSwordMaster().getCurrentHitPoints());
+    assertEquals(10,getTargetArcher().getCurrentHitPoints());
     //combat Hero
+    getTargetArcher().receiveRecovery(getStaff_normal());
     getTargetHero().attack(getTestUnit());
     assertEquals(50,getTargetHero().getCurrentHitPoints());
     assertEquals(10,getTestUnit().getCurrentHitPoints());
+    getTargetHero().attack(getTargetArcher());
+    assertEquals(30, getTargetHero().getCurrentHitPoints());
+    assertEquals(10,getTargetArcher().getCurrentHitPoints());
 
   }
 
@@ -154,27 +166,50 @@ public class ArcherTest extends AbstractTestUnit {
     getTargetSorcerer().attack(archer);
     assertEquals(20, archer.getCurrentHitPoints());
     assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    getTargetArcher().addItem(getBow());
+    getTargetArcher().equipItem(getBow());
+    getTargetSorcerer().attack(getTargetArcher());
+    assertEquals(20,getTargetArcher().getCurrentHitPoints());
+    assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
     archer.receiveRecovery(getStaff());
+    getTargetSorcerer().receiveRecovery(getStaff());
+    getTargetArcher().receiveRecovery(getStaff());
     assertEquals(50, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
     //combat with darkness
     getTargetSorcerer().changeEquippedItem(getDarkness());
     getTargetSorcerer().attack(archer);
     assertEquals(20, archer.getCurrentHitPoints());
     assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    // with target archer
+    getTargetSorcerer().attack(getTargetArcher());
+    assertEquals(20,getTargetArcher().getCurrentHitPoints());
+    assertEquals(20, getTargetSorcerer().getCurrentHitPoints());
     archer.receiveRecovery(getStaff());
+    getTargetSorcerer().receiveRecovery(getStaff());
+    getTargetArcher().receiveRecovery(getStaff());
     assertEquals(50, archer.getCurrentHitPoints());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
     //combat with soul
     getTargetSorcerer().changeEquippedItem(getSoul());
     getTargetSorcerer().attack(archer);
     assertEquals(20, archer.getCurrentHitPoints());
     assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
     //combat archer counterAttack to sorcerer
-    getTargetArcher().addItem(getBow());
-    getTargetArcher().equipItem(getBow());
     assertEquals(2,getTargetArcher().getLocation().distanceTo(getTargetSorcerer().getLocation()));
     getTargetSorcerer().attack(getTargetArcher());
     assertEquals(20,getTargetSorcerer().getCurrentHitPoints());
     assertEquals(20,getTargetArcher().getCurrentHitPoints());
+    getTargetSorcerer().receiveRecovery(getStaff());
+    getTargetArcher().receiveRecovery(getStaff());
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints());
+    getTargetArcher().attack(getTargetSorcerer());
+    assertEquals(20,getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(20,getTargetArcher().getCurrentHitPoints());
+
   }
 
   @Test

@@ -49,14 +49,10 @@ public class Fighter extends AbstractUnit {
           if(enemy.getEquippedItem()!=null){
             enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
           }
-          else{
-            enemy.receiveAttack(this.getEquippedItem());
+          else enemy.receiveAttack(this.getEquippedItem());
           }
         }
-        // this unit isn't in the range
-      }
       // this unit haven't army
-      else enemy.receiveAttack(this.getEquippedItem());
     }
     // this unit or enemy rip
   }

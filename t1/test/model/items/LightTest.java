@@ -53,4 +53,6 @@ public class LightTest extends AbstractTestItem {
         return sorcerer;
     }
 
+    @Override
+    public void magicAttackTest() { }
 }

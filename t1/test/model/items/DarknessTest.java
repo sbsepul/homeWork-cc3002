@@ -53,4 +53,6 @@ public class DarknessTest extends AbstractTestItem {
         return sorcerer;
     }
 
+    @Override
+    public void magicAttackTest() { }
 }

@@ -1,12 +1,9 @@
 package model.map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Sebastian Sepulveda
@@ -90,6 +87,13 @@ class LocationTest {
     locationA0.addNeighbour(locationB0);
     locationA0.addNeighbour(locationA1);
     assertEquals(2, locationA0.getNeighbours().size());
+  }
+
+  @Test
+  public void testInvalidLocation(){
+    Location wrongLocation = new InvalidLocation();
+    wrongLocation.addNeighbour(locationA0);
+    assertEquals(0,wrongLocation.getNeighbours().size());
   }
 
   /**

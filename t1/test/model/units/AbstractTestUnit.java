@@ -166,6 +166,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void checkGiveItem(IUnit unit) {
     assertNull(getTestUnit().getEquippedItem());
     assertEquals(0, getTestUnit().getItems().size());
+    assertNull(getTestUnit().removeItem(getBow()));
     getTestUnit().giveItem(unit, getBow());
     assertEquals(2, unit.getItems().size());
     assertEquals(false, unit.getItems().contains(getBow()));

@@ -52,5 +52,6 @@ public class SoulTest extends AbstractTestItem {
         return sorcerer;
     }
 
-
+    @Override
+    public void magicAttackTest() { }
 }
