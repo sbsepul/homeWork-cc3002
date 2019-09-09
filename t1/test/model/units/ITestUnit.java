@@ -32,7 +32,7 @@ public interface ITestUnit {
   void setTestUnit();
 
   /**
-   *
+   * Set up the units that will be used for test with others units
    */
   void setTargets();
 
@@ -366,18 +366,39 @@ public interface ITestUnit {
    */
   void clericAttackTest();
 
+  /**
+   * Test alpaca receive a attack of each unit
+   */
   @Test
   void alpacaReceiveAttack();
 
+  /**
+   * Test when a unit receive a attack normal
+   */
   @Test
   void receiveNormalAttackTest();
+
+  /**
+   * Test for attack resistant to unit
+   */
   @Test
   void receiveWeaknessAttackTest();
+
+  /**
+   * Test for attack weak to unit
+   */
   @Test
   void receiveResistantAttackTest();
+
+  /**
+   * Test for attack that recovery to unit
+   */
   @Test
   void receiveRecoveryAttackTest();
 
+  /**
+   * @return unit test's item
+   */
   IEquipableItem getTestItem();
 
 

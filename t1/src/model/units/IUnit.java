@@ -36,53 +36,55 @@ public interface IUnit {
   /**
    *
    * @param item
-   * to equip a Darkness, item magic
+   * to equip a Darkness to Sorcerer, item magic
    */
   void equipItemDarkness(Darkness item);
 
   /**
    *
    * @param item
-   * to equip a Light, item magic
+   * to equip a Light to Sorcerer, item magic
    */
   void equipItemLight(Light item);
 
   /**
    *
    * @param item
-   * to equip a Soul, item magic
+   * to equip a Soul to Sorcerer, item magic
    */
   void equipItemSoul(Soul item);
 
   /**
-   * @param item the item to equip
+   * @param item
+   * to equip a Bow to Archer
    */
   void equipItemBow(Bow item);
 
   /**
    *
    * @param item
-   * to equip Axe
+   * to equip Axe to Fighter
    */
   void equipItemAxe(Axe item);
   /**
    *
    * @param item
-   * to equip Sword
+   * to equip Sword to SwordMaster
    */
   void equipItemSword(Sword item);
   /**
    *
    * @param item
-   * to equip Staff
+   * to equip Staff to Cleric
    */
   void equipItemStaff(Staff item);
   /**
    *
    * @param item
-   * to equip Spear
+   * to equip Spear to Hero
    */
   void equipItemSpear(Spear item);
+
   /**
    * @return the items carried by this unit
    */
@@ -94,8 +96,7 @@ public interface IUnit {
   IEquipableItem getEquippedItem();
 
   /**
-   *
-   * @return
+   * @return true if the inventory of items is full, false otherwise.
    */
   boolean isItemFull();
 
@@ -151,36 +152,40 @@ public interface IUnit {
 
   /* BEGIN COMBAT SECTION */
 
+  /**
+   * Is necessary for that a unit attack on other
+   * @param unit is the enemy
+   */
   void attack(IUnit unit);
 
   /**
-   * A unit can receive a Attack normal
-   * @param attack
+   * A unit receive a Normal Attack, without modify damage
+   * @param attack normal that receive this unit
    */
   void receiveAttack(IEquipableItem attack);
 
   /**
    * A unit receive a Attack that seriously affect it
-   * @param attack
+   * @param attack's damage increase x1.5
    */
   void receiveAttackWeakness(IEquipableItem attack);
 
   /**
    * A unit receive a Attack that not affect it too much.
-   * @param attack
+   * @param attack's damage reduce 20 points
    */
   void receiveAttackResistant(IEquipableItem attack);
 
   /**
    * A unit receive a Attack that recovers it
-   * @param attack
+   * @param attack's damage increase the unit's hp that is attacked
    */
   void receiveRecovery(IEquipableItem attack);
 
   /**
    * Determine if the unit enemy is in the range of army's unit that attack
-   * @param unit
-   * @return
+   * @param unit is the enemy
+   * @return true if the enemy is between MinRange and MaxRange, false otherwise
    */
   boolean isInRange(IUnit unit);
 
@@ -188,27 +193,31 @@ public interface IUnit {
 
   /**
    * Give a item to other
-   * @param unit
-   * @param item
+   * @param unit who receive the item
+   * @param item what is given
    */
   void giveItem(IUnit unit, IEquipableItem item);
 
   /**
-   *
-   * @param item
+   * set a item equipped for any other
+   * @param item new that will be equipped
    */
   void setEquippedItem(IEquipableItem item);
 
   /**
    * change the item equipped in the unit if this have,
    * for other item in the inventory
+   * @param item new that will be equipped
    */
   void changeEquippedItem(IEquipableItem item);
 
   /**
-   *
-   * @param unitEnemy
-   * @return
+   * A combat init when
+   *      the two units is life
+   *      this unit have a item equipped
+   *      the enemy is in the equippedItem's range
+   * @param unitEnemy that will be attacked
+   * @return true if this unit can attack, false otherwise
    */
   boolean initCombat(IUnit unitEnemy);
 

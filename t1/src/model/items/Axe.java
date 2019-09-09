@@ -48,7 +48,6 @@ public class Axe extends AbstractItem {
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
     this.receiveWeaknessAttack(attackSword);
-    //if this owner is life yet
     if(this.canAttack(attackSword)){
       if(attackSword.getOwner().getCurrentHitPoints()>0){
         attackSword.getOwner().receiveAttackResistant(this);
@@ -68,7 +67,6 @@ public class Axe extends AbstractItem {
 
   @Override
   public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
-
 
   @Override
   public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }

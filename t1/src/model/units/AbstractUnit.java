@@ -121,28 +121,16 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
-  /**
-   * Reduce hp in unit that receive a attack
-   * @param attack
-   */
   @Override
   public void receiveAttack(IEquipableItem attack){
     this.currentHitPoints -= attack.getPower();
   }
 
-  /**
-   *
-   * @param attack
-   */
   @Override
   public void receiveAttackWeakness(IEquipableItem attack){
     this.currentHitPoints -= (int) (attack.getPower() *1.5);
   }
 
-  /**
-   *
-   * @param attack
-   */
   @Override
   public void receiveAttackResistant(IEquipableItem attack) {
     double power = attack.getPower() - 20;
@@ -151,10 +139,6 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
-  /**
-   * Increase hp in unit that receive a attack
-   * @param recovery
-   */
   @Override
   public void receiveRecovery(IEquipableItem recovery){
     this.currentHitPoints += recovery.getPower();
@@ -182,10 +166,7 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public IEquipableItem getEquippedItem() { return equippedItem; }
 
-  /**
-   * Change the equippedItem for a item new
-   * @param item
-   */
+  @Override
   public void setEquippedItem(IEquipableItem item) { this.equippedItem = item;  }
 
   @Override

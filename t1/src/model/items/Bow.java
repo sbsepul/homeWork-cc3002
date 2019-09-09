@@ -41,11 +41,6 @@ public class Bow extends AbstractItem {
     this.setOwner(unit);
   }
 
-
-  /**
-   * Receive a Bow attack if the other unit not is Neighbour (2 spaces, review)
-   * @param attackBow
-   */
   @Override
   public void receiveBowAttack(Bow attackBow) {
     this.receiveAttack(attackBow);
@@ -57,10 +52,6 @@ public class Bow extends AbstractItem {
     else; //can't attack
   }
 
-  /**
-   * if the attacker is Neighbour, then receive attack
-   * @param attackAxe
-   */
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
     this.receiveAttack(attackAxe);

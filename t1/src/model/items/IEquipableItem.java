@@ -66,49 +66,51 @@ public interface IEquipableItem {
 
   /**
    *
-   * @param attackBow is the type of damage received when a Archer attack
+   * @param attackBow is the type of damage received for a Bow
    */
   void receiveBowAttack(Bow attackBow);
 
   /**
    *
-   * @param attackAxe is the type of damage received when a Fighter attack
+   * @param attackAxe is the type of damage received for a Axe
    */
   void receiveAxeAttack(Axe attackAxe);
 
   /**
    *
-   * @param attackSword is the type of damage received when a SwordMaster attack
+   * @param attackSword is the type of damage received for a Sword
    */
   void receiveSwordsAttack(Sword attackSword);
 
   /**
    *
-   * @param attackSpears is the type of damage received when a Hero attack
+   * @param attackSpears is the type of damage received for a Spear
    */
   void receiveSpearsAttack(Spear attackSpears);
 
   /**
    *
-   * @param attackDarkness
+   * @param attackDarkness is the type of damage received for a Darkness
    */
   void receiveDarknessAttack(Darkness attackDarkness);
 
   /**
    *
-   * @param attackLight
+   * @param attackLight is the type of damage received for a Light
    */
   void receiveLightAttack(Light attackLight);
 
   /**
    *
-   * @param attackSoul
+   * @param attackSoul is the type of damage received for a Soul
    */
   void receiveSoulAttack(Soul attackSoul);
 
   /**
    * Attack special to items magics
-   * @param enemyAttack
+   * if the item is not magic, does not apply
+   *
+   * @param enemyAttack is the enemy's item
    */
   void magicAttack(IEquipableItem enemyAttack);
   /* END COMBAT SECTION */
