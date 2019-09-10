@@ -110,7 +110,7 @@ El ataque y contraataque varia según el tipo de unidad. Para una mayor compresi
 
 - Alpaca: No ataca. **Recibe ataque normal** de toda `unit`. 
 - Archer (item `Bow`): Ataca y recibe ataque si ambos `item` están en rango. No ataca ni contrataca si su enemigo es vecino de él. No recibe ataque si el otro `item` no lo puede atacar (no está en rango).
-- Cleric (item `Staff`): Su ataque es **recuperar**. No realiza ni recibe contraataque.
+- Cleric (item `Staff`): Su ataque es **recuperar**. No realiza ni recibe contraataque. No puede recuperar a una unidad más allá del máximo de HP.
 - Para las otras unidades, se resumen las características de los `item` en las siguientes tablas:
 
 **Tipos ataque normal**: Fighter (Axe), SwordMaster (Sword), Hero (Spear)
@@ -131,17 +131,17 @@ El ataque y contraataque varia según el tipo de unidad. Para una mayor compresi
 | **Darkness** |     Light      |        Soul         |
 |  **Light**   |      Soul      |      Darkness       |
 
-*Reciben y atacan con efecto de debilidad* a Unidades normales. Alpaca recibe ataque normal, pues no tiene `item` equipado
+*Reciben y atacan con efecto de debilidad* a Unidades normales, esto implica que ambas unidades reciben `x1.5` de daño. Sin embargo, se asume que `Alpaca` **recibe ataque normal**, pues no tiene `item` equipado, y que el `Staff` **no aumenta la recuperación** que realiza a un `Sorcerer` que tiene equipada un `item`.
 
 En `unit` se definen los ataques que pueden recibir según los distintos ataques de items que se mencionan. Estos son:
 
-`receiveAttack(IEquipable item)`: simula un ataque con el poder de daño sin modificación de `item`
+* `receiveAttack(IEquipable item)`: simula un ataque con el poder de daño sin modificación de `item`
 
-`receiveWeaknessAttack(IEquipable item):` simula un ataque donde el poder de daño de `item` aumenta `x1.5`
+* `receiveWeaknessAttack(IEquipable item):` simula un ataque donde el poder de daño de `item` aumenta `x1.5`
 
-`receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos el HP
+* `receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos el HP
 
-`receiveRecovery(IEquipable item):` simula un ataque de recuperación, donde el poder de daño de `item` suma HP
+* `receiveRecovery(IEquipable item):` simula un ataque de recuperación, donde el poder de daño de `item` suma HP
 
 Al momento de iniciarse un ataque por `unit A`, se debe verificar que la unidad a la cual se ataca **tiene algún `item` equipado**, en caso de no tenerlo **recibe un ataque normal**, el cual solamente descuenta `HitPoints` según el daño, sin modificación, que realiza el `item A`. Si la unidad que recibió el ataque **tiene `item` equipado**, primero recibirá el ataque y luego realizará un contrataque. 
 
@@ -197,117 +197,48 @@ public void receiveMagicAttack(IEquipableItem enemyAttack){
 
 #### Exchange
 
-Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas estén a distancia 1 entre ellas y que no se supere la cantidad máxima de objetos que puede portar.
-
-#### For the Units
-
-
-
-##### For the Cleric
-
-La curacion que hace se implementa como ataque, y los puntos que recupera son sin añadirles más puntos 
-
-Para esta unidad el ataque no podia ser implementado por restricciones del problema. Además como el ataque se implementó sobre los items, si un staff no tiene item entonces este no puede recuperar. SIn embargo, una unidad que no tenga arma igual puede recuperarse
-
-#### For the Map
-
-
-
-
-
-## Tests
-
-
-
-Al momento de implementar los test de ataques se eligió una distribución para cada unidad que sería testeada. La asignación de posiciones para cada unidad fue la siguiente:
-
-
-
-| Staff   | Hero   | Archer      |
-| ------- | ------ | ----------- |
-| Fighter | Cleric | Sorcerer    |
-|         | Alpaca | SwordMaster |
-
-
-
-### Supposed
-
-
-
-## How to use?
-
-*short*
-
-
-
-Explain the structure that was used,  the designs patterns and why did you use it? 
-
-### Example Code in Java
+Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas **estén a distancia 1 entre ellas**, que **no se supere la cantidad máxima** de items que puede portar la unidad que va a recibir el `item` y la unidad que dará el `item` **contenga el `item`** que va a dar en su inventario. Esto se verifica en `canExchange`
 
 ```java
-public class SuperClass {
-    public int getNb() {
-         //specify what must happen
-        return 1;
-     }
-
-     public int getNb2() {
-         //specify what must happen
-        return 2;
-     }
- }
-
+public boolean canExchange(IUnit unit, IEquipableItem item) {
+    return !this.getItems().isEmpty() && !unit.isItemFull()
+            && this.getLocation().distanceTo(unit.getLocation())==1
+            && this.getItems().contains(item);
+  }
 ```
 
+El método `giveItem` realiza el intercambio y se implementa en `AbstractUnit` para que todas las unidades hereden este método.
 
+```java
+public void giveItem(IUnit unit, IEquipableItem item) {
+    if(canExchange(unit,item)){
+      IEquipableItem itemA = this.removeItem(item);
+      unit.addItem(itemA);
+    }
+  }
+```
 
-### Questions
+El intercambio no tiene distinción entre unidades, por lo que no se añaden más restricciones de las ya mencionadas.
 
-1. La interfaz de unidad es una clase que no tiene un implement, eso hay que crearlo en un nuevo archivo que tenga implement  o hay que implementarlo en la misma clase de la interfaz??
-2. Cuales son los métodos que se pueden implementar en las subclases del `AbstractUnit`, `AbstractItem`?? o mas bien, hay que crear si o si los metodos declarados en `Abstract` ?
-3. La carpeta Test debe quedar oculta? En la tarea 0 note que Intellij lo ocultaba, pero dado a que mi tarea esta de la siguiente manera:
+## Uso de app
 
+Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable del programa.
 
+Dada la etapa del proyecto, hasta el momento solo es posible probar la funcionalidad de los métodos creados desde el directorio `Test/model` del repositorio. 
 
+Los `test` que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
 
+El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
 
-COMBATE -------->
-
-ATAQUE --------->
-
-CONTRA <---------
-
-
-
-
-
-caso borde:
-
-
-
-# Cosas que faltan
-
-* Implementar un dd en units, dependiendo del ataque que recibe se va a cierta arma y bla.. así la recuperación deberia poder recibirse de un item staff y no de otro.
-* Completar algunos test que faltan
-
-
-
-Readme: Debe hacer un readme especificando los detalles de su implementación, los supuestos que realice y una breve explicación de cómo ejecutar el programa. Adicionalmente se le solicita dar una
-explicación general de la estructura que decidió utilizar, los patrones de dise˜ no y la razón por la cual
-los utiliza.
-
-
-
-
-
-hay bonus x no romper liskov (hint: interfaces)
-
-## References
+## Referencias
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
+
 - [Double Dispatch](https://sites.google.com/site/programacionhm/conceptos/multiple-dispatch) How to use the double dispatch
+
 - [Javadoc Tool](https://www.oracle.com/technetwork/articles/java/index-137868.html) How to write doc comments for Javadoc
-- 
+
+  
 
 
 

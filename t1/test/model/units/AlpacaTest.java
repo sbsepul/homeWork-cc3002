@@ -29,8 +29,8 @@ public class AlpacaTest extends AbstractTestUnit {
   @Test
   @Override
   public void testCombat() {
-    assertEquals(50, getTargetFighter().getCurrentHitPoints());
-    assertEquals(50, alpaca.getCurrentHitPoints());
+    assertEquals(50, getTargetFighter().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, alpaca.getCurrentHitPoints(),EPSILON);
     getTargetFighter().addItem(axe);
     getTargetFighter().equipItem(axe);
     assertEquals(axe,getTargetFighter().getEquippedItem());
@@ -39,10 +39,10 @@ public class AlpacaTest extends AbstractTestUnit {
     alpaca.equipItem(sword);
     assertNull(alpaca.getEquippedItem());
     getTargetFighter().attack(alpaca);
-    assertEquals(30, alpaca.getCurrentHitPoints());
-    assertEquals(50,getTargetFighter().getCurrentHitPoints());
+    assertEquals(30, alpaca.getCurrentHitPoints(),EPSILON);
+    assertEquals(50,getTargetFighter().getCurrentHitPoints(),EPSILON);
     alpaca.attack(getTargetFighter());
-    assertEquals(50,getTargetFighter().getCurrentHitPoints());
+    assertEquals(50,getTargetFighter().getCurrentHitPoints(),EPSILON);
   }
 
   @Override
@@ -61,8 +61,8 @@ public class AlpacaTest extends AbstractTestUnit {
   @Override
   public void sorcererAttackTest() {
     //hp normal
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetCleric().getCurrentHitPoints(),EPSILON);
     //test unit with inventory
     alpaca.addItem(getAxe());
     alpaca.equipItem(getAxe());
@@ -71,8 +71,8 @@ public class AlpacaTest extends AbstractTestUnit {
     getTargetSorcerer().equipItem(getLight());
     assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
     getTargetSorcerer().attack(alpaca);
-    assertEquals(30, alpaca.getCurrentHitPoints());
-    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(30, alpaca.getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints(),EPSILON);
   }
 
   @Override
@@ -153,10 +153,10 @@ public class AlpacaTest extends AbstractTestUnit {
   @Test
   @Override
   public void alpacaReceiveAttack() {
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints(),EPSILON);
     getTestUnit().attack(getTargetAlpaca());
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints(),EPSILON);
   }
 }

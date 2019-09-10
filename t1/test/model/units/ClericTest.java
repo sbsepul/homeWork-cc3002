@@ -82,40 +82,40 @@ public class ClericTest extends AbstractTestUnit {
   @Test
   @Override
   public void testCombat() {
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50 ,getTargetFighter().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50 ,getTargetFighter().getCurrentHitPoints(),EPSILON);
     getTargetFighter().addItem(getAxe());
     getTestUnit().addItem(staff_p);
     getTargetFighter().equipItem(getAxe());
     getTestUnit().equipItem(staff_p);
     getTargetFighter().attack(getTestUnit());
-    assertEquals(50, getTargetFighter().getCurrentHitPoints());
-    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetFighter().getCurrentHitPoints(),EPSILON);
+    assertEquals(30,getTestUnit().getCurrentHitPoints(),EPSILON);
     getTestUnit().receiveRecovery(staff);
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
     //combat hero
     getTargetHero().addItem(getSpear());
     getTargetHero().equipItem(getSpear());
     getTargetHero().attack(getTestUnit());
-    assertEquals(50, getTargetHero().getCurrentHitPoints());
-    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetHero().getCurrentHitPoints(),EPSILON);
+    assertEquals(30,getTestUnit().getCurrentHitPoints(),EPSILON);
     getTestUnit().receiveRecovery(staff);
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
     //combat swordmaster
     getTargetSwordMaster().addItem(getSword());
     getTargetSwordMaster().equipItem(getSword());
     getTargetSwordMaster().attack(getTestUnit());
-    assertEquals(50, getTargetSwordMaster().getCurrentHitPoints());
-    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetSwordMaster().getCurrentHitPoints(),EPSILON);
+    assertEquals(30,getTestUnit().getCurrentHitPoints(),EPSILON);
     getTestUnit().receiveRecovery(staff);
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
   }
 
   @Test
   @Override
   public void weaknessAttackTest() {
-    assertEquals(50,getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(50,getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints(),EPSILON);
     getTestUnit().addItem(staff_p);
     getTestUnit().equipItem(staff_p);
     getTargetSorcerer().addItem(getLight());
@@ -125,20 +125,20 @@ public class ClericTest extends AbstractTestUnit {
     getTargetSorcerer().equipItem(getSoul());
     //receive soul's attack
     staff_p.receiveSoulAttack(getSoul());
-    assertEquals(20,getTestUnit().getCurrentHitPoints());
+    assertEquals(20,getTestUnit().getCurrentHitPoints(),EPSILON);
     getTargetCleric().addItem(getStaff_normal());
     getTargetCleric().equipItem(getStaff_normal());
     getTargetCleric().attack(getTestUnit());
     //staff cure staff
-    assertEquals(40, getTestUnit().getCurrentHitPoints());
+    assertEquals(40, getTestUnit().getCurrentHitPoints(),EPSILON);
     getTargetSorcerer().changeEquippedItem(getDarkness());
     staff_p.receiveDarknessAttack(getDarkness());
-    assertEquals(10,getTestUnit().getCurrentHitPoints());
+    assertEquals(10,getTestUnit().getCurrentHitPoints(),EPSILON);
     getTargetCleric().attack(getTestUnit());
-    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    assertEquals(30, getTestUnit().getCurrentHitPoints(),EPSILON);
     getTargetSorcerer().changeEquippedItem(getLight());
     staff_p.receiveLightAttack(getLight());
-    assertEquals(0,getTestUnit().getCurrentHitPoints());
+    assertEquals(0,getTestUnit().getCurrentHitPoints(),EPSILON);
     assertEquals(false, getLight().canAttack(staff_p));
   }
 
@@ -152,24 +152,24 @@ public class ClericTest extends AbstractTestUnit {
   @Override
   public void archerAttackTest() {
     //hp normal
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetCleric().getCurrentHitPoints(),EPSILON);
     //test unit with inventory
     getTestUnit().addItem(staff_p);
     getTestUnit().equipItem(staff_p);
     getTargetArcher().addItem(getBow());
     getTargetArcher().equipItem(getBow());
     staff_p.receiveBowAttack(getBow());
-    assertEquals(50, getTargetArcher().getCurrentHitPoints());
-    assertEquals(30,getTestUnit().getCurrentHitPoints());
+    assertEquals(50, getTargetArcher().getCurrentHitPoints(),EPSILON);
+    assertEquals(30,getTestUnit().getCurrentHitPoints(),EPSILON);
   }
 
   @Test
   @Override
   public void sorcererAttackTest() {
     //hp normal
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetCleric().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetCleric().getCurrentHitPoints(),EPSILON);
     //test unit with inventory
     getTestUnit().addItem(staff_p);
     getTestUnit().equipItem(staff_p);
@@ -178,8 +178,8 @@ public class ClericTest extends AbstractTestUnit {
     assertEquals(staff_p, getTestUnit().getEquippedItem());
     assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
     getTargetSorcerer().attack(getTestUnit());
-    assertEquals(20, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetSorcerer().getCurrentHitPoints());
+    assertEquals(20, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetSorcerer().getCurrentHitPoints(),EPSILON);
   }
 
   @Test
@@ -195,10 +195,10 @@ public class ClericTest extends AbstractTestUnit {
   @Test
   @Override
   public void alpacaReceiveAttack() {
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints(),EPSILON);
     getTestUnit().attack(getTargetAlpaca());
-    assertEquals(50, getTestUnit().getCurrentHitPoints());
-    assertEquals(50, getTargetAlpaca().getCurrentHitPoints());
+    assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
+    assertEquals(50, getTargetAlpaca().getCurrentHitPoints(),EPSILON);
   }
 }

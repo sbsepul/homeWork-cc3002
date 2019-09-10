@@ -1,15 +1,13 @@
 package model.items;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
 import model.units.SwordMaster;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Defines some common methods for all the items tests
@@ -149,18 +147,30 @@ public abstract class AbstractTestItem {
     assertEquals(true , unit.equals(getTestItem().getOwner()));
   }
 
+  /**
+   * @return a unit SwordMaster (1) for it use like enemy (good initialized)
+   */
   public SwordMaster getTestEnemy(){
     return swordMaster;
   }
 
+  /**
+   * @return a unit SwordMaster (2) for it use like enemy (power in weapon 0)
+   */
   public SwordMaster getTestFirstEnemyWrong(){
     return wrongSwordMaster;
   }
 
+  /**
+   * @return a unit SwordMaster (3) for it use like enemy (far position)
+   */
   public SwordMaster getTestSecondEnemyWrong(){
     return wrongSecondSwordMaster;
   }
 
+  /**
+   * Test that verify that the magicAttack can not to be used for units that are not Sorcerer
+   */
   @Test
   public void magicAttackTest(){
     getTestUnit().addItem(getTestItem());
@@ -172,16 +182,20 @@ public abstract class AbstractTestItem {
     assertEquals(10,getTestUnit().getCurrentHitPoints());
   }
 
+  /**
+   * Verify that a item can attack when all the conditions are good
+   * otherwise is false
+   */
   @Test
   public void canAttackTest(){
-    assertEquals(false, getTestItem().canAttack(getTestItem()));
+    assertFalse(getTestItem().canAttack(getTestItem()));
     assertNull(getTestItem().getOwner());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
-    assertEquals(false, getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));
-    assertEquals(false,getTestItem().canAttack(getTestSecondEnemyWrong().getEquippedItem()));
+    assertFalse(getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));
+    assertFalse(getTestItem().canAttack(getTestSecondEnemyWrong().getEquippedItem()));
     assertEquals(2, getTestItem().getOwner().getLocation().distanceTo(getTestEnemy().getLocation()));
-    assertEquals(true, getTestItem().canAttack(getTestEnemy().getEquippedItem()));
+    assertTrue(getTestItem().canAttack(getTestEnemy().getEquippedItem()));
   }
   /**
    * @return a unit that can equip the item being tested

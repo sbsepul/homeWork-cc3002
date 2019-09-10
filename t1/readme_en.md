@@ -109,6 +109,23 @@ public class SuperClass {
 
 
 
+
+
+## Tests
+
+Al igual que la implementación del código del programa, se crean clases para testear los 
+
+
+
+Al momento de implementar los test de ataques se eligió una distribución para cada unidad que sería testeada. La asignación de posiciones para cada unidad fue la siguiente:
+
+| Staff   | Hero   | Archer      |
+| ------- | ------ | ----------- |
+| Fighter | Cleric | Sorcerer    |
+|         | Alpaca | SwordMaster |
+
+
+
 ### Questions
 
 1. La interfaz de unidad es una clase que no tiene un implement, eso hay que crearlo en un nuevo archivo que tenga implement  o hay que implementarlo en la misma clase de la interfaz??

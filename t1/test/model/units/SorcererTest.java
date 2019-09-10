@@ -34,6 +34,9 @@ public class SorcererTest extends AbstractTestUnit {
         return sorcerer;
     }
 
+    /**
+     * Test that a Sorcerer equip a Darkness correctly and can add items
+     */
     @Test
     @Override
     public void equipDarknessTest() {
@@ -52,6 +55,9 @@ public class SorcererTest extends AbstractTestUnit {
         assertEquals(3 , sorcerer.getItems().size());
     }
 
+    /**
+     * Test that a Sorcerer equip a Light correctly and can add items
+     */
     @Test
     @Override
     public void equipLightTest() {
@@ -70,6 +76,9 @@ public class SorcererTest extends AbstractTestUnit {
         assertEquals(3 , sorcerer.getItems().size());
     }
 
+    /**
+     * Test that a Sorcerer equip a Soul correctly and can add items
+     */
     @Test
     @Override
     public void equipSoulTest() {
@@ -88,6 +97,9 @@ public class SorcererTest extends AbstractTestUnit {
         assertEquals(3 , sorcerer.getItems().size());
     }
 
+    /**
+     * Test in item
+     */
     @Test
     @Override
     public void giveToUnitSorcererTest() {
@@ -169,8 +181,8 @@ public class SorcererTest extends AbstractTestUnit {
         getTargetFighter().addItem(getAxe());
         getTargetFighter().equipItem(getAxe());
         getTargetFighter().attack(getTestUnit());
-        assertEquals(20, getTestUnit().getCurrentHitPoints());
-        assertEquals(20,getTargetFighter().getCurrentHitPoints());
+        assertEquals(20, getTestUnit().getCurrentHitPoints(),EPSILON);
+        assertEquals(20,getTargetFighter().getCurrentHitPoints(),EPSILON);
     }
 
     @Test
@@ -180,8 +192,8 @@ public class SorcererTest extends AbstractTestUnit {
         getTargetSwordMaster().addItem(getSword());
         getTargetSwordMaster().equipItem(getSword());
         getTargetSwordMaster().attack(getTestUnit());
-        assertEquals(20, getTestUnit().getCurrentHitPoints());
-        assertEquals(20,getTargetSwordMaster().getCurrentHitPoints());
+        assertEquals(20, getTestUnit().getCurrentHitPoints(),EPSILON);
+        assertEquals(20,getTargetSwordMaster().getCurrentHitPoints(),EPSILON);
     }
 
     @Test
@@ -191,10 +203,10 @@ public class SorcererTest extends AbstractTestUnit {
         getTargetHero().addItem(getSpear());
         getTargetHero().equipItem(getSpear());
         getTargetHero().attack(getTestUnit());
-        assertEquals(20, getTestUnit().getCurrentHitPoints());
-        assertEquals(20,getTargetHero().getCurrentHitPoints());
+        assertEquals(20, getTestUnit().getCurrentHitPoints(),EPSILON);
+        assertEquals(20,getTargetHero().getCurrentHitPoints(),EPSILON);
         getTestUnit().receiveRecovery(getStaff());
-        assertEquals(50, getTestUnit().getCurrentHitPoints());
+        assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
     }
 
     @Test

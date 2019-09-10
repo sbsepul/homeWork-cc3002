@@ -41,6 +41,9 @@ public class SwordMasterTest extends AbstractTestUnit {
     return swordMaster;
   }
 
+  /**
+   * Test that a SwordMaster equip a Sword correctly and can add items
+   */
   @Test
   @Override
   public void equipSwordTest() {
@@ -86,9 +89,7 @@ public class SwordMasterTest extends AbstractTestUnit {
   }
 
   @Override
-  public void testCombat() {
-
-  }
+  public void testCombat() { }
 
   @Test
   @Override
