@@ -45,7 +45,6 @@ Los llamados que se realizan con el `DoubleDispatch` se resumirá tomando de eje
 * Un `Archer` puede equiparse de un `Bow` si este posee el `item` en su inventario, en caso contrario no se lo puede equipar. Para que funcione el equipar un `item` la unidad debe tener el `item` en su inventario, es por eso que se implementa primero un método `addItem` el cual añade un `item` al inventario. Luego es posible equiparlo con lo siguiente:
 
 ```java
-@Override
   public void equipItem(IEquipableItem item){
     if(item!=null){
       if(items.contains(item)){
@@ -58,7 +57,6 @@ Los llamados que se realizan con el `DoubleDispatch` se resumirá tomando de eje
 * El `method lookup` de `Bow` comienza buscando `equipTo` en la clase del objeto `Bow`:
 
 ```java
-  @Override
   public void equipTo(IUnit unit) {
     unit.equipItemBow(this);
     this.setOwner(unit);
@@ -70,11 +68,9 @@ Donde `setOwner` es un método nuevo que se tuvo que implementar para que el `it
 *  Finalmente el proceso termina en la clase de `Archer`, donde el `Bow` termina como parámetro de la unidad.
 
 ```java
-  @Override
   public void equipItemBow(Bow item) {
     equippedItem = item;
   }
-  @Override
   public void equipItemSpear(Spear item) { }
 ```
 
@@ -97,9 +93,16 @@ Se consideraron los siguientes supuestos en equipar los items a una unidad:
 
 Los `item` van a tener la capacidad de atacar, no así las unidades que son las que reciben el daño del ataque efectuado por el `item`. De esta manera se logra una independencia entre la arma que porta cada unidad y el ataque que genera. 
 
-Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene arma **no debería poder contraatacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar.
+Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene `item` equipado **no debería poder contraatacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar.
 
-Un `unit A` puede utilizar el objeto que tiene equipado sobre otra `unit B` siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item A` y *ambas unidades estén vivas*. Cuando esto sucede se entra en un combate.
+Un `unit A` puede utilizar el objeto que tiene equipado sobre otra `unit B` siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item A` y *ambas unidades estén vivas*. Cuando esto sucede se entra en un combate. El método implementado para verificar esto fue `initCombat()` el cual retorna `true` si se puede comenzar el combate:
+
+```java
+public boolean initCombat(IUnit unitEnemy) {
+    return this.getCurrentHitPoints()>0 && unitEnemy.getCurrentHitPoints()>0
+            && this.getEquippedItem()!=null && this.isInRange(unitEnemy);
+  }
+```
 
 ##### Recibir ataques
 
@@ -130,25 +133,71 @@ El ataque y contraataque varia según el tipo de unidad. Para una mayor compresi
 
 *Reciben y atacan con efecto de debilidad* a Unidades normales. Alpaca recibe ataque normal, pues no tiene `item` equipado
 
+En `unit` se definen los ataques que pueden recibir según los distintos ataques de items que se mencionan. Estos son:
 
+`receiveAttack(IEquipable item)`: simula un ataque con el poder de daño sin modificación de `item`
+
+`receiveWeaknessAttack(IEquipable item):` simula un ataque donde el poder de daño de `item` aumenta `x1.5`
+
+`receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos el HP
+
+`receiveRecovery(IEquipable item):` simula un ataque de recuperación, donde el poder de daño de `item` suma HP
 
 Al momento de iniciarse un ataque por `unit A`, se debe verificar que la unidad a la cual se ataca **tiene algún `item` equipado**, en caso de no tenerlo **recibe un ataque normal**, el cual solamente descuenta `HitPoints` según el daño, sin modificación, que realiza el `item A`. Si la unidad que recibió el ataque **tiene `item` equipado**, primero recibirá el ataque y luego realizará un contrataque. 
 
+```java
+public void attack(IUnit enemy){
+    if(this.initCombat(enemy)){
+      if(enemy.getEquippedItem()!=null){
+        enemy.getEquippedItem().receive<Item>Attack((<Item>) this.getEquippedItem());
+      }
+      else enemy.receiveAttack(this.getEquippedItem());
+    }
+  }
+```
+
 Como se mencionó anteriormente, el `item` es el que realiza el daño y el ataque en sí, por tanto, se implementa `receive<Item>Attack(IEquipableItem itemEnemy)` a cada `item` para que reciba el ataque según el `itemEnemy` que lo recibe como parámetro. De esta manera, `unit A` delega el trabajo de atacar al `item A` que tiene equipado y se realiza lo mismo con`unit B`, haciendo que el `item B` que tiene equipado sea quien reciba el ataque. De esta manera es más simple hacer un `DoubleDispatch` para los ataques recibidos
 
-<code>
+```java
+//Example general of receive Attack
+  public void receive<Item>Attack(Axe attackAxe) {
+    this.receiveResistantAttack(attackAxe);
+    if(this.canAttack(attackAxe)) {
+      if(attackAxe.getOwner().getCurrentHitPoints()>0){
+        attackAxe.getOwner().receiveAttackWeakness(this);
+      }
+    }
+  }
+```
 
-`item B` al recibir el ataque, deriva el daño a `unit B` según el `item A` que lo atacó. Suponiendo que `unit B` puede seguir atacando, y recibe un daño, según [las tablas anteriores](#Recibir-ataques) `item B` puede realizar distintos tipos de ataques sobre la unidad. 
+`item B` al recibir el ataque, deriva el daño a `unit B` según el `item A` que lo atacó. Suponiendo que `unit B` puede seguir atacando, a pesar del daño recibido, según [las tablas anteriores](#Recibir-ataques) `item B` realiza el contrataque que le corresponde respecto al `item A` que lo atacó. Luego, el combate termina.
 
+##### Recibir ataque mágico
 
+Dado a que `Sorcerer` puede equiparse de 3 items distintos, es necesario distinguir con qué `item` ataca a su enemigo. Esto se resuelve con el método `receiveMagicAttack()` implementado en el ataque que realiza `Sorcerer` contra otra unidad. 
 
+```java
+public void attack(IUnit enemy) {
+        if (this.initCombat(enemy)){
+            if(enemy.getEquippedItem()!=null) {
+            this.getEquippedItem().receiveMagicAttack(enemy.getEquippedItem());
+            }
+            else enemy.receiveAttack(this.getEquippedItem());
+        }
+    }
+```
 
+El método recibe como parámetro el item del enemigo y lo envía a la clase del `item` portado por el `Sorcerer` donde se reconoce el `item` que porta el `Sorcerer` y se sigue el procedimiento descrito anteriormente de ataque y contrataque. 
 
-
+```java
+public void receiveMagicAttack(IEquipableItem enemyAttack){
+        enemyAttack.receiveLightAttack(this);
+    }
+```
 
 #### Exchange
 
-Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas est´ en a distancia 1 entre ellas y que no se supere la cantidad máxima de objetos que puede portar.
+Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas estén a distancia 1 entre ellas y que no se supere la cantidad máxima de objetos que puede portar.
 
 #### For the Units
 

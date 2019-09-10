@@ -167,7 +167,7 @@ public abstract class AbstractTestItem {
     getTestItem().equipTo(getTestUnit());
     assertEquals(10,getTestEnemy().getCurrentHitPoints());
     assertEquals(10,getTestUnit().getCurrentHitPoints());
-    getTestItem().magicAttack(getTestEnemy().getEquippedItem());
+    getTestItem().receiveMagicAttack(getTestEnemy().getEquippedItem());
     assertEquals(10,getTestEnemy().getCurrentHitPoints());
     assertEquals(10,getTestUnit().getCurrentHitPoints());
   }

@@ -170,14 +170,17 @@ public abstract class AbstractUnit implements IUnit{
   public void setEquippedItem(IEquipableItem item) { this.equippedItem = item;  }
 
   @Override
+  public boolean canExchange(IUnit unit, IEquipableItem item) {
+    return !this.getItems().isEmpty() && !unit.isItemFull()
+            && this.getLocation().distanceTo(unit.getLocation())==1
+            && this.getItems().contains(item);
+  }
+
+  @Override
   public void giveItem(IUnit unit, IEquipableItem item) {
-    if(!this.getItems().isEmpty()){
-      if(!unit.isItemFull()){
-        if(this.getLocation().distanceTo(unit.getLocation())==1){
-          IEquipableItem itemA = this.removeItem(item);
-          unit.addItem(itemA);
-        }
-      }
+    if(canExchange(unit,item)){
+      IEquipableItem itemA = this.removeItem(item);
+      unit.addItem(itemA);
     }
   }
 

@@ -167,7 +167,7 @@ public abstract class AbstractItem implements IEquipableItem {
   }
 
   @Override
-  public void magicAttack(IEquipableItem enemyAttack){ }
+  public void receiveMagicAttack(IEquipableItem enemyAttack){ }
 
   //END COMBAT
 

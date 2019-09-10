@@ -37,7 +37,7 @@ public class Darkness extends AbstractItemMagic {
     }
 
     @Override
-    public void magicAttack(IEquipableItem enemyAttack){
+    public void receiveMagicAttack(IEquipableItem enemyAttack){
         enemyAttack.receiveDarknessAttack(this);
     }
 

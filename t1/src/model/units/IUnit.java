@@ -221,5 +221,14 @@ public interface IUnit {
    */
   boolean initCombat(IUnit unitEnemy);
 
+  /**
+   * Verify if a unit can exchange a item to other unit
+   *
+   * @param unit that receive the item
+   * @param item that will be exchange
+   * @return true if the two units can exchange a item
+   */
+  boolean canExchange(IUnit unit, IEquipableItem item);
+
 }
 

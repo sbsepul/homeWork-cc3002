@@ -112,6 +112,6 @@ public interface IEquipableItem {
    *
    * @param enemyAttack is the enemy's item
    */
-  void magicAttack(IEquipableItem enemyAttack);
+  void receiveMagicAttack(IEquipableItem enemyAttack);
   /* END COMBAT SECTION */
 }
