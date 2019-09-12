@@ -78,7 +78,7 @@ Donde `setOwner` es un método nuevo que se tuvo que implementar para que el `it
 
 Se consideraron los siguientes supuestos en equipar los items a una unidad:
 
-1. Una unidad del tipo `IUnit` puede equipar un tipo`IEquipableitem` según las restricciones del problema. Si el `item` no existe, entonces simplemente no se equipa. Esto se realiza implementando en cada unidad `equipItemOther`, el cual no realiza nada.
+1. Una unidad del tipo `IUnit` puede equipar un tipo`IEquipableitem` según las restricciones del problema. Si el `item` no existe, entonces simplemente no se equipa. 
 2. Una unidad no puede equiparse de más de 1 `item`, ni tampoco puede portar un `item` que ya posee una unidad. 
 3. En el caso de la `alpaca`, la cual no puede equiparse un `item`, los métodos `equipItem<nom>` se dejan con un cuerpo vacío. 
 
@@ -229,6 +229,8 @@ Dada la etapa del proyecto, hasta el momento solo es posible probar la funcional
 Los `test` que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
 
 El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
+
+Por último, el [Informe](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Report_Model_AlpacaEmblem.pdf) y el [enunciado](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Enunciado_Model.pdf) de la tarea se encuentran presentes en el repositorio de Github.
 
 ## Referencias
 
