@@ -219,15 +219,11 @@ The exchange has no distinction between units, so no more restrictions that thos
 
 ## How to use?
 
+To obtain the lastest version of the program, go to [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) where you will find the most stable version.
 
+Because of this is the first stage of project, so far it is only possible to test the functionality of the methods created in the folder `Test/model`.
 
-
-
-Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable del programa.
-
-Dada la etapa del proyecto, hasta el momento solo es posible probar la funcionalidad de los métodos creados desde el directorio `Test/model` del repositorio. 
-
-Los `test` que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
+que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
 
 El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
 

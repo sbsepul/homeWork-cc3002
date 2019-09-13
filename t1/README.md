@@ -228,15 +228,15 @@ Los test que eran repetidos para ciertas unidades fueron colocados en `AbstractT
 
 Las unidades `Archer`, `Alpaca`, `Sorcerer` y `Cleric` poseen test particulares pues tienen características especiales que necesitan ser probadas a parte y no en conjunto con todas las demás. Además, cada unidad tiene un método `giveToUnit<name>Test` que verifica que pueda intercambiar items solamente con alguna unidad que esta a distancia 1 y que no supere el máximo de items o pueda dar sin tener items. Como también se crea un `giveToUnitAlpacaTest` para verificar que a la `alpaca` se le puede dar una cantidad ilimitada de items.
 
-Cada test tienen el encabezado @Test para probarlo, por lo que aquellos métodos que no eran necesarios para ciertas clases, (por ejemplo `weaknessAttackTest()` para `alpaca`, pues alpaca no puede realizar ataques de debilidad, ni recibirlos) tienen un cuerpo vacio, pero no se les coloca el encabezado @Test
+Cada test tienen el encabezado @Test para probarlo, por lo que aquellos métodos que no eran necesarios para ciertas clases, (por ejemplo `weaknessAttackTest()` para `alpaca`, pues alpaca no puede realizar ataques de debilidad, ni recibirlos) tienen un cuerpo vacio, pero no se les coloca el encabezado @Test.
+
+El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
 
 ## Uso de app
 
 Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable.
 
 Dada la etapa del proyecto, hasta el momento solo es posible probar la funcionalidad de los métodos creados desde el directorio `Test/model` del repositorio. 
-
-Los `test` que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
 
 El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
 
