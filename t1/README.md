@@ -238,21 +238,17 @@ Para poder obtener la última versión del programa, dirigirse a [Tags](https://
 
 Dada la etapa del proyecto, hasta el momento solo es posible probar la funcionalidad de los métodos creados desde el directorio `Test/model` del repositorio. 
 
-El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
-
 Por último, el [Informe](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Report_Model_AlpacaEmblem.pdf) y el [enunciado](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Enunciado_Model.pdf) de la tarea se encuentran presentes en el repositorio de Github.
 
 ## Referencias
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
-
 - [Double Dispatch](https://sites.google.com/site/programacionhm/conceptos/multiple-dispatch) How to use the double dispatch
-
 - [Javadoc Tool](https://www.oracle.com/technetwork/articles/java/index-137868.html) How to write doc comments for Javadoc
 
-  
+## Agradecimientos
 
-
+**Lukas Gribbell**: Por ayudarme a entender `DoubleDispatch` *thanks you bro.*
 
 
 

@@ -217,20 +217,32 @@ public void giveItem(IUnit unit, IEquipableItem item) {
 
 The exchange has no distinction between units, so no more restrictions that those already mentioned are added 
 
+## Test
+
+The tests were performed using the format provided by the *Template A.E.*, where in each `package` the particular methods of each object are tested. However, where the largest number of test lines are performed in `package unit`. This is due to the edge cases that were to be verified to verify that a combat was being carried out correctly. In addition, not all units can attack and the combat can still suffer a weight that a unit does not have an `item`, so it is necessary to test the methods of the units.
+
+The tests that were repeated for certain units were placed in `AbstractTestUnit`, as in the case of the elements, where they were placed in` AbstractTestItem`, taking advantage of inheritance between classes.
+
+The units `Archer`,` Alpaca`, `Sorcerer` and` Cleric` have special tests because they have special characteristics that need to be tested separately and not in conjunction with all the others. In addition, each unit has a `giveToUnit <name> Test` method that verifies that it can exchange items only with a unit that is at a distance 1 and that does not exceed the maximum number of items or can give without items. As a `giveToUnitAlpacaTest` is also created to verify that the` alpaca` can be given an unlimited amount of items.
+
+Each test has the @Test heading to prove it, so those methods that were not necessary for certain classes, (for example `weakAttackTest ()` for `alpaca`, because alpaca cannot carry out weakness attacks, nor receive them) have a empty body, but the @Test header is not placed.
+
+The `coverage` achieved at this stage was 100% in` Class`, 100% in `Method` and 100% in` Lines`, which was checked when using the option `Run 'Test' in 'model' ' with coverage` provided by `IntelliJ`.
+
 ## How to use?
 
 To obtain the lastest version of the program, go to [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) where you will find the most stable version.
 
 Because of this is the first stage of project, so far it is only possible to test the functionality of the methods created in the folder `Test/model`.
 
-que se realizaron se concentran en las clases de `unitTest` debido a que los métodos con más casos bordes se generan en esta clase, la cual genera llamados a métodos que están creados en `item`, lo cual verifica que aquellos métodos igual funcionan correctamente.
-
-El `coverage` logrado en esta etapa fue de un 100% en `Class`, 100% en `Method` y 100% en `Lines`, lo cual fue comprobado al utilizar la opción `Run 'Test in 'model'' with coverage` proporcionado por `IntelliJ`. 
-
-Por último, el [Informe](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Report_Model_AlpacaEmblem.pdf) y el [enunciado](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Enunciado_Model.pdf) de la tarea se encuentran presentes en el repositorio de Github.
+Finally, the [Report](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t1/Report_Model_AlpacaEmblem.pdf) and the [statement](https://github.com/sesepulveda17/homeWork- cc3002 / blob / master / t1 / Enunciado_Model.pdf) of the task are present in the Github repository.
 
 ## References
 
 - [Project Template - Alpaca Emblem](https://github.com/islaterm/cc3002-alpaca-project-template) From Ignacio Slater.
 - [Double Dispatch](https://sites.google.com/site/programacionhm/conceptos/multiple-dispatch) How to use the double dispatch
 - [Javadoc Tool](https://www.oracle.com/technetwork/articles/java/index-137868.html) How to write doc comments for Javadoc
+
+## Acknowledgment
+
+**Lukas Gribbell**: For helping me understand  `DoubleDispatch` *thanks you bro.*
