@@ -139,7 +139,7 @@ En `unit` se definen los ataques que pueden recibir según los distintos ataques
 
 * `receiveWeaknessAttack(IEquipable item):` simula un ataque donde el poder de daño de `item` aumenta `x1.5`
 
-* `receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos el HP
+* `receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos 
 
 * `receiveRecovery(IEquipable item):` simula un ataque de recuperación, donde el poder de daño de `item` suma HP
 
@@ -220,9 +220,19 @@ public void giveItem(IUnit unit, IEquipableItem item) {
 
 El intercambio no tiene distinción entre unidades, por lo que no se añaden más restricciones de las ya mencionadas.
 
+## Test
+
+Los test fueron realizados utilizando el formato proporcionado por el *Template A.E.*, donde en cada `package` se prueban los métodos particulares de cada objeto. Sin embargo, donde se realizan la mayor cantidad de lineas de test es en `package unit` . Esto se debe a que los casos bordes que se debían comprobar para verificar que un combate se estaba realizando correctamente. Además, no todas las unidades pueden atacar y el combate igual puede ocurrir a pesar que una unidad no tenga `item` por lo que es menester testear los métodos de las unidades.
+
+Los test que eran repetidos para ciertas unidades fueron colocados en `AbstractTestUnit`, al igual que en el caso de los items, donde fueron colocados en `AbstractTestItem`, aprovechando de esta manera la herencia entre clases.
+
+Las unidades `Archer`, `Alpaca`, `Sorcerer` y `Cleric` poseen test particulares pues tienen características especiales que necesitan ser probadas a parte y no en conjunto con todas las demás. Además, cada unidad tiene un método `giveToUnit<name>Test` que verifica que pueda intercambiar items solamente con alguna unidad que esta a distancia 1 y que no supere el máximo de items o pueda dar sin tener items. Como también se crea un `giveToUnitAlpacaTest` para verificar que a la `alpaca` se le puede dar una cantidad ilimitada de items.
+
+Cada test tienen el encabezado @Test para probarlo, por lo que aquellos métodos que no eran necesarios para ciertas clases, (por ejemplo `weaknessAttackTest()` para `alpaca`, pues alpaca no puede realizar ataques de debilidad, ni recibirlos) tienen un cuerpo vacio, pero no se les coloca el encabezado @Test
+
 ## Uso de app
 
-Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable del programa.
+Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable.
 
 Dada la etapa del proyecto, hasta el momento solo es posible probar la funcionalidad de los métodos creados desde el directorio `Test/model` del repositorio. 
 

@@ -79,23 +79,23 @@ Where`setOwner` is a new method that set the attribute `Owner` in `Bow`
 The assumptions to equip a item were: 
 
 1. If a `item` don't exist, then it is not equipped. For example, a item null.
-2. Una unidad no puede equiparse de más de 1 `item`, ni tampoco puede portar un `item` que ya posee una unidad. 
-3. En el caso de la `alpaca`, la cual no puede equiparse un `item`, los métodos `equipItem<nom>` se dejan con un cuerpo vacío. 
+2. A unit can not be equipped with more of one `item`, nor can it carry an `item` that already has a unit.
+3. In the case of the `alpaca`, which can not to equip a item, the methods `equipItem<nom>` are empty.
 
 ##### Nuevos métodos
 
-* Se crea el método `equals` para verificar cuando un `IEquipableitem` es igual a otro `IEquipableitem`.
-* Se crea método `isItemFull`: retorna `true` si el inventario está lleno
+* New method`equals` to verify when a`IEquipableitem` is equal to other`IEquipableitem`.
+* New method `isItemFull`: return`true` if the inventory is full
 
 #### Combat
 
-##### Ataque en items
+##### Attack in items
 
-Los `item` van a tener la capacidad de atacar, no así las unidades que son las que reciben el daño del ataque efectuado por el `item`. De esta manera se logra una independencia entre la arma que porta cada unidad y el ataque que genera. 
+The `item` will be able to attack, don't the `unit`, because the `unit` receive the damage of attack done for a `item`. In this way an independence is achieved between the weapon that carry each `unit` and the attack that produce.
 
-Esto se consideró dado el caso borde donde en un combate puede haber una **unidad que ataque sin arma**, lo cual no debería ocurrir, por tanto en ese caso simplemente **no se puede atacar**. También en el caso de **contrataque**, si el adversario no tiene `item` equipado **no debería poder contraatacar**. Esto facilita también el caso de la unidad `alpaca` que no puede atacar.
+This help in the edge case where a `unit` **attack without a weapon**, which should not occur. Thereore in this case simply the `unit` **can not attack**. The case of counterattack is analogous. A opponent without item equipped **can not counterattack**. The `alpaca` simply can not attack (method attack without corp)
 
-Un `unit A` puede utilizar el objeto que tiene equipado sobre otra `unit B` siempre y cuando la otra unidad se encuentre dentro del rango definido por el `item A` y *ambas unidades estén vivas*. Cuando esto sucede se entra en un combate. El método implementado para verificar esto fue `initCombat()` el cual retorna `true` si se puede comenzar el combate:
+A `unit A` can use the item that have equipped over the` unit B` if and only if the other unit is in the range defined for the `item A` and both units are living. When this happen, start a combat. The method implemented for verify this conditions is `initCombat()`, which return `true` if a combat can start:
 
 ```java
 public boolean initCombat(IUnit unitEnemy) {
@@ -104,16 +104,16 @@ public boolean initCombat(IUnit unitEnemy) {
   }
 ```
 
-##### Recibir ataques
+##### Receive attack
 
-El ataque y contraataque varia según el tipo de unidad. Para una mayor compresión del procedimiento de ataque y contrataque, se resumen primero las características de cada unidad y los supuestos hechos:
+The attack and counter attack change according to the type of the `unit`, and `item` particularly. For greater compresion of attack and counterattack process, are summarized the characteristics of each `unit` and the assumtions
 
-- Alpaca: No ataca. **Recibe ataque normal** de toda `unit`. 
-- Archer (item `Bow`): Ataca y recibe ataque si ambos `item` están en rango. No ataca ni contrataca si su enemigo es vecino de él. No recibe ataque si el otro `item` no lo puede atacar (no está en rango).
-- Cleric (item `Staff`): Su ataque es **recuperar**. No realiza ni recibe contraataque. No puede recuperar a una unidad más allá del máximo de HP.
-- Para las otras unidades, se resumen las características de los `item` en las siguientes tablas:
+- `Alpaca`: Can not attack. **Receive normal attack** from any`unit`. 
+- `Archer` (item `Bow`): Attack y receive attack if both items (`item A, B`) are in range. Does not attack or counterattack if the enemy is neighbor of him. Does not receive attack if the other `item` can not attack him. (`Item B` out of range).
+- `Cleric` (item `Staff`): Attack is **recovery**. Does not attack, no receive counterattack. Does not can recovery a `unit` beyond the maximum `HitPoints`.
+- For the other units and their items review the following tables:
 
-**Tipos ataque normal**: Fighter (Axe), SwordMaster (Sword), Hero (Spear)
+\***Type normal attack**: Fighter (Axe), SwordMaster (Sword), Hero (Spear)
 
 |  *Item*   | *Weak against* | *Resistant against* |
 | :-------: | :------------: | :-----------------: |
@@ -121,7 +121,7 @@ El ataque y contraataque varia según el tipo de unidad. Para una mayor compresi
 | **Sword** |     Spear      |         Axe         |
 | **Spear** |      Axe       |        Sword        |
 
-*Atacan normal* a Alpaca, Archer, Cleric.
+\**Normal attack* to Alpaca, Archer, Cleric.
 
 **Tipos ataque mágicos**: Sorcerer (Light - Darkness - Soul)
 
@@ -131,19 +131,16 @@ El ataque y contraataque varia según el tipo de unidad. Para una mayor compresi
 | **Darkness** |     Light      |        Soul         |
 |  **Light**   |      Soul      |      Darkness       |
 
-*Reciben y atacan con efecto de debilidad* a Unidades normales, esto implica que ambas unidades reciben `x1.5` de daño. Sin embargo, se asume que `Alpaca` **recibe ataque normal**, pues no tiene `item` equipado, y que el `Staff` **no aumenta la recuperación** que realiza a un `Sorcerer` que tiene equipada un `item`.
+*Receive attack and it attack with effect of weakness* to normal `unit`, this implies that both units receive `x1.5` of damage. However, was assumpted that `Alpaca` receive normal attack, because `alpaca` does not have `item` equipped, and that `Staff` **recover normal** to `Sorcerer`
 
-En `unit` se definen los ataques que pueden recibir según los distintos ataques de items que se mencionan. Estos son:
+In each `unit` are defined the attacks that can to receive depending on the differents attacks of items previosly mencioned. These are:
 
-* `receiveAttack(IEquipable item)`: simula un ataque con el poder de daño sin modificación de `item`
+* `receiveAttack(IEquipable item)`: Simulates a attack with normal damage (without modification) of `item``
+* `receiveWeaknessAttack(IEquipable item):` Simulates a attack where the damage of `item` increase `x1.5`
+* `receiveResistantAttack(IEquipable item):`Simulates a attack where the damage of `item` decrease 20 points.
+* `receiveRecovery(IEquipable item):` Simulates a recovery attack, where the damage of `item` increase the HP of the enemy unit
 
-* `receiveWeaknessAttack(IEquipable item):` simula un ataque donde el poder de daño de `item` aumenta `x1.5`
-
-* `receiveResistantAttack(IEquipable item):`simula un ataque donde el poder de daño de `item` disminuye 20 puntos el HP
-
-* `receiveRecovery(IEquipable item):` simula un ataque de recuperación, donde el poder de daño de `item` suma HP
-
-Al momento de iniciarse un ataque por `unit A`, se debe verificar que la unidad a la cual se ataca **tiene algún `item` equipado**, en caso de no tenerlo **recibe un ataque normal**, el cual solamente descuenta `HitPoints` según el daño, sin modificación, que realiza el `item A`. Si la unidad que recibió el ataque **tiene `item` equipado**, primero recibirá el ataque y luego realizará un contrataque. 
+In the moment of start a attack for `unit A`, must be verified that the `unit` attacked **have any `item` equipped**, in case of does not have **receive a normal attack**, which only deduct `HitPoints` according to the damage, without modification, that was realized for the `item A`. If the `unit B` **have `item` equipped**, first will receive the attack of `item A` and then will counterattack.
 
 ```java
 public void attack(IUnit enemy){
@@ -156,7 +153,7 @@ public void attack(IUnit enemy){
   }
 ```
 
-Como se mencionó anteriormente, el `item` es el que realiza el daño y el ataque en sí, por tanto, se implementa `receive<Item>Attack(IEquipableItem itemEnemy)` a cada `item` para que reciba el ataque según el `itemEnemy` que lo recibe como parámetro. De esta manera, `unit A` delega el trabajo de atacar al `item A` que tiene equipado y se realiza lo mismo con`unit B`, haciendo que el `item B` que tiene equipado sea quien reciba el ataque. De esta manera es más simple hacer un `DoubleDispatch` para los ataques recibidos
+As mentioned earlier, the `item` is who damage and make the attack, therefore, it's implemented `receive<Item>Attack(IEquipableItem itemEnemy)` to each `item` to receive the attack according to `itemEnemy` that receives as a parameter. In this way, `unit A` delegate the job of attack to `item A` equipped and the `unit B` make the same, doing that the `item B` equipped to `unit B` receive the attack. This way it is simpler to make a `DoubleDispatch` for the attacks received
 
 ```java
 //Example general of receive Attack
@@ -170,11 +167,11 @@ Como se mencionó anteriormente, el `item` es el que realiza el daño y el ataqu
   }
 ```
 
-`item B` al recibir el ataque, deriva el daño a `unit B` según el `item A` que lo atacó. Suponiendo que `unit B` puede seguir atacando, a pesar del daño recibido, según [las tablas anteriores](#Recibir-ataques) `item B` realiza el contrataque que le corresponde respecto al `item A` que lo atacó. Luego, el combate termina.
+`item B` receive the attack and delegate the damage to `unit B` according to the `item A` that attacked him. Supposing that `unit B` can keep attacking, in spite of the damage received, `item B` make the counterattack with respect to `item A`. Finally, the combat ends.
 
-##### Recibir ataque mágico
+##### Receive magic attack
 
-Dado a que `Sorcerer` puede equiparse de 3 items distintos, es necesario distinguir con qué `item` ataca a su enemigo. Esto se resuelve con el método `receiveMagicAttack()` implementado en el ataque que realiza `Sorcerer` contra otra unidad. 
+As `Sorcerer` can equip 3 differents items, is necessary to distinguish which `itemMagic` attack to the `enemy`. This is solved with the method `receiveMagicAttack()` implemented in the attack that make `Sorcerer` counter other `unit`.
 
 ```java
 public void attack(IUnit enemy) {
@@ -187,7 +184,7 @@ public void attack(IUnit enemy) {
     }
 ```
 
-El método recibe como parámetro el item del enemigo y lo envía a la clase del `item` portado por el `Sorcerer` donde se reconoce el `item` que porta el `Sorcerer` y se sigue el procedimiento descrito anteriormente de ataque y contrataque. 
+The method receive as parameter the enemy's `item` and sends it to the class of the `itemMagic` that was equipped to `Sorcerer`, where it's recognise the `itemMagic` that `Sorcerer` carry and the procedure attack and counterattack continues between the units.
 
 ```java
 public void receiveMagicAttack(IEquipableItem enemyAttack){
@@ -197,7 +194,7 @@ public void receiveMagicAttack(IEquipableItem enemyAttack){
 
 #### Exchange
 
-Todas las unidades pueden dar y recibir objetos de otras, siempre y cuando estas **estén a distancia 1 entre ellas**, que **no se supere la cantidad máxima** de items que puede portar la unidad que va a recibir el `item` y la unidad que dará el `item` **contenga el `item`** que va a dar en su inventario. Esto se verifica en `canExchange`
+All the units can give and receive items from other, as long as they **are to 1 distance between them**, **do not exceed** the maximum item capacity of the unit that will receive the `item` and the `unit` that will give the `item` **contain the `item`**. This is verified in `canExchange`
 
 ```java
 public boolean canExchange(IUnit unit, IEquipableItem item) {
@@ -207,7 +204,7 @@ public boolean canExchange(IUnit unit, IEquipableItem item) {
   }
 ```
 
-El método `giveItem` realiza el intercambio y se implementa en `AbstractUnit` para que todas las unidades hereden este método.
+In `AbstractUnit` is implemented the method `giveItem` for to make the exchange and all the units inherit this method 
 
 ```java
 public void giveItem(IUnit unit, IEquipableItem item) {
@@ -218,9 +215,13 @@ public void giveItem(IUnit unit, IEquipableItem item) {
   }
 ```
 
-El intercambio no tiene distinción entre unidades, por lo que no se añaden más restricciones de las ya mencionadas.
+The exchange has no distinction between units, so no more restrictions that those already mentioned are added 
 
-## Uso de app
+## How to use?
+
+
+
+
 
 Para poder obtener la última versión del programa, dirigirse a [Tags](https://github.com/sesepulveda17/homeWork-cc3002/releases) donde encontrará la versión más estable del programa.
 
