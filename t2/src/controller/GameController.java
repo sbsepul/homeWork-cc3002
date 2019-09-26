@@ -1,10 +1,10 @@
 package controller;
 
-import java.util.List;
-import model.Tactician;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
+
+import java.util.List;
 
 /**
  * Controller of the game.
@@ -16,6 +16,11 @@ import model.units.IUnit;
  */
 public class GameController {
 
+  private int numPlayers;
+  private int tamMap;
+  private List<Tactician> players;
+  private Field map;
+
   /**
    * Creates the controller for a new game.
    *
@@ -25,21 +30,22 @@ public class GameController {
    *     the dimensions of the map, for simplicity, all maps are squares
    */
   public GameController(int numberOfPlayers, int mapSize) {
-
+    numPlayers = numberOfPlayers;
+    tamMap = mapSize;
   }
 
   /**
    * @return the list of all the tacticians participating in the game.
    */
   public List<Tactician> getTacticians() {
-    return null;
+    return players;
   }
 
   /**
    * @return the map of the current game
    */
   public Field getGameMap() {
-    return null;
+    return map;
   }
 
   /**

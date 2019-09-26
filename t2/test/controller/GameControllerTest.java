@@ -22,15 +22,15 @@ class GameControllerTest {
   private List<String> testTacticians;
 
   @BeforeEach
-  void setUp() {
-    // Se define la semilla como un número aleatorio para generar variedad en los tests
+  public void setUp() {
+    // Se define la semilla como un número aleatorio para generar variedad en los tests || ok
     randomSeed = new Random().nextLong();
     controller = new GameController(4, 128);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
   }
 
   @Test
-  void getTacticians() {
+  public void getTacticians() {
     List<Tactician> tacticians = controller.getTacticians();
     assertEquals(4, tacticians.size());
     for (int i = 0; i < tacticians.size(); i++) {
@@ -39,9 +39,9 @@ class GameControllerTest {
   }
 
   @Test
-  void getGameMap() {
+  public void getGameMap() {
     Field gameMap = controller.getGameMap();
-    assertEquals(128, gameMap.getSize()); // getSize deben definirlo
+    assertEquals(128, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
     Random testRandom = new Random(randomSeed);
     // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:
@@ -52,16 +52,16 @@ class GameControllerTest {
     //    resultados que van a obtener.
     //    Hay 2 formas de hacer esto en Java, le pueden pasar el seed al constructor de Random, o
     //    usar el método setSeed de Random.
-    //  ESTO ÚLTIMO NO ESTÁ IMPLEMENTADO EN EL MAPA, ASÍ QUE DEBEN AGREGARLO (!)
+    //  ESTO ÚLTIMO NO ESTÁ IMPLEMENTADO EN EL MAPA, ASÍ QUE DEBEN AGREGARLO (!) || ok (?)
   }
 
   @Test
-  void getTurnOwner() {
+  public void getTurnOwner() {
     //  En este caso deben hacer lo mismo que para el mapa
   }
 
   @Test
-  void getRoundNumber() {
+  public void getRoundNumber() {
     controller.initGame(10);
     for (int i = 1; i < 10; i++) {
       assertEquals(i, controller.getRoundNumber());
@@ -72,7 +72,7 @@ class GameControllerTest {
   }
 
   @Test
-  void getMaxRounds() {
+  public void getMaxRounds() {
     Random randomTurnSequence = new Random();
     IntStream.range(0, 50).forEach(i -> {
       controller.initGame(randomTurnSequence.nextInt());
@@ -83,10 +83,10 @@ class GameControllerTest {
   }
 
   @Test
-  void endTurn() {
+  public void endTurn() {
     Tactician firstPlayer = controller.getTurnOwner();
     // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
-    Tactician secondPlayer = new Tactician(); // <- Deben cambiar esto (!)
+    Tactician secondPlayer = new Tactician("Player1"); // <- Deben cambiar esto (!)
     assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 
     controller.endTurn();
@@ -95,7 +95,7 @@ class GameControllerTest {
   }
 
   @Test
-  void removeTactician() {
+  public void removeTactician() {
     assertEquals(4, controller.getTacticians().size());
     controller.getTacticians()
         .forEach(tactician -> Assertions.assertTrue(testTacticians.contains(tactician.getName())));
@@ -113,7 +113,7 @@ class GameControllerTest {
   }
 
   @Test
-  void getWinners() {
+  public void getWinners() {
     controller.initGame(2);
     IntStream.range(0, 8).forEach(i -> controller.endTurn());
     assertEquals(4, controller.getWinners().size());
@@ -140,30 +140,30 @@ class GameControllerTest {
 
   // Desde aquí en adelante, los tests deben definirlos completamente ustedes
   @Test
-  void getSelectedUnit() {
+  public void getSelectedUnit() {
   }
 
   @Test
-  void selectUnitIn() {
+  public void selectUnitIn() {
   }
 
   @Test
-  void getItems() {
+  public void getItems() {
   }
 
   @Test
-  void equipItem() {
+  public void equipItem() {
   }
 
   @Test
-  void useItemOn() {
+  public void useItemOn() {
   }
 
   @Test
-  void selectItem() {
+  public void selectItem() {
   }
 
   @Test
-  void giveItemTo() {
+  public void giveItemTo() {
   }
 }

@@ -27,6 +27,8 @@ public class Field {
    *     the locations that are going to be added to the map
    */
   public void addCells(final boolean connectAll, final Location... cells) {
+    // Seed inserted
+    random.setSeed(200);
     for (Location cell : cells) {
       addCell(cell);
       Location[] adjacentCells = getAdjacentCells(cell);
@@ -141,7 +143,12 @@ public class Field {
     return cell1.isNeighbour(cell2);
   }
 
-    public int getSize() {
-    return 0;
-    }
+
+  /**
+   *
+   * @return size of map
+   */
+  public int getSize() {
+    return map.size();
+  }
 }

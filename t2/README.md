@@ -1,2 +1,6 @@
-# cc3002-hw
-Methodology's homeworks
+# Controlador
+## Resumen
+
+
+
+## Modo de uso	

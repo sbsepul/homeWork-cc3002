@@ -9,7 +9,8 @@ import model.units.IUnit;
  * Abstract class that defines some common information and behaviour between all items normals.
  *
  * @author Sebastian Sepulveda
- * @since 1.0
+ * @version 2.0
+ * @since v1.0
  */
 public abstract class AbstractItem implements IEquipableItem {
 
