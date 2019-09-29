@@ -2,9 +2,11 @@ package controller;
 
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
 import model.units.IUnit;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Controller of the game.
@@ -16,10 +18,16 @@ import java.util.List;
  */
 public class GameController {
 
+  private int turnCurrent = 0;
+  private Random random = new Random();
   private int numPlayers;
   private int tamMap;
   private List<Tactician> players;
+  private List<String> namePlayers;
   private Field map;
+  private int maxRounds;
+  private int numRounds;
+
 
   /**
    * Creates the controller for a new game.
@@ -32,13 +40,35 @@ public class GameController {
   public GameController(int numberOfPlayers, int mapSize) {
     numPlayers = numberOfPlayers;
     tamMap = mapSize;
+    // desordenamos la lista
+    players = new ArrayList<>(numberOfPlayers);
+    // seed
+    random.setSeed(500);
+    for(int i=0; i<numberOfPlayers; i++){
+      int posRandom = random.nextInt(numberOfPlayers);
+      String name = "Player " + Integer.toString(i+1);
+      namePlayers.add(posRandom, name);
+      players.add(posRandom, new Tactician(name));
+    }
+
+    //adding locations to map
+    List<Location> locations = new ArrayList<>();
+    double n = Math.sqrt(mapSize);
+    for(int i = 0; i < (int) n; i++){
+      for(int j = 0; i < (int) n; i++){
+        locations.add(new Location(i,j));
+      }
+    }
+    for(Location cell:locations) {
+      map.addCells(true, cell);
+    }
   }
 
   /**
    * @return the list of all the tacticians participating in the game.
    */
   public List<Tactician> getTacticians() {
-    return players;
+    return List.copyOf(players);
   }
 
   /**
@@ -52,28 +82,35 @@ public class GameController {
    * @return the tactician that's currently playing
    */
   public Tactician getTurnOwner() {
-    return null;
+    return players.get(turnCurrent);
   }
 
   /**
    * @return the number of rounds since the start of the game.
    */
   public int getRoundNumber() {
-    return 0;
+    return numRounds;
   }
 
   /**
    * @return the maximum number of rounds a match can last
    */
   public int getMaxRounds() {
-    return 0;
+    return maxRounds;
   }
 
   /**
    * Finishes the current player's turn.
    */
   public void endTurn() {
-
+    //verify if a player has lost, for example in a counter attack
+    if(getTurnOwner().canPlay()){
+      // if can
+      turnCurrent++;
+    }
+    else{
+      players.remove(turnCurrent);
+    }
   }
 
   /**
@@ -83,7 +120,9 @@ public class GameController {
    *     the player to be removed
    */
   public void removeTactician(String tactician) {
-
+    int index = namePlayers.indexOf(tactician);
+    players.remove(index);
+    namePlayers.remove(index);
   }
 
   /**
@@ -92,28 +131,47 @@ public class GameController {
    *  the maximum number of turns the game can last
    */
   public void initGame(final int maxTurns) {
-
+    maxRounds = maxTurns;
+    numRounds = maxRounds;
+    boolean time = false;
+    if(maxTurns==-1){
+      time = true;
+    }
+    while(numRounds<=getMaxRounds() || time){
+      /*
+       colocar aqui todo lo que significa iniciar una partida
+       asegurarse cuando termina una partida
+      */
+    }
+    // detener el juego y retornar ganadores????? (no devuelve nada este metodo)
   }
 
   /**
    * Starts a game without a limit of turns.
    */
   public void initEndlessGame() {
-
+    initGame(-1);
   }
 
   /**
    * @return the winner of this game, if the match ends in a draw returns a list of all the winners
    */
   public List<String> getWinners() {
-    return null;
+    ArrayList<String> winners = null;
+    Map<String, Integer> unitRest = new HashMap<String,Integer>();
+    for(Tactician t: this.getTacticians()){
+      // verificando en initGame o en otro proceso que el numero de
+      // partidas ya se acabo, entonces hay que ver cual t tiene
+      // mayor cantidad de unidades restantes
+    }
+    return winners;
   }
 
   /**
    * @return the current player's selected unit
    */
   public IUnit getSelectedUnit() {
-    return null;
+    return getTurnOwner().getCurrentUnit();
   }
 
   /**

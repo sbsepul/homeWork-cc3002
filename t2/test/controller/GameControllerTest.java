@@ -58,6 +58,9 @@ class GameControllerTest {
   @Test
   public void getTurnOwner() {
     //  En este caso deben hacer lo mismo que para el mapa
+    Tactician tactician = controller.getTurnOwner();
+    String firstName = controller.getTacticians().get(0).getName();
+    assertEquals(firstName, tactician.getName());
   }
 
   @Test
@@ -128,7 +131,7 @@ class GameControllerTest {
     IntStream.range(0, 2).forEach(i -> controller.endTurn());
     List<String> winners = controller.getWinners();
     assertEquals(2, winners.size());
-    assertTrue(List.of("Player 1", "Player 2").containsAll(winners));
+    assertTrue(List.of("Player 1", "Player 3").containsAll(winners));
 
     controller.initEndlessGame();
     for (int i = 0; i < 3; i++) {
