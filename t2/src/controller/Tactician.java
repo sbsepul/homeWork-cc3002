@@ -6,6 +6,8 @@ import java.util.List;
 
 import model.items.IEquipableItem;
 import model.map.Field;
+import model.map.Location;
+import model.units.Hero;
 import model.units.IUnit;
 
 /**
@@ -25,19 +27,26 @@ public class Tactician {
     private final List<IUnit> units = new ArrayList<>();
     private IUnit currentUnit;
     private boolean status;
+    private final Field map;
+    private Field location;
+
 
     /**
      * Constructor to specify an alternative source of moves
      *
      * @param markName name for mark to player
+     * @param map
      *
      */
-    public Tactician(String markName, IUnit... unitSet){
-        mark = markName;
-        status = true;
-        units.addAll(Arrays.asList(unitSet));
+    public Tactician(String markName, Field map, IUnit... unitSet){
+        this.mark = markName;
+        this.map = map;
+        this.status = true;
+        IUnit hero = new Hero(50,2, new Location(0,0));
+        this.units.add(hero);
+        this.units.addAll(Arrays.asList(unitSet));
         // for default the first element in units will be the first object in the list units
-        currentUnit = units.get(0);
+        this.currentUnit = units.get(0);
     }
 
     /**

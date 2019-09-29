@@ -20,6 +20,7 @@ class GameControllerTest {
   private GameController controller;
   private long randomSeed;
   private List<String> testTacticians;
+  private Field mapTarget;
 
   @BeforeEach
   public void setUp() {
@@ -89,7 +90,7 @@ class GameControllerTest {
   public void endTurn() {
     Tactician firstPlayer = controller.getTurnOwner();
     // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
-    Tactician secondPlayer = new Tactician("Player1"); // <- Deben cambiar esto (!)
+    Tactician secondPlayer = new Tactician("Player1", mapTarget); // <- Deben cambiar esto (!)
     assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 
     controller.endTurn();

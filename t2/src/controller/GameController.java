@@ -5,7 +5,6 @@ import model.map.Field;
 import model.map.Location;
 import model.units.IUnit;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -40,27 +39,35 @@ public class GameController {
   public GameController(int numberOfPlayers, int mapSize) {
     numPlayers = numberOfPlayers;
     tamMap = mapSize;
-    // desordenamos la lista
-    players = new ArrayList<>(numberOfPlayers);
-    // seed
-    random.setSeed(500);
-    for(int i=0; i<numberOfPlayers; i++){
-      int posRandom = random.nextInt(numberOfPlayers);
-      String name = "Player " + Integer.toString(i+1);
-      namePlayers.add(posRandom, name);
-      players.add(posRandom, new Tactician(name));
-    }
-
     //adding locations to map
     List<Location> locations = new ArrayList<>();
-    double n = Math.sqrt(mapSize);
-    for(int i = 0; i < (int) n; i++){
-      for(int j = 0; i < (int) n; i++){
+    int n = (int) Math.floor(Math.sqrt(mapSize));
+    for(int i = 0; i < n; i++){
+      for(int j = 0; i < n; i++){
         locations.add(new Location(i,j));
       }
     }
     for(Location cell:locations) {
       map.addCells(true, cell);
+    }
+    // desordenamos la lista
+    players = new ArrayList<Tactician>(numberOfPlayers);
+    namePlayers = new ArrayList<String>(numberOfPlayers);
+    // seed
+    random.setSeed(500);
+    for(int i=0; i<numberOfPlayers; i++){
+      String name = "Player " + Integer.toString(i+1);
+      namePlayers.add(name);
+      players.add(new Tactician(name, this.map));
+    }
+    for(int i = 0; i <  numberOfPlayers; i++){
+      int posRandom = random.nextInt(numberOfPlayers);
+      Tactician temp_t = players.get(i);
+      String temp_s = namePlayers.get(i);
+      players.set(i, players.get(posRandom));
+      players.set(posRandom, temp_t);
+      namePlayers.set(i, namePlayers.get(posRandom));
+      namePlayers.set(posRandom, temp_s);
     }
   }
 
