@@ -205,7 +205,10 @@ public class GameController {
    *     vertical position of the unit
    */
   public void selectUnitIn(int x, int y) {
-
+     IUnit selectedUnit = map.getCell(x,y).getUnit();
+     if(this.getTurnOwner().getUnits().contains(selectedUnit)){
+       this.getTurnOwner().setCurrentUnit(map.getCell(x,y).getUnit());
+     }
   }
 
   /**

@@ -46,6 +46,8 @@ Casos bordes:
 * Si las unidades pueden tenern 0 unidades en un comienzo. En este caso el jugador no puede jugar, esto significaria que tiene que no se puede mover, lo cual quita un poco la logica del programa. Luego tambien sucede que el *tactician*  pierde en un caso cuando no tiene mas unidades. Entonces en este caso el jugador que parte sin unidades se ve como que revive. Nah que verrrratatatatata (DEBEN TENER MINIMO 1 UNIDAD
 * Cada tactician puede mover a todas sus unidades **solo una vez**, esto implica que una vez que mueva una unidad el proceso de partida continua si hay otra unidad que se pueda mover, es decir, hay otra unidad que este en la misma posicion
 * En ningun momento del juego debe haber dos unidades en la misma casilla. Por tanto, si una unidad muere, hay que verificar que la casilla en la que se encuentraba queda vacia para que otra unidad pueda ocupar ese puesto en otro turno, o incluso en el mismo.
+* Se asume que el van a existir 
+* Al selecccionar una unidad esta debe pertenecer al equipo del jugador. No deberia poder seleccionar a otra unidad que no sea de su equipo.
 
 
 
@@ -56,7 +58,15 @@ Casos bordes:
 
 
 * Los Tacticians deben tener referencia a todo el mapa y además deben conocer el lugar que se le asigna al comienzo?
+
 * Dado el tamaño del mapa existe una cantidad limitada de jugadores que pueden participar y una cantidad maxima de unidades que pueden tener cada uno para colocarlos en el mapa. Por tanto, se debe considerar esto al iniciarse el juego?
+
 * Asumiendo que tener 0 unidades significa perder, pensé en crear un hero en el constructor de tactician para que tenga sentido que el juego no inicie con todos perdiendo, por ejemplo si el jugador no selecciona a un hero al inicio. Tengo la duda si esto esta bien y si el area que se le asigna al jugador debe ser aleatorio o eso es algo arbitrario? 
+
 * Cuando se señala que el controller debe manejar inputs, esto significa que debemos implementar un BufferedReader en Controller? 
+
 * En la tarea se debe manejar errores con IOException y todo eso? 
+
+* En el enunciado aparece que al jugador se le asigna un área de inicio donde debe situar sus unidades
+
+  

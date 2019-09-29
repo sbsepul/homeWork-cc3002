@@ -1,8 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -28,46 +26,47 @@ public class Tactician {
     private IUnit currentUnit;
     private boolean status;
     private final Field map;
+    private Field ownMap;
     private Field location;
-    private List<Boolean> liveHero;
+    private Map<Integer,Boolean> liveHero = new HashMap<>();
+
 
 
     /**
      * Constructor to specify an alternative source of moves
      *
      * @param markName name for mark to player
-     * @param map
+     * @param map reference to map in the game
+     * @param unitSet Tactician's firsts units in the start game.
      *
      */
     public Tactician(String markName, Field map, IUnit... unitSet){
         this.mark = markName;
         this.map = map;
+        this.ownMap = map;
         this.status = true;
-        IUnit hero = new Hero(50,2, new Location(0,0));
-        this.units.add(hero);
-        this.liveHero.add(true);
         this.units.addAll(Arrays.asList(unitSet));
         // for default the first element in units will be the first object in the list units
         this.currentUnit = units.get(0);
     }
 
     /**
-     * Constructor normal to use with input
-     *
-     * @param initMark
+     * Constructor to specify range of the map that can use the Tactician
      */
-    //public Tactician(String initMark) { this(initMark,IUnit...); }
+    public Tactician(String markName, Field map,List<Integer> rangeX, List<Integer> rangeY, IUnit... unitSet){
+        this(markName,map, unitSet);
+        if(rangeX.get(0)!=-1 && rangeY.get(0)!=-1){
+            for(int i = rangeX.get(0); i< rangeX.get(1); i++){
+                for(int j = rangeY.get(0); j< rangeY.get(1); j++){
+                    ownMap.addCells(true, map.getCell(i,j));
+                }
+            }
+        }
+    }
 
     /**
-     * Special constructor to make a Player that plays a fixed
-     * set of moves from a String.
-     *
-     * Used to define test cases.
+     * @return Tactician's name
      */
-    //public Tactician(String initMark) {
-    //    this(initMark);
-    //}
-
     public String getName() {
         return mark;
     }
@@ -85,6 +84,10 @@ public class Tactician {
      * @param unitAdded
      */
     public void addUnit(IUnit unitAdded){
+        if(unitAdded instanceof Hero){
+            int pos = this.units.size()-1;
+            this.liveHero.put(pos,true);
+        }
         units.add(unitAdded);
     }
 
@@ -140,6 +143,14 @@ public class Tactician {
 
     /**
      *
+     * @param unit
+     */
+    public void setCurrentUnit(IUnit unit) {
+        this.currentUnit = unit;
+    }
+
+    /**
+     *
      * @param index
      */
     public void selectUnit(int index){
@@ -171,6 +182,4 @@ public class Tactician {
     public void retirePlayer(){
         status = false;
     }
-
-
 }
