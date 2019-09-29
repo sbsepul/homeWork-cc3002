@@ -35,7 +35,7 @@ class GameControllerTest {
     List<Tactician> tacticians = controller.getTacticians();
     assertEquals(4, tacticians.size());
     for (int i = 0; i < tacticians.size(); i++) {
-      assertEquals("Player " + i, tacticians.get(i + 1).getName());
+      assertEquals("Player " + Integer.toString(i+1), tacticians.get(i).getName());
     }
   }
 

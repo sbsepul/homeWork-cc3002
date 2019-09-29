@@ -23,9 +23,9 @@ public class GameController {
   private int tamMap;
   private List<Tactician> players;
   private List<String> namePlayers;
-  private Field map;
+  private Field map= new Field();
   private int maxRounds;
-  private int numRounds;
+  private int numRounds = 0;
 
 
   /**
@@ -41,7 +41,8 @@ public class GameController {
     tamMap = mapSize;
     //adding locations to map
     List<Location> locations = new ArrayList<>();
-    int n = (int) Math.floor(Math.sqrt(mapSize));
+    //int n = (int) Math.floor(Math.sqrt(mapSize));
+    int n = (int) Math.pow(mapSize,2);
     for(int i = 0; i < n; i++){
       for(int j = 0; i < n; i++){
         locations.add(new Location(i,j));
@@ -54,20 +55,11 @@ public class GameController {
     players = new ArrayList<Tactician>(numberOfPlayers);
     namePlayers = new ArrayList<String>(numberOfPlayers);
     // seed
-    random.setSeed(500);
+    //random.setSeed(500);
     for(int i=0; i<numberOfPlayers; i++){
       String name = "Player " + Integer.toString(i+1);
       namePlayers.add(name);
       players.add(new Tactician(name, this.map));
-    }
-    for(int i = 0; i <  numberOfPlayers; i++){
-      int posRandom = random.nextInt(numberOfPlayers);
-      Tactician temp_t = players.get(i);
-      String temp_s = namePlayers.get(i);
-      players.set(i, players.get(posRandom));
-      players.set(posRandom, temp_t);
-      namePlayers.set(i, namePlayers.get(posRandom));
-      namePlayers.set(posRandom, temp_s);
     }
   }
 
@@ -76,6 +68,24 @@ public class GameController {
    */
   public List<Tactician> getTacticians() {
     return List.copyOf(players);
+  }
+
+  /**
+   *
+   * @return a Random order for the tactician in a new Round
+   */
+  public void getNewRound(List<Tactician> players, List<String> namePlayers){
+    random.setSeed(500);
+    int nPlayers = this.getTacticians().size();
+    for(int i = 0; i <  nPlayers; i++){
+      int posRandom = random.nextInt(nPlayers);
+      Tactician temp_t = players.get(i);
+      String temp_s = namePlayers.get(i);
+      players.set(i, players.get(posRandom));
+      players.set(posRandom, temp_t);
+      namePlayers.set(i, namePlayers.get(posRandom));
+      namePlayers.set(posRandom, temp_s);
+    }
   }
 
   /**
@@ -96,7 +106,7 @@ public class GameController {
    * @return the number of rounds since the start of the game.
    */
   public int getRoundNumber() {
-    return numRounds;
+    return turnCurrent;
   }
 
   /**
@@ -106,17 +116,23 @@ public class GameController {
     return maxRounds;
   }
 
+  private void changeToNextTurn(){
+    int nPlayers = getTacticians().size();
+    this.turnCurrent = nPlayers%turnCurrent;
+    this.numRounds++;
+
+  }
   /**
    * Finishes the current player's turn.
    */
   public void endTurn() {
     //verify if a player has lost, for example in a counter attack
     if(getTurnOwner().canPlay()){
-      // if can
-      turnCurrent++;
+      this.changeToNextTurn();
     }
     else{
       players.remove(turnCurrent);
+      this.changeToNextTurn();
     }
   }
 
@@ -139,7 +155,6 @@ public class GameController {
    */
   public void initGame(final int maxTurns) {
     maxRounds = maxTurns;
-    numRounds = maxRounds;
     boolean time = false;
     if(maxTurns==-1){
       time = true;

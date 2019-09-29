@@ -29,6 +29,7 @@ public class Tactician {
     private boolean status;
     private final Field map;
     private Field location;
+    private List<Boolean> liveHero;
 
 
     /**
@@ -44,6 +45,7 @@ public class Tactician {
         this.status = true;
         IUnit hero = new Hero(50,2, new Location(0,0));
         this.units.add(hero);
+        this.liveHero.add(true);
         this.units.addAll(Arrays.asList(unitSet));
         // for default the first element in units will be the first object in the list units
         this.currentUnit = units.get(0);

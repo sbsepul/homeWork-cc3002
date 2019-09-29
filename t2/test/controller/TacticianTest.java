@@ -4,17 +4,21 @@ import model.map.Field;
 import model.map.Location;
 import org.junit.jupiter.api.BeforeEach;
 
+import javax.swing.table.TableCellRenderer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class TacticianTest {
     private Tactician tactician;
     private Field mapTactician;
     private Field map;
+    private GameController controller;
 
     @BeforeEach
     public void setUp(){
-        int mapSize = 9<<2;
+        controller = new GameController(2,9);
+        int mapSize = controller.getGameMap().getSize();
         List<Location> locations = new ArrayList<>();
         int n = (int) Math.floor(Math.sqrt(mapSize));
         for(int i = 0; i < n; i++){
@@ -25,6 +29,12 @@ public class TacticianTest {
         for(Location cell:locations) {
             map.addCells(true, cell);
         }
-        tactician = new Tactician("Player0", map);
+        for(int i=0; i<3; i++){
+            for(int j = 0; j<3; j++){
+                Location l = map.getCell(i,j);
+                mapTactician.addCells(true, l);
+            }
+        }
+        tactician = new Tactician("Player0", mapTactician);
     }
 }
