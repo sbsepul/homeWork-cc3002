@@ -215,7 +215,7 @@ public class GameController {
    * @return the inventory of the currently selected unit.
    */
   public List<IEquipableItem> getItems() {
-    return null;
+    return this.getTurnOwner().getItemsCurrentUnit();
   }
 
   /**
@@ -225,7 +225,8 @@ public class GameController {
    *     the location of the item in the inventory.
    */
   public void equipItem(int index) {
-
+    IEquipableItem item = this.getTurnOwner().getItemsCurrentUnit().get(index);
+    this.getTurnOwner().setEquipItem(item);
   }
 
   /**

@@ -201,8 +201,9 @@ public interface IUnit {
   /**
    * set a item equipped for any other
    * @param item new that will be equipped
+   * @return
    */
-  void setEquippedItem(IEquipableItem item);
+  int setEquippedItem(IEquipableItem item);
 
   /**
    * change the item equipped in the unit if this have,
@@ -229,6 +230,7 @@ public interface IUnit {
    * @return true if the two units can exchange a item
    */
   boolean canExchange(IUnit unit, IEquipableItem item);
+
 
 }
 

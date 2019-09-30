@@ -113,7 +113,7 @@ public class Tactician {
      * @param item
      */
     public void equippedCurrentUnit(IEquipableItem item){
-        currentUnit.equipItem(item);
+        //currentUnit.setEquippedItem();
     }
 
     /**
@@ -181,5 +181,13 @@ public class Tactician {
      */
     public void retirePlayer(){
         status = false;
+    }
+
+    /**
+     *
+     * @param item
+     */
+    public void setEquipItem(IEquipableItem item) {
+       this.currentUnit.changeEquippedItem(item);
     }
 }
