@@ -1,10 +1,10 @@
 package controller;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import model.items.IEquipableItem;
 import model.map.Field;
-import model.map.Location;
 import model.units.Hero;
 import model.units.IUnit;
 
@@ -71,6 +71,10 @@ public class Tactician {
         return mark;
     }
 
+    public Map<Integer, Boolean> getLiveHero() {
+        return liveHero;
+    }
+
     /**
      * Remove the unit which is died
      * @param unitDeleted
@@ -84,11 +88,12 @@ public class Tactician {
      * @param unitAdded
      */
     public void addUnit(IUnit unitAdded){
+        units.add(unitAdded);
+        // se asume que las unidades que se añaden tienen vida positiva
         if(unitAdded instanceof Hero){
             int pos = this.units.size()-1;
             this.liveHero.put(pos,true);
         }
-        units.add(unitAdded);
     }
 
     /**
@@ -104,16 +109,32 @@ public class Tactician {
      * @return true if a player can play, otherwise false
      */
     public boolean canPlay() {
-        return true;
+        if(this.getLiveHero().size()==0){
+            if(this.getStatus()){
+                if(this.isDieAllUnit()){
+                    return false;
+                }
+                return this.getStatus();
+            }
+            return this.getStatus();
+        }
+        else{
+            if(liveHero.containsValue(false)){
+                return false;
+            }
+            else{
+                return this.getStatus();
+            }
+        }
     }
 
-
-    /**
-     *
-     * @param item
-     */
-    public void equippedCurrentUnit(IEquipableItem item){
-        //currentUnit.setEquippedItem();
+    private boolean isDieAllUnit() {
+        for(int i = 0; i < this.getUnits().size(); i++){
+            if(this.getUnits().get(i).getCurrentHitPoints()>0){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

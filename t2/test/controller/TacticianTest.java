@@ -3,6 +3,7 @@ package controller;
 import model.map.Field;
 import model.map.Location;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.table.TableCellRenderer;
 import java.util.ArrayList;
@@ -18,23 +19,30 @@ public class TacticianTest {
     @BeforeEach
     public void setUp(){
         controller = new GameController(2,9);
-        int mapSize = controller.getGameMap().getSize();
-        List<Location> locations = new ArrayList<>();
-        int n = (int) Math.floor(Math.sqrt(mapSize));
-        for(int i = 0; i < n; i++){
-            for(int j = 0; i < n; i++){
-                locations.add(new Location(i,j));
-            }
-        }
-        for(Location cell:locations) {
-            map.addCells(true, cell);
-        }
-        for(int i=0; i<3; i++){
-            for(int j = 0; j<3; j++){
-                Location l = map.getCell(i,j);
-                mapTactician.addCells(true, l);
-            }
-        }
         tactician = new Tactician("Player0", mapTactician);
     }
+
+    @Test
+    public void getCurrentUnit(){
+
+    }
+    @Test
+    public void removeUnit(){
+
+    }
+    @Test
+    public void addUnit(){
+
+    }
+
+    @Test
+    public void getUnits(){
+
+    }
+    @Test
+    public void canPlay(){
+
+    }
+
+
 }

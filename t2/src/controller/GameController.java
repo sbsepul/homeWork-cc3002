@@ -20,12 +20,13 @@ public class GameController {
   private int turnCurrent = 0;
   private Random random = new Random();
   private int numPlayers;
-  private int tamMap;
+  private final int tamMap;
   private List<Tactician> players;
   private List<String> namePlayers;
   private Field map= new Field();
   private int maxRounds;
   private int numRounds = 0;
+  private List<String> winners = null;
 
 
   /**
@@ -61,6 +62,14 @@ public class GameController {
       namePlayers.add(name);
       players.add(new Tactician(name, this.map));
     }
+  }
+
+  public int getNumPlayers() {
+    return numPlayers;
+  }
+
+  public void lessNumPlayers(){
+    this.numPlayers--;
   }
 
   /**
@@ -103,10 +112,18 @@ public class GameController {
   }
 
   /**
+   *
+   * @return
+   */
+  public int getPosTurnOwner(){
+    return turnCurrent;
+  }
+
+  /**
    * @return the number of rounds since the start of the game.
    */
   public int getRoundNumber() {
-    return turnCurrent;
+    return numRounds;
   }
 
   /**
@@ -149,6 +166,54 @@ public class GameController {
   }
 
   /**
+   *
+   * @return
+   */
+  public boolean notOver(){
+    if(this.getMaxRounds()==-1){
+      /*
+      No acaba hasta que todos los jugadores se retiren
+       */
+      if(this.isOnlyAPlayer() || this.dieAllHero()) return false;
+      return true;
+    }
+    else{
+      if(this.isOnlyAPlayer() || this.dieAllHero() || this.getMaxRounds()==this.getRoundNumber()){
+        this.updateWinners();
+        return false;
+      }
+      // Round number < Max rounds
+      else return true;
+    }
+  }
+
+  /**
+   *
+   */
+  public void updateWinners() {
+
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean dieAllHero() {
+    return false;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean isOnlyAPlayer() {
+    if(numPlayers==1){
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Starts the game.
    * @param maxTurns
    *  the maximum number of turns the game can last
@@ -164,6 +229,7 @@ public class GameController {
        colocar aqui todo lo que significa iniciar una partida
        asegurarse cuando termina una partida
       */
+
     }
     // detener el juego y retornar ganadores????? (no devuelve nada este metodo)
   }
@@ -179,14 +245,13 @@ public class GameController {
    * @return the winner of this game, if the match ends in a draw returns a list of all the winners
    */
   public List<String> getWinners() {
-    ArrayList<String> winners = null;
     Map<String, Integer> unitRest = new HashMap<String,Integer>();
     for(Tactician t: this.getTacticians()){
       // verificando en initGame o en otro proceso que el numero de
       // partidas ya se acabo, entonces hay que ver cual t tiene
       // mayor cantidad de unidades restantes
     }
-    return winners;
+    return this.winners;
   }
 
   /**
