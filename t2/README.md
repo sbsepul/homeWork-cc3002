@@ -69,4 +69,8 @@ Casos bordes:
 
 * En el enunciado aparece que al jugador se le asigna un área de inicio donde debe situar sus unidades
 
+* Si un metodo retorna un valor cualquiera, es valido que en algun caso retorne nulo? por ejemplo cree un mapa que guarda en las llaves la posicion del hero en la lista de unidades de tactician, y en los valores guarda un boleano que representa el estado del hero (true vivo, false muerto). Esto hace mas facil revisar cuando un jugador perdió o ganó, porque si no habria que revisar cada HP de cada unidad siempre que se termina una batalla.
+
+* 
+
   

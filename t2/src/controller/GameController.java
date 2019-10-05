@@ -25,7 +25,7 @@ public class GameController {
   private List<String> namePlayers;
   private Field map= new Field();
   private int maxRounds;
-  private int numRounds = 0;
+  private int numRounds = 1;
   private List<String> winners = null;
 
 
@@ -64,12 +64,12 @@ public class GameController {
     }
   }
 
+  /**
+   * Getter the number of players in the game
+   * @return
+   */
   public int getNumPlayers() {
     return numPlayers;
-  }
-
-  public void lessNumPlayers(){
-    this.numPlayers--;
   }
 
   /**
@@ -77,24 +77,6 @@ public class GameController {
    */
   public List<Tactician> getTacticians() {
     return List.copyOf(players);
-  }
-
-  /**
-   *
-   * @return a Random order for the tactician in a new Round
-   */
-  public void getNewRound(List<Tactician> players, List<String> namePlayers){
-    random.setSeed(500);
-    int nPlayers = this.getTacticians().size();
-    for(int i = 0; i <  nPlayers; i++){
-      int posRandom = random.nextInt(nPlayers);
-      Tactician temp_t = players.get(i);
-      String temp_s = namePlayers.get(i);
-      players.set(i, players.get(posRandom));
-      players.set(posRandom, temp_t);
-      namePlayers.set(i, namePlayers.get(posRandom));
-      namePlayers.set(posRandom, temp_s);
-    }
   }
 
   /**
@@ -133,10 +115,31 @@ public class GameController {
     return maxRounds;
   }
 
+  /**
+   *
+   * @return a Random order for the tactician in a new Round
+   */
+  public void createNewRound(List<Tactician> players, List<String> namePlayers){
+    random.setSeed(500);
+    int nPlayers = this.getTacticians().size();
+    for(int i = 0; i <  nPlayers; i++){
+      int posRandom = random.nextInt(nPlayers);
+      Tactician temp_t = players.get(i);
+      String temp_s = namePlayers.get(i);
+      players.set(i, players.get(posRandom));
+      players.set(posRandom, temp_t);
+      namePlayers.set(i, namePlayers.get(posRandom));
+      namePlayers.set(posRandom, temp_s);
+    }
+  }
+
   private void changeToNextTurn(){
     int nPlayers = getTacticians().size();
-    this.turnCurrent = nPlayers%turnCurrent;
-    this.numRounds++;
+    if(turnCurrent==nPlayers-1){
+      this.numRounds++;
+      this.turnCurrent=0;
+    }
+    else this.turnCurrent++;
 
   }
   /**
@@ -219,7 +222,7 @@ public class GameController {
    *  the maximum number of turns the game can last
    */
   public void initGame(final int maxTurns) {
-    maxRounds = maxTurns;
+    this.maxRounds = maxTurns;
     boolean time = false;
     if(maxTurns==-1){
       time = true;
@@ -228,8 +231,11 @@ public class GameController {
       /*
        colocar aqui todo lo que significa iniciar una partida
        asegurarse cuando termina una partida
+       aqui se supone que se deben tomar acciones que el controller debe estar observando
+       En este caso se estaria ocupando el patron de diseño Observer, donde el observado seria el
+       jugador actual y el controller seria el controlador
       */
-
+      
     }
     // detener el juego y retornar ganadores????? (no devuelve nada este metodo)
   }

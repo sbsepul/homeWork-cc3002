@@ -26,7 +26,7 @@ class GameControllerTest {
   public void setUp() {
     // Se define la semilla como un número aleatorio para generar variedad en los tests || ok
     randomSeed = new Random().nextLong();
-    controller = new GameController(4, 128);
+    controller = new GameController(4, 7);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
   }
 
@@ -42,7 +42,7 @@ class GameControllerTest {
   @Test
   public void getGameMap() {
     Field gameMap = controller.getGameMap();
-    assertEquals(128, gameMap.getSize()); // getSize deben definirlo || ok
+    assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
     Random testRandom = new Random(randomSeed);
     // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:

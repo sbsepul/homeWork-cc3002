@@ -13,6 +13,9 @@ import model.units.IUnit;
  * juego. Dentro de su turno un jugador puede mover a todas sus unidades, pero una sola vez. Para facilitar
  * la implementación el jugador debe mantener una referencia a la unidad actualmente seleccionada.
  *
+ * Dado a que tactician debe ocupar cosas de IEquipable y de IUnit, se deberia ocupar el patron de diseño
+ * de
+ *
  * @author Sebastian Sepulveda
  * @version 2.0
  * @since 2.0
@@ -47,7 +50,9 @@ public class Tactician {
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
         // for default the first element in units will be the first object in the list units
-        this.currentUnit = units.get(0);
+        if(!this.units.isEmpty()){
+            this.currentUnit = units.get(0);
+        }
     }
 
     /**
@@ -71,8 +76,35 @@ public class Tactician {
         return mark;
     }
 
+    /**
+     *
+     * @return all the player's units
+     */
+    public List<IUnit> getUnits(){
+        return units;
+    }
+
+    /**
+     *
+     * @return List of Heros live, null if Tactician don't have Heros
+     */
     public Map<Integer, Boolean> getLiveHero() {
         return liveHero;
+    }
+
+    /**
+     * @return Game's map
+     */
+    public Field getMap() {
+        return map;
+    }
+
+    /**
+     *
+     * @return Tactician's map where can put his units
+     */
+    public Field getOwnMap() {
+        return ownMap;
     }
 
     /**
@@ -94,14 +126,6 @@ public class Tactician {
             int pos = this.units.size()-1;
             this.liveHero.put(pos,true);
         }
-    }
-
-    /**
-     *
-     * @return all the player's units
-     */
-    public List<IUnit> getUnits(){
-        return units;
     }
 
     /**
@@ -128,7 +152,11 @@ public class Tactician {
         }
     }
 
-    private boolean isDieAllUnit() {
+    /**
+     *
+     * @return
+     */
+    public boolean isDieAllUnit() {
         for(int i = 0; i < this.getUnits().size(); i++){
             if(this.getUnits().get(i).getCurrentHitPoints()>0){
                 return false;
@@ -200,7 +228,7 @@ public class Tactician {
     /**
      *
      */
-    public void retirePlayer(){
+    public void retirePlayer() {
         status = false;
     }
 
