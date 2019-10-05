@@ -11,7 +11,7 @@ import java.util.*;
  * Controller of the game.
  * The controller manages all the input received from de game's GUI.
  *
- * @author Ignacio Slater Muñoz
+ * @author Sebastian Sepulveda
  * @version 2.0
  * @since 2.0
  */
