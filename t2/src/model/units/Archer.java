@@ -1,5 +1,6 @@
 package model.units;
 
+import model.factoryUnit.UnitType;
 import model.items.*;
 import model.items.Axe;
 import model.items.Bow;
@@ -37,7 +38,6 @@ public class Archer extends AbstractUnit {
       final IEquipableItem... items) {
     super(hitPoints, movement, position, 3, items);
   }
-
   @Override
   public void equipItemBow(Bow item) {
     equippedItem = item;

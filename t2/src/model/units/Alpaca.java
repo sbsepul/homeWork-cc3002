@@ -37,7 +37,7 @@ public class Alpaca extends AbstractUnit {
     super(hitPoints, movement, location, Integer.MAX_VALUE, items);
   }
 
-  /**
+    /**
    * {@inheritDoc}
    * <p>
    * The <i>Alpaca</i> cannot equip any item.

@@ -3,6 +3,32 @@
 
 
 
+## Patterns Design
+
+Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del jeugo en cierto instante, como las acciones realizadas por los tacticians, a traves del patron de Observer Pattern
+
+## Factory Pattern
+
+
+
+Se utiliza para crear los items, unidades y el mapa
+
+<insertar una imagen uml>
+
+La idea del diseño se basa en que al momento de seleccionarse una cierta unidad, el controlador debe ser capaz de poder asignarsela a un tactician
+
+
+
+
+
+## Observer Pattern
+
+
+
+Se utiliza para generar la interaccion entre el controlador
+
+<insertar  una imagen uml>
+
 ## Modo de uso	
 
 
@@ -10,6 +36,14 @@
 
 
 ## Supuestos
+
+
+
+
+
+
+
+
 
 
 
@@ -71,6 +105,8 @@ Casos bordes:
 
 * Si un metodo retorna un valor cualquiera, es valido que en algun caso retorne nulo? por ejemplo cree un mapa que guarda en las llaves la posicion del hero en la lista de unidades de tactician, y en los valores guarda un boleano que representa el estado del hero (true vivo, false muerto). Esto hace mas facil revisar cuando un jugador perdió o ganó, porque si no habria que revisar cada HP de cada unidad siempre que se termina una batalla.
 
-* 
+* Se asume que las unidades parten con un HP, movement??
+
+* Tiene sentido definir como class static a la fabrica de unit e items?
 
   

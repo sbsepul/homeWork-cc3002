@@ -20,6 +20,14 @@ import model.map.Location;
  */
 public class Fighter extends AbstractUnit {
 
+  /**
+   * Create a Fighter with HP, movement, location and items
+   *
+   * @param hitPoints
+   * @param movement
+   * @param location
+   * @param items
+   */
   public Fighter(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);

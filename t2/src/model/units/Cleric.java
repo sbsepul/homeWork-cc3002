@@ -32,7 +32,6 @@ public class Cleric extends AbstractUnit {
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
   }
-
   @Override
   public void equipItemStaff(Staff item) {
     equippedItem = item;
