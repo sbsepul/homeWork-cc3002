@@ -1,6 +1,5 @@
 package model.units;
 
-import model.factoryUnit.UnitType;
 import model.items.*;
 import model.items.Axe;
 import model.items.Bow;

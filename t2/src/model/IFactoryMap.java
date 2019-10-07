@@ -1,4 +1,4 @@
-package model.factoryMap;
+package model;
 
 import model.map.Field;
 
