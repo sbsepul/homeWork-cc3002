@@ -218,6 +218,8 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+
+
   @Override
   public boolean equals(Object obj) {
     return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints

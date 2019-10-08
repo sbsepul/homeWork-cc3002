@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import model.items.IEquipableItem;
 import model.map.Field;

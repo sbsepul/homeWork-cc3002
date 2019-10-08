@@ -26,6 +26,8 @@ public class GameController {
   private Field map= new Field();
   private int maxRounds;
   private int numRounds = 1;
+  private IUnit selectedUnit;
+  private IEquipableItem selectedItem;
   private List<String> winners = null;
 
 
@@ -163,6 +165,13 @@ public class GameController {
    *     the player to be removed
    */
   public void removeTactician(String tactician) {
+    /*
+    for(int i = 0; i<getTacticians().size(); i++){
+      if(getTacticians().get(i).getName()==tactician){
+        players.remove(i);
+      }
+    }
+    */
     int index = namePlayers.indexOf(tactician);
     players.remove(index);
     namePlayers.remove(index);
@@ -264,7 +273,11 @@ public class GameController {
    * @return the current player's selected unit
    */
   public IUnit getSelectedUnit() {
-    return getTurnOwner().getCurrentUnit();
+    return selectedUnit;
+  }
+
+  private void setSelectedUnit(IUnit newUnit){
+    selectedUnit = newUnit;
   }
 
   /**
@@ -277,8 +290,9 @@ public class GameController {
    */
   public void selectUnitIn(int x, int y) {
      IUnit selectedUnit = map.getCell(x,y).getUnit();
-     if(this.getTurnOwner().getUnits().contains(selectedUnit)){
-       this.getTurnOwner().setCurrentUnit(map.getCell(x,y).getUnit());
+     if(selectedUnit != null){
+       //this.getTurnOwner().setCurrentUnit(map.getCell(x,y).getUnit());
+       this.setSelectedUnit(selectedUnit);
      }
   }
 
@@ -309,7 +323,10 @@ public class GameController {
    *     vertical position of the target
    */
   public void useItemOn(int x, int y) {
-
+    IUnit enemy = getGameMap().getCell(x,y).getUnit();
+    if(enemy!=null) {
+      getTurnOwner().getCurrentUnit().attack(enemy);
+    }
   }
 
   /**
@@ -319,7 +336,11 @@ public class GameController {
    *     the location of the item in the inventory.
    */
   public void selectItem(int index) {
+    selectedItem = getSelectedUnit().getItems().get(index);
+  }
 
+  public IEquipableItem getSelectedItem(){
+    return selectedItem;
   }
 
   /**
@@ -331,6 +352,16 @@ public class GameController {
    *     vertical position of the target
    */
   public void giveItemTo(int x, int y) {
-
+    Tactician actual = getTurnOwner();
+    IUnit unitCurrent = getTurnOwner().getCurrentUnit();
+    //si la unidad actual tiene el item equipado
+    if(unitCurrent.getItems().contains(getSelectedItem())){
+      //si el jugador actual contiene a target unit
+      IUnit target = getGameMap().getCell(x,y).getUnit();
+      if(actual.getUnits().contains(target)){
+        getTurnOwner().getCurrentUnit().giveItem(
+                getGameMap().getCell(x,y).getUnit(),getSelectedItem());
+      }
+    }
   }
 }
