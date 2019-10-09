@@ -1,5 +1,9 @@
 package controller;
 
+import model.FactoryItem;
+import model.FactoryUnit;
+import model.IFactoryItem;
+import model.IFactoryUnit;
 import model.map.Field;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +25,8 @@ class GameControllerTest {
   private long randomSeed;
   private List<String> testTacticians;
   private Field mapTarget;
+  private IFactoryUnit factoryUnit;
+  private IFactoryItem factoryItem;
 
   @BeforeEach
   public void setUp() {
@@ -28,6 +34,8 @@ class GameControllerTest {
     randomSeed = new Random().nextLong();
     controller = new GameController(4, 7);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
+    factoryItem = new FactoryItem();
+    factoryUnit = new FactoryUnit();
   }
 
   @Test
@@ -35,7 +43,7 @@ class GameControllerTest {
     List<Tactician> tacticians = controller.getTacticians();
     assertEquals(4, tacticians.size());
     for (int i = 0; i < tacticians.size(); i++) {
-      assertEquals("Player " + Integer.toString(i+1), tacticians.get(i).getName());
+      assertEquals("Player " + i, tacticians.get(i).getName());
     }
   }
 
@@ -76,11 +84,13 @@ class GameControllerTest {
   }
 
   @Test
-  public void getMaxRounds() {
+  void getMaxRounds() {
     Random randomTurnSequence = new Random();
-    IntStream.range(0, 50).forEach(i -> {
-      controller.initGame(randomTurnSequence.nextInt());
-      assertEquals(randomTurnSequence.nextInt(), controller.getMaxRounds());
+    IntStream.range(0, 50).map(i -> randomTurnSequence.nextInt() & Integer.MAX_VALUE).forEach(nextInt -> {
+      controller.initGame(nextInt);
+      //System.out.println(nextInt);
+      assertEquals(nextInt, controller.getMaxRounds());
+      //System.out.println(nextInt);
     });
     controller.initEndlessGame();
     assertEquals(-1, controller.getMaxRounds());
@@ -90,7 +100,7 @@ class GameControllerTest {
   public void endTurn() {
     Tactician firstPlayer = controller.getTurnOwner();
     // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
-    Tactician secondPlayer = new Tactician("Player1", mapTarget); // <- Deben cambiar esto (!)
+    Tactician secondPlayer = new Tactician("Player 1"); // <- Deben cambiar esto (!)
     assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
 
     controller.endTurn();
@@ -106,7 +116,7 @@ class GameControllerTest {
 
     controller.removeTactician("Player 0");
     assertEquals(3, controller.getTacticians().size());
-    controller.getTacticians().forEach(tactician -> assertNotEquals("Player 1", tactician));
+    controller.getTacticians().forEach(tactician -> assertNotEquals("Player 0", tactician.getName()));
     controller.getTacticians()
         .forEach(tactician -> Assertions.assertTrue(testTacticians.contains(tactician.getName())));
 
@@ -120,6 +130,7 @@ class GameControllerTest {
   public void getWinners() {
     controller.initGame(2);
     IntStream.range(0, 8).forEach(i -> controller.endTurn());
+    assertEquals(3, controller.getRoundNumber());
     assertEquals(4, controller.getWinners().size());
     controller.getWinners()
         .forEach(player -> Assertions.assertTrue(testTacticians.contains(player)));
@@ -137,7 +148,7 @@ class GameControllerTest {
     controller.initEndlessGame();
     for (int i = 0; i < 3; i++) {
       assertNull(controller.getWinners());
-      controller.removeTactician("Player " + i);
+      controller.removeTactician("Player " + Integer.toString(i));
     }
     assertTrue(List.of("Player 3").containsAll(controller.getWinners()));
   }
@@ -145,6 +156,7 @@ class GameControllerTest {
   // Desde aquí en adelante, los tests deben definirlos completamente ustedes
   @Test
   public void getSelectedUnit() {
+
   }
 
   @Test

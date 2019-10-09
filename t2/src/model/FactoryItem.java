@@ -19,7 +19,7 @@ public class FactoryItem implements IFactoryItem{
      * @return
      */
     @Override
-    public IEquipableItem makeFactory(ItemType typeItem){
+    public IEquipableItem makeItem(ItemType typeItem){
         switch (typeItem){
             case AXE:
                 return new Axe("axe", 10, 1, 2);

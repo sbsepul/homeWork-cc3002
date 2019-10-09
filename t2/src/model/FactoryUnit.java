@@ -9,16 +9,9 @@ import model.units.*;
  * @version 2.0
  * @since 2.0
  */
-
-public class FactoryUnit implements IFactoryUnit{
-
-    /**
-     *
-     * @param unitType
-     * @return
-     */
+public class FactoryUnit implements IFactoryUnit {
     @Override
-    public IUnit makeFactory(UnitType unitType){
+    public IUnit makeUnit(UnitType unitType){
         switch (unitType){
             case HERO:
                 return new Hero(50,2,null);

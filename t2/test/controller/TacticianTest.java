@@ -19,7 +19,7 @@ public class TacticianTest {
     @BeforeEach
     public void setUp(){
         controller = new GameController(2,9);
-        tactician = new Tactician("Player0", mapTactician);
+        tactician = new Tactician("Player0");
     }
 
     @Test

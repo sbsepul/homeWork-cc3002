@@ -3,7 +3,6 @@ package controller;
 import java.util.*;
 
 import model.items.IEquipableItem;
-import model.map.Field;
 import model.units.Hero;
 import model.units.IUnit;
 
@@ -27,9 +26,6 @@ public class Tactician {
     private final List<IUnit> units = new ArrayList<>();
     private IUnit currentUnit;
     private boolean status;
-    private final Field map;
-    private Field ownMap;
-    private Field location;
     private Map<Integer,Boolean> liveHero = new HashMap<>();
 
 
@@ -38,33 +34,18 @@ public class Tactician {
      * Constructor to specify an alternative source of moves
      *
      * @param markName name for mark to player
-     * @param map reference to map in the game
      * @param unitSet Tactician's firsts units in the start game.
      *
      */
-    public Tactician(String markName, Field map, IUnit... unitSet){
+    public Tactician(String markName, IUnit... unitSet){
         this.mark = markName;
-        this.map = map;
-        this.ownMap = map;
+        //this.map = map;
+        //this.ownMap = map;
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
         // for default the first element in units will be the first object in the list units
         if(!this.units.isEmpty()){
             this.currentUnit = units.get(0);
-        }
-    }
-
-    /**
-     * Constructor to specify range of the map that can use the Tactician
-     */
-    public Tactician(String markName, Field map,List<Integer> rangeX, List<Integer> rangeY, IUnit... unitSet){
-        this(markName,map, unitSet);
-        if(rangeX.get(0)!=-1 && rangeY.get(0)!=-1){
-            for(int i = rangeX.get(0); i< rangeX.get(1); i++){
-                for(int j = rangeY.get(0); j< rangeY.get(1); j++){
-                    ownMap.addCells(true, map.getCell(i,j));
-                }
-            }
         }
     }
 
@@ -94,17 +75,9 @@ public class Tactician {
     /**
      * @return Game's map
      */
-    public Field getMap() {
-        return map;
-    }
-
-    /**
-     *
-     * @return Tactician's map where can put his units
-     */
-    public Field getOwnMap() {
-        return ownMap;
-    }
+    //public Field getMap() {
+    //    return map;
+    //}
 
     /**
      * Remove the unit which is died
@@ -156,6 +129,7 @@ public class Tactician {
      * @return
      */
     public boolean isDieAllUnit() {
+        if(this.getUnits().isEmpty()) return false;
         for(int i = 0; i < this.getUnits().size(); i++){
             if(this.getUnits().get(i).getCurrentHitPoints()>0){
                 return false;

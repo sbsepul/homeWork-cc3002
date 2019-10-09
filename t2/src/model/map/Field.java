@@ -28,7 +28,7 @@ public class Field {
    */
   public void addCells(final boolean connectAll, final Location... cells) {
     // Seed inserted
-    random.setSeed(200);
+    //random.setSeed(200);
     for (Location cell : cells) {
       addCell(cell);
       Location[] adjacentCells = getAdjacentCells(cell);

@@ -17,18 +17,16 @@ import java.util.*;
  */
 public class GameController {
 
-  private int turnCurrent = 0;
+  private int turnCurrent;
   private Random random = new Random();
   private int numPlayers;
   private final int tamMap;
   private List<Tactician> players;
-  private List<String> namePlayers;
-  private Field map= new Field();
-  private int maxRounds;
-  private int numRounds = 1;
+  private Field map;
+  private long maxRounds;
+  private int numRounds;
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
-  private List<String> winners = null;
 
 
   /**
@@ -40,30 +38,32 @@ public class GameController {
    *     the dimensions of the map, for simplicity, all maps are squares
    */
   public GameController(int numberOfPlayers, int mapSize) {
-    numPlayers = numberOfPlayers;
-    tamMap = mapSize;
+    this.numPlayers = numberOfPlayers;
+    this.tamMap = mapSize;
+    this.map = createNewMap(mapSize);
+    this.players = createTacticians(numberOfPlayers);
+  }
+
+  private Field createNewMap(int tamMapInit) {
+    Field mapCreate = new Field();
     //adding locations to map
     List<Location> locations = new ArrayList<>();
     //int n = (int) Math.floor(Math.sqrt(mapSize));
-    int n = (int) Math.pow(mapSize,2);
+    int n = (int) Math.pow(tamMapInit,2);
     for(int i = 0; i < n; i++){
       for(int j = 0; i < n; i++){
         locations.add(new Location(i,j));
       }
     }
     for(Location cell:locations) {
-      map.addCells(true, cell);
+      mapCreate.addCells(true, cell);
     }
-    // desordenamos la lista
-    players = new ArrayList<Tactician>(numberOfPlayers);
-    namePlayers = new ArrayList<String>(numberOfPlayers);
-    // seed
-    //random.setSeed(500);
-    for(int i=0; i<numberOfPlayers; i++){
-      String name = "Player " + Integer.toString(i+1);
-      namePlayers.add(name);
-      players.add(new Tactician(name, this.map));
-    }
+    return mapCreate;
+  }
+
+  private void resetController(){
+    this.players = createTacticians(this.numPlayers);
+    this.map = createNewMap(this.tamMap);
   }
 
   /**
@@ -71,7 +71,7 @@ public class GameController {
    * @return
    */
   public int getNumPlayers() {
-    return numPlayers;
+    return getTacticians().size();
   }
 
   /**
@@ -95,6 +95,15 @@ public class GameController {
     return players.get(turnCurrent);
   }
 
+  private List<Tactician> createTacticians(int numTacticians){
+    List<Tactician> tact = new ArrayList<Tactician>(numTacticians);
+    for(int i=0; i<numTacticians; i++){
+      String name = "Player " + i;
+      tact.add(new Tactician(name));
+    }
+    return tact;
+  }
+
   /**
    *
    * @return
@@ -113,32 +122,37 @@ public class GameController {
   /**
    * @return the maximum number of rounds a match can last
    */
-  public int getMaxRounds() {
+  public long getMaxRounds() {
     return maxRounds;
   }
 
+  public void setSeedRandom(){
+    random.setSeed(500);
+  }
   /**
    *
    * @return a Random order for the tactician in a new Round
    */
-  public void createNewRound(List<Tactician> players, List<String> namePlayers){
-    random.setSeed(500);
+  private void createNewRound(List<Tactician> players){
+    setSeedRandom();
     int nPlayers = this.getTacticians().size();
+    Tactician ini_t = this.getTacticians().get(nPlayers-1);
     for(int i = 0; i <  nPlayers; i++){
       int posRandom = random.nextInt(nPlayers);
       Tactician temp_t = players.get(i);
-      String temp_s = namePlayers.get(i);
       players.set(i, players.get(posRandom));
       players.set(posRandom, temp_t);
-      namePlayers.set(i, namePlayers.get(posRandom));
-      namePlayers.set(posRandom, temp_s);
+    }
+    if(players.get(0).equals(ini_t)){
+      Tactician temp = players.get(0);
+      players.set(0, players.get(nPlayers-1));
+      players.set(nPlayers-1,temp);
     }
   }
 
   private void changeToNextTurn(){
     int nPlayers = getTacticians().size();
     if(turnCurrent==nPlayers-1){
-      this.numRounds++;
       this.turnCurrent=0;
     }
     else this.turnCurrent++;
@@ -150,6 +164,7 @@ public class GameController {
   public void endTurn() {
     //verify if a player has lost, for example in a counter attack
     if(getTurnOwner().canPlay()){
+      if(turnCurrent==getTacticians().size()-1) this.numRounds++;
       this.changeToNextTurn();
     }
     else{
@@ -165,16 +180,15 @@ public class GameController {
    *     the player to be removed
    */
   public void removeTactician(String tactician) {
-    /*
     for(int i = 0; i<getTacticians().size(); i++){
-      if(getTacticians().get(i).getName()==tactician){
+      String name = getTacticians().get(i).getName();
+      if(getTacticians().get(i).getName().equals(tactician)){
         players.remove(i);
       }
     }
-    */
-    int index = namePlayers.indexOf(tactician);
-    players.remove(index);
-    namePlayers.remove(index);
+    //int index = namePlayers.indexOf(tactician);
+    //players.remove(index);
+    //namePlayers.remove(index);
   }
 
   /**
@@ -219,7 +233,7 @@ public class GameController {
    * @return
    */
   public boolean isOnlyAPlayer() {
-    if(numPlayers==1){
+    if(getTacticians().size()==1){
       return true;
     }
     return false;
@@ -232,11 +246,15 @@ public class GameController {
    */
   public void initGame(final int maxTurns) {
     this.maxRounds = maxTurns;
-    boolean time = false;
-    if(maxTurns==-1){
-      time = true;
-    }
-    while(numRounds<=getMaxRounds() || time){
+    this.numRounds = 1;
+    this.turnCurrent = 0;
+    this.resetController();
+    //boolean time = false;
+    //if(maxTurns==-1){
+    //  time = true;
+    //}
+
+    //while(numRounds<=getMaxRounds() || time){
       /*
        colocar aqui todo lo que significa iniciar una partida
        asegurarse cuando termina una partida
@@ -244,9 +262,12 @@ public class GameController {
        En este caso se estaria ocupando el patron de diseño Observer, donde el observado seria el
        jugador actual y el controller seria el controlador
       */
-      
-    }
+    //}
     // detener el juego y retornar ganadores????? (no devuelve nada este metodo)
+  }
+
+  private int getPlayersInit() {
+    return numPlayers;
   }
 
   /**
@@ -260,13 +281,32 @@ public class GameController {
    * @return the winner of this game, if the match ends in a draw returns a list of all the winners
    */
   public List<String> getWinners() {
-    Map<String, Integer> unitRest = new HashMap<String,Integer>();
-    for(Tactician t: this.getTacticians()){
-      // verificando en initGame o en otro proceso que el numero de
-      // partidas ya se acabo, entonces hay que ver cual t tiene
-      // mayor cantidad de unidades restantes
+    List<String> win = new ArrayList<>();
+    if(getMaxRounds()==-1){
+      if(isOnlyAPlayer()){
+        win.add(getTacticians().get(0).getName());
+        return win;
+      }
+      return null;
     }
-    return this.winners;
+    if(getRoundNumber()>getMaxRounds()){
+      int maxUnits = 0;
+      for(Tactician t: this.getTacticians()){
+        // verificando en initGame o en otro proceso que el numero de
+        // partidas ya se acabo, entonces hay que ver cual t tiene
+        // mayor cantidad de unidades restantes
+        if(t.getUnits().size()>=maxUnits){
+          maxUnits = t.getUnits().size();
+          if(win.contains(t.getName())) continue;
+          else win.add(t.getName());
+        }
+        else if(t.getUnits().isEmpty()){
+          win.add(t.getName());
+        }
+      }
+      return win;
+    }
+    else return null;
   }
 
   /**

@@ -2,10 +2,11 @@ package model;
 
 import model.units.IUnit;
 
-enum UnitType {
-    ALPACA, ARCHER, CLERIC, FIGHTER, HERO, SORCERER, SWORDMASTER;
-}
-
 public interface IFactoryUnit {
-    public IUnit makeFactory(UnitType unitType);
+    /**
+     *
+     * @param unitType
+     * @return
+     */
+    public IUnit makeUnit(UnitType unitType);
 }
