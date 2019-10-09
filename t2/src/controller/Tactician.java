@@ -22,10 +22,10 @@ import model.units.IUnit;
 
 
 public class Tactician {
-    private final String mark;
-    private final List<IUnit> units = new ArrayList<>();
-    private IUnit currentUnit;
     private boolean status;
+    private final String mark;
+    private List<IUnit> units = new ArrayList<>();
+    private IUnit currentUnit;
     private Map<Integer,Boolean> liveHero = new HashMap<>();
 
 

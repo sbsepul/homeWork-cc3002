@@ -17,14 +17,14 @@ import java.util.*;
  */
 public class GameController {
 
-  private int turnCurrent;
   private Random random = new Random();
-  private int numPlayers;
+  private long maxRounds;
+  private int numRounds;
+  private int turnCurrent;
+  private final int numPlayers;
   private final int tamMap;
   private List<Tactician> players;
   private Field map;
-  private long maxRounds;
-  private int numRounds;
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
 
