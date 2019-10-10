@@ -2,7 +2,7 @@ package controller;
 
 import model.FactoryItem;
 import model.FactoryUnit;
-import model.IFactoryItem;
+import model.factoryItem.IFactoryItem;
 import model.factoryUnit.IFactoryUnit;
 import model.map.Field;
 import org.junit.jupiter.api.Assertions;

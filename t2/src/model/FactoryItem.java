@@ -1,24 +1,22 @@
 package model;
 
+import model.factoryItem.IFactoryItem;
 import model.items.*;
 import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
-
-import java.util.Enumeration;
 
 
 /**
  *
  *
  */
-public class FactoryItem implements IFactoryItem{
+public class FactoryItem {
     /**
      *
      * @param typeItem
      * @return
      */
-    @Override
     public IEquipableItem makeItem(ItemType typeItem){
         switch (typeItem){
             case AXE:

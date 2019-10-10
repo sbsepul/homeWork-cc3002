@@ -1,7 +1,7 @@
 package factory;
 
 import model.FactoryItem;
-import model.IFactoryItem;
+import model.factoryItem.IFactoryItem;
 import model.ItemType;
 import model.items.*;
 import model.items.IEquipableItem;
