@@ -1,5 +1,6 @@
 package model;
 
+import model.factoryUnit.IFactoryUnit;
 import model.units.*;
 
 /**
@@ -9,9 +10,9 @@ import model.units.*;
  * @version 2.0
  * @since 2.0
  */
-public class FactoryUnit implements IFactoryUnit {
-    @Override
-    public IUnit makeUnit(UnitType unitType){
+public class FactoryProvider{
+
+    public IUnit createUnit(UnitType unitType){
         switch (unitType){
             case HERO:
                 return new Hero(50,2,null);

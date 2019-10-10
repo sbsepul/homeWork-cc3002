@@ -32,8 +32,10 @@ public class EventTactician {
      *
      * @param value
      */
-    public void setProperty(String value){
+    public void setPropertyPrincipal(String value){
         changes.firePropertyChange("status", this.news, value);
         this.news = value;
     }
+
+
 }
