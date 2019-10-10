@@ -1,5 +1,6 @@
 package model.factoryUnit;
 
+import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.Alpaca;
 

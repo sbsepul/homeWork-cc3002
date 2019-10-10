@@ -1,6 +1,6 @@
 package model;
 
-import model.factoryItem.IFactoryItem;
+import model.factoryItem.*;
 import model.items.*;
 import model.items.magic.Darkness;
 import model.items.magic.Light;
@@ -11,30 +11,30 @@ import model.items.magic.Soul;
  *
  *
  */
-public class FactoryItem {
+public class FactoryProviderItem {
     /**
      *
      * @param typeItem
      * @return
      */
-    public IEquipableItem makeItem(ItemType typeItem){
+    public IFactoryItem makeItem(ItemType typeItem){
         switch (typeItem){
             case AXE:
-                return new Axe("axe", 10, 1, 2);
+                return new AxeFactory("axe");
             case BOW:
-                return new Bow("bow", 10,1,2);
+                return new BowFactory("bow",10,2,3);
             case SPEAR:
-                return new Spear("spear", 10, 1,2);
+                return new SpearFactory("spear");
             case SWORD:
-                return new Sword("sword", 10, 1,2);
+                return new SwordFactory("sword");
             case STAFF:
-                return  new Staff("staff", 10, 1,2);
+                return new StaffFactory("staff");
             case SOUL:
-                return new Soul("soul", 10, 1,2);
+                return new SoulFactory("soul");
             case LIGHT:
-                return new Light("light", 10,1,2);
+                return new LightFactory("light");
             case DARKNESS:
-                return new Darkness("darkness", 10, 1, 2);
+                return new DarknessFactory("darkness");
             default:
                 throw new IllegalArgumentException("Item not supported");
         }

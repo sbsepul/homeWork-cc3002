@@ -1,58 +1,59 @@
 package factory;
 
-import model.FactoryUnit;
+import model.FactoryProviderUnit;
 import model.UnitType;
+import model.factoryUnit.IFactoryUnit;
 import model.units.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FactoryUnitTest {
-    private FactoryUnit factory;
+    private FactoryProviderUnit factory;
 
     @BeforeEach
     public void setUp() {
-        factory = new FactoryUnit();
+        factory = new FactoryProviderUnit();
     }
 
     @Test
     public void makeUnitAlpaca(){
-        IUnit alpaca = factory.makeUnit(UnitType.ALPACA);
-        assertTrue(alpaca instanceof Alpaca);
+        IFactoryUnit alpaca = factory.makeUnit(UnitType.ALPACA);
+        assertEquals(alpaca.createUnit().getClass(), Alpaca.class);
     }
 
     @Test
     public void makeUnitArcher(){
-        IUnit archer = factory.makeUnit(UnitType.ARCHER);
-        assertTrue(archer instanceof Archer);
+        IFactoryUnit archer = factory.makeUnit(UnitType.ARCHER);
+        assertEquals(archer.createUnit().getClass(),Archer.class);
     }
 
     @Test
     public void makeUnitCleric(){
-        IUnit cleric = factory.makeUnit(UnitType.CLERIC);
-        assertTrue(cleric instanceof Cleric);
+        IFactoryUnit cleric = factory.makeUnit(UnitType.CLERIC);
+        assertEquals(cleric.createUnit().getClass(),Cleric.class);
     }
 
     @Test
     public void makeUnitFighter(){
-        IUnit fighter = factory.makeUnit(UnitType.FIGHTER);
-        assertTrue(fighter instanceof Fighter);
+        IFactoryUnit fighter = factory.makeUnit(UnitType.FIGHTER);
+        assertEquals(fighter.createUnit().getClass(),Fighter.class);
     }
 
     @Test
     public void makeUnitHero(){
-        IUnit hero = factory.makeUnit(UnitType.HERO);
-        assertTrue(hero instanceof Hero);
+        IFactoryUnit hero = factory.makeUnit(UnitType.HERO);
+        assertEquals(hero.createUnit().getClass(),Hero.class);
     }
     @Test
     public void makeUnitSorcerer(){
-        IUnit sorcerer = factory.makeUnit(UnitType.SORCERER);
-        assertTrue(sorcerer instanceof Sorcerer);
+        IFactoryUnit sorcerer = factory.makeUnit(UnitType.SORCERER);
+        assertEquals(sorcerer.createUnit().getClass(),Sorcerer.class);
     }
     @Test
     public void makeUnitSwordMaster(){
-        IUnit swordmaster = factory.makeUnit(UnitType.SWORDMASTER);
-        assertTrue(swordmaster instanceof SwordMaster);
+        IFactoryUnit swordmaster = factory.makeUnit(UnitType.SWORDMASTER);
+        assertEquals(swordmaster.createUnit().getClass(),SwordMaster.class);
     }
 }

@@ -1,18 +1,22 @@
 package model.factoryUnit;
 
 import model.items.IEquipableItem;
+import model.map.InvalidLocation;
 import model.map.Location;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractFactoryUnit implements IFactoryUnit {
     protected final int hp;
     protected final int move;
-    protected Location location;
-    protected IEquipableItem[] itemAll;
+    protected Location location = new InvalidLocation();
+    protected IEquipableItem[] itemAll = new IEquipableItem[0];
 
     public AbstractFactoryUnit(){
         this.hp = 50;
         this.move = 2;
-        this.location =null;
     }
 
     public AbstractFactoryUnit(int hitPoints, int movement, Location location, IEquipableItem... itemsAll) {

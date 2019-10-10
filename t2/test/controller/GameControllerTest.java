@@ -1,7 +1,5 @@
 package controller;
 
-import model.FactoryItem;
-import model.FactoryUnit;
 import model.factoryItem.IFactoryItem;
 import model.factoryUnit.IFactoryUnit;
 import model.map.Field;
@@ -34,8 +32,6 @@ class GameControllerTest {
     randomSeed = new Random().nextLong();
     controller = new GameController(4, 7);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
-    factoryItem = new FactoryItem();
-    factoryUnit = new FactoryUnit();
   }
 
   @Test

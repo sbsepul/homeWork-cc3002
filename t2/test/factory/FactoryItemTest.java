@@ -1,12 +1,12 @@
 package factory;
 
-import model.FactoryItem;
+import model.FactoryProviderItem;
 import model.factoryItem.IFactoryItem;
 import model.ItemType;
 import model.items.*;
-import model.items.IEquipableItem;
 import model.items.Sword;
 import model.items.magic.*;
+import model.units.Sorcerer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,56 +14,56 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FactoryItemTest {
-    private IFactoryItem factory;
+    private FactoryProviderItem factory;
 
     @BeforeEach
     public void setUp() {
-        factory = new FactoryItem();
+        factory = new FactoryProviderItem();
     }
 
     @Test
     public void makeItemBow(){
-        IEquipableItem bow = factory.makeItem(ItemType.BOW);
-        assertTrue(bow instanceof Bow);
+        IFactoryItem bow = factory.makeItem(ItemType.BOW);
+        assertEquals(bow.createItem().getClass(),Bow.class);
     }
 
     @Test
     public void makeItemAxe(){
-        IEquipableItem axe = factory.makeItem(ItemType.AXE);
-        assertTrue(axe instanceof Axe);
+        IFactoryItem axe = factory.makeItem(ItemType.AXE);
+        assertEquals(axe.createItem().getClass(),Axe.class);
     }
 
     @Test
     public void makeItemLight(){
-        IEquipableItem light = factory.makeItem(ItemType.LIGHT);
-        assertTrue(light instanceof Light);
+        IFactoryItem light = factory.makeItem(ItemType.LIGHT);
+        assertEquals(light.createItem().getClass(),Light.class);
     }
 
     @Test
     public void makeItemDarkness(){
-        IEquipableItem darkness = factory.makeItem(ItemType.DARKNESS);
-        assertTrue(darkness instanceof Darkness);
+        IFactoryItem darkness = factory.makeItem(ItemType.DARKNESS);
+        assertEquals(darkness.createItem().getClass(),Darkness.class);
     }
 
     @Test
     public void makeItemSoul(){
-        IEquipableItem soul = factory.makeItem(ItemType.SOUL);
-        assertTrue(soul instanceof Soul);
+        IFactoryItem soul = factory.makeItem(ItemType.SOUL);
+        assertEquals(soul.createItem().getClass(), Soul.class);
     }
     @Test
     public void makeItemSpear(){
-        IEquipableItem spear = factory.makeItem(ItemType.SPEAR);
-        assertTrue(spear instanceof Spear);
+        IFactoryItem spear = factory.makeItem(ItemType.SPEAR);
+        assertEquals(spear.createItem().getClass(),Spear.class);
     }
     @Test
     public void makeItemStaff(){
-        IEquipableItem staff = factory.makeItem(ItemType.STAFF);
-        assertTrue(staff instanceof Staff);
+        IFactoryItem staff = factory.makeItem(ItemType.STAFF);
+        assertEquals(staff.createItem().getClass(),Staff.class);
     }
     @Test
     public void makeItemSword(){
-        IEquipableItem sword = factory.makeItem(ItemType.SWORD);
-        assertTrue(sword instanceof Sword);
+        IFactoryItem sword = factory.makeItem(ItemType.SWORD);
+        assertEquals(sword.createItem().getClass(),Sword.class);
     }
 
 
