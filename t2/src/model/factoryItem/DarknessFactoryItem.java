@@ -1,10 +1,9 @@
 package model.factoryItem;
 
-import model.items.IEquipableItem;
 import model.items.magic.Darkness;
 
-public class DarknessFactory extends AbstractItemFactory {
-    public DarknessFactory(String name) {
+public class DarknessFactoryItem extends AbstractFactoryItem {
+    public DarknessFactoryItem(String name) {
         super(name);
     }
 

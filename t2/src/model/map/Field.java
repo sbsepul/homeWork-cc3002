@@ -149,6 +149,6 @@ public class Field {
    * @return size of map
    */
   public int getSize() {
-    return (int) Math.sqrt(getMap().size());
+    return getMap().size();
   }
 }

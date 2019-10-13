@@ -1,8 +1,12 @@
 package controller;
 
-import model.factoryItem.IFactoryItem;
-import model.factoryUnit.IFactoryUnit;
+import model.factoryItem.FactoryItemProvider;
+import model.factoryItem.ItemType;
+import model.factoryUnit.FactoryProviderUnit;
+import model.factoryUnit.UnitType;
+import model.items.IEquipableItem;
 import model.map.Field;
+import model.units.IUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +27,10 @@ class GameControllerTest {
   private long randomSeed;
   private List<String> testTacticians;
   private Field mapTarget;
-  private IFactoryUnit factoryUnit;
-  private IFactoryItem factoryItem;
+  private FactoryProviderUnit factoryUnit;
+  private FactoryItemProvider factoryItem;
+  private IUnit targetHero;
+  private IEquipableItem targetSpear;
 
   @BeforeEach
   public void setUp() {
@@ -152,6 +158,11 @@ class GameControllerTest {
   // Desde aquí en adelante, los tests deben definirlos completamente ustedes
   @Test
   public void getSelectedUnit() {
+    controller.initGame(2);
+    assertNull(controller.getSelectedUnit());
+    targetHero = factoryUnit.makeUnit(UnitType.HERO).createUnit();
+    targetSpear = factoryItem.makeItem(ItemType.SPEAR).createItem();
+
 
   }
 
@@ -173,6 +184,8 @@ class GameControllerTest {
 
   @Test
   public void selectItem() {
+    assertNull(controller.getSelectedItem());
+
   }
 
   @Test

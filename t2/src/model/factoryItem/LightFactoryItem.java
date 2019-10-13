@@ -1,10 +1,9 @@
 package model.factoryItem;
 
-import model.items.IEquipableItem;
 import model.items.magic.Light;
 
-public class LightFactory extends AbstractItemFactory {
-    public LightFactory(String name) {
+public class LightFactoryItem extends AbstractFactoryItem {
+    public LightFactoryItem(String name) {
         super(name);
     }
 

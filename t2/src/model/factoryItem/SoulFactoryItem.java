@@ -1,10 +1,9 @@
 package model.factoryItem;
 
-import model.items.IEquipableItem;
 import model.items.magic.Soul;
 
-public class SoulFactory extends AbstractItemFactory {
-    public SoulFactory(String name) {
+public class SoulFactoryItem extends AbstractFactoryItem {
+    public SoulFactoryItem(String name) {
         super(name);
     }
 

@@ -1,13 +1,12 @@
 package model.factoryItem;
 
 import model.items.Axe;
-import model.items.IEquipableItem;
 
-public class AxeFactory extends AbstractItemFactory {
+public class AxeFactoryItem extends AbstractFactoryItem {
     /**
      * @param name
      */
-    public AxeFactory(String name) {
+    public AxeFactoryItem(String name) {
         super(name);
     }
 

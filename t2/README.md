@@ -13,11 +13,25 @@ Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** par
 
 ## Factory Pattern
 
+El Factory Pattern es el encargado de crear objetos sin exponer la lógica de instanciación al cliente, en este caso el usuario del juego. Toda el trabajo de inicializar los objetos queda oculto. 
+
+Se utiliza para crear los items, unidades y el mapa del juego. 
+
+### Units y Items
+
+Para las unidades y los items se estructuró una fabrica desde una interfaz `IFactory<Object>`  y un `AbstractFactory<Object>` para aprovechar la herencia de métodos y poder realizar llamadas `super()` al constructor del `AbstractFactory<Object>` para la creación de los objetos. 
+
+![UML for items](C:\Users\Sebastian\Desktop\Screenshot_4.png)
+
+Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto impide la reutilización de codigo que facilita realizando el abstract class.
+
+Otra clase que fue implementada fue `FactoryProvider<Object>`, que se creo utilizando una `class enum Type<Object>`. La finalidad del Provider es poder entregarle como parámetro el tipo de la clase del objeto que se desea crear para que de esta manera el provider pueda devolver el objeto correspondiente. En este caso `FactoryProvider<Object>` devuelve la fabrica que se encarga de crear el tipo de unidad o item que se desea. 
 
 
-Se utiliza para crear los items, unidades y el mapa
 
-<insertar una imagen uml>
+
+
+
 
 La idea del diseño se basa en que al momento de seleccionarse una cierta unidad, el controlador debe ser capaz de poder asignarsela a un tactician
 
@@ -32,6 +46,42 @@ La idea del diseño se basa en que al momento de seleccionarse una cierta unidad
 Se utiliza para generar la interaccion entre el controlador
 
 <insertar  una imagen uml>
+
+
+
+
+
+## Tactician
+
+### Descripcion
+
+Una entidad *Tactician* representa a un jugador que es manejado por el **Controller**. *Tactician* es el encargado de  manejar todas las **instrucciones del usuario** y **delegar mensajes a los objetos del modelo** tales como las unidades y los items. Este diseño permite que el usuario **no interactúe** directamente con el modelo del juego.
+
+Para lograr esto tactician también debe **conocer a todas las unidades que posee**, como también tener conocimiento del **mapa del juego**.
+
+Dentro del turno del jugador este puede mover a todas sus unidades, pero **solo una vez**. Esto también aplica con los ataques, una unidad **no puede atacar 2 veces***. Para facilitar la implementación, *tactician* tiene la referencia a la unidad que tiene actualmente seleccionada.
+
+Un jugador debe tener la capacidad de **ver los datos** de sus unidades (HP current y max, items, inventario, poder, etc). 
+
+
+
+### Test
+
+
+
+
+
+## Controller
+
+
+
+
+
+
+
+
+
+
 
 ## Modo de uso	
 

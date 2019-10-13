@@ -1,8 +1,11 @@
 package controller;
 
+import model.factoryMap.FactoryMap;
+import model.factoryMap.IFactoryMap;
+import model.factoryItem.FactoryItemProvider;
+import model.factoryUnit.FactoryProviderUnit;
 import model.items.IEquipableItem;
 import model.map.Field;
-import model.map.Location;
 import model.units.IUnit;
 
 import java.util.*;
@@ -27,7 +30,9 @@ public class GameController {
   private Field map;
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
-
+  private FactoryProviderUnit factoryUnit;
+  private FactoryItemProvider factoryItem;
+  private IFactoryMap factoryMap;
 
   /**
    * Creates the controller for a new game.
@@ -44,23 +49,19 @@ public class GameController {
     this.players = createTacticians(numberOfPlayers);
   }
 
+  /**
+   * Create a instance of Field with a Factory Map
+   * @param tamMapInit for default is square. N x N
+   * @return a Field of N x N
+   */
   private Field createNewMap(int tamMapInit) {
-    Field mapCreate = new Field();
-    //adding locations to map
-    List<Location> locations = new ArrayList<>();
-    //int n = (int) Math.floor(Math.sqrt(mapSize));
-    int n = (int) Math.pow(tamMapInit,2);
-    for(int i = 0; i < n; i++){
-      for(int j = 0; i < n; i++){
-        locations.add(new Location(i,j));
-      }
-    }
-    for(Location cell:locations) {
-      mapCreate.addCells(true, cell);
-    }
-    return mapCreate;
+    this.factoryMap = new FactoryMap(this.tamMap);
+    return factoryMap.createMap();
   }
 
+  /**
+   * Reset the game to the beginning
+   */
   private void resetController(){
     this.players = createTacticians(this.numPlayers);
     this.map = createNewMap(this.tamMap);
@@ -68,7 +69,7 @@ public class GameController {
 
   /**
    * Getter the number of players in the game
-   * @return
+   * @return the number of players
    */
   public int getNumPlayers() {
     return getTacticians().size();
@@ -95,6 +96,12 @@ public class GameController {
     return players.get(turnCurrent);
   }
 
+  /**
+   * Create a list of Tacticians
+   *
+   * @param numTacticians that begin in the game
+   * @return a list of tacticians without units
+   */
   private List<Tactician> createTacticians(int numTacticians){
     List<Tactician> tact = new ArrayList<Tactician>(numTacticians);
     for(int i=0; i<numTacticians; i++){
@@ -105,8 +112,8 @@ public class GameController {
   }
 
   /**
-   *
-   * @return
+   * Getter the position of the current player of the list of Tacticians
+   * @return a integer of current player
    */
   public int getPosTurnOwner(){
     return turnCurrent;
@@ -126,9 +133,13 @@ public class GameController {
     return maxRounds;
   }
 
+  /**
+   * Setter the seed of random parameter
+   */
   public void setSeedRandom(){
     random.setSeed(500);
   }
+
   /**
    *
    * @return a Random order for the tactician in a new Round
@@ -150,14 +161,20 @@ public class GameController {
     }
   }
 
+  /**
+   * Change the current turn for the next.
+   * If the current player is the last in the round
+   * the next turn begin in the start
+   *
+   */
   private void changeToNextTurn(){
     int nPlayers = getTacticians().size();
     if(turnCurrent==nPlayers-1){
       this.turnCurrent=0;
     }
     else this.turnCurrent++;
-
   }
+
   /**
    * Finishes the current player's turn.
    */
@@ -181,19 +198,15 @@ public class GameController {
    */
   public void removeTactician(String tactician) {
     for(int i = 0; i<getTacticians().size(); i++){
-      String name = getTacticians().get(i).getName();
       if(getTacticians().get(i).getName().equals(tactician)){
         players.remove(i);
       }
     }
-    //int index = namePlayers.indexOf(tactician);
-    //players.remove(index);
-    //namePlayers.remove(index);
   }
 
   /**
-   *
-   * @return
+   * Verify that the game not over yet
+   * @return true if the not over, false otherwise
    */
   public boolean notOver(){
     if(this.getMaxRounds()==-1){
@@ -205,19 +218,12 @@ public class GameController {
     }
     else{
       if(this.isOnlyAPlayer() || this.dieAllHero() || this.getMaxRounds()==this.getRoundNumber()){
-        this.updateWinners();
+        this.getWinners();
         return false;
       }
       // Round number < Max rounds
       else return true;
     }
-  }
-
-  /**
-   *
-   */
-  public void updateWinners() {
-
   }
 
   /**
@@ -316,7 +322,11 @@ public class GameController {
     return selectedUnit;
   }
 
-  private void setSelectedUnit(IUnit newUnit){
+  /**
+   *
+   * @param newUnit
+   */
+  public void setSelectedUnit(IUnit newUnit){
     selectedUnit = newUnit;
   }
 
@@ -379,6 +389,10 @@ public class GameController {
     selectedItem = getSelectedUnit().getItems().get(index);
   }
 
+  /**
+   * Getter item selected
+   * @return a item selected of the unit selected
+   */
   public IEquipableItem getSelectedItem(){
     return selectedItem;
   }

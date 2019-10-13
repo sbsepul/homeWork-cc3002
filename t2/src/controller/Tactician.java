@@ -1,5 +1,8 @@
 package controller;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 import model.items.IEquipableItem;
@@ -22,13 +25,13 @@ import model.units.IUnit;
 
 
 public class Tactician {
+
+    private PropertyChangeSupport support;
     private boolean status;
     private final String mark;
     private List<IUnit> units = new ArrayList<>();
     private IUnit currentUnit;
     private Map<Integer,Boolean> liveHero = new HashMap<>();
-
-
 
     /**
      * Constructor to specify an alternative source of moves
@@ -39,14 +42,26 @@ public class Tactician {
      */
     public Tactician(String markName, IUnit... unitSet){
         this.mark = markName;
-        //this.map = map;
-        //this.ownMap = map;
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
+        this.support = new PropertyChangeSupport(this);
         // for default the first element in units will be the first object in the list units
         if(!this.units.isEmpty()){
             this.currentUnit = units.get(0);
         }
+    }
+    //Observer for Tactician
+
+    public PropertyChangeSupport getPropertyChangeSupport(){
+        return this.support;
+    }
+
+    public void addObserver(PropertyChangeListener pcl){
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl){
+        support.removePropertyChangeListener(pcl);
     }
 
     /**
@@ -71,13 +86,6 @@ public class Tactician {
     public Map<Integer, Boolean> getLiveHero() {
         return liveHero;
     }
-
-    /**
-     * @return Game's map
-     */
-    //public Field getMap() {
-    //    return map;
-    //}
 
     /**
      * Remove the unit which is died
@@ -180,6 +188,7 @@ public class Tactician {
     }
 
 
+
     // STATUS PLAYER
     /**
      *
@@ -195,14 +204,15 @@ public class Tactician {
      * @return
      */
     public boolean getStatus(){
-        return status;
+        return this.status;
     }
 
     /**
-     *
+     * Set the Status of the tactician to false (retired)
      */
-    public void retirePlayer() {
-        status = false;
+    public void setStatus(boolean newStatus) {
+        support.firePropertyChange("status", this.getPropertyChangeSupport(), newStatus);
+        this.status = newStatus;
     }
 
     /**

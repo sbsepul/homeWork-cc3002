@@ -5,7 +5,7 @@ package model.factoryItem;
  *
  *
  */
-public class FactoryProviderItem {
+public class FactoryItemProvider {
     /**
      *
      * @param typeItem
@@ -14,21 +14,21 @@ public class FactoryProviderItem {
     public IFactoryItem makeItem(ItemType typeItem){
         switch (typeItem){
             case AXE:
-                return new AxeFactory("axe");
+                return new AxeFactoryItem("axe");
             case BOW:
-                return new BowFactory("bow",10,2,3);
+                return new BowFactoryItem("bow");
             case SPEAR:
-                return new SpearFactory("spear");
+                return new SpearFactoryItem("spear");
             case SWORD:
-                return new SwordFactory("sword");
+                return new SwordFactoryItem("sword");
             case STAFF:
-                return new StaffFactory("staff");
+                return new StaffFactoryItem("staff");
             case SOUL:
-                return new SoulFactory("soul");
+                return new SoulFactoryItem("soul");
             case LIGHT:
-                return new LightFactory("light");
+                return new LightFactoryItem("light");
             case DARKNESS:
-                return new DarknessFactory("darkness");
+                return new DarknessFactoryItem("darkness");
             default:
                 throw new IllegalArgumentException("Item not supported");
         }

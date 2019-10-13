@@ -1,15 +1,14 @@
 package model.factoryItem;
 
-import model.items.IEquipableItem;
 import model.items.Staff;
 
-public class StaffFactory extends AbstractItemFactory {
+public class StaffFactoryItem extends AbstractFactoryItem {
     /**
      * Setters the parameters for default to each items
      *
      * @param name
      */
-    public StaffFactory(String name) {
+    public StaffFactoryItem(String name) {
         super(name);
     }
 
