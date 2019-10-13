@@ -1,10 +1,4 @@
-package model;
-
-import model.factoryItem.*;
-import model.items.*;
-import model.items.magic.Darkness;
-import model.items.magic.Light;
-import model.items.magic.Soul;
+package model.factoryItem;
 
 
 /**

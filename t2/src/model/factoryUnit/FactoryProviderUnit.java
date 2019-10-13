@@ -1,7 +1,4 @@
-package model;
-
-import model.factoryUnit.*;
-import model.units.*;
+package model.factoryUnit;
 
 /**
  * Types of units

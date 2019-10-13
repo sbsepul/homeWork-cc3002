@@ -1,15 +1,12 @@
-package factory;
+package model.factoryUnit;
 
-import model.FactoryProviderUnit;
-import model.UnitType;
-import model.factoryUnit.IFactoryUnit;
 import model.units.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FactoryUnitTest {
+public class FactoryProviderUnitTest {
     private FactoryProviderUnit factory;
 
     @BeforeEach

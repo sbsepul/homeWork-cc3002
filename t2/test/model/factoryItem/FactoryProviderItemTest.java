@@ -1,19 +1,15 @@
-package factory;
+package model.factoryItem;
 
-import model.FactoryProviderItem;
-import model.factoryItem.IFactoryItem;
-import model.ItemType;
 import model.items.*;
 import model.items.Sword;
 import model.items.magic.*;
-import model.units.Sorcerer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FactoryItemTest {
+public class FactoryProviderItemTest {
     private FactoryProviderItem factory;
 
     @BeforeEach

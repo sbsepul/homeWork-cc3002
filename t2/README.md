@@ -3,6 +3,10 @@
 
 
 
+
+
+
+
 ## Patterns Design
 
 Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del jeugo en cierto instante, como las acciones realizadas por los tacticians, a traves del patron de Observer Pattern
