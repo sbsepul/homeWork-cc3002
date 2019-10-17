@@ -255,10 +255,6 @@ public class GameController {
     this.numRounds = 1;
     this.turnCurrent = 0;
     this.resetController();
-    //boolean time = false;
-    //if(maxTurns==-1){
-    //  time = true;
-    //}
   }
 
   private int getPlayersInit() {
@@ -287,9 +283,6 @@ public class GameController {
     if(getRoundNumber()>getMaxRounds()){
       int maxUnits = 0;
       for(Tactician t: this.getTacticians()){
-        // verificando en initGame o en otro proceso que el numero de
-        // partidas ya se acabo, entonces hay que ver cual t tiene
-        // mayor cantidad de unidades restantes
         if(t.getUnits().size()>=maxUnits){
           maxUnits = t.getUnits().size();
           if(win.contains(t.getName())) continue;

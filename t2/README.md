@@ -77,9 +77,17 @@ Un jugador debe tener la capacidad de **ver los datos** de sus unidades (HP curr
 
 
 
+## Ganar un Juego
+
+El controller es el encargado de revisar cuales son los jugadores que ganaron el juego en ciertas circunstancias. Controller debe tener una 
 
 
 
+Para que un jugador gane:
+
+* Todos el resto de los jugadores se han retirado del juego: esto significa que un jugador en una partida actual puede "colocar" me retiro. Esto implica que un tactician cambia su estado a "no seguir", esto lo vamos a definir como un boleeano true si esta activo, false si no (a penas un jugador tenga estado false debe ser eliminado de la partida con sus unidades)
+
+* Se alcanza una cantidad máxima de turnos (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
 
 
 
@@ -114,12 +122,6 @@ Todos sus heros live
 
 
 
-
-Para que un jugador gane:
-
-* Todos el resto de los jugadores se han retirado del juego: esto significa que un jugador en una partida actual puede "colocar" me retiro. Esto implica que un tactician cambia su estado a "no seguir", esto lo vamos a definir como un boleeano true si esta activo, false si no (a penas un jugador tenga estado false debe ser eliminado de la partida con sus unidades)
-
-* Se alcanza una cantidad máxima de turnos (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
 
 
 
