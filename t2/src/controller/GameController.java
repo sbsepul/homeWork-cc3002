@@ -1,9 +1,9 @@
 package controller;
 
-import model.factoryMap.FactoryMap;
-import model.factoryMap.IFactoryMap;
-import model.factoryItem.FactoryItemProvider;
-import model.factoryUnit.FactoryProviderUnit;
+import model.map.factoryMap.FactoryMap;
+import model.map.factoryMap.IFactoryMap;
+import model.items.factoryItem.FactoryItemProvider;
+import model.units.factoryUnit.FactoryProviderUnit;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -259,17 +259,6 @@ public class GameController {
     //if(maxTurns==-1){
     //  time = true;
     //}
-
-    //while(numRounds<=getMaxRounds() || time){
-      /*
-       colocar aqui todo lo que significa iniciar una partida
-       asegurarse cuando termina una partida
-       aqui se supone que se deben tomar acciones que el controller debe estar observando
-       En este caso se estaria ocupando el patron de diseño Observer, donde el observado seria el
-       jugador actual y el controller seria el controlador
-      */
-    //}
-    // detener el juego y retornar ganadores????? (no devuelve nada este metodo)
   }
 
   private int getPlayersInit() {

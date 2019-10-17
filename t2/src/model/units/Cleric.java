@@ -36,21 +36,6 @@ public class Cleric extends AbstractUnit {
   public void equipItemStaff(Staff item) {
     equippedItem = item;
   }
-  @Override
-  public void equipItemSpear(Spear item) { }
-  @Override
-  public void equipItemSword(Sword item) {  }
-  @Override
-  public void equipItemDarkness(Darkness item) { }
-  @Override
-  public void equipItemLight(Light item) { }
-  @Override
-  public void equipItemSoul(Soul item) { }
-  @Override
-  public void equipItemBow(Bow item) { }
-  @Override
-  public void equipItemAxe(Axe item) { }
-
   //cleric can't attack, but can recovery a unit
   public void attack(IUnit enemy){
     if (this.initCombat(enemy)) enemy.receiveRecovery(this.getEquippedItem());

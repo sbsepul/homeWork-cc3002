@@ -1,9 +1,9 @@
 package controller;
 
-import model.factoryItem.FactoryItemProvider;
-import model.factoryItem.ItemType;
-import model.factoryUnit.FactoryProviderUnit;
-import model.factoryUnit.UnitType;
+import model.items.factoryItem.FactoryItemProvider;
+import model.items.factoryItem.ItemType;
+import model.units.factoryUnit.FactoryProviderUnit;
+import model.units.factoryUnit.UnitType;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;

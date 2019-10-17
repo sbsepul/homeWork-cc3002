@@ -39,17 +39,6 @@ public class Sorcerer extends AbstractUnit{
         equippedItem=item;
     }
     @Override
-    public void equipItemBow(Bow item) {}
-    @Override
-    public void equipItemAxe(Axe item) {}
-    @Override
-    public void equipItemSword(Sword item) {}
-    @Override
-    public void equipItemStaff(Staff item) {}
-    @Override
-    public void equipItemSpear(Spear item) {}
-
-    @Override
     public void attack(IUnit enemy) {
         if (this.initCombat(enemy)){
             if(enemy.getEquippedItem()!=null) this.getEquippedItem().receiveMagicAttack(enemy.getEquippedItem());

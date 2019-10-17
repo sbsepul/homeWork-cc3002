@@ -97,15 +97,18 @@ public class Tactician {
 
     /**
      * Added a unit for a player
-     * @param unitAdded
+     * @param unitAdded added with hp full
      */
     public void addUnit(IUnit unitAdded){
         units.add(unitAdded);
-        // se asume que las unidades que se añaden tienen vida positiva
-        if(unitAdded instanceof Hero){
-            int pos = this.units.size()-1;
-            this.liveHero.put(pos,true);
-        }
+    }
+
+    /**
+     * Add a hero to the inventory of units
+     * @param unitHero added
+     */
+    public void addUnitHero(Hero unitHero){
+        units.add(unitHero);
     }
 
     /**

@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.items.*;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.Location;
 
 /**
@@ -217,14 +220,29 @@ public abstract class AbstractUnit implements IUnit{
       setLocation(targetLocation);
     }
   }
-
-
-
   @Override
   public boolean equals(Object obj) {
     return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints
             && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(equippedItem)
             && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(items);
   }
+
+  @Override
+  public void equipItemDarkness(Darkness item) { }
+  @Override
+  public void equipItemLight(Light item) { }
+  @Override
+  public void equipItemSoul(Soul item) { }
+  @Override
+  public void equipItemBow(Bow item) { }
+  @Override
+  public void equipItemAxe(Axe item) { }
+  @Override
+  public void equipItemSword(Sword item) { }
+  @Override
+  public void equipItemStaff(Staff item) { }
+  @Override
+  public void equipItemSpear(Spear item) { }
+
 }
 
