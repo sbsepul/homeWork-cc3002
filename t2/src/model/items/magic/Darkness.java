@@ -13,7 +13,7 @@ import model.units.IUnit;
  * @since 1.0
  */
 
-public class Darkness extends AbstractItemMagic {
+public class Darkness extends AbstractItemMagic implements IAttack {
     /**
      * Create a new Darkness item
      *
@@ -37,31 +37,22 @@ public class Darkness extends AbstractItemMagic {
     }
 
     @Override
-    public void receiveMagicAttack(IEquipableItem enemyAttack){
+    public void giveMagicAttack(IEquipableItem enemyAttack){
         enemyAttack.receiveDarknessAttack(this);
     }
 
     @Override
     public void receiveDarknessAttack(Darkness attackDarkness) {
-        this.receiveAttack(attackDarkness);
-        if(this.canAttack(attackDarkness)){
-            attackDarkness.receiveAttack(this);
-        }
+        super.receiveAttackNormal(attackDarkness);
     }
 
     @Override
     public void receiveLightAttack(Light attackLight) {
-        this.receiveWeaknessAttack(attackLight);
-        if(this.canAttack(attackLight)){
-            attackLight.getOwner().receiveAttackResistant(this);
-        }
+        super.receiveWeakAttack(attackLight);
     }
 
     @Override
     public void receiveSoulAttack(Soul attackSoul) {
-        this.receiveResistantAttack(attackSoul);
-        if(this.canAttack(attackSoul)){
-            attackSoul.getOwner().receiveAttackWeakness(this);
-        }
+        super.receiveSoftAttack(attackSoul);
     }
 }

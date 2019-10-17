@@ -7,6 +7,7 @@ import model.units.factoryUnit.FactoryProviderUnit;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
+import model.units.factoryUnit.UnitType;
 
 import java.util.*;
 
@@ -239,10 +240,7 @@ public class GameController {
    * @return
    */
   public boolean isOnlyAPlayer() {
-    if(getTacticians().size()==1){
-      return true;
-    }
-    return false;
+    return getTacticians().size()==1? true:false;
   }
 
   /**
@@ -269,30 +267,40 @@ public class GameController {
   }
 
   /**
-   * @return the winner of this game, if the match ends in a draw returns a list of all the winners
+   * @return Players's name who won. null if there are not players in the game.
    */
-  public List<String> getWinners() {
+  public List<String> getNamePlayers(){
     List<String> win = new ArrayList<>();
-    if(getMaxRounds()==-1){
-      if(isOnlyAPlayer()){
-        win.add(getTacticians().get(0).getName());
-        return win;
-      }
-      return null;
+    if(getTacticians().size()==0) return null;
+    if(isOnlyAPlayer()){
+      win.add(getTacticians().get(0).getName());
+      return win;
     }
-    if(getRoundNumber()>getMaxRounds()){
+    else{
       int maxUnits = 0;
       for(Tactician t: this.getTacticians()){
-        if(t.getUnits().size()>=maxUnits){
-          maxUnits = t.getUnits().size();
-          if(win.contains(t.getName())) continue;
-          else win.add(t.getName());
+        int numUnits = t.getUnits().size();
+        if(numUnits>maxUnits){
+          maxUnits = numUnits;
+          win.clear();
+          win.add(t.getName());
         }
-        else if(t.getUnits().isEmpty()){
+        else if(numUnits == maxUnits){
           win.add(t.getName());
         }
       }
-      return win;
+    }
+    return win;
+  }
+  /**
+   * @return the winner of this game, if the match ends in a draw returns a list of all the winners
+   */
+  public List<String> getWinners() {
+    if(getMaxRounds()==-1){
+      return getNamePlayers();
+    }
+    if(getRoundNumber()>getMaxRounds()){
+      return getNamePlayers();
     }
     else return null;
   }
@@ -400,4 +408,15 @@ public class GameController {
       }
     }
   }
+
+  // Factories process
+
+  public IUnit createUnit(UnitType unitType){
+    IUnit unit = factoryUnit.makeUnit(unitType).createUnit();
+    return unit;
+  }
+
+
+
+
 }

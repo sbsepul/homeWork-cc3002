@@ -36,20 +36,12 @@ public class Alpaca extends AbstractUnit {
       final IEquipableItem... items) {
     super(hitPoints, movement, location, Integer.MAX_VALUE, items);
   }
-
-    /**
+  /**
    * {@inheritDoc}
    * <p>
    * The <i>Alpaca</i> cannot equip any item.
    */
   @Override
   public void equipItem(final IEquipableItem item) { }
-  /**
-   * {@inheritDoc}
-   * <p>
-   * The <i>Alpaca</i> cannot attack any unit.
-   */
-  @Override
-  public void attack(IUnit enemy) { }
 
 }

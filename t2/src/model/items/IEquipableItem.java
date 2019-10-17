@@ -65,13 +65,11 @@ public interface IEquipableItem {
   /* BEGIN COMBAT SECTION */
 
   /**
-   *
    * @param attackBow is the type of damage received for a Bow
    */
   void receiveBowAttack(Bow attackBow);
 
   /**
-   *
    * @param attackAxe is the type of damage received for a Axe
    */
   void receiveAxeAttack(Axe attackAxe);
@@ -83,10 +81,31 @@ public interface IEquipableItem {
   void receiveSwordsAttack(Sword attackSword);
 
   /**
-   *
    * @param attackSpears is the type of damage received for a Spear
    */
   void receiveSpearsAttack(Spear attackSpears);
+
+  /**
+   * Receives an attack to which this Unit is weak.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  void receiveUnitWeaknessAttack(IEquipableItem attack);
+
+  /**
+   * Receives an attack to which this Unit is resistant.
+   *
+   * @param attack
+   *     Received attack.
+   */
+  void receiveUnitResistantAttack(IEquipableItem attack);
+
+  /**
+   * A item can receive a Attack without damage additional
+   * @param attack
+   */
+  void receiveUnitAttack(IEquipableItem attack);
 
   /**
    *
@@ -101,7 +120,6 @@ public interface IEquipableItem {
   void receiveLightAttack(Light attackLight);
 
   /**
-   *
    * @param attackSoul is the type of damage received for a Soul
    */
   void receiveSoulAttack(Soul attackSoul);
@@ -112,6 +130,6 @@ public interface IEquipableItem {
    *
    * @param enemyAttack is the enemy's item
    */
-  void receiveMagicAttack(IEquipableItem enemyAttack);
+  void giveMagicAttack(IEquipableItem enemyAttack);
   /* END COMBAT SECTION */
 }

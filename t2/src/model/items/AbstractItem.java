@@ -79,96 +79,25 @@ public abstract class AbstractItem implements IEquipableItem {
     return maxRange;
   }
 
-  //COMBAT
-
-  /**
-   * Receives an attack to which this Unit is weak.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveWeaknessAttack(IEquipableItem attack){
+  @Override
+  public void receiveUnitWeaknessAttack(IEquipableItem attack){
     this.getOwner().receiveAttackWeakness(attack);
   }
 
 
-  /**
-   * Receives an attack to which this Unit is resistant.
-   *
-   * @param attack
-   *     Received attack.
-   */
-  protected void receiveResistantAttack(IEquipableItem attack) {
+  @Override
+  public void receiveUnitResistantAttack(IEquipableItem attack) {
     this.getOwner().receiveAttackResistant(attack);
   }
 
-  /**
-   * A item can receive a Attack without damage additional
-   * @param attack
-   */
-  protected void receiveAttack(IEquipableItem attack) {
+
+  @Override
+  public void receiveUnitAttack(IEquipableItem attack) {
     this.getOwner().receiveAttack(attack);
   }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) {
-    this.receiveWeaknessAttack(attackDarkness);
-    if(this.canAttack(attackDarkness)){
-      attackDarkness.getOwner().receiveAttackWeakness(this);
-    }
-  }
-
-  @Override
-  public void receiveLightAttack(Light attackLight) {
-    this.receiveWeaknessAttack(attackLight);
-    if(this.canAttack(attackLight)){
-      attackLight.getOwner().receiveAttackWeakness(this);
-    }
-  }
-
-  @Override
-  public void receiveSoulAttack(Soul attackSoul) {
-    this.receiveWeaknessAttack(attackSoul);
-    if(this.canAttack(attackSoul)){
-      attackSoul.getOwner().receiveAttackWeakness(this);
-    }
-  }
-
-  @Override
-  public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveAttack(attackAxe);
-    if(this.canAttack(attackAxe)){
-      if(attackAxe.getOwner().getCurrentHitPoints()>0){
-        attackAxe.getOwner().receiveAttack(this);
-      }
-    }
-  }
-
-  @Override
-  public void receiveSpearsAttack(Spear attackSpears) {
-    this.receiveAttack(attackSpears);
-    if(this.canAttack(attackSpears)){
-      attackSpears.getOwner().receiveAttack(this);
-    }
-  }
-
-  @Override
-  public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveAttack(attackSword);
-    if(this.canAttack(attackSword)){
-      if(attackSword.getOwner().getCurrentHitPoints()>0){
-        attackSword.getOwner().receiveAttack(this);
-      }
-    }
-  }
-
-  @Override
-  public void receiveBowAttack(Bow attackBow) {
-    receiveAttack(attackBow);
-  }
-
-  @Override
-  public void receiveMagicAttack(IEquipableItem enemyAttack){ }
+  public void giveMagicAttack(IEquipableItem itemMagic){ }
 
   //END COMBAT
 

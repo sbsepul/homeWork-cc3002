@@ -13,7 +13,7 @@ import model.units.IUnit;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Axe extends AbstractItem {
+public class Axe extends AbstractAttack implements IAttack{
 
   /**
    * Creates a new Axe item
@@ -39,43 +39,30 @@ public class Axe extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    super.receiveBowAttack(attackBow);
+    super.receiveAttackNormal(attackBow);
   }
 
   @Override
-  public void receiveAxeAttack(Axe attackAxe) { super.receiveAxeAttack(attackAxe); }
+  public void receiveAxeAttack(Axe attackAxe) { super.receiveAttackNormal(attackAxe); }
 
   @Override
-  public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveWeaknessAttack(attackSword);
-    if(this.canAttack(attackSword)){
-      if(attackSword.getOwner().getCurrentHitPoints()>0){
-        attackSword.getOwner().receiveAttackResistant(this);
-      }
-    }
-  }
+  public void receiveSwordsAttack(Sword attackSword) { super.receiveWeakAttack(attackSword);  }
 
   @Override
-  public void receiveSpearsAttack(Spear attackSpears) {
-    this.receiveResistantAttack(attackSpears);
-    if(this.canAttack(attackSpears)){
-      if(attackSpears.getOwner().getCurrentHitPoints()>0){
-        attackSpears.getOwner().receiveAttackWeakness(this);
-      }
-    }
-  }
+  public void receiveSpearsAttack(Spear attackSpears) { super.receiveSoftAttack(attackSpears);  }
 
   @Override
-  public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
+  public void receiveSoulAttack(Soul attackSoul) { super.receiveMagicAttack(attackSoul); }
 
   @Override
-  public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
+  public void receiveLightAttack(Light attackLight) { super.receiveMagicAttack(attackLight); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveDarknessAttack(attackDarkness); }
+  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveMagicAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {
     return obj instanceof Axe && super.equals(obj);
   }
+
 }

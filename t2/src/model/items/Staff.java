@@ -13,7 +13,7 @@ import model.units.IUnit;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Staff extends AbstractItem {
+public class Staff extends AbstractHeap implements IHeap {
 
   /**
    * Creates a new Staff item.
@@ -39,37 +39,37 @@ public class Staff extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    this.receiveAttack(attackBow);
+    receiveAttackNormalDamage(attackBow);
   }
 
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveAttack(attackAxe);
+    receiveAttackNormalDamage(attackAxe);
   }
 
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveAttack(attackSword);
+    receiveAttackNormalDamage(attackSword);
   }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    this.receiveAttack(attackSpears);
+    receiveAttackNormalDamage(attackSpears);
   }
 
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
-    this.receiveWeaknessAttack(attackDarkness);
+    receiveAttackMagic(attackDarkness);
   }
 
   @Override
   public void receiveLightAttack(Light attackLight) {
-    this.receiveWeaknessAttack(attackLight);
+    receiveAttackMagic(attackLight);
   }
 
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
-    this.receiveWeaknessAttack(attackSoul);
+    receiveAttackMagic(attackSoul);
   }
 
 

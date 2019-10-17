@@ -13,7 +13,7 @@ import model.units.IUnit;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Spear extends AbstractItem {
+public class Spear extends AbstractAttack implements IAttack {
 
   /**
    * Creates a new Axe item
@@ -39,42 +39,27 @@ public class Spear extends AbstractItem {
   }
 
   @Override
-  public void receiveBowAttack(Bow attackBow) {
-      super.receiveBowAttack(attackBow);
-  }
+  public void receiveBowAttack(Bow attackBow) { super.receiveAttackNormal(attackBow); }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    super.receiveSpearsAttack(attackSpears);
+    super.receiveAttackNormal(attackSpears);
   }
 
   @Override
-  public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveResistantAttack(attackSword);
-    if(this.canAttack(attackSword)){
-      if(attackSword.getOwner().getCurrentHitPoints()>0){
-        attackSword.getOwner().receiveAttackWeakness(this);
-      }
-    }
-  }
+  public void receiveSwordsAttack(Sword attackSword) {  super.receiveSoftAttack(attackSword);  }
 
   @Override
-  public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveWeaknessAttack(attackAxe);
-    if(this.canAttack(attackAxe)){
-      attackAxe.getOwner().receiveAttackResistant(this);
-    }
-  }
+  public void receiveAxeAttack(Axe attackAxe) {  super.receiveWeakAttack(attackAxe);  }
 
   @Override
-  public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
-
-
-  @Override
-  public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
+  public void receiveSoulAttack(Soul attackSoul) { super.receiveMagicAttack(attackSoul); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveDarknessAttack(attackDarkness); }
+  public void receiveLightAttack(Light attackLight) { super.receiveMagicAttack(attackLight); }
+
+  @Override
+  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveMagicAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {

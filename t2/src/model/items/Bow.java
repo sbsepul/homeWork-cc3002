@@ -12,7 +12,7 @@ import model.units.IUnit;
  * @author Sebastian Sepulveda
  * @since
  */
-public class Bow extends AbstractItem {
+public class Bow extends AbstractAttack implements IAttack {
 
   /**
    * Creates a new bow.
@@ -43,59 +43,35 @@ public class Bow extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    this.receiveAttack(attackBow);
-    if(this.canAttack(attackBow)){
-      if(attackBow.getOwner().getCurrentHitPoints()>0){
-          attackBow.getOwner().receiveAttack(attackBow);
-      }
-    }
-    else; //can't attack
+    super.receiveAttackNormal(attackBow);
   }
 
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveAttack(attackAxe);
-    if(this.canAttack(attackAxe)){
-      attackAxe.receiveAttack(this);
-    }
+    super.receiveAttackNormal(attackAxe);
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    this.receiveAttack(attackSword);
-    if(this.canAttack(attackSword)){
-      attackSword.receiveAttack(this);
-    }
+    super.receiveAttackNormal(attackSword);
   }
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    this.receiveAttack(attackSpears);
-    if(this.canAttack(attackSpears)){
-      attackSpears.receiveAttack(this);
-    }
+    super.receiveAttackNormal(attackSpears);
   }
 
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
-    this.receiveWeaknessAttack(attackDarkness);
-    if(this.canAttack(attackDarkness)){
-      attackDarkness.receiveWeaknessAttack(this);
-    }
+    super.receiveMagicAttack(attackDarkness);
   }
 
   @Override
   public void receiveLightAttack(Light attackLight) {
-    this.receiveWeaknessAttack(attackLight);
-    if(this.canAttack(attackLight)){
-      attackLight.receiveWeaknessAttack(this);
-    }
+    super.receiveMagicAttack(attackLight);
   }
 
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
-    this.receiveWeaknessAttack(attackSoul);
-    if(this.canAttack(attackSoul)){
-      attackSoul.receiveWeaknessAttack(this);
-    }
+    super.receiveMagicAttack(attackSoul);
   }
 
   @Override

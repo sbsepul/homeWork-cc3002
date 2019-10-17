@@ -147,6 +147,10 @@ public interface IUnit {
    */
   double getCurrentHitPoints();
 
+  /**
+   * @return maximum hit points of the unit
+   */
+  double getMaxCurrentHitPoints();
 
   /* END HIT POINTS SECTION */
 

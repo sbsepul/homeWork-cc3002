@@ -10,7 +10,7 @@ import model.items.*;
  * @since 1.0
  */
 
-public abstract class AbstractItemMagic extends AbstractItem implements IEquipableItem{
+public abstract class AbstractItemMagic extends AbstractAttack implements IAttack{
     /**
      * Constructor for a default item magic
      *
@@ -25,34 +25,22 @@ public abstract class AbstractItemMagic extends AbstractItem implements IEquipab
 
     @Override
     public void receiveAxeAttack(Axe attackAxe) {
-        this.receiveWeaknessAttack(attackAxe);
-        if(this.canAttack(attackAxe)){
-            attackAxe.getOwner().receiveAttackWeakness(this);
-        }
+        super.receiveMagicAttack(attackAxe);
     }
 
     @Override
     public void receiveBowAttack(Bow attackBow) {
-        this.receiveWeaknessAttack(attackBow);
-        if(this.canAttack(attackBow)){
-            attackBow.getOwner().receiveAttackWeakness(this);
-        }
+        super.receiveMagicAttack(attackBow);
     }
 
     @Override
     public void receiveSpearsAttack(Spear attackSpears) {
-        this.receiveWeaknessAttack(attackSpears);
-        if(this.canAttack(attackSpears)){
-            attackSpears.getOwner().receiveAttackWeakness(this);
-        }
+        super.receiveMagicAttack(attackSpears);
     }
 
     @Override
     public void receiveSwordsAttack(Sword attackSword) {
-        this.receiveWeaknessAttack(attackSword);
-        if(this.canAttack(attackSword)){
-            attackSword.getOwner().receiveAttackWeakness(this);
-        }
+        super.receiveMagicAttack(attackSword);
     }
 
 }

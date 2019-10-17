@@ -13,7 +13,7 @@ import model.units.IUnit;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Sword extends AbstractItem {
+public class Sword extends AbstractAttack implements IAttack {
 
   /**
    * Creates a new Sword.
@@ -39,44 +39,35 @@ public class Sword extends AbstractItem {
 
   @Override
   public void receiveBowAttack(Bow attackBow) {
-    super.receiveBowAttack(attackBow);
+    receiveAttackNormal(attackBow);
   }
   @Override
   public void receiveSwordsAttack(Sword attackSword) {
-    super.receiveSwordsAttack(attackSword);
+    receiveAttackNormal(attackSword);
   }
 
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
-    this.receiveResistantAttack(attackAxe);
-    if(this.canAttack(attackAxe)) {
-      if(attackAxe.getOwner().getCurrentHitPoints()>0){
-        attackAxe.getOwner().receiveAttackWeakness(this);
-      }
-    }
+    receiveSoftAttack(attackAxe);
   }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    this.receiveWeaknessAttack(attackSpears);
-    if(this.canAttack(attackSpears)){
-      if(attackSpears.getOwner().getCurrentHitPoints()>0){
-        attackSpears.getOwner().receiveAttackResistant(this);
-      }
-    }
+    receiveWeakAttack(attackSpears);
   }
 
   @Override
-  public void receiveSoulAttack(Soul attackSoul) { super.receiveSoulAttack(attackSoul); }
+  public void receiveSoulAttack(Soul attackSoul) { receiveMagicAttack(attackSoul); }
 
   @Override
-  public void receiveLightAttack(Light attackLight) { super.receiveLightAttack(attackLight); }
+  public void receiveLightAttack(Light attackLight) { receiveMagicAttack(attackLight); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveDarknessAttack(attackDarkness); }
+  public void receiveDarknessAttack(Darkness attackDarkness) { receiveMagicAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {
     return obj instanceof Sword && super.equals(obj);
   }
+
 }

@@ -3,6 +3,7 @@ package controller;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.net.http.WebSocket;
 import java.util.*;
 
 import model.items.IEquipableItem;
@@ -140,7 +141,7 @@ public class Tactician {
      * @return
      */
     public boolean isDieAllUnit() {
-        if(this.getUnits().isEmpty()) return false;
+        if(this.getUnits().isEmpty()) return true;
         for(int i = 0; i < this.getUnits().size(); i++){
             if(this.getUnits().get(i).getCurrentHitPoints()>0){
                 return false;
@@ -149,46 +150,53 @@ public class Tactician {
         return true;
     }
 
+    public String getNameCurrentUnit(){ return getCurrentUnit().getEquippedItem().getName();}
+
     /**
-     *
-     * @return
+     * @return getter the item equipped in the current unit of tactician
      */
     public IEquipableItem getEquipItemCurrentUnit(){
         return currentUnit.getEquippedItem();
     }
 
     /**
-     *
-     * @return
+     * @return getter the item's inventory of the tactician
      */
     public List<IEquipableItem> getItemsCurrentUnit(){
         return currentUnit.getItems();
     }
 
+    /**
+     * @return the current HP of the unit
+     */
+    public double hitPointsCurrentUnit(){ return getCurrentUnit().getCurrentHitPoints(); }
 
     /**
-     *
-     * @return
+     * @return the maximum HP of the unit
+     */
+    public double maxHitPointsCurrenUnit(){ return getCurrentUnit().getMaxCurrentHitPoints(); }
+
+    /**
+     * @return get the reference to the current unit of tactician
      */
     public IUnit getCurrentUnit() {
         return currentUnit;
     }
 
     /**
-     *
-     * @param unit
+     * @param unit that will change to current unit
      */
     public void setCurrentUnit(IUnit unit) {
         this.currentUnit = unit;
     }
 
     /**
-     *
-     * @param index
+     * @param index select a unit of inventory's unit
      */
     public void selectUnit(int index){
         currentUnit = units.get(index);
     }
+
 
 
 

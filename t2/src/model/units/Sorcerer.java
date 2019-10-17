@@ -41,7 +41,7 @@ public class Sorcerer extends AbstractUnit{
     @Override
     public void attack(IUnit enemy) {
         if (this.initCombat(enemy)){
-            if(enemy.getEquippedItem()!=null) this.getEquippedItem().receiveMagicAttack(enemy.getEquippedItem());
+            if(enemy.getEquippedItem()!=null) this.getEquippedItem().giveMagicAttack(enemy.getEquippedItem());
             else enemy.receiveAttack(this.getEquippedItem());
         }
     }

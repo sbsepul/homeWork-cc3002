@@ -77,6 +77,11 @@ public abstract class AbstractUnit implements IUnit{
     return currentHitPoints;
   }
 
+  @Override
+  public double getMaxCurrentHitPoints() {
+    return this.maxHitPoints;
+  }
+
   /**
    * Add a element to list of items's unit
    * @param item
@@ -226,6 +231,14 @@ public abstract class AbstractUnit implements IUnit{
             && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(equippedItem)
             && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(items);
   }
+
+  /**
+   * {@inheritDoc}
+   * <p>
+   * The <i>Alpaca</i> cannot attack any unit.
+   */
+  @Override
+  public void attack(IUnit enemy) { }
 
   @Override
   public void equipItemDarkness(Darkness item) { }

@@ -1,6 +1,7 @@
 package model.items.magic;
 
 import model.items.AbstractItem;
+import model.items.IAttack;
 import model.items.IEquipableItem;
 import model.units.IUnit;
 
@@ -14,7 +15,7 @@ import model.units.IUnit;
  * @since 1.0
  */
 
-public class Light extends AbstractItemMagic {
+public class Light extends AbstractItemMagic implements IAttack {
     /**
      * Create a new Light item
      *
@@ -38,31 +39,18 @@ public class Light extends AbstractItemMagic {
     }
 
     @Override
-    public void receiveMagicAttack(IEquipableItem enemyAttack){
+    public void giveMagicAttack(IEquipableItem enemyAttack){
         enemyAttack.receiveLightAttack(this);
     }
 
     @Override
     public void receiveLightAttack(Light attackLight) {
-        this.receiveAttack(attackLight);
-        if(this.canAttack(attackLight)){
-            attackLight.receiveAttack(this);
-        }
+        super.receiveAttackNormal(attackLight);
     }
 
     @Override
-    public void receiveDarknessAttack(Darkness attackDarkness) {
-        this.receiveResistantAttack(attackDarkness);
-        if(this.canAttack(attackDarkness)){
-            attackDarkness.getOwner().receiveAttackWeakness(this);
-        }
-    }
+    public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveSoftAttack(attackDarkness); }
 
     @Override
-    public void receiveSoulAttack(Soul attackSoul) {
-        this.receiveWeaknessAttack(attackSoul);
-        if(this.canAttack(attackSoul)){
-            attackSoul.getOwner().receiveAttackResistant(this);
-        }
-    }
+    public void receiveSoulAttack(Soul attackSoul) { super.receiveWeakAttack(attackSoul);  }
 }

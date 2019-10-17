@@ -65,6 +65,12 @@ Un jugador debe tener la capacidad de **ver los datos** de sus unidades (HP curr
 
 
 
+La pieza más importante de un Tactician es su heroe.
+
+Si el héroe de un jugador es derrotado en el turno de cualquier otro, entonces este jugador **pierde la partida y se retira del juego** junto con todas sus unidades. Si el héroe es derrotado en el turno del mismo jugador al que pertenece entonces **se termina su turno antes de ser excluido de la partida**. Un usuario puede tener más de un héroe en juego, en cuyo caso pierde la partida si cualquiera de estos es derrotado.
+
+
+
 ### Test
 
 
@@ -79,15 +85,14 @@ Un jugador debe tener la capacidad de **ver los datos** de sus unidades (HP curr
 
 ## Ganar un Juego
 
-El controller es el encargado de revisar cuales son los jugadores que ganaron el juego en ciertas circunstancias. Controller debe tener una 
+El controller es el encargado de revisar cuales son los jugadores que ganaron el juego en ciertas circunstancias. Los ganadores se obtienen **una vez que el juego es finalizado** o que se retiran todos los jugadores.
 
+En detalle, para que un jugador gane:
 
+* **Todos el resto de los jugadores se han retirado del juego:** esto significa que un jugador en una partida actual puede "colocar" me retiro. Esto implica que un tactician cambia su estado a "no seguir", esto lo vamos a definir como un boleeano true si esta activo, false si no (a penas un jugador tenga estado false debe ser eliminado de la partida con sus unidades)
+* **Se alcanza una cantidad máxima de turnos** (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
 
-Para que un jugador gane:
-
-* Todos el resto de los jugadores se han retirado del juego: esto significa que un jugador en una partida actual puede "colocar" me retiro. Esto implica que un tactician cambia su estado a "no seguir", esto lo vamos a definir como un boleeano true si esta activo, false si no (a penas un jugador tenga estado false debe ser eliminado de la partida con sus unidades)
-
-* Se alcanza una cantidad máxima de turnos (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
+Por tanto si se alcanza una cantidad maxima de turnos 
 
 
 
