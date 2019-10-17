@@ -25,6 +25,8 @@ import model.map.Location;
 public interface IUnit {
 
   /* BEGIN ITEM SECTION */
+  boolean isNull();
+
   /**
    *
    * @param item
@@ -109,7 +111,7 @@ public interface IUnit {
 
   /**
    * get a item of the inventory
-   * @param index
+   * @param item
    * @return
    */
   IEquipableItem removeItem(IEquipableItem item);

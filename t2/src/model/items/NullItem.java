@@ -17,7 +17,14 @@ public class NullItem extends AbstractItem {
      * @param unit the unit that will be quipped with the item
      */
     @Override
-    public void equipTo(IUnit unit) { }
+    public void equipTo(IUnit unit) {
+        setOwner(unit);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
 
     @Override
     public void receiveBowAttack(Bow attackBow) { }

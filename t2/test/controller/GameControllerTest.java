@@ -162,8 +162,6 @@ class GameControllerTest {
     assertNull(controller.getSelectedUnit());
     targetHero = factoryUnit.makeUnit(UnitType.HERO).createUnit();
     targetSpear = factoryItem.makeItem(ItemType.SPEAR).createItem();
-
-
   }
 
   @Test

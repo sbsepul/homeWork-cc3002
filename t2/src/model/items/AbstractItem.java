@@ -4,6 +4,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.units.IUnit;
+import model.units.NullUnit;
 
 /**
  * Abstract class that defines some common information and behaviour between all items normals.
@@ -37,12 +38,13 @@ public abstract class AbstractItem implements IEquipableItem {
     this.power = power;
     this.minRange = Math.max(minRange, 1);
     this.maxRange = Math.max(maxRange, this.minRange);
+    this.owner = new NullUnit();
   }
 
 
   @Override
   public boolean canAttack(IEquipableItem itemEnemy) {
-    if(itemEnemy.getOwner()!=null){
+    if(!itemEnemy.getOwner().isNull()){
       return this.getOwner().getCurrentHitPoints()>0 && this.getOwner().isInRange(itemEnemy.getOwner())
               && itemEnemy.getOwner().getCurrentHitPoints()>0;
     }
@@ -77,6 +79,15 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public int getMaxRange() {
     return maxRange;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
+
+  public boolean isEquipped(){
+    return false;
   }
 
   @Override

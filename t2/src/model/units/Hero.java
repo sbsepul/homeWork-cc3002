@@ -41,7 +41,7 @@ public class Hero extends AbstractUnit {
   @Override
   public void attack(IUnit enemy) {
     if (this.initCombat(enemy)){
-      if(enemy.getEquippedItem()!=null){
+      if(!enemy.getEquippedItem().isEmpty()){
         enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());
