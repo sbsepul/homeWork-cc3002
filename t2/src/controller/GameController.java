@@ -1,8 +1,10 @@
 package controller;
 
+import model.map.Location;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
 import model.items.factoryItem.FactoryItemProvider;
+import model.units.Hero;
 import model.units.factoryUnit.FactoryProviderUnit;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -24,7 +26,7 @@ public class GameController {
   private Random random = new Random();
   private long maxRounds;
   private int numRounds;
-  private int turnCurrent;
+  private int turnCurrent=0;
   private final int numPlayers;
   private final int tamMap;
   private List<Tactician> players;
@@ -48,6 +50,8 @@ public class GameController {
     this.tamMap = mapSize;
     this.map = createNewMap(mapSize);
     this.players = createTacticians(numberOfPlayers);
+    this.factoryItem = new FactoryItemProvider();
+    this.factoryUnit = new FactoryProviderUnit();
   }
 
   /**
@@ -55,7 +59,7 @@ public class GameController {
    * @param tamMapInit for default is square. N x N
    * @return a Field of N x N
    */
-  private Field createNewMap(int tamMapInit) {
+  public Field createNewMap(int tamMapInit) {
     this.factoryMap = new FactoryMap(this.tamMap);
     return factoryMap.createMap();
   }
@@ -63,7 +67,7 @@ public class GameController {
   /**
    * Reset the game to the beginning
    */
-  private void resetController(){
+  public void resetController(){
     this.players = createTacticians(this.numPlayers);
     this.map = createNewMap(this.tamMap);
   }
@@ -94,7 +98,7 @@ public class GameController {
    * @return the tactician that's currently playing
    */
   public Tactician getTurnOwner() {
-    return players.get(turnCurrent);
+    return this.players.get(this.turnCurrent);
   }
 
   /**
@@ -103,7 +107,7 @@ public class GameController {
    * @param numTacticians that begin in the game
    * @return a list of tacticians without units
    */
-  private List<Tactician> createTacticians(int numTacticians){
+  public List<Tactician> createTacticians(int numTacticians){
     List<Tactician> tact = new ArrayList<Tactician>(numTacticians);
     for(int i=0; i<numTacticians; i++){
       String name = "Player " + i;
@@ -145,20 +149,21 @@ public class GameController {
    *
    * @return a Random order for the tactician in a new Round
    */
-  private void createNewRound(List<Tactician> players){
+  public void createNewRound(){
     setSeedRandom();
-    int nPlayers = this.getTacticians().size();
-    Tactician ini_t = this.getTacticians().get(nPlayers-1);
+    int nPlayers = this.players.size();
+    Tactician ini_t = this.players.get(nPlayers-1);
     for(int i = 0; i <  nPlayers; i++){
       int posRandom = random.nextInt(nPlayers);
       Tactician temp_t = players.get(i);
-      players.set(i, players.get(posRandom));
+      Tactician other = players.get(posRandom);
       players.set(posRandom, temp_t);
+      players.set(i, other);
     }
-    if(players.get(0).equals(ini_t)){
-      Tactician temp = players.get(0);
-      players.set(0, players.get(nPlayers-1));
-      players.set(nPlayers-1,temp);
+    if(getTacticians().get(0).equals(ini_t)){
+      Tactician temp = getTacticians().get(0);
+      getTacticians().set(0, getTacticians().get(nPlayers-1));
+      getTacticians().set(nPlayers-1,temp);
     }
   }
 
@@ -182,7 +187,7 @@ public class GameController {
   public void endTurn() {
     //verify if a player has lost, for example in a counter attack
     if(getTurnOwner().canPlay()){
-      if(turnCurrent==getTacticians().size()-1) this.numRounds++;
+      if(turnCurrent == getTacticians().size()-1) this.numRounds++;
       this.changeToNextTurn();
     }
     else{
@@ -277,6 +282,7 @@ public class GameController {
       return win;
     }
     else{
+      if(getMaxRounds()==-1) return null;
       int maxUnits = 0;
       for(Tactician t: this.getTacticians()){
         int numUnits = t.getUnits().size();
@@ -302,7 +308,7 @@ public class GameController {
     if(getRoundNumber()>getMaxRounds()){
       return getNamePlayers();
     }
-    else return null;
+    return null;
   }
 
   /**
@@ -334,6 +340,7 @@ public class GameController {
        //this.getTurnOwner().setCurrentUnit(map.getCell(x,y).getUnit());
        this.setSelectedUnit(selectedUnit);
      }
+     else this.setSelectedUnit(null);
   }
 
   /**
@@ -411,12 +418,45 @@ public class GameController {
 
   // Factories process
 
-  public IUnit createUnit(UnitType unitType){
+  /**
+   *
+   * @param unitType
+   * @return
+   */
+  public IUnit requestUnit(UnitType unitType){
     IUnit unit = factoryUnit.makeUnit(unitType).createUnit();
     return unit;
   }
 
+  /**
+   *
+   * @param unit
+   */
+  public void addUnitToTactician(IUnit unit){
+    getTurnOwner().addUnit(unit);
+  }
 
+  /**
+   *
+   */
+  public void addHeroToTactician(){
+    Hero unit = (Hero) factoryUnit.makeUnit(UnitType.HERO).createUnit();
+    getTurnOwner().addUnitHero(unit);
+  }
+
+
+  public void putUnitInMap(IUnit unit, int x, int y){
+    Location cell = getGameMap().getCell(x,y);
+    if(cell.isValid()){
+      unit.setLocation(getGameMap().getCell(x,y));
+      this.getGameMap().getCell(x,y).setUnit(unit);
+    }
+  }
+
+  public void setPositionCurrentUnit(int x, int y){
+    Location cell = getGameMap().getCell(x,y);
+    this.getTurnOwner().setLocationCurrentUnit(cell);
+  }
 
 
 }

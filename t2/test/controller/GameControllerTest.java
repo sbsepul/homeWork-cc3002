@@ -2,6 +2,8 @@ package controller;
 
 import model.items.factoryItem.FactoryItemProvider;
 import model.items.factoryItem.ItemType;
+import model.map.InvalidLocation;
+import model.units.Alpaca;
 import model.units.factoryUnit.FactoryProviderUnit;
 import model.units.factoryUnit.UnitType;
 import model.items.IEquipableItem;
@@ -86,6 +88,17 @@ class GameControllerTest {
   }
 
   @Test
+  public void createNewRoundTest(){
+    //RANDOM TEST
+    Tactician firstPlayer = controller.getTacticians().get(0);
+    Tactician lastPlayer = controller.getTacticians().get(3);
+    controller.createNewRound();
+    Tactician newFirst = controller.getTacticians().get(0);
+    assertFalse(lastPlayer.getName().equals(newFirst.getName()));
+    assertFalse(firstPlayer.getName().equals(newFirst.getName()));
+  }
+
+  @Test
   void getMaxRounds() {
     Random randomTurnSequence = new Random();
     IntStream.range(0, 50).map(i -> randomTurnSequence.nextInt() & Integer.MAX_VALUE).forEach(nextInt -> {
@@ -155,17 +168,63 @@ class GameControllerTest {
     assertTrue(List.of("Player 3").containsAll(controller.getWinners()));
   }
 
-  // Desde aquí en adelante, los tests deben definirlos completamente ustedes
+  @Test
+  public void requestUnitTest(){
+    controller.initGame(2);
+    IUnit unit = controller.requestUnit(UnitType.ALPACA);
+    assertEquals(unit.getClass(), Alpaca.class);
+  }
+
+  @Test
+  public void addUnitToTacticianTest(){
+    IUnit hero = controller.requestUnit(UnitType.HERO);
+    IUnit unit = controller.requestUnit(UnitType.ARCHER);
+    controller.addHeroToTactician();
+    assertEquals(1, controller.getTurnOwner().getUnits().size());
+    assertEquals(hero.getClass(), controller.getTurnOwner().getUnits().get(0).getClass());
+    controller.addUnitToTactician(unit);
+    assertEquals(2, controller.getTurnOwner().getUnits().size());
+  }
+
+  @Test
+  public void putInMap(){
+    IUnit unit = controller.requestUnit(UnitType.SORCERER);
+    controller.putUnitInMap(unit, 8,8);
+    assertEquals(InvalidLocation.class, unit.getLocation().getClass());
+    controller.putUnitInMap(unit, 0,0);
+    assertFalse(unit.getClass().equals(InvalidLocation.class));
+    assertTrue(controller.getGameMap().getCell(0,0).equals(unit.getLocation()));
+    IUnit unitExtracted = controller.getGameMap().getCell(0,0).getUnit();
+    assertEquals(unit, unitExtracted);
+  }
+
   @Test
   public void getSelectedUnit() {
-    controller.initGame(2);
     assertNull(controller.getSelectedUnit());
-    targetHero = factoryUnit.makeUnit(UnitType.HERO).createUnit();
-    targetSpear = factoryItem.makeItem(ItemType.SPEAR).createItem();
+    IUnit unit = controller.requestUnit(UnitType.ARCHER);
+    controller.setSelectedUnit(unit);
+    assertEquals(unit, controller.getSelectedUnit());
   }
 
   @Test
   public void selectUnitIn() {
+    assertNull(controller.getGameMap().getCell(0,0).getUnit());
+    IUnit unitNew = controller.requestUnit(UnitType.SWORDMASTER);
+    controller.putUnitInMap(unitNew, 0,0);
+    assertTrue(controller.getGameMap().getCell(0,0).getUnit().equals(unitNew));
+    IUnit unit = controller.getGameMap().getCell(0,0).getUnit();
+    controller.selectUnitIn(1,1);
+    assertNull(controller.getSelectedUnit());
+    controller.selectUnitIn(0,0);
+    assertEquals(unit,controller.getSelectedUnit());
+    IUnit unitTwo = controller.requestUnit(UnitType.CLERIC);
+    controller.putUnitInMap(unitTwo, 3,3);
+    System.out.println(controller.getGameMap().toString());
+    assertTrue(controller.getGameMap().getCell(3,3).isValid());
+    //celda 3,3 no es valida
+    assertEquals(unit,controller.getGameMap().getCell(3,3).getUnit());
+    controller.selectUnitIn(3,3);
+    assertEquals(unitTwo, controller.getSelectedUnit());
   }
 
   @Test

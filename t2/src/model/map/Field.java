@@ -151,4 +151,24 @@ public class Field {
   public int getSize() {
     return getMap().size();
   }
+
+  @Override
+  public String toString(){
+    StringBuilder str = new StringBuilder();
+    for(int i = getSize()-1; i>=0; i--){
+      for(int j = 0; j<getSize(); j++){
+        if(this.getCell(i,j).isValid()){
+          if(j==getSize()-1) str.append("+\n");
+          else str.append("+");
+        }
+        else{
+          if(j==getSize()-1) str.append("#\n");
+          else str.append("#");
+        }
+      }
+    }
+    return str.toString();
+  }
+
+
 }

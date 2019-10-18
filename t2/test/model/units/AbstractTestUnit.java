@@ -1,9 +1,5 @@
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import model.items.*;
 import model.items.Axe;
 import model.items.Bow;
@@ -19,6 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.print.attribute.standard.MediaSize;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Sebastian Sepulveda
@@ -126,8 +124,10 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void constructorTest() {
     assertEquals(50, getTestUnit().getCurrentHitPoints(),EPSILON);
     assertEquals(2, getTestUnit().getMovement());
+    assertEquals(50, getTestUnit().getMaxCurrentHitPoints());
     assertEquals(new Location(0, 0), getTestUnit().getLocation());
     assertTrue(getTestUnit().getItems().isEmpty());
+    assertNull(getTestUnit().getEquippedItem());
   }
 
   /**

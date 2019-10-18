@@ -1,5 +1,6 @@
 package model.units.factoryUnit;
 
+import model.items.factoryItem.ItemType;
 import model.units.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,5 +53,16 @@ public class FactoryProviderUnitTest {
     public void makeUnitSwordMaster(){
         IFactoryUnit swordmaster = factory.makeUnit(UnitType.SWORDMASTER);
         assertEquals(swordmaster.createUnit().getClass(),SwordMaster.class);
+    }
+
+    @Test
+    public void illegalItemArgument() throws IllegalArgumentException{
+        boolean thrown = false;
+        try {
+            IFactoryUnit aUnit = factory.makeUnit(UnitType.OTHER);
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 }

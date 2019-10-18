@@ -36,7 +36,11 @@ public class Cleric extends AbstractUnit {
   public void equipItemStaff(Staff item) {
     equippedItem = item;
   }
-  //cleric can't attack, but can recovery a unit
+
+  /**
+   * Cleric can't attack, but can recovery a unit
+   * @param enemy
+   */
   public void attack(IUnit enemy){
     if (this.initCombat(enemy)) enemy.receiveRecovery(this.getEquippedItem());
   }

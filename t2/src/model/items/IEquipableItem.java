@@ -56,11 +56,6 @@ public interface IEquipableItem {
   public int getMaxRange();
 
   /**
-   * @return true if the item is ItemNull, false otherwise
-   */
-  public boolean isEmpty();
-
-  /**
    *
    * @param itemEnemy is the unitEnemy's item
    * @return true if the unit can attack to other

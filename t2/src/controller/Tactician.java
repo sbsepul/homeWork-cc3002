@@ -1,12 +1,11 @@
 package controller;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.net.http.WebSocket;
 import java.util.*;
 
 import model.items.IEquipableItem;
+import model.map.Location;
 import model.units.Hero;
 import model.units.IUnit;
 
@@ -117,23 +116,7 @@ public class Tactician {
      * @return true if a player can play, otherwise false
      */
     public boolean canPlay() {
-        if(this.getLiveHero().size()==0){
-            if(this.getStatus()){
-                if(this.isDieAllUnit()){
-                    return false;
-                }
-                return this.getStatus();
-            }
-            return this.getStatus();
-        }
-        else{
-            if(liveHero.containsValue(false)){
-                return false;
-            }
-            else{
-                return this.getStatus();
-            }
-        }
+        return this.status;
     }
 
     /**
@@ -232,5 +215,14 @@ public class Tactician {
      */
     public void setEquipItem(IEquipableItem item) {
        this.currentUnit.changeEquippedItem(item);
+    }
+
+
+    /**
+     *
+     * @param location
+     */
+    public void setLocationCurrentUnit(Location location){
+        getCurrentUnit().setLocation(location);
     }
 }

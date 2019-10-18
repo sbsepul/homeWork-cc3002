@@ -37,7 +37,7 @@ public class Fighter extends AbstractUnit {
   @Override
   public void attack(IUnit enemy) {
     if (this.initCombat(enemy)){
-      if(!enemy.getEquippedItem().isEmpty()){
+      if(enemy.getEquippedItem()!=null){
         enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());

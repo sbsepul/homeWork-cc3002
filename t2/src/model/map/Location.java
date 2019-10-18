@@ -107,7 +107,7 @@ public class Location {
    * @param unit
    *     the unit to be placed in this cell
    */
-  public void setUnit(final IUnit unit) {
+  public void setUnit(IUnit unit) {
     this.unit = unit;
   }
 
@@ -173,5 +173,7 @@ public class Location {
   public int getColumn() {
     return column;
   }
+
+  public boolean isValid() { return true; }
 
 }

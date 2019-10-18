@@ -55,12 +55,11 @@ public abstract class AbstractUnit implements IUnit{
     this.maxItems = maxItems;
     this.location = location;
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
-    this.equippedItem = new NullItem();
   }
 
   @Override
   public void equipItem(IEquipableItem item){
-    if(!item.isEmpty()){
+    if(item!=null){
       if(items.contains(item)){
         item.equipTo(this);
       }
@@ -68,14 +67,9 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public boolean isNull() {
-    return false;
-  }
-
-  @Override
   public boolean initCombat(IUnit unitEnemy) {
     return this.getCurrentHitPoints()>0 && unitEnemy.getCurrentHitPoints()>0
-            && !this.getEquippedItem().isEmpty() && this.isInRange(unitEnemy);
+            && this.getEquippedItem()!=null && this.isInRange(unitEnemy);
   }
 
   @Override
@@ -96,8 +90,8 @@ public abstract class AbstractUnit implements IUnit{
   public void addItem(IEquipableItem item) {
     int n = items.size();
     if(n<this.maxItems){
-      if(!item.isEmpty()){
-        if(item.getOwner().isNull()){
+      if(item!=null){
+        if(item.getOwner()==null){
           this.items.add(item);
           item.setOwner(this);
         }
@@ -112,9 +106,9 @@ public abstract class AbstractUnit implements IUnit{
         for(int i=0; i<this.getItems().size(); i++){
           if(item.equals(this.getItems().get(i))){
             if(item.equals(this.getEquippedItem())){
-              this.setEquippedItem(new NullItem());
+              this.setEquippedItem(null);
             }
-            item.setOwner(new NullUnit());
+            item.setOwner(null);
             return this.items.remove(i);
           }
         }
@@ -182,12 +176,12 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public int setEquippedItem(IEquipableItem item) {
-    if(item.isEmpty()){
-      this.equippedItem = new NullItem();
+    if(item==null){
+      this.equippedItem = null;
       return 0;
     }
     this.equipItem(item);
-    if(!this.getEquippedItem().isEmpty()){
+    if(this.getEquippedItem()!=null){
       if(this.getEquippedItem().equals(item)){
         return 0;
       }
@@ -231,10 +225,11 @@ public abstract class AbstractUnit implements IUnit{
       setLocation(targetLocation);
     }
   }
+  //&& ((IUnit) obj).getEquippedItem().equals(equippedItem)
   @Override
   public boolean equals(Object obj) {
     return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints
-            && ((IUnit) obj).getLocation().equals(location) && ((IUnit) obj).getEquippedItem().equals(equippedItem)
+            && ((IUnit) obj).getLocation().equals(location)
             && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(items);
   }
 

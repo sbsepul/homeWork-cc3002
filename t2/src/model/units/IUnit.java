@@ -25,7 +25,6 @@ import model.map.Location;
 public interface IUnit {
 
   /* BEGIN ITEM SECTION */
-  boolean isNull();
 
   /**
    *
