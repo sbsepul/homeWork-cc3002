@@ -1,5 +1,8 @@
 package model.units.factoryUnit;
 
+import model.items.Spear;
+import model.items.factoryItem.FactoryItemProvider;
+import model.items.factoryItem.IFactoryItem;
 import model.items.factoryItem.ItemType;
 import model.units.*;
 import org.junit.jupiter.api.BeforeEach;

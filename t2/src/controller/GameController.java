@@ -347,7 +347,7 @@ public class GameController {
    * @return the inventory of the currently selected unit.
    */
   public List<IEquipableItem> getItems() {
-    return this.getTurnOwner().getItemsCurrentUnit();
+    return getSelectedUnit().getItems();
   }
 
   /**
@@ -447,10 +447,8 @@ public class GameController {
 
   public void putUnitInMap(IUnit unit, int x, int y){
     Location cell = getGameMap().getCell(x,y);
-    if(cell.isValid()){
-      unit.setLocation(getGameMap().getCell(x,y));
-      this.getGameMap().getCell(x,y).setUnit(unit);
-    }
+    unit.setLocation(getGameMap().getCell(x,y));
+    this.getGameMap().getCell(x,y).setUnit(unit);
   }
 
   public void setPositionCurrentUnit(int x, int y){

@@ -1,11 +1,13 @@
 # Controlador
 ## Resumen
 
+La segunda etapa del proyecto del juego `Alpaca Emblem` consiste en programar la funcionalidad de la interacción entre el usuario y el modelo, es decir la conexión lógica entre la vista y el modelo, creando dos entidades relevantes:
 
+* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberán tener conocimiento de las unidades que poseen, el estado de sus unidades, entre otras cosas. 
 
+* **Controller**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego.  
 
-
-
+Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos durante el curso y que son necesarios para obtener la funcionalidad que es solicitada.
 
 ## Patterns Design
 
@@ -37,15 +39,31 @@ La idea del diseño se basa en que al momento de seleccionarse una cierta unidad
 
 
 
+### Test
+
+
+
+
+
 
 
 ## Observer Pattern
 
 
 
-Se utiliza para generar la interaccion entre el controlador
+Se utiliza para generar la interacción entre el controlador y los cambios generados sobre los jugadores de la partida y sus unidades.
 
 <insertar  una imagen uml>
+
+
+
+
+
+
+
+
+
+### Test
 
 
 
@@ -55,7 +73,7 @@ Se utiliza para generar la interaccion entre el controlador
 
 ### Descripcion
 
-Una entidad *Tactician* representa a un jugador que es manejado por el **Controller**. *Tactician* es el encargado de  manejar todas las **instrucciones del usuario** y **delegar mensajes a los objetos del modelo** tales como las unidades y los items. Este diseño permite que el usuario **no interactúe** directamente con el modelo del juego.
+Una entidad *Tactician* representa a un jugador que es manejado por el **Controller**. *Tactician* es el encargado de  	manejar todas las **instrucciones del usuario** y **delegar mensajes a los objetos del modelo** tales como las unidades y los items. Este diseño permite que el usuario **no interactúe** directamente con el modelo del juego.
 
 Para lograr esto tactician también debe **conocer a todas las unidades que posee**, como también tener conocimiento del **mapa del juego**.
 
@@ -93,6 +111,12 @@ En detalle, para que un jugador gane:
 * **Se alcanza una cantidad máxima de turnos** (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
 
 Por tanto si se alcanza una cantidad maxima de turnos 
+
+
+
+### Test
+
+
 
 
 

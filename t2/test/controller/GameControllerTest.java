@@ -1,10 +1,12 @@
 package controller;
 
 import model.items.factoryItem.FactoryItemProvider;
+import model.items.factoryItem.IFactoryItem;
 import model.items.factoryItem.ItemType;
 import model.map.InvalidLocation;
 import model.units.Alpaca;
 import model.units.factoryUnit.FactoryProviderUnit;
+import model.units.factoryUnit.IFactoryUnit;
 import model.units.factoryUnit.UnitType;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -219,16 +221,25 @@ class GameControllerTest {
     assertEquals(unit,controller.getSelectedUnit());
     IUnit unitTwo = controller.requestUnit(UnitType.CLERIC);
     controller.putUnitInMap(unitTwo, 3,3);
-    System.out.println(controller.getGameMap().toString());
-    assertTrue(controller.getGameMap().getCell(3,3).isValid());
+    //System.out.println(controller.getGameMap().toString());
     //celda 3,3 no es valida
-    assertEquals(unit,controller.getGameMap().getCell(3,3).getUnit());
+    assertEquals(controller.getGameMap().getCell(3,3), unitTwo.getLocation());
+    assertEquals(unitTwo,controller.getGameMap().getCell(3,3).getUnit());
     controller.selectUnitIn(3,3);
     assertEquals(unitTwo, controller.getSelectedUnit());
   }
 
   @Test
   public void getItems() {
+    IFactoryUnit unit = factoryUnit.makeUnit(UnitType.ALPACA);
+    IEquipableItem axe = factoryItem.makeItem(ItemType.AXE).createItem();
+    IEquipableItem sword = factoryItem.makeItem(ItemType.SWORD).createItem();
+    unit.setItems(axe,sword);
+    controller.putUnitInMap(unit.createUnit(), 1,1);
+    assertNull(controller.getSelectedUnit());
+    controller.selectUnitIn(1,1);
+    assertEquals(unit, controller.getSelectedUnit());
+
   }
 
   @Test

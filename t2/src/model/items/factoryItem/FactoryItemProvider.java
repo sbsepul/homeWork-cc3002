@@ -16,21 +16,21 @@ public class FactoryItemProvider {
     public IFactoryItem makeItem(ItemType typeItem){
         switch (typeItem){
             case AXE:
-                return new AxeFactoryItem("axe");
+                return new AxeFactoryItem();
             case BOW:
-                return new BowFactoryItem("bow");
+                return new BowFactoryItem();
             case SPEAR:
-                return new SpearFactoryItem("spear");
+                return new SpearFactoryItem();
             case SWORD:
-                return new SwordFactoryItem("sword");
+                return new SwordFactoryItem();
             case STAFF:
-                return new StaffFactoryItem("staff");
+                return new StaffFactoryItem();
             case SOUL:
-                return new SoulFactoryItem("soul");
+                return new SoulFactoryItem();
             case LIGHT:
-                return new LightFactoryItem("light");
+                return new LightFactoryItem();
             case DARKNESS:
-                return new DarknessFactoryItem("darkness");
+                return new DarknessFactoryItem();
             default:
                 throw new IllegalArgumentException("Item not supported");
         }

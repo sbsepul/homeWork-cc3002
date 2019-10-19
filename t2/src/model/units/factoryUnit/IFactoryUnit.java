@@ -11,6 +11,13 @@ public interface IFactoryUnit {
      */
     public IUnit createUnit();
 
+    public int getHp();
+
+    public int getMove();
+
+    public IEquipableItem[] getItemAll();
+
+    public Location getLocation();
     /**
      *
      * @param location

@@ -8,7 +8,7 @@ public abstract class AbstractFactoryItem implements IFactoryItem {
 
     /**
      * Setters the parameters for default to each items
-     * @param name
+     * @param name is the name of the item
      */
     public AbstractFactoryItem(String name){
         this.name = name;
@@ -17,17 +17,17 @@ public abstract class AbstractFactoryItem implements IFactoryItem {
         this.maxRange = 2;
     }
 
-    public AbstractFactoryItem(String name, int power){
-        this.name = name;
-        this.power = power;
-        this.minRange = 1;
-        this.maxRange = 2;
-    }
+    /**
+     * Setter the parameters for default in the creation
+     * @param name is the name of the item
+     * @param power power for default of the item
+     * @param minRange for default of the item
+     * @param maxRange for default of the item
+     */
     public AbstractFactoryItem(String name, int power, int minRange, int maxRange){
         this.name = name;
         this.power = power;
         this.minRange = minRange;
         this.maxRange = maxRange;
     }
-
 }

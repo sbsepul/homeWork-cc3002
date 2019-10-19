@@ -1,5 +1,10 @@
 package model.map;
 
+import model.units.Archer;
+import model.units.IUnit;
+import model.units.factoryUnit.FactoryProviderUnit;
+import model.units.factoryUnit.IFactoryUnit;
+import model.units.factoryUnit.UnitType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,6 +92,15 @@ class LocationTest {
     locationA0.addNeighbour(locationB0);
     locationA0.addNeighbour(locationA1);
     assertEquals(2, locationA0.getNeighbours().size());
+  }
+
+  @Test
+  public void testSetUnit(){
+    FactoryProviderUnit factory = new FactoryProviderUnit();
+    IUnit unit = factory.makeUnit(UnitType.ARCHER).createUnit();
+    assertNull(locationA0.getUnit());
+    locationA0.setUnit(unit);
+    assertEquals(unit, locationA0.getUnit());
   }
 
   @Test

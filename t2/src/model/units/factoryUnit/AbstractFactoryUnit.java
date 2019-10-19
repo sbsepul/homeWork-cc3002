@@ -15,17 +15,26 @@ public abstract class AbstractFactoryUnit implements IFactoryUnit {
         this.move = 2;
     }
 
-    public AbstractFactoryUnit(int hitPoints, int movement, Location location, IEquipableItem... itemsAll) {
-        this.hp = hitPoints;
-        this.move = movement;
-        this.location = location;
-        this.itemAll = itemsAll;
+    @Override
+    public int getHp() {
+        return hp;
     }
 
-    public AbstractFactoryUnit(int hitPoints, int movement) {
-        this.hp = hitPoints;
-        this.move = movement;
+    @Override
+    public int getMove() {
+        return move;
     }
+
+    @Override
+    public IEquipableItem[] getItemAll() {
+        return itemAll;
+    }
+
+    @Override
+    public Location getLocation() {
+        return location;
+    }
+
 
     @Override
     public void setLocation(Location location) {

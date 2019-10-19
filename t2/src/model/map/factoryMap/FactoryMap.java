@@ -24,14 +24,16 @@ public class FactoryMap implements IFactoryMap {
         Field map = new Field();
         List<Location> locations = new ArrayList<>();
         int n = this.tamMap;
-        for(int i = 1; i <= n; i++){
-            for(int j = 1; i <= n; i++){
-                locations.add(new Location(i,j));
+        for(int i = 0; i <= n; i++){
+            for(int j = 0; j <= n; j++) {
+                locations.add(new Location(i, j));
             }
         }
-        for(Location cell:locations) {
-            map.addCells(false, cell);
+        for(Location loc: locations){
+            map.addCells(false,loc);
         }
+        //Location[] loc = (Location[]) locations.toArray();
+        //map.addCells(false, loc);
         return map;
     }
 }
