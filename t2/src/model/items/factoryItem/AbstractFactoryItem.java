@@ -12,7 +12,7 @@ public abstract class AbstractFactoryItem implements IFactoryItem {
      */
     public AbstractFactoryItem(String name){
         this.name = name;
-        this.power = 50;
+        this.power = 10;
         this.minRange = 1;
         this.maxRange = 2;
     }
@@ -29,5 +29,37 @@ public abstract class AbstractFactoryItem implements IFactoryItem {
         this.power = power;
         this.minRange = minRange;
         this.maxRange = maxRange;
+    }
+    @Override
+    public String getName() {
+        return name;
+    }
+    @Override
+    public int getMaxRange() {
+        return maxRange;
+    }
+    @Override
+    public int getMinRange() {
+        return minRange;
+    }
+    @Override
+    public int getPower() {
+        return power;
+    }
+    @Override
+    public void setMaxRange(int maxRange) {
+        this.maxRange = maxRange;
+    }
+    @Override
+    public void setMinRange(int minRange) {
+        this.minRange = minRange;
+    }
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public void setPower(int power) {
+        this.power = power;
     }
 }

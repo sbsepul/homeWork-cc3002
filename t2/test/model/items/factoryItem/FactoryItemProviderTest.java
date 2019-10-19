@@ -59,7 +59,7 @@ class FactoryItemProviderTest {
     @Test
     public void makeItemSword(){
         IFactoryItem sword = factory.makeItem(ItemType.SWORD);
-        assertEquals(sword.createItem().getClass(), Sword.class);
+        assertEquals(sword.createItem().getClass(), SwordFactTest.class);
     }
     @Test
     public void illegalItemArgument() throws IllegalArgumentException{
