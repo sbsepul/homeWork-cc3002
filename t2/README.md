@@ -107,7 +107,7 @@ Si el héroe de un jugador es derrotado en el turno de cualquier otro, entonces 
 
 ## Controller
 
-
+El controller es una pieza fundamental para manejar el estado del juego en cierto instante y para interactuar con el jugador actual, generando acciones entre sus unidades
 
 
 
@@ -120,9 +120,7 @@ En detalle, para que un jugador gane:
 * **Todos el resto de los jugadores se han retirado del juego:** esto significa que un jugador en una partida actual puede "colocar" me retiro. Esto implica que un tactician cambia su estado a "no seguir", esto lo vamos a definir como un boleeano true si esta activo, false si no (a penas un jugador tenga estado false debe ser eliminado de la partida con sus unidades)
 * **Se alcanza una cantidad máxima de turnos** (-1 es indefinido). El ganador en este caso es el que tiene la mayor de unidades restantes. Si dos jugadores tienen la misma cantidad de unidades entonces se declara un empate entre ambos jugadores.
 
-Por tanto si se alcanza una cantidad maxima de turnos 
-
-
+Por tanto si se alcanza una cantidad máxima de turnos entonces el juego debe ser terminado y retornar los ganadores de la partida. 
 
 ### Test
 

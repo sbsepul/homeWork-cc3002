@@ -33,8 +33,6 @@ public class GameController {
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
-  private IFactoryUnit factoryUnitType;
-  private IFactoryItem factoryItemType;
   private FactoryProviderUnit factoryUnit;
   private FactoryItemProvider factoryItem;
   private List<ResponseStatusTactician> responseStatusTactician = new ArrayList<>();
@@ -497,71 +495,56 @@ public class GameController {
   // FACTORY UNIT
 
   public IFactoryUnit getSwordMasterFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new SwordMasterFactory();
   }
 
   public IFactoryUnit getArcherFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new ArcherFactory();
   }
   public IFactoryUnit getClericFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new ClericFactory();
   }
   public IFactoryUnit getAlpacaFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new AlpacaFactory();
   }
   public IFactoryUnit getFighterFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new FighterFactory();
   }
   public IFactoryUnit getHeroFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new HeroFactory();
   }
   public IFactoryUnit getSorcererFab(){
-    this.factoryUnitType = new SwordMasterFactory();
-    return factoryUnitType;
+    return new SorcererFactory();
   }
 
   //FACTORY ITEMS
 
   public IFactoryItem getSwordFab(){
-    this.factoryItemType = new SwordFactoryItem();
-    return factoryItemType;
+    return new SwordFactoryItem();
   }
 
   public IFactoryItem getBowFab(){
-    this.factoryItemType = new BowFactoryItem();
-    return factoryItemType;
+    return new BowFactoryItem();
   }
 
   public IFactoryItem getAxeFab(){
-    this.factoryItemType = new AxeFactoryItem();
-    return factoryItemType;
+    return new AxeFactoryItem();
   }
 
   public IFactoryItem getDarknessFab(){
-    this.factoryItemType = new DarknessFactoryItem();
-    return factoryItemType;
+    return new DarknessFactoryItem();
   }
   public IFactoryItem getSoulFab(){
-    this.factoryItemType = new SoulFactoryItem();
-    return factoryItemType;
+    return new SoulFactoryItem();
   }
   public IFactoryItem getLightFab(){
-    this.factoryItemType = new LightFactoryItem();
-    return factoryItemType;
+    return new LightFactoryItem();
   }
   public IFactoryItem getStaffFab(){
-    this.factoryItemType = new StaffFactoryItem();
-    return factoryItemType;
+    return new StaffFactoryItem();
   }
   public IFactoryItem getSpearFab(){
-    this.factoryItemType = new SpearFactoryItem();
-    return factoryItemType;
+    return new SpearFactoryItem();
   }
 
 

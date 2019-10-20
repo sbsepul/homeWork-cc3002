@@ -116,6 +116,7 @@ class GameControllerTest {
 
   @Test
   public void endTurn() {
+    Random randomEndTur = new Random(212121);
     Tactician firstPlayer = controller.getTurnOwner();
     // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
     Tactician secondPlayer = new Tactician("Player 1"); // <- Deben cambiar esto (!)
@@ -191,6 +192,7 @@ class GameControllerTest {
 
   @Test
   public void putInMap(){
+    IFactoryUnit archerFab = controller.getArcherFab();
     IUnit unit = controller.requestUnit(UnitType.SORCERER);
     controller.putUnitInMap(unit, 8,8);
     assertEquals(InvalidLocation.class, unit.getLocation().getClass());
@@ -198,7 +200,12 @@ class GameControllerTest {
     assertFalse(unit.getClass().equals(InvalidLocation.class));
     assertTrue(controller.getGameMap().getCell(0,0).equals(unit.getLocation()));
     IUnit unitExtracted = controller.getGameMap().getCell(0,0).getUnit();
+
     assertEquals(unit, unitExtracted);
+    controller.putUnitInMap(archerFab.createUnit(), 0,0);
+    assertFalse(controller.getGameMap().getCell(0,0).equals(archerFab.getLocation()));
+    assertTrue(controller.getGameMap().getCell(0,0).equals(unit.getLocation()));
+
   }
 
   @Test
@@ -251,9 +258,10 @@ class GameControllerTest {
   @Test
   public void equipItem() {
     IFactoryUnit archerFab = controller.getArcherFab();
+    IEquipableItem bowFirst = controller.getBowFab().createItem();
     archerFab.setItems(
-            controller.getBowFab().createItem(),
             controller.getAxeFab().createItem(),
+            bowFirst,
             controller.getSwordFab().createItem()
     );
     IUnit archer = archerFab.createUnit();
@@ -286,13 +294,44 @@ class GameControllerTest {
 
   @Test
   public void useItemOn() {
-
+    IFactoryUnit archer = controller.getArcherFab();
+    IFactoryUnit fighter = controller.getFighterFab();
+    archer.addItemForDefault();
+    fighter.addItemForDefault();
+    controller.putUnitInMap(archer.createUnit(), 0,0);
+    controller.putUnitInMap(fighter.createUnit(),1,1);
+    System.out.println(controller.getGameMap().toString());
+    controller.selectUnitIn(0,0);
+    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(1, controller.getSelectedUnit().getItems().size());
+    controller.equipItem(0);
+    controller.selectUnitIn(1,1);
+    controller.equipItem(0);
+    controller.selectUnitIn(0,0);
+    controller.useItemOn(1,1);
+    assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getGameMap().getCell(1,1).getUnit().getCurrentHitPoints());
   }
 
   @Test
   public void selectItem() {
     assertNull(controller.getSelectedItem());
+    IFactoryUnit alpaca = controller.getAlpacaFab();
+    alpaca.setItems(
+            controller.getAxeFab().createItem(),
+            controller.getSwordFab().createItem(),
+            controller.getBowFab().createItem(),
+            controller.getLightFab().createItem()
+    );
+    controller.putUnitInMap(alpaca.createUnit(), 1,1);
+    controller.selectUnitIn(1,1);
+    controller.selectItem(0);
+    assertEquals(controller.getAxeFab().createItem().getName(),controller.getSelectedItem());
+    controller.selectItem(1);
 
+    controller.selectItem(2);
+
+    controller.selectItem(3);
   }
 
   @Test
