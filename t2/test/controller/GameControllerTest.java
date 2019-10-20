@@ -15,11 +15,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.interfaces.XECKey;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * @author Ignacio Slater Muñoz
@@ -30,24 +34,76 @@ class GameControllerTest {
   private GameController controller;
   private long randomSeed;
   private List<String> testTacticians;
-  private Field mapTarget;
-  private FactoryProviderUnit factoryUnit;
-  private FactoryItemProvider factoryItem;
-  private IUnit targetHero;
-  private IEquipableItem targetSpear;
+  private IFactoryUnit factoryUnitAlpaca;
+  private IFactoryItem factoryItemAxe;
+  private IFactoryItem factoryItemSword;
+  private List<IFactoryUnit> packFactoryUnit;
+  private List<IFactoryItem> packFactoryItem;
+  private Map<String, IFactoryItem> mapFactoryItem = new HashMap<>();
 
   @BeforeEach
   public void setUp() {
     // Se define la semilla como un número aleatorio para generar variedad en los tests || ok
+    setFactories();
     randomSeed = new Random().nextLong();
     controller = new GameController(4, 7);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
+  }
+
+  public void setFactories(){
+    FactoryItemProvider factoryItemProvider = new FactoryItemProvider();
+    FactoryProviderUnit factoryProviderUnit = new FactoryProviderUnit();
+    factoryUnitAlpaca = factoryProviderUnit.makeUnit(UnitType.ALPACA);
+    factoryItemAxe = factoryItemProvider.makeItem(ItemType.AXE);
+    factoryItemSword = factoryItemProvider.makeItem(ItemType.SWORD);
+    packFactoryUnit = List.of(
+            factoryProviderUnit.makeUnit(UnitType.ARCHER),
+            factoryProviderUnit.makeUnit(UnitType.CLERIC),
+            factoryProviderUnit.makeUnit(UnitType.FIGHTER),
+            factoryProviderUnit.makeUnit(UnitType.HERO),
+            factoryProviderUnit.makeUnit(UnitType.SORCERER),
+            factoryProviderUnit.makeUnit(UnitType.SWORDMASTER)
+    );
+    packFactoryItem = List.of(
+            factoryItemProvider.makeItem(ItemType.AXE),
+            factoryItemProvider.makeItem(ItemType.BOW),
+            factoryItemProvider.makeItem(ItemType.DARKNESS),
+            factoryItemProvider.makeItem(ItemType.LIGHT),
+            factoryItemProvider.makeItem(ItemType.SOUL),
+            factoryItemProvider.makeItem(ItemType.SPEAR),
+            factoryItemProvider.makeItem(ItemType.STAFF),
+            factoryItemProvider.makeItem(ItemType.SWORD)
+    );
+    IntStream.range(0,packFactoryItem.size()).forEach(
+            i -> mapFactoryItem.put(packFactoryItem.get(i).getName(), packFactoryItem.get(i))
+    );
+  }
+
+  public IFactoryUnit getFactoryUnitAlpaca() {
+    return factoryUnitAlpaca;
+  }
+
+  public IFactoryItem getFactoryItemAxe() {
+    return factoryItemAxe;
+  }
+
+  public IFactoryItem getFactoryItemSword() {
+    return factoryItemSword;
+  }
+
+  public List<IFactoryItem> getPackFactoryItem() {
+    return packFactoryItem;
+  }
+
+  public List<IFactoryUnit> getPackFactoryUnit() {
+    return packFactoryUnit;
   }
 
   @Test
   public void getTacticians() {
     List<Tactician> tacticians = controller.getTacticians();
     assertEquals(4, tacticians.size());
+    assertEquals(4, controller.getNumPlayers());
     for (int i = 0; i < tacticians.size(); i++) {
       assertEquals("Player " + i, tacticians.get(i).getName());
     }
@@ -58,7 +114,8 @@ class GameControllerTest {
     Field gameMap = controller.getGameMap();
     assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
-    Random testRandom = new Random(randomSeed);
+    Random testRandom = new Random();
+    testRandom.setSeed(randomSeed);
     // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:
     //  - Comprobar las invariantes de las estructuras que se crean (en este caso que el mapa tenga
     //    las dimensiones definidas y que sea conexo.
@@ -221,7 +278,6 @@ class GameControllerTest {
     assertEquals(unit,controller.getSelectedUnit());
     IUnit unitTwo = controller.requestUnit(UnitType.CLERIC);
     controller.putUnitInMap(unitTwo, 3,3);
-    //System.out.println(controller.getGameMap().toString());
     //celda 3,3 no es valida
     assertEquals(controller.getGameMap().getCell(3,3), unitTwo.getLocation());
     assertEquals(unitTwo,controller.getGameMap().getCell(3,3).getUnit());
@@ -231,23 +287,49 @@ class GameControllerTest {
 
   @Test
   public void getItems() {
-    IFactoryUnit unit = factoryUnit.makeUnit(UnitType.ALPACA);
-    IEquipableItem axe = factoryItem.makeItem(ItemType.AXE).createItem();
-    IEquipableItem sword = factoryItem.makeItem(ItemType.SWORD).createItem();
-    unit.setItems(axe,sword);
-    controller.putUnitInMap(unit.createUnit(), 1,1);
+    System.out.println(controller.getGameMap().toString());
+    IEquipableItem axe = getFactoryItemAxe().createItem();
+    IEquipableItem sword = getFactoryItemSword().createItem();
+    getFactoryUnitAlpaca().setItems(axe,sword);
+    IUnit unit = getFactoryUnitAlpaca().createUnit();
+    controller.putUnitInMap(unit, 1,1);
     assertNull(controller.getSelectedUnit());
     controller.selectUnitIn(1,1);
     assertEquals(unit, controller.getSelectedUnit());
-
+    List<IEquipableItem> itemsUnit = unit.getItems();
+    itemsUnit.forEach(item -> assertTrue(controller.getItems().contains(item)));
   }
 
   @Test
   public void equipItem() {
+    IFactoryUnit archerFab = packFactoryUnit.get(0);
+    archerFab.setItems(
+            mapFactoryItem.get("axe").createItem(),
+            mapFactoryItem.get("bow").createItem(),
+            mapFactoryItem.get("sword").createItem()
+    );
+    IUnit archer = archerFab.createUnit();
+    controller.putUnitInMap(archer, 1,1);
+    controller.selectUnitIn(1,1);
+    assertEquals(archer, controller.getSelectedUnit());
+    assertEquals(3, controller.getSelectedUnit().getItems().size());
+    assertNull(controller.getSelectedUnit().getEquippedItem());
+    controller.equipItem(0);
+    assertNull(controller.getSelectedUnit().getEquippedItem());
+    controller.equipItem(1);
+    IEquipableItem bow = mapFactoryItem.get("bow").createItem();
+    assertEquals(
+            bow.getClass(),
+            controller.getSelectedUnit().getEquippedItem().getClass());
+    controller.equipItem(2);
+    assertEquals(
+            bow.getClass(),
+            controller.getSelectedUnit().getEquippedItem().getClass());
   }
 
   @Test
   public void useItemOn() {
+
   }
 
   @Test

@@ -1,5 +1,7 @@
 package model.units.factoryUnit;
 
+import java.util.List;
+
 /**
  * Types of units
  *
@@ -28,6 +30,18 @@ public class FactoryProviderUnit {
             default:
                 throw new IllegalArgumentException("Unit not supported");
         }
+    }
+
+    public List<IFactoryUnit> createUnitPack(){
+        //factoryUnit.makeUnit(UnitType.HERO)
+        return List.of(
+                this.makeUnit(UnitType.ALPACA),
+                this.makeUnit(UnitType.ARCHER),
+                this.makeUnit(UnitType.CLERIC),
+                this.makeUnit(UnitType.FIGHTER),
+                this.makeUnit(UnitType.SORCERER),
+                this.makeUnit(UnitType.SWORDMASTER)
+        );
     }
 }
 

@@ -1,5 +1,7 @@
 package controller;
 
+import model.items.factoryItem.IFactoryItem;
+import model.items.factoryItem.ItemType;
 import model.map.Location;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
@@ -9,16 +11,18 @@ import model.units.factoryUnit.FactoryProviderUnit;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
+import model.units.factoryUnit.IFactoryUnit;
 import model.units.factoryUnit.UnitType;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Controller of the game.
  * The controller manages all the input received from de game's GUI.
  *
  * @author Sebastian Sepulveda
- * @version 2.0
+ * @version 1.0
  * @since 2.0
  */
 public class GameController {
@@ -29,13 +33,15 @@ public class GameController {
   private int turnCurrent=0;
   private final int numPlayers;
   private final int tamMap;
-  private List<Tactician> players;
   private Field map;
+  private List<Tactician> players;
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
+  private IFactoryMap factoryMap;
   private FactoryProviderUnit factoryUnit;
   private FactoryItemProvider factoryItem;
-  private IFactoryMap factoryMap;
+  private List<ResponseStatusTactician> responseStatusTactician = new ArrayList<>();
+  private List<ResponseNoLiveHero> responseNoLiveHeroes = new ArrayList<>();
 
   /**
    * Creates the controller for a new game.
@@ -70,6 +76,11 @@ public class GameController {
   public void resetController(){
     this.players = createTacticians(this.numPlayers);
     this.map = createNewMap(this.tamMap);
+  }
+
+  public Random getRandom() {
+    random.setSeed(500);
+    return random;
   }
 
   /**
@@ -112,6 +123,12 @@ public class GameController {
     for(int i=0; i<numTacticians; i++){
       String name = "Player " + i;
       tact.add(new Tactician(name));
+      responseStatusTactician.add(new ResponseStatusTactician());
+    }
+    int index=0;
+    for(Tactician t : tact){
+      t.addObserver(responseStatusTactician.get(index));
+      index++;
     }
     return tact;
   }
@@ -139,22 +156,14 @@ public class GameController {
   }
 
   /**
-   * Setter the seed of random parameter
-   */
-  public void setSeedRandom(){
-    random.setSeed(500);
-  }
-
-  /**
    *
    * @return a Random order for the tactician in a new Round
    */
   public void createNewRound(){
-    setSeedRandom();
     int nPlayers = this.players.size();
     Tactician ini_t = this.players.get(nPlayers-1);
     for(int i = 0; i <  nPlayers; i++){
-      int posRandom = random.nextInt(nPlayers);
+      int posRandom = getRandom().nextInt(nPlayers);
       Tactician temp_t = players.get(i);
       Tactician other = players.get(posRandom);
       players.set(posRandom, temp_t);
@@ -357,8 +366,8 @@ public class GameController {
    *     the location of the item in the inventory.
    */
   public void equipItem(int index) {
-    IEquipableItem item = this.getTurnOwner().getItemsCurrentUnit().get(index);
-    this.getTurnOwner().setEquipItem(item);
+    IEquipableItem item = getSelectedUnit().getItems().get(index);
+    getSelectedUnit().setEquippedItem(item);
   }
 
   /**
@@ -444,9 +453,35 @@ public class GameController {
     getTurnOwner().addUnitHero(unit);
   }
 
+  public List<IFactoryUnit> createUnitWithItem(){
+    //factoryUnit.makeUnit(UnitType.HERO)
+    List<IFactoryUnit> fab = factoryUnit.createUnitPack();
+    IntStream.range(0,fab.size()).forEach(i -> fab.get(i));
+    return fab;
+  }
+
+
+  /**
+   * assign random units and items for each player in the game
+   * each unit have a hero with his item
+   */
+  public void assignUnitRandom(){
+    List<IFactoryUnit> fabUnit = factoryUnit.createUnitPack();
+    Map<String, IFactoryItem> fabItem = factoryItem.createItemMap();
+    int i=0, j=3;
+    for(Tactician t : this.getTacticians()){
+      //Collections.shuffle(fabUnit, getRandom());
+      List<IFactoryUnit> subFabUnit = fabUnit.subList(i,j);
+      IntStream.range(0,3).forEach(index -> t.addUnit(subFabUnit.get(index).createUnit()));
+      addHeroToTactician();
+      i++; j++;
+      if(j==fabUnit.size()) {
+        i=0; j=3;
+      }
+    }
+  }
 
   public void putUnitInMap(IUnit unit, int x, int y){
-    Location cell = getGameMap().getCell(x,y);
     unit.setLocation(getGameMap().getCell(x,y));
     this.getGameMap().getCell(x,y).setUnit(unit);
   }

@@ -1,14 +1,21 @@
 package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
+import model.items.factoryItem.FactoryItemProvider;
+import model.items.factoryItem.IFactoryItem;
+import model.items.factoryItem.ItemType;
 import model.map.InvalidLocation;
 import model.map.Location;
+
+import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractFactoryUnit implements IFactoryUnit {
     protected final int hp;
     protected final int move;
     protected Location location = new InvalidLocation();
     protected IEquipableItem[] itemAll = new IEquipableItem[0];
+    protected FactoryItemProvider factoryItemProvider = new FactoryItemProvider();
 
     public AbstractFactoryUnit(){
         this.hp = 50;
@@ -44,5 +51,14 @@ public abstract class AbstractFactoryUnit implements IFactoryUnit {
     @Override
     public void setItems(IEquipableItem... item) {
         this.itemAll = item;
+    }
+
+    @Override
+    public void addItemForDefault() {
+        Map<String, IFactoryItem> factoryItemMap = factoryItemProvider.createItemMap();
+        this.itemAll = new IEquipableItem[]{
+                factoryItemMap.get("bow").createItem(),
+                factoryItemMap.get("axe").createItem()
+        };
     }
 }

@@ -24,8 +24,8 @@ public class FactoryMap implements IFactoryMap {
         Field map = new Field();
         List<Location> locations = new ArrayList<>();
         int n = this.tamMap;
-        for(int i = 0; i <= n; i++){
-            for(int j = 0; j <= n; j++) {
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++) {
                 locations.add(new Location(i, j));
             }
         }

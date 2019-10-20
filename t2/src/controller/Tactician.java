@@ -107,7 +107,7 @@ public class Tactician {
      * Add a hero to the inventory of units
      * @param unitHero added
      */
-    public void addUnitHero(Hero unitHero){
+    public void addUnitHero(Hero unitHero) {
         units.add(unitHero);
     }
 
@@ -197,7 +197,7 @@ public class Tactician {
      *
      * @return
      */
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.status;
     }
 

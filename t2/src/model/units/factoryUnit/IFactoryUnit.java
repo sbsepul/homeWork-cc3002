@@ -30,4 +30,6 @@ public interface IFactoryUnit {
      */
     public void setItems(IEquipableItem... items);
 
+    public void addItemForDefault();
+
 }

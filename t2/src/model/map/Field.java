@@ -1,6 +1,7 @@
 package model.map;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * This class represents the map where the units are located and the game is played.
@@ -15,7 +16,7 @@ import java.util.*;
 public class Field {
 
   private Map<String, Location> map = new HashMap<>();
-  private Random random = new Random();
+  private Random random = new Random(212121);
   private StringBuilder builder = new StringBuilder();
 
   /**
@@ -28,11 +29,11 @@ public class Field {
    */
   public void addCells(final boolean connectAll, final Location... cells) {
     // Seed inserted
-    //random.setSeed(200);
     for (Location cell : cells) {
       addCell(cell);
       Location[] adjacentCells = getAdjacentCells(cell);
       for (Location adjacentCell : adjacentCells) {
+        //System.out.println(random.nextDouble() > 1.0 / 3);
         if (connectAll || random.nextDouble() > 1.0 / 3 || cell.getNeighbours().size() < 1) {
           addConnection(cell, adjacentCell);
         }
@@ -149,21 +150,47 @@ public class Field {
    * @return size of map
    */
   public int getSize() {
-    return getMap().size();
+    return (int) Math.sqrt(getMap().size());
+  }
+
+  public Map<Integer, StringBuilder> toStringGetAdjacent(Location cell){
+    Map<Integer, StringBuilder> newMap = new HashMap<>();
+    StringBuilder str1 = new StringBuilder();
+    StringBuilder str2 = new StringBuilder();
+    StringBuilder str3 = new StringBuilder();
+    int row = cell.getRow(),
+            col = cell.getColumn();
+    if(checkConnection(getCell(row - 1, col), cell)) str1.append("   ");
+    else str1.append(" # ");
+    if(checkConnection(getCell(row + 1, col), cell)) str3.append("   ");
+    else str3.append(" # ");
+    if(checkConnection(getCell(row, col - 1), cell)) str2.append(" +");
+    else str2.append("#+");
+    if(checkConnection(getCell(row, col + 1), cell)) str2.append(" ");
+    else str2.append("#");
+    newMap.put(0,str3); newMap.put(1,str2); newMap.put(2,str1);
+    return newMap;
   }
 
   @Override
   public String toString(){
     StringBuilder str = new StringBuilder();
     for(int i = getSize()-1; i>=0; i--){
+      StringBuilder str_l1 = new StringBuilder();
+      StringBuilder str_l2 = new StringBuilder();
+      StringBuilder str_l3 = new StringBuilder();
       for(int j = 0; j<getSize(); j++){
-        if(this.getCell(i,j).isValid()){
-          if(j==getSize()-1) str.append("+\n");
-          else str.append("+");
-        }
-        else{
-          if(j==getSize()-1) str.append("#\n");
-          else str.append("#");
+        Map<Integer, StringBuilder> newMap = new HashMap<>();
+        Location cell = getCell(i,j);
+        newMap = toStringGetAdjacent(cell);
+        str_l1.append(newMap.get(0).toString());
+        str_l2.append(newMap.get(1).toString());
+        str_l3.append(newMap.get(2).toString());
+        if(j==getSize()-1){
+          str_l1.append("\n"); str_l2.append("\n"); str_l3.append("\n");
+          str.append(str_l1.toString());
+          str.append(str_l2.toString());
+          str.append(str_l3.toString());
         }
       }
     }

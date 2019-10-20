@@ -6,6 +6,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+/**
+ * Listener of status of hero in the player
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class ResponseNoLiveHero implements PropertyChangeListener {
     private List<IUnit> hero;
     /**
