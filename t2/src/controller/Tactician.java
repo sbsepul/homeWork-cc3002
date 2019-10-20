@@ -1,5 +1,6 @@
 package controller;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
@@ -26,10 +27,12 @@ import model.units.IUnit;
 
 public class Tactician {
 
-    private PropertyChangeSupport support;
+    private PropertyChangeSupport tacticianStatus;
+    private PropertyChangeSupport unitStatus;
     private boolean status;
     private final String mark;
     private List<IUnit> units = new ArrayList<>();
+    private List<Hero> heroes;
     private IUnit currentUnit;
     private Map<Integer,Boolean> liveHero = new HashMap<>();
 
@@ -44,7 +47,7 @@ public class Tactician {
         this.mark = markName;
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
-        this.support = new PropertyChangeSupport(this);
+        this.tacticianStatus = new PropertyChangeSupport(this);
         // for default the first element in units will be the first object in the list units
         if(!this.units.isEmpty()){
             this.currentUnit = units.get(0);
@@ -52,16 +55,16 @@ public class Tactician {
     }
     //Observer for Tactician
 
-    public PropertyChangeSupport getPropertyChangeSupport(){
-        return this.support;
+    public PropertyChangeSupport getTacticianStatus(){
+        return this.tacticianStatus;
     }
 
-    public void addObserver(PropertyChangeListener pcl){
-        support.addPropertyChangeListener(pcl);
+    public void addResponseStatusTactician(PropertyChangeListener pcl){
+        tacticianStatus.addPropertyChangeListener(pcl);
     }
 
     public void removePropertyChangeListener(PropertyChangeListener pcl){
-        support.removePropertyChangeListener(pcl);
+        tacticianStatus.removePropertyChangeListener(pcl);
     }
 
     /**
@@ -180,34 +183,20 @@ public class Tactician {
         currentUnit = units.get(index);
     }
 
-
-
-
     // STATUS PLAYER
-    /**
-     *
-     * @param decision
-     * @return the tactician's decision
-     */
-    public boolean followPlaying(boolean decision){
-        return decision;
+
+    public void retire(){
+        tacticianStatus.firePropertyChange(
+                new PropertyChangeEvent(this,"status", getStatus(),false)
+        );
+        this.status = false;
     }
 
     /**
      *
      * @return
      */
-    public boolean getStatus() {
-        return this.status;
-    }
-
-    /**
-     * Set the Status of the tactician to false (retired)
-     */
-    public void setStatus(boolean newStatus) {
-        support.firePropertyChange("status", this.getPropertyChangeSupport(), newStatus);
-        this.status = newStatus;
-    }
+    public boolean getStatus() { return this.status; }
 
     /**
      *
@@ -217,7 +206,6 @@ public class Tactician {
        this.currentUnit.changeEquippedItem(item);
     }
 
-
     /**
      *
      * @param location
@@ -225,4 +213,27 @@ public class Tactician {
     public void setLocationCurrentUnit(Location location){
         getCurrentUnit().setLocation(location);
     }
+
+
+    public void generateAttack(IUnit enemy){
+        double hpInit = getCurrentUnit().getCurrentHitPoints();
+        getCurrentUnit().attack(enemy);
+        unitStatus.firePropertyChange(
+                new PropertyChangeEvent(this,
+                        "statusUnit",
+                        hpInit,
+                        getCurrentUnit().getCurrentHitPoints())
+        );
+    }
+
+    public void giveItemToUnit(IUnit target, IEquipableItem itemSelected){
+        //si la unidad actual tiene el item equipado
+        if(this.getCurrentUnit().getItems().contains(itemSelected)){
+            //si el jugador actual contiene a target unit
+            if(this.getUnits().contains(target)){
+                this.getCurrentUnit().giveItem(target,itemSelected);
+            }
+        }
+    }
+
 }

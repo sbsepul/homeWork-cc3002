@@ -164,8 +164,14 @@ public class Field {
     else str1.append(" # ");
     if(checkConnection(getCell(row + 1, col), cell)) str3.append("   ");
     else str3.append(" # ");
-    if(checkConnection(getCell(row, col - 1), cell)) str2.append(" +");
-    else str2.append("#+");
+    if(checkConnection(getCell(row, col - 1), cell)){
+      if(cell.getUnit()!=null) str2.append(" o");
+      else str2.append(" +");
+    }
+    else {
+      if(cell.getUnit()!=null) str2.append("#o");
+      else str2.append("#+");
+    }
     if(checkConnection(getCell(row, col + 1), cell)) str2.append(" ");
     else str2.append("#");
     newMap.put(0,str3); newMap.put(1,str2); newMap.put(2,str1);
@@ -188,9 +194,11 @@ public class Field {
         str_l3.append(newMap.get(2).toString());
         if(j==getSize()-1){
           str_l1.append("\n"); str_l2.append("\n"); str_l3.append("\n");
-          str.append(str_l1.toString());
+          if(!str_l1.toString().contains("#")) str_l1.toString().replaceAll(" ", "");
+          else str.append(str_l1.toString());
           str.append(str_l2.toString());
-          str.append(str_l3.toString());
+          if(!str_l3.toString().contains("#")) str_l3.toString().replaceAll(" ", "");
+          else str.append(str_l3.toString());
         }
       }
     }

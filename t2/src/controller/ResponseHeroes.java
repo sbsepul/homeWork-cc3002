@@ -13,7 +13,7 @@ import java.util.List;
  * @version 1.0
  * @since 2.0
  */
-public class ResponseNoLiveHero implements PropertyChangeListener {
+public class ResponseHeroes implements PropertyChangeListener {
     private List<IUnit> hero;
     /**
      * This method gets called when a bound property is changed.

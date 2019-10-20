@@ -1,13 +1,10 @@
 package controller;
 
-import model.items.factoryItem.FactoryItemProvider;
-import model.items.factoryItem.IFactoryItem;
-import model.items.factoryItem.ItemType;
+import model.items.Spear;
+import model.items.factoryItem.*;
 import model.map.InvalidLocation;
 import model.units.Alpaca;
-import model.units.factoryUnit.FactoryProviderUnit;
-import model.units.factoryUnit.IFactoryUnit;
-import model.units.factoryUnit.UnitType;
+import model.units.factoryUnit.*;
 import model.items.IEquipableItem;
 import model.map.Field;
 import model.units.IUnit;
@@ -34,70 +31,17 @@ class GameControllerTest {
   private GameController controller;
   private long randomSeed;
   private List<String> testTacticians;
-  private IFactoryUnit factoryUnitAlpaca;
-  private IFactoryItem factoryItemAxe;
-  private IFactoryItem factoryItemSword;
-  private List<IFactoryUnit> packFactoryUnit;
-  private List<IFactoryItem> packFactoryItem;
-  private Map<String, IFactoryItem> mapFactoryItem = new HashMap<>();
+  private IFactoryUnit unitFactory;
+  private IFactoryItem itemFactory;
 
   @BeforeEach
   public void setUp() {
     // Se define la semilla como un número aleatorio para generar variedad en los tests || ok
-    setFactories();
     randomSeed = new Random().nextLong();
     controller = new GameController(4, 7);
     testTacticians = List.of("Player 0", "Player 1", "Player 2", "Player 3");
   }
 
-  public void setFactories(){
-    FactoryItemProvider factoryItemProvider = new FactoryItemProvider();
-    FactoryProviderUnit factoryProviderUnit = new FactoryProviderUnit();
-    factoryUnitAlpaca = factoryProviderUnit.makeUnit(UnitType.ALPACA);
-    factoryItemAxe = factoryItemProvider.makeItem(ItemType.AXE);
-    factoryItemSword = factoryItemProvider.makeItem(ItemType.SWORD);
-    packFactoryUnit = List.of(
-            factoryProviderUnit.makeUnit(UnitType.ARCHER),
-            factoryProviderUnit.makeUnit(UnitType.CLERIC),
-            factoryProviderUnit.makeUnit(UnitType.FIGHTER),
-            factoryProviderUnit.makeUnit(UnitType.HERO),
-            factoryProviderUnit.makeUnit(UnitType.SORCERER),
-            factoryProviderUnit.makeUnit(UnitType.SWORDMASTER)
-    );
-    packFactoryItem = List.of(
-            factoryItemProvider.makeItem(ItemType.AXE),
-            factoryItemProvider.makeItem(ItemType.BOW),
-            factoryItemProvider.makeItem(ItemType.DARKNESS),
-            factoryItemProvider.makeItem(ItemType.LIGHT),
-            factoryItemProvider.makeItem(ItemType.SOUL),
-            factoryItemProvider.makeItem(ItemType.SPEAR),
-            factoryItemProvider.makeItem(ItemType.STAFF),
-            factoryItemProvider.makeItem(ItemType.SWORD)
-    );
-    IntStream.range(0,packFactoryItem.size()).forEach(
-            i -> mapFactoryItem.put(packFactoryItem.get(i).getName(), packFactoryItem.get(i))
-    );
-  }
-
-  public IFactoryUnit getFactoryUnitAlpaca() {
-    return factoryUnitAlpaca;
-  }
-
-  public IFactoryItem getFactoryItemAxe() {
-    return factoryItemAxe;
-  }
-
-  public IFactoryItem getFactoryItemSword() {
-    return factoryItemSword;
-  }
-
-  public List<IFactoryItem> getPackFactoryItem() {
-    return packFactoryItem;
-  }
-
-  public List<IFactoryUnit> getPackFactoryUnit() {
-    return packFactoryUnit;
-  }
 
   @Test
   public void getTacticians() {
@@ -285,13 +229,17 @@ class GameControllerTest {
     assertEquals(unitTwo, controller.getSelectedUnit());
   }
 
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
   @Test
   public void getItems() {
-    System.out.println(controller.getGameMap().toString());
-    IEquipableItem axe = getFactoryItemAxe().createItem();
-    IEquipableItem sword = getFactoryItemSword().createItem();
-    getFactoryUnitAlpaca().setItems(axe,sword);
-    IUnit unit = getFactoryUnitAlpaca().createUnit();
+    //System.out.println(controller.getGameMap().toString());
+    IEquipableItem axe = controller.getAxeFab().createItem();
+    IEquipableItem sword = controller.getSwordFab().createItem();
+    IFactoryUnit alpaca = controller.getAlpacaFab();
+    alpaca.setItems(axe,sword);
+    IUnit unit = alpaca.createUnit();
     controller.putUnitInMap(unit, 1,1);
     assertNull(controller.getSelectedUnit());
     controller.selectUnitIn(1,1);
@@ -302,11 +250,11 @@ class GameControllerTest {
 
   @Test
   public void equipItem() {
-    IFactoryUnit archerFab = packFactoryUnit.get(0);
+    IFactoryUnit archerFab = controller.getArcherFab();
     archerFab.setItems(
-            mapFactoryItem.get("axe").createItem(),
-            mapFactoryItem.get("bow").createItem(),
-            mapFactoryItem.get("sword").createItem()
+            controller.getBowFab().createItem(),
+            controller.getAxeFab().createItem(),
+            controller.getSwordFab().createItem()
     );
     IUnit archer = archerFab.createUnit();
     controller.putUnitInMap(archer, 1,1);
@@ -317,7 +265,7 @@ class GameControllerTest {
     controller.equipItem(0);
     assertNull(controller.getSelectedUnit().getEquippedItem());
     controller.equipItem(1);
-    IEquipableItem bow = mapFactoryItem.get("bow").createItem();
+    IEquipableItem bow = controller.getBowFab().createItem();
     assertEquals(
             bow.getClass(),
             controller.getSelectedUnit().getEquippedItem().getClass());
@@ -325,6 +273,15 @@ class GameControllerTest {
     assertEquals(
             bow.getClass(),
             controller.getSelectedUnit().getEquippedItem().getClass());
+  }
+
+  @Test
+  public void removeUnitStatus(){
+    assertEquals(4, controller.getNumPlayers());
+    assertTrue(controller.getTurnOwner().getStatus());
+    assertTrue(controller.getResponseStatusTactician().get(controller.getPosTurnOwner()).getProperty());
+    controller.getTurnOwner().retire();
+    assertFalse(controller.getResponseStatusTactician().get(controller.getPosTurnOwner()).getProperty());
   }
 
   @Test
