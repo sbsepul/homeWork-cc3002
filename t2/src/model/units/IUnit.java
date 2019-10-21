@@ -113,7 +113,7 @@ public interface IUnit {
    * @param item
    * @return
    */
-  IEquipableItem removeItem(IEquipableItem item);
+  void removeItem(IEquipableItem item);
 
   /* END ITEM SECTION */
 

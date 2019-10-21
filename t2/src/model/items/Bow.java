@@ -45,7 +45,6 @@ public class Bow extends AbstractAttack implements IAttack {
   public void receiveBowAttack(Bow attackBow) {
     super.receiveAttackNormal(attackBow);
   }
-
   @Override
   public void receiveAxeAttack(Axe attackAxe) {
     super.receiveAttackNormal(attackAxe);
@@ -58,22 +57,18 @@ public class Bow extends AbstractAttack implements IAttack {
   public void receiveSpearsAttack(Spear attackSpears) {
     super.receiveAttackNormal(attackSpears);
   }
-
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
     super.receiveMagicAttack(attackDarkness);
   }
-
   @Override
   public void receiveLightAttack(Light attackLight) {
     super.receiveMagicAttack(attackLight);
   }
-
   @Override
   public void receiveSoulAttack(Soul attackSoul) {
     super.receiveMagicAttack(attackSoul);
   }
-
   @Override
   public boolean equals(Object obj) {
     return obj instanceof Bow && super.equals(obj);

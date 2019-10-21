@@ -58,8 +58,6 @@ class GameControllerTest {
     Field gameMap = controller.getGameMap();
     assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
-    Random testRandom = new Random();
-    testRandom.setSeed(randomSeed);
     // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:
     //  - Comprobar las invariantes de las estructuras que se crean (en este caso que el mapa tenga
     //    las dimensiones definidas y que sea conexo.
@@ -116,15 +114,19 @@ class GameControllerTest {
 
   @Test
   public void endTurn() {
-    Random randomEndTur = new Random(212121);
+    controller.initGame(3);
     Tactician firstPlayer = controller.getTurnOwner();
     // Nuevamente, para determinar el orden de los jugadores se debe usar una semilla
     Tactician secondPlayer = new Tactician("Player 1"); // <- Deben cambiar esto (!)
     assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
-
     controller.endTurn();
     assertNotEquals(firstPlayer.getName(), controller.getTurnOwner().getName());
     assertEquals(secondPlayer.getName(), controller.getTurnOwner().getName());
+    IntStream.range(0,2).forEach(i->controller.endTurn());
+    Tactician lastPlayer = new Tactician("Player 3");
+    assertEquals("Player 3", controller.getTurnOwner().getName());
+    controller.endTurn();
+    assertFalse(lastPlayer.getName().equals(controller.getTurnOwner().getName()));
   }
 
   @Test
@@ -236,9 +238,6 @@ class GameControllerTest {
     assertEquals(unitTwo, controller.getSelectedUnit());
   }
 
-  ////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////
   @Test
   public void getItems() {
     //System.out.println(controller.getGameMap().toString());
@@ -296,45 +295,83 @@ class GameControllerTest {
   public void useItemOn() {
     IFactoryUnit archer = controller.getArcherFab();
     IFactoryUnit fighter = controller.getFighterFab();
+    IFactoryUnit master = controller.getSwordMasterFab();
     archer.addItemForDefault();
     fighter.addItemForDefault();
-    controller.putUnitInMap(archer.createUnit(), 0,0);
-    controller.putUnitInMap(fighter.createUnit(),1,1);
-    System.out.println(controller.getGameMap().toString());
-    controller.selectUnitIn(0,0);
+    master.addItemForDefault();
+    controller.putUnitInMap(archer.createUnit(), 6,0);
+    controller.putUnitInMap(fighter.createUnit(),5,1);
+    controller.putUnitInMap(master.createUnit(), 5,0);
+    // System.out.println(controller.getGameMap().toString());
+    controller.selectUnitIn(6,0);
     assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
     assertEquals(1, controller.getSelectedUnit().getItems().size());
     controller.equipItem(0);
-    controller.selectUnitIn(1,1);
+    controller.selectUnitIn(5,1);
     controller.equipItem(0);
-    controller.selectUnitIn(0,0);
-    controller.useItemOn(1,1);
+    controller.selectUnitIn(5,0);
+    controller.equipItem(0);
+    controller.selectUnitIn(6,0);
+    controller.useItemOn(5,1);
     assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
-    assertEquals(40, controller.getGameMap().getCell(1,1).getUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getGameMap().getCell(5,1).getUnit().getCurrentHitPoints());
+    controller.selectUnitIn(5,0);
+    controller.useItemOn(5,1);
+    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getGameMap().getCell(5,1).getUnit().getCurrentHitPoints());
   }
 
   @Test
   public void selectItem() {
     assertNull(controller.getSelectedItem());
     IFactoryUnit alpaca = controller.getAlpacaFab();
+    IEquipableItem axe = controller.getAxeFab().createItem();
+    IEquipableItem sword = controller.getSwordFab().createItem();
+    IEquipableItem bow = controller.getBowFab().createItem();
+    IEquipableItem light = controller.getLightFab().createItem();
     alpaca.setItems(
-            controller.getAxeFab().createItem(),
-            controller.getSwordFab().createItem(),
-            controller.getBowFab().createItem(),
-            controller.getLightFab().createItem()
+            axe,sword,bow,light
     );
     controller.putUnitInMap(alpaca.createUnit(), 1,1);
     controller.selectUnitIn(1,1);
     controller.selectItem(0);
-    assertEquals(controller.getAxeFab().createItem().getName(),controller.getSelectedItem());
+    assertEquals(axe.getName(),controller.getSelectedItem().getName());
     controller.selectItem(1);
-
+    assertEquals(sword.getName(),controller.getSelectedItem().getName());
     controller.selectItem(2);
-
+    assertEquals(bow.getName(),controller.getSelectedItem().getName());
     controller.selectItem(3);
+    assertEquals(light.getName(),controller.getSelectedItem().getName());
   }
 
   @Test
   public void giveItemTo() {
+    IFactoryUnit sorcerer = controller.getSorcererFab();
+    IFactoryUnit cleric = controller.getClericFab();
+    IFactoryUnit alpaca = controller.getAlpacaFab();
+    sorcerer.addItemForDefault();
+    assertEquals(1,sorcerer.getItemAll().length);
+    cleric.addItemForDefault();
+    assertEquals(1,cleric.getItemAll().length);
+    alpaca.addItemForDefault();
+    assertEquals(2,alpaca.getItemAll().length);
+    controller.putUnitInMap(sorcerer.createUnit(),6,1);
+    controller.putUnitInMap(cleric.createUnit(),6,0);
+    controller.putUnitInMap(alpaca.createUnit(),5,1);
+    controller.selectUnitIn(6,0);
+    controller.selectItem(0);
+    assertEquals(1,controller.getSelectedUnit().getItems().size());
+    controller.giveItemTo(6,1);
+    assertEquals(0,controller.getSelectedUnit().getItems().size());
+    controller.selectUnitIn(6,1);
+    assertEquals(2, controller.getSelectedUnit().getItems().size());
+    controller.selectUnitIn(5,1);
+    controller.selectItem(0);
+    controller.giveItemTo(6,1);
+    assertEquals(1,controller.getSelectedUnit().getItems().size());
+    assertEquals(3,controller.getGameMap().getCell(6,1).getUnit().getItems().size());
+    controller.selectItem(0);
+    controller.giveItemTo(6,1);
+    assertEquals(1,controller.getSelectedUnit().getItems().size());
   }
 }

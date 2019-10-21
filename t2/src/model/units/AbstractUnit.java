@@ -100,21 +100,12 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public IEquipableItem removeItem(IEquipableItem item) {
-    if(!items.isEmpty()){
-      if(this.items.contains(item)) {
-        for(int i=0; i<this.getItems().size(); i++){
-          if(item.equals(this.getItems().get(i))){
-            if(item.equals(this.getEquippedItem())){
-              this.setEquippedItem(null);
-            }
-            item.setOwner(null);
-            return this.items.remove(i);
-          }
-        }
-      }
+  public void removeItem(IEquipableItem item) {
+    if(!items.isEmpty() && this.items.contains(item)){
+      if(item.equals(this.getEquippedItem())) this.setEquippedItem(null);
+      items.remove(item);
+      item.setOwner(null);
     }
-    return null;
   }
 
   @Override
@@ -193,14 +184,14 @@ public abstract class AbstractUnit implements IUnit{
   public boolean canExchange(IUnit unit, IEquipableItem item) {
     return !this.getItems().isEmpty() && !unit.isItemFull()
             && this.getLocation().distanceTo(unit.getLocation())==1
-            && this.getItems().contains(item);
+            && this.items.contains(item);
   }
 
   @Override
   public void giveItem(IUnit unit, IEquipableItem item) {
     if(canExchange(unit,item)){
-      IEquipableItem itemA = this.removeItem(item);
-      unit.addItem(itemA);
+      this.removeItem(item);
+      unit.addItem(item);
     }
   }
 

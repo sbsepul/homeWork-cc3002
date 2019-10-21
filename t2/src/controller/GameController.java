@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class GameController {
 
-  private Random random = new Random();
+  private Random random = new Random(212121);
   private long maxRounds;
   private int numRounds;
   private int turnCurrent=0;
@@ -74,7 +74,6 @@ public class GameController {
   }
 
   public Random getRandom() {
-    random.setSeed(500);
     return random;
   }
 
@@ -188,6 +187,7 @@ public class GameController {
   private void changeToNextTurn(){
     int nPlayers = getTacticians().size();
     if(turnCurrent==nPlayers-1){
+      createNewRound();
       this.turnCurrent=0;
     }
     else this.turnCurrent++;
@@ -378,7 +378,7 @@ public class GameController {
    */
   public void useItemOn(int x, int y) {
     IUnit enemy = getGameMap().getCell(x,y).getUnit();
-    if(enemy!=null) {
+    if(enemy!=null && getSelectedUnit()!=null) {
       getSelectedUnit().attack(getGameMap().getCell(x,y).getUnit());
     }
   }
@@ -410,12 +410,9 @@ public class GameController {
    *     vertical position of the target
    */
   public void giveItemTo(int x, int y) {
-    IUnit unitCurrent = getSelectedUnit();
     //si la unidad actual tiene el item equipado
-    if(unitCurrent.getItems().contains(getSelectedItem())){
-      if(getGameMap().getCell(x,y).getUnit()!=null){
-        getSelectedUnit().giveItem(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
-      }
+    if(getGameMap().getCell(x,y).getUnit()!=null && getSelectedUnit()!=null){
+      getSelectedUnit().giveItem(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
     }
   }
 
