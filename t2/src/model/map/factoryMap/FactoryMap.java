@@ -8,6 +8,7 @@ import java.util.List;
 
 public class FactoryMap implements IFactoryMap {
     private int tamMap;
+    private long numLong;
 
     /**
      * Constructor of Factory Map, create a instance of Field with dimensions
@@ -17,11 +18,13 @@ public class FactoryMap implements IFactoryMap {
      */
     public FactoryMap(int size){
         this.tamMap = size;
+        numLong = 0;
     }
 
     @Override
     public Field createMap() {
         Field map = new Field();
+        if(numLong!=0) map.setSeed(getLong());
         List<Location> locations = new ArrayList<>();
         int n = this.tamMap;
         for(int i = 0; i < n; i++){
@@ -35,5 +38,15 @@ public class FactoryMap implements IFactoryMap {
         //Location[] loc = (Location[]) locations.toArray();
         //map.addCells(false, loc);
         return map;
+    }
+
+    @Override
+    public void setNumLong(long numLong) {
+        this.numLong = numLong;
+    }
+
+    @Override
+    public long getLong(){
+        return this.numLong;
     }
 }

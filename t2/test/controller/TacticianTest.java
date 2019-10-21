@@ -1,14 +1,12 @@
 package controller;
 
 import model.map.Field;
-import model.map.Location;
+import model.units.IUnit;
+import model.units.factoryUnit.IFactoryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.table.TableCellRenderer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TacticianTest {
     private Tactician tactician;
@@ -23,11 +21,30 @@ public class TacticianTest {
     }
 
     @Test
-    public void getCurrentUnit(){
+    public void constructorTactician(){
+        String name = "Player 0";
+        assertEquals(name, tactician.getName());
+        assertEquals(0,tactician.getUnits().size());
+        assertEquals(0,tactician.getTacticianStatus().getPropertyChangeListeners().length);
+    }
 
+    @Test
+    public void getCurrentUnit(){
+        IUnit unit = controller.getArcherFab().createUnit();
+        assertNull(tactician.getCurrentUnit());
+        tactician.setCurrentUnit(unit);
+        assertNull(tactician.getCurrentUnit());
+        tactician.addUnitInventory(unit);
+        assertEquals(1,tactician.getUnits().size());
+        tactician.setCurrentUnit(unit);
+        assertEquals(unit.getClass(),tactician.getCurrentUnit().getClass());
     }
     @Test
     public void removeUnit(){
+        IFactoryUnit fab = controller.getArcherFab();
+        tactician.addUnitInventory(fab.createUnit());
+        assertEquals(1,tactician.getUnits().size());
+        tactician.addUnitInventory(fab.createUnit());
 
     }
     @Test

@@ -48,10 +48,6 @@ public class Tactician {
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
         this.tacticianStatus = new PropertyChangeSupport(this);
-        // for default the first element in units will be the first object in the list units
-        if(!this.units.isEmpty()){
-            this.currentUnit = units.get(0);
-        }
     }
     //Observer for Tactician
 
@@ -75,7 +71,6 @@ public class Tactician {
     }
 
     /**
-     *
      * @return all the player's units
      */
     public List<IUnit> getUnits(){
@@ -83,7 +78,6 @@ public class Tactician {
     }
 
     /**
-     *
      * @return List of Heros live, null if Tactician don't have Heros
      */
     public Map<Integer, Boolean> getLiveHero() {
@@ -95,35 +89,32 @@ public class Tactician {
      * @param unitDeleted
      */
     public void removeUnit(IUnit unitDeleted){
-        units.remove(unitDeleted);
+        if(units.contains(unitDeleted)) units.remove(unitDeleted);
     }
 
     /**
-     * Added a unit for a player
+     * Added a unit to the inventory of unit from player
      * @param unitAdded added with hp full
      */
-    public void addUnit(IUnit unitAdded){
+    public void addUnitInventory(IUnit unitAdded){
         units.add(unitAdded);
     }
 
     /**
-     * Add a hero to the inventory of units
+     * Add a hero to the inventory of units from player
      * @param unitHero added
      */
     public void addUnitHero(Hero unitHero) {
         units.add(unitHero);
     }
 
-    /**
-     *
-     * @return true if a player can play, otherwise false
-     */
-    public boolean canPlay() {
-        return this.status;
-    }
 
     /**
-     *
+     * @return true if a player can play, otherwise false
+     */
+    public boolean canPlay() { return this.status; }
+
+    /**
      * @return
      */
     public boolean isDieAllUnit() {
@@ -173,7 +164,7 @@ public class Tactician {
      * @param unit that will change to current unit
      */
     public void setCurrentUnit(IUnit unit) {
-        this.currentUnit = unit;
+        if(getUnits().contains(unit)) this.currentUnit = unit;
     }
 
     /**
@@ -215,6 +206,10 @@ public class Tactician {
     }
 
 
+    /**
+     *
+     * @param enemy
+     */
     public void generateAttack(IUnit enemy){
         double hpInit = getCurrentUnit().getCurrentHitPoints();
         getCurrentUnit().attack(enemy);

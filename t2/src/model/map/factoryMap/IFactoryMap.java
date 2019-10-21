@@ -18,4 +18,7 @@ public interface IFactoryMap {
      */
     public Field createMap();
 
+    void setNumLong(long numLong);
+
+    long getLong();
 }

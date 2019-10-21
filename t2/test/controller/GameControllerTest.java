@@ -1,21 +1,18 @@
 package controller;
 
-import model.items.Spear;
-import model.items.factoryItem.*;
+import model.items.*;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
 import model.map.InvalidLocation;
-import model.units.Alpaca;
+import model.units.*;
 import model.units.factoryUnit.*;
-import model.items.IEquipableItem;
 import model.map.Field;
-import model.units.IUnit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.security.interfaces.XECKey;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -31,8 +28,6 @@ class GameControllerTest {
   private GameController controller;
   private long randomSeed;
   private List<String> testTacticians;
-  private IFactoryUnit unitFactory;
-  private IFactoryItem itemFactory;
 
   @BeforeEach
   public void setUp() {
@@ -58,6 +53,15 @@ class GameControllerTest {
     Field gameMap = controller.getGameMap();
     assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
+    Random testRandom = new Random(randomSeed);
+      //System.out.println(gameMap.toString());
+
+    controller.setSeedMap(testRandom.nextLong());
+    Field newGameMap = controller.createNewMap();
+    assertEquals(7, newGameMap.getSize());
+    assertTrue(newGameMap.isConnected());
+      //System.out.println(newGameMap.toString());
+
     // Para testear funcionalidades que dependen de valores aleatorios se hacen 2 cosas:
     //  - Comprobar las invariantes de las estructuras que se crean (en este caso que el mapa tenga
     //    las dimensiones definidas y que sea conexo.
@@ -174,17 +178,11 @@ class GameControllerTest {
     assertTrue(List.of("Player 3").containsAll(controller.getWinners()));
   }
 
-  @Test
-  public void requestUnitTest(){
-    controller.initGame(2);
-    IUnit unit = controller.requestUnit(UnitType.ALPACA);
-    assertEquals(unit.getClass(), Alpaca.class);
-  }
 
   @Test
   public void addUnitToTacticianTest(){
-    IUnit hero = controller.requestUnit(UnitType.HERO);
-    IUnit unit = controller.requestUnit(UnitType.ARCHER);
+    IUnit hero = controller.getHeroFab().createUnit();
+    IUnit unit = controller.getArcherFab().createUnit();
     controller.addHeroToTactician();
     assertEquals(1, controller.getTurnOwner().getUnits().size());
     assertEquals(hero.getClass(), controller.getTurnOwner().getUnits().get(0).getClass());
@@ -195,7 +193,7 @@ class GameControllerTest {
   @Test
   public void putInMap(){
     IFactoryUnit archerFab = controller.getArcherFab();
-    IUnit unit = controller.requestUnit(UnitType.SORCERER);
+    IUnit unit = controller.getSorcererFab().createUnit();
     controller.putUnitInMap(unit, 8,8);
     assertEquals(InvalidLocation.class, unit.getLocation().getClass());
     controller.putUnitInMap(unit, 0,0);
@@ -213,7 +211,7 @@ class GameControllerTest {
   @Test
   public void getSelectedUnit() {
     assertNull(controller.getSelectedUnit());
-    IUnit unit = controller.requestUnit(UnitType.ARCHER);
+    IUnit unit = controller.getArcherFab().createUnit();
     controller.setSelectedUnit(unit);
     assertEquals(unit, controller.getSelectedUnit());
   }
@@ -221,7 +219,7 @@ class GameControllerTest {
   @Test
   public void selectUnitIn() {
     assertNull(controller.getGameMap().getCell(0,0).getUnit());
-    IUnit unitNew = controller.requestUnit(UnitType.SWORDMASTER);
+    IUnit unitNew = controller.getSwordMasterFab().createUnit();
     controller.putUnitInMap(unitNew, 0,0);
     assertTrue(controller.getGameMap().getCell(0,0).getUnit().equals(unitNew));
     IUnit unit = controller.getGameMap().getCell(0,0).getUnit();
@@ -229,7 +227,7 @@ class GameControllerTest {
     assertNull(controller.getSelectedUnit());
     controller.selectUnitIn(0,0);
     assertEquals(unit,controller.getSelectedUnit());
-    IUnit unitTwo = controller.requestUnit(UnitType.CLERIC);
+    IUnit unitTwo = controller.getClericFab().createUnit();
     controller.putUnitInMap(unitTwo, 3,3);
     //celda 3,3 no es valida
     assertEquals(controller.getGameMap().getCell(3,3), unitTwo.getLocation());
@@ -374,4 +372,44 @@ class GameControllerTest {
     controller.giveItemTo(6,1);
     assertEquals(1,controller.getSelectedUnit().getItems().size());
   }
+
+  @Test
+  public void getFabUnits(){
+    IUnit unit1 = controller.getSwordMasterFab().createUnit();
+    assertEquals(SwordMaster.class, unit1.getClass());
+    IUnit unit2 = controller.getClericFab().createUnit();
+    assertEquals(Cleric.class, unit2.getClass());
+    IUnit unit3 = controller.getHeroFab().createUnit();
+    assertEquals(Hero.class, unit3.getClass());
+    IUnit unit4 = controller.getSorcererFab().createUnit();
+    assertEquals(Sorcerer.class, unit4.getClass());
+    IUnit unit5 = controller.getArcherFab().createUnit();
+    assertEquals(Archer.class, unit5.getClass());
+    IUnit unit6 = controller.getAlpacaFab().createUnit();
+    assertEquals(Alpaca.class, unit6.getClass());
+    IUnit unit7 = controller.getFighterFab().createUnit();
+    assertEquals(Fighter.class, unit7.getClass());
+  }
+
+  @Test
+  public void getFabItem(){
+    IEquipableItem item1 = controller.getAxeFab().createItem();
+    assertEquals(Axe.class, item1.getClass());
+    IEquipableItem item2 = controller.getBowFab().createItem();
+    assertEquals(Bow.class, item2.getClass());
+    IEquipableItem item3 = controller.getSwordFab().createItem();
+    assertEquals(Sword.class, item3.getClass());
+    IEquipableItem item4 = controller.getStaffFab().createItem();
+    assertEquals(Staff.class, item4.getClass());
+    IEquipableItem item5 = controller.getSpearFab().createItem();
+    assertEquals(Spear.class, item5.getClass());
+    IEquipableItem item6 = controller.getDarknessFab().createItem();
+    assertEquals(Darkness.class, item6.getClass());
+    IEquipableItem item7 = controller.getLightFab().createItem();
+    assertEquals(Light.class, item7.getClass());
+    IEquipableItem item8 = controller.getSoulFab().createItem();
+    assertEquals(Soul.class, item8.getClass());
+  }
+
+
 }

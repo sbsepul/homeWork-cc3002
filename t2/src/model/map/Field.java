@@ -33,12 +33,15 @@ public class Field {
       addCell(cell);
       Location[] adjacentCells = getAdjacentCells(cell);
       for (Location adjacentCell : adjacentCells) {
-        //System.out.println(random.nextDouble() > 1.0 / 3);
         if (connectAll || random.nextDouble() > 1.0 / 3 || cell.getNeighbours().size() < 1) {
           addConnection(cell, adjacentCell);
         }
       }
     }
+  }
+
+  public void setSeed(long seed){
+    this.random = new Random(seed);
   }
 
   /**

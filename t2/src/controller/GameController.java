@@ -1,7 +1,6 @@
 package controller;
 
 import model.items.factoryItem.*;
-import model.map.Location;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
 import model.units.Hero;
@@ -23,6 +22,7 @@ import java.util.*;
 public class GameController {
 
   private Random random = new Random(212121);
+  private long seedMap = 0;
   private long maxRounds;
   private int numRounds;
   private int turnCurrent=0;
@@ -33,8 +33,6 @@ public class GameController {
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
-  private FactoryProviderUnit factoryUnit;
-  private FactoryItemProvider factoryItem;
   private List<ResponseStatusTactician> responseStatusTactician = new ArrayList<>();
   private List<ResponseHeroes> responseHeroes = new ArrayList<>();
 
@@ -49,19 +47,17 @@ public class GameController {
   public GameController(int numberOfPlayers, int mapSize) {
     this.numPlayers = numberOfPlayers;
     this.tamMap = mapSize;
-    this.map = createNewMap(mapSize);
+    this.map = createNewMap();
     this.players = createTacticians(numberOfPlayers);
-    this.factoryItem = new FactoryItemProvider();
-    this.factoryUnit = new FactoryProviderUnit();
   }
 
   /**
    * Create a instance of Field with a Factory Map
-   * @param tamMapInit for default is square. N x N
-   * @return a Field of N x N
+   * @return a Field of N x N with tamMap initial
    */
-  public Field createNewMap(int tamMapInit) {
+  public Field createNewMap() {
     this.factoryMap = new FactoryMap(this.tamMap);
+    if(seedMap!=0) this.factoryMap.setNumLong(this.seedMap);
     return factoryMap.createMap();
   }
 
@@ -70,11 +66,15 @@ public class GameController {
    */
   public void resetController(){
     this.players = createTacticians(this.numPlayers);
-    this.map = createNewMap(this.tamMap);
+    this.map = createNewMap();
   }
 
   public Random getRandom() {
     return random;
+  }
+
+  public void setSeedMap(long seedMap) {
+    this.seedMap = seedMap;
   }
 
   /**
@@ -218,36 +218,6 @@ public class GameController {
   }
 
   /**
-   * Verify that the game not over yet
-   * @return true if the not over, false otherwise
-   */
-  public boolean notOver(){
-    if(this.getMaxRounds()==-1){
-      /*
-      No acaba hasta que todos los jugadores se retiren
-       */
-      if(this.isOnlyAPlayer() || this.dieAllHero()) return false;
-      return true;
-    }
-    else{
-      if(this.isOnlyAPlayer() || this.dieAllHero() || this.getMaxRounds()==this.getRoundNumber()){
-        this.getWinners();
-        return false;
-      }
-      // Round number < Max rounds
-      else return true;
-    }
-  }
-
-  /**
-   *
-   * @return
-   */
-  public boolean dieAllHero() {
-    return false;
-  }
-
-  /**
    *
    * @return
    */
@@ -344,7 +314,6 @@ public class GameController {
   public void selectUnitIn(int x, int y) {
      IUnit selectedUnit = map.getCell(x,y).getUnit();
      if(selectedUnit != null){
-       //this.getTurnOwner().setCurrentUnit(map.getCell(x,y).getUnit());
        this.setSelectedUnit(selectedUnit);
      }
      else this.setSelectedUnit(null);
@@ -420,51 +389,18 @@ public class GameController {
 
   /**
    *
-   * @param unitType
-   * @return
-   */
-  public IUnit requestUnit(UnitType unitType){
-    IUnit unit = factoryUnit.makeUnit(unitType).createUnit();
-    return unit;
-  }
-
-  /**
-   *
    * @param unit
    */
   public void addUnitToTactician(IUnit unit){
-    getTurnOwner().addUnit(unit);
+    getTurnOwner().addUnitInventory(unit);
   }
 
   /**
    * Add a Hero without items to current tactician.
    */
   public void addHeroToTactician(){
-    Hero unit = new HeroFactory().createUnit();
-    getTurnOwner().addUnitHero(unit);
+    getTurnOwner().addUnitHero((Hero) this.getHeroFab().createUnit());
   }
-
-  /**
-   * assign random units and items for each player in the game
-   * each unit have a hero with his item
-   */
-  public void assignUnitRandom(){
-    List<IFactoryUnit> fabUnit = factoryUnit.createUnitPack();
-    int i=0, j=3;
-    for(Tactician t : this.getTacticians()){
-      //Collections.shuffle(fabUnit, getRandom());
-      List<IFactoryUnit> subFabUnit = fabUnit.subList(i,j);
-      for (int index = 0; index < 3; index++) {
-        subFabUnit.get(index).addItemForDefault();
-        t.addUnit(subFabUnit.get(index).createUnit());
-      }
-      i++; j++;
-      if(j==fabUnit.size()) {
-        i=0; j=3;
-      }
-    }
-  }
-
 
   /**
    * Put anything unit in the map
@@ -480,66 +416,125 @@ public class GameController {
   }
 
   /**
-   * Setter the position of the current player's unit
-   * @param x
-   * @param y
+   * assign random units and items for each player in the game
+   * each unit have a hero with his item
    */
-  public void setPositionCurrentUnit(int x, int y){
-    Location cell = getGameMap().getCell(x,y);
-    this.getTurnOwner().setLocationCurrentUnit(cell);
+  public void assignUnitRandom(){
+    List<IFactoryUnit> fabUnit =
+            List.of(
+                    getAlpacaFab(),
+                    getArcherFab(),
+                    getClericFab(),
+                    getHeroFab(),
+                    getSorcererFab(),
+                    getSwordMasterFab(),
+                    getFighterFab()
+            );
+    int i=0, j=3;
+    for(Tactician t : this.getTacticians()){
+      //Collections.shuffle(fabUnit, getRandom());
+      List<IFactoryUnit> subFabUnit = fabUnit.subList(i,j);
+      for (int index = 0; index < 3; index++) {
+        subFabUnit.get(index).addItemForDefault();
+        t.addUnitInventory(subFabUnit.get(index).createUnit());
+      }
+      i++; j++;
+      if(j==fabUnit.size()) {
+        i=0; j=3;
+      }
+    }
   }
 
   // FACTORY UNIT
 
+  /**
+   * @return Factory from SwordMaster <b>IUnit</b>
+   */
   public IFactoryUnit getSwordMasterFab(){
     return new SwordMasterFactory();
   }
-
+  /**
+   * @return Factory from Archer <b>IUnit</b>
+   */
   public IFactoryUnit getArcherFab(){
     return new ArcherFactory();
   }
+  /**
+   * @return Factory from Cleric <b>IUnit</b>
+   */
   public IFactoryUnit getClericFab(){
     return new ClericFactory();
   }
+  /**
+   * @return Factory from Alpaca <b>IUnit</b>
+   */
   public IFactoryUnit getAlpacaFab(){
     return new AlpacaFactory();
   }
+  /**
+   * @return Factory from Fighter <b>IUnit</b>
+   */
   public IFactoryUnit getFighterFab(){
     return new FighterFactory();
   }
-  public IFactoryUnit getHeroFab(){
-    return new HeroFactory();
-  }
+  /**
+   * @return Factory from Hero <b>IUnit</b>
+   */
+  public IFactoryUnit getHeroFab(){ return new HeroFactory(); }
+  /**
+   * @return Factory from Sorcerer <b>IUnit</b>
+   */
   public IFactoryUnit getSorcererFab(){
     return new SorcererFactory();
   }
 
   //FACTORY ITEMS
 
+  /**
+   * @return Factory from Sword <b>IEquipableItem</b>
+   */
   public IFactoryItem getSwordFab(){
     return new SwordFactoryItem();
   }
-
+  /**
+   * @return Factory from Bow <b>IEquipableItem</b>
+   */
   public IFactoryItem getBowFab(){
     return new BowFactoryItem();
   }
-
+  /**
+   * @return Factory from Axe <b>IEquipableItem</b>
+   */
   public IFactoryItem getAxeFab(){
     return new AxeFactoryItem();
   }
-
+  /**
+   * @return Factory from Darkness <b>IEquipableItem</b>
+   */
   public IFactoryItem getDarknessFab(){
     return new DarknessFactoryItem();
   }
+  /**
+   * @return Factory from Soul <b>IEquipableItem</b>
+   */
   public IFactoryItem getSoulFab(){
     return new SoulFactoryItem();
   }
+  /**
+   * @return Factory from Light <b>IEquipableItem</b>
+   */
   public IFactoryItem getLightFab(){
     return new LightFactoryItem();
   }
+  /**
+   * @return Factory from Staff <b>IEquipableItem</b>
+   */
   public IFactoryItem getStaffFab(){
     return new StaffFactoryItem();
   }
+  /**
+   * @return Factory from Spear <b>IEquipableItem</b>
+   */
   public IFactoryItem getSpearFab(){
     return new SpearFactoryItem();
   }
