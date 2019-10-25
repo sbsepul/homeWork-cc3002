@@ -10,6 +10,7 @@ public class ResponseCellMap implements PropertyChangeListener {
     private Location cellSource;
     private List<Boolean> change;
 
+
     /**
      * This method gets called when a bound property is changed.
      *

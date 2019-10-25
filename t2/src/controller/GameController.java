@@ -36,7 +36,7 @@ public class GameController {
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
-  private List<ResponseStatusTactician> responseStatusTactician = new ArrayList<>();
+
   /**
    * Creates the controller for a new game.
    *
@@ -115,13 +115,6 @@ public class GameController {
   }
 
   /**
-   * @return
-   */
-  public List<ResponseStatusTactician> getResponseStatusTactician() {
-    return responseStatusTactician;
-  }
-
-  /**
    * Create a list of Tacticians
    *
    * @param numTacticians that begin in the game
@@ -136,9 +129,8 @@ public class GameController {
       Tactician pTactician = new Tactician(builder.toString());
       pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
       pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
+      pTactician.addObserverStatus(new ResponseStatusTactician(this));
       tacticianList.add(pTactician);
-      responseStatusTactician.add(new ResponseStatusTactician());
-      responseStatusTactician.get(i).setProperty(true);
     }
     return tacticianList;
   }
@@ -440,14 +432,29 @@ public class GameController {
     }
   }
 
+  /**
+   * Add a Bow to unit selected
+   */
   public void addBowToSelectedUnit(){ getSelectedUnit().addItem(getBowFab().createItem()); }
 
+  /**
+   * Add a Axe to unit selected
+   */
   public void addAxeToSelectedUnit(){ getSelectedUnit().addItem(getAxeFab().createItem());}
 
+  /**
+   * Add a Darkness to unit selected
+   */
   public void addDarknessToSelectedUnit(){ getSelectedUnit().addItem(getSwordFab().createItem());}
 
+  /**
+   * Add a Light to unit selected
+   */
   public void addLightToSelectedUnit() { getSelectedUnit().addItem(getLightFab().createItem());}
 
+  /**
+   * Add a Soul to unit selected
+   */
   public void addSoulToSelectedUnit() { getSelectedUnit().addItem(getSoulFab().createItem());}
 
   public void addStaffToSelectedUnit() { getSelectedUnit().addItem(getStaffFab().createItem());}

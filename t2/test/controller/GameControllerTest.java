@@ -284,9 +284,8 @@ class GameControllerTest {
   public void removeUnitStatus(){
     assertEquals(4, controller.getNumPlayers());
     assertTrue(controller.getTurnOwner().getStatus());
-    assertTrue(controller.getResponseStatusTactician().get(controller.getPosTurnOwner()).getProperty());
     controller.getTurnOwner().retire();
-    assertFalse(controller.getResponseStatusTactician().get(controller.getPosTurnOwner()).getProperty());
+    assertEquals(3, controller.getNumPlayers());
   }
 
   @Test

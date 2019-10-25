@@ -37,7 +37,8 @@ public class Tactician {
     private IUnit currentUnit;
     private PropertyChangeSupport
             changesNormalUnit = new PropertyChangeSupport(this),
-            changesSpecialUnit = new PropertyChangeSupport(this);
+            changesSpecialUnit = new PropertyChangeSupport(this),
+            changesStatusTactician = new PropertyChangeSupport(this);
 
     /**
      * Constructor to specify an alternative source of moves
@@ -67,12 +68,13 @@ public class Tactician {
     }
 
     /**
-     * Remove the unit which is died
+     * Remove a normal unit die and set the unit in location to null
      * @param unitDeleted
      */
     public void removeUnit(NormalUnit unitDeleted){
         if(units.contains(unitDeleted)) {
             int initSize = getUnits().size();
+            unitDeleted.getLocation().setUnit(null);
             units.remove(unitDeleted);
             changesNormalUnit.firePropertyChange(
                     new PropertyChangeEvent(
@@ -85,9 +87,14 @@ public class Tactician {
     }
 
 
+    /**
+     * Remove a special unit die and set the unit in location to null
+     * @param specialUnit
+     */
     public void removeSpecialUnit(SpecialUnit specialUnit) {
         if(units.contains(specialUnit)) {
             int initSize = getUnits().size();
+            specialUnit.getLocation().setUnit(null);
             units.remove(specialUnit);
             changesSpecialUnit.firePropertyChange(
                     new PropertyChangeEvent(
@@ -126,18 +133,6 @@ public class Tactician {
      */
     public boolean canPlay() { return this.status; }
 
-    /**
-     * @return
-     */
-    public boolean isDieAllUnit() {
-        if(this.getUnits().isEmpty()) return true;
-        for(int i = 0; i < this.getUnits().size(); i++){
-            if(this.getUnits().get(i).getCurrentHitPoints()>0){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public String getNameCurrentUnit(){ return getCurrentUnit().getEquippedItem().getName();}
 
@@ -174,15 +169,7 @@ public class Tactician {
      * @param unit that will change to current unit
      */
     public void setCurrentUnit(IUnit unit) {
-        if(getUnits().contains(unit)) this.currentUnit = unit;
-    }
-
-
-    /**
-     * @param index select a unit of inventory's unit
-     */
-    public void selectUnit(int index){
-        if(getUnits().size()>0) currentUnit = units.get(index);
+         if(getUnits().contains(unit)) this.currentUnit = unit;
     }
 
     // STATUS PLAYER
@@ -191,15 +178,23 @@ public class Tactician {
      * Retire a tactician of the game
      */
     public void retire(){
-        this.status = false;
+        changesStatusTactician.firePropertyChange(
+                new PropertyChangeEvent(
+                        this,
+                        "change-status",
+                        this.getStatus(),
+                        false
+                )
+        );
     }
 
     /**
-     * @return
+     * @return the current unit's status
      */
     public boolean getStatus() { return this.status; }
 
     /**
+     * Set the item equipped to other item
      *
      * @param item
      */
@@ -208,6 +203,7 @@ public class Tactician {
     }
 
     /**
+     * The current unit generate a attack to a target unit
      *
      * @param enemy
      */
@@ -216,6 +212,8 @@ public class Tactician {
     }
 
     /**
+     * The current unit give the item selected for the controller
+     * to a target unit.
      *
      * @param target
      * @param itemSelected
@@ -244,6 +242,10 @@ public class Tactician {
      */
     public void addObserverSpecialUnit(PropertyChangeListener plc){
         changesSpecialUnit.addPropertyChangeListener(plc);
+    }
+
+    public void addObserverStatus(PropertyChangeListener plc){
+        changesStatusTactician.addPropertyChangeListener(plc);
     }
 
 }

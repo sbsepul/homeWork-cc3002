@@ -26,7 +26,6 @@ public class Hero extends AbstractSpecialUnit{
   public Hero(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
-    changeSupport.addPropertyChangeListener(new ResponseSpecialUnit(this));
   }
 
   @Override
