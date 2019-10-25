@@ -1,9 +1,17 @@
-package controller;
+package controller.handler;
+
+import controller.GameController;
+import controller.Tactician;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class NormalUnitLoseHandler implements PropertyChangeListener {
+    private GameController controller;
+
+    public NormalUnitLoseHandler(GameController game){
+        this.controller = game;
+    }
     /**
      * This method gets called when a bound property is changed.
      *
@@ -12,6 +20,7 @@ public class NormalUnitLoseHandler implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        Tactician player = (Tactician) evt.getSource();
+        if((int) evt.getNewValue()==0) controller.removeTactician(player.getName());
     }
 }

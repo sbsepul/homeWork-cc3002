@@ -77,7 +77,7 @@ public class Tactician {
             changesNormalUnit.firePropertyChange(
                     new PropertyChangeEvent(
                             this,
-                            "remove-normal-unit",
+                            "Normal Unit deleted",
                             initSize,
                             getUnits())
             );
@@ -92,7 +92,7 @@ public class Tactician {
             changesSpecialUnit.firePropertyChange(
                     new PropertyChangeEvent(
                             this,
-                            "remove-special-unit",
+                            "Special Unit deleted",
                             initSize,
                             getUnits()
                     )
@@ -206,7 +206,6 @@ public class Tactician {
     public void setEquipItem(IEquipableItem item) {
        this.currentUnit.changeEquippedItem(item);
     }
-
 
     /**
      *

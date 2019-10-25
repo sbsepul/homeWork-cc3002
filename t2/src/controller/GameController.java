@@ -1,5 +1,7 @@
 package controller;
 
+import controller.handler.NormalUnitLoseHandler;
+import controller.handler.SpecialUnitLoseHandler;
 import model.items.factoryItem.*;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
@@ -126,18 +128,19 @@ public class GameController {
    * @return a list of tacticians without units
    */
   public List<Tactician> createTacticians(int numTacticians){
-    List<Tactician> tact = new ArrayList<Tactician>(numTacticians);
+    List<Tactician> tacticianList = new ArrayList<Tactician>(numTacticians);
     for(int i=0; i<numTacticians; i++){
-      String name = "Player " + i;
-      tact.add(new Tactician(name));
+      StringBuilder builder = new StringBuilder();
+      builder.append("Player ");
+      builder.append(i);
+      Tactician pTactician = new Tactician(builder.toString());
+      pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
+      pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
+      tacticianList.add(pTactician);
       responseStatusTactician.add(new ResponseStatusTactician());
       responseStatusTactician.get(i).setProperty(true);
     }
-    int index=0;
-    for(Tactician t : tact){
-      index++;
-    }
-    return tact;
+    return tacticianList;
   }
 
   /**
