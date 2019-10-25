@@ -18,7 +18,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Cleric extends AbstractUnit {
+public class Cleric extends AbstractNormalUnit {
 
   /**
    * Creates a new Unit.

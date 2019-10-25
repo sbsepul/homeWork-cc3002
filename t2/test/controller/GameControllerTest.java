@@ -54,7 +54,7 @@ class GameControllerTest {
     assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
     Random testRandom = new Random(randomSeed);
-      //System.out.println(gameMap.toString());
+     // System.out.println(gameMap.toString());
 
     controller.setSeedMap(testRandom.nextLong());
     Field newGameMap = controller.createNewMap();
@@ -186,7 +186,7 @@ class GameControllerTest {
     controller.addHeroToTactician();
     assertEquals(1, controller.getTurnOwner().getUnits().size());
     assertEquals(hero.getClass(), controller.getTurnOwner().getUnits().get(0).getClass());
-    controller.addUnitToTactician(unit);
+    controller.addUnitToTactician((NormalUnit) unit);
     assertEquals(2, controller.getTurnOwner().getUnits().size());
   }
 

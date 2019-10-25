@@ -1,14 +1,9 @@
 package controller;
 
-import model.units.IUnit;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ResponseUnits implements PropertyChangeListener {
-    private Tactician source;
-    private IUnit unit;
-
+public class SpecialUnitLoseHandler implements PropertyChangeListener {
     /**
      * This method gets called when a bound property is changed.
      *
@@ -17,6 +12,6 @@ public class ResponseUnits implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        
     }
 }

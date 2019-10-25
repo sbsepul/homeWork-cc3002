@@ -6,17 +6,21 @@ import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 import model.items.IEquipableItem;
-import model.map.Location;
-import model.units.Hero;
 import model.units.IUnit;
+import model.units.NormalUnit;
+import model.units.SpecialUnit;
+import model.units.handlers.ResponseNormalUnit;
+import model.units.handlers.ResponseSpecialUnit;
 
 /**
- * Un Tactician debe ser capaz de conocer todas las unidades que posee, y tener conocimiento del mapa del
- * juego. Dentro de su turno un jugador puede mover a todas sus unidades, pero una sola vez. Para facilitar
- * la implementación el jugador debe mantener una referencia a la unidad actualmente seleccionada.
+ * A Tactician is the interface for the interaction between the user and the model of the game.
+ * In the developer of the code, a tactician represent to a player, so it must to know
+ * all the features of the units and the quantity of units that have.
  *
- * Dado a que tactician debe ocupar cosas de IEquipable y de IUnit, se deberia ocupar el patron de diseño
- * de
+ * Besides, a tactician have a reference to the unit currently selected
+ *
+ *
+ *
  *
  * @author Sebastian Sepulveda
  * @version 2.0
@@ -27,14 +31,13 @@ import model.units.IUnit;
 
 public class Tactician {
 
-    private PropertyChangeSupport tacticianStatus;
-    private PropertyChangeSupport unitStatus;
     private boolean status;
     private final String mark;
     private List<IUnit> units = new ArrayList<>();
-    private List<Hero> heroes;
     private IUnit currentUnit;
-    private Map<Integer,Boolean> liveHero = new HashMap<>();
+    private PropertyChangeSupport
+            changesNormalUnit = new PropertyChangeSupport(this),
+            changesSpecialUnit = new PropertyChangeSupport(this);
 
     /**
      * Constructor to specify an alternative source of moves
@@ -43,24 +46,10 @@ public class Tactician {
      * @param unitSet Tactician's firsts units in the start game.
      *
      */
-    public Tactician(String markName, IUnit... unitSet){
+    public Tactician(final String markName, IUnit... unitSet){
         this.mark = markName;
         this.status = true;
         this.units.addAll(Arrays.asList(unitSet));
-        this.tacticianStatus = new PropertyChangeSupport(this);
-    }
-    //Observer for Tactician
-
-    public PropertyChangeSupport getTacticianStatus(){
-        return this.tacticianStatus;
-    }
-
-    public void addResponseStatusTactician(PropertyChangeListener pcl){
-        tacticianStatus.addPropertyChangeListener(pcl);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener pcl){
-        tacticianStatus.removePropertyChangeListener(pcl);
     }
 
     /**
@@ -78,25 +67,46 @@ public class Tactician {
     }
 
     /**
-     * @return List of Heros live, null if Tactician don't have Heros
-     */
-    public Map<Integer, Boolean> getLiveHero() {
-        return liveHero;
-    }
-
-    /**
      * Remove the unit which is died
      * @param unitDeleted
      */
-    public void removeUnit(IUnit unitDeleted){
-        if(units.contains(unitDeleted)) units.remove(unitDeleted);
+    public void removeUnit(NormalUnit unitDeleted){
+        if(units.contains(unitDeleted)) {
+            int initSize = getUnits().size();
+            units.remove(unitDeleted);
+            changesNormalUnit.firePropertyChange(
+                    new PropertyChangeEvent(
+                            this,
+                            "remove-normal-unit",
+                            initSize,
+                            getUnits())
+            );
+        }
+    }
+
+
+    public void removeSpecialUnit(SpecialUnit specialUnit) {
+        if(units.contains(specialUnit)) {
+            int initSize = getUnits().size();
+            units.remove(specialUnit);
+            changesSpecialUnit.firePropertyChange(
+                    new PropertyChangeEvent(
+                            this,
+                            "remove-special-unit",
+                            initSize,
+                            getUnits()
+                    )
+            );
+        }
     }
 
     /**
      * Added a unit to the inventory of unit from player
      * @param unitAdded added with hp full
      */
-    public void addUnitInventory(IUnit unitAdded){
+    public void addUnitInventory(NormalUnit unitAdded) {
+        ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
+        unitAdded.addObserver(respNormalUnit);
         units.add(unitAdded);
     }
 
@@ -104,7 +114,9 @@ public class Tactician {
      * Add a hero to the inventory of units from player
      * @param unitHero added
      */
-    public void addUnitHero(Hero unitHero) {
+    public void addUnitHero(SpecialUnit unitHero) {
+        ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
+        unitHero.addObserver(respSpecialUnit);
         units.add(unitHero);
     }
 
@@ -151,14 +163,12 @@ public class Tactician {
     /**
      * @return the maximum HP of the unit
      */
-    public double maxHitPointsCurrenUnit(){ return getCurrentUnit().getMaxCurrentHitPoints(); }
+    public double maxHitPointsCurrentUnit(){ return getCurrentUnit().getMaxCurrentHitPoints(); }
 
     /**
      * @return get the reference to the current unit of tactician
      */
-    public IUnit getCurrentUnit() {
-        return currentUnit;
-    }
+    public IUnit getCurrentUnit() { return currentUnit; }
 
     /**
      * @param unit that will change to current unit
@@ -167,24 +177,24 @@ public class Tactician {
         if(getUnits().contains(unit)) this.currentUnit = unit;
     }
 
+
     /**
      * @param index select a unit of inventory's unit
      */
     public void selectUnit(int index){
-        currentUnit = units.get(index);
+        if(getUnits().size()>0) currentUnit = units.get(index);
     }
 
     // STATUS PLAYER
 
+    /**
+     * Retire a tactician of the game
+     */
     public void retire(){
-        tacticianStatus.firePropertyChange(
-                new PropertyChangeEvent(this,"status", getStatus(),false)
-        );
         this.status = false;
     }
 
     /**
-     *
      * @return
      */
     public boolean getStatus() { return this.status; }
@@ -197,38 +207,44 @@ public class Tactician {
        this.currentUnit.changeEquippedItem(item);
     }
 
-    /**
-     *
-     * @param location
-     */
-    public void setLocationCurrentUnit(Location location){
-        getCurrentUnit().setLocation(location);
-    }
-
 
     /**
      *
      * @param enemy
      */
     public void generateAttack(IUnit enemy){
-        double hpInit = getCurrentUnit().getCurrentHitPoints();
         getCurrentUnit().attack(enemy);
-        unitStatus.firePropertyChange(
-                new PropertyChangeEvent(this,
-                        "statusUnit",
-                        hpInit,
-                        getCurrentUnit().getCurrentHitPoints())
-        );
     }
 
+    /**
+     *
+     * @param target
+     * @param itemSelected
+     */
     public void giveItemToUnit(IUnit target, IEquipableItem itemSelected){
-        //si la unidad actual tiene el item equipado
-        if(this.getCurrentUnit().getItems().contains(itemSelected)){
-            //si el jugador actual contiene a target unit
-            if(this.getUnits().contains(target)){
-                this.getCurrentUnit().giveItem(target,itemSelected);
-            }
+        if(this.getUnits().contains(target)){
+            this.getCurrentUnit().giveItem(target,itemSelected);
         }
+    }
+
+    /**
+     * Add a controller like listener in the change in the
+     * quantity of tactician's normal units.
+     *
+     * @param plc controller of the game
+     */
+    public void addObserverNormalUnit(PropertyChangeListener plc){
+        changesNormalUnit.addPropertyChangeListener(plc);
+    }
+
+    /**
+     * Add a controller like listener in the change in the
+     * quantity of tactician's special units.
+     *
+     * @param plc controller of the game
+     */
+    public void addObserverSpecialUnit(PropertyChangeListener plc){
+        changesSpecialUnit.addPropertyChangeListener(plc);
     }
 
 }

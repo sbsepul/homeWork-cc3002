@@ -185,21 +185,44 @@ Casos bordes:
 
 
 * Los Tacticians deben tener referencia a todo el mapa y además deben conocer el lugar que se le asigna al comienzo?
-
 * Dado el tamaño del mapa existe una cantidad limitada de jugadores que pueden participar y una cantidad maxima de unidades que pueden tener cada uno para colocarlos en el mapa. Por tanto, se debe considerar esto al iniciarse el juego?
-
 * Asumiendo que tener 0 unidades significa perder, pensé en crear un hero en el constructor de tactician para que tenga sentido que el juego no inicie con todos perdiendo, por ejemplo si el jugador no selecciona a un hero al inicio. Tengo la duda si esto esta bien y si el area que se le asigna al jugador debe ser aleatorio o eso es algo arbitrario? 
-
 * Cuando se señala que el controller debe manejar inputs, esto significa que debemos implementar un BufferedReader en Controller? 
-
 * En la tarea se debe manejar errores con IOException y todo eso? 
-
 * En el enunciado aparece que al jugador se le asigna un área de inicio donde debe situar sus unidades
-
 * Si un metodo retorna un valor cualquiera, es valido que en algun caso retorne nulo? por ejemplo cree un mapa que guarda en las llaves la posicion del hero en la lista de unidades de tactician, y en los valores guarda un boleano que representa el estado del hero (true vivo, false muerto). Esto hace mas facil revisar cuando un jugador perdió o ganó, porque si no habria que revisar cada HP de cada unidad siempre que se termina una batalla.
-
 * Se asume que las unidades parten con un HP, movement??
-
 * Tiene sentido definir como class static a la fabrica de unit e items?
 
-  
+
+
+La victoria depende de las unidades que se tiene
+
+Mientras que las unidades que tenga no sean Hero, pierdo si se mueren todas
+
+​	-> units.size() == 0 
+
+Mientras que una unidad que tenga sea Hero, pierdo si se me muere 1
+
+​	-> hero.currentHP == 0
+
+
+
+Para el que observer funcione en HERO debe ser la sgte secuencia de acciones:
+
+al añadir un hero, a este hero se le añade un observador
+
+el objeto observado es la vida de hero, pero el que añade al observador es un support
+
+cuando la vida del hero cambia, esto es avisado al observador.
+
+El observador conoce:
+
+* La fuente del evento, el cambio, y lo que era antes.
+
+Si la vida del hero llega a 0, entonces directamente el jugador pierde y sale del juego 
+
+
+
+Para el caso de tener
+

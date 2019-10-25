@@ -96,15 +96,4 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public void giveMagicAttack(IEquipableItem itemMagic){ }
 
-  //END COMBAT
-
-  @Override
-  public boolean equals(Object obj){
-    return obj instanceof IEquipableItem && ((IEquipableItem) obj).getPower()==this.getPower()
-            && ((IEquipableItem) obj).getMinRange() == this.getMinRange()
-            && ((IEquipableItem) obj).getMaxRange() == this.getMaxRange()
-            && ((IEquipableItem) obj).getName() == this.getName()
-            && ((IEquipableItem) obj).getOwner() == this.getOwner();
-  }
-
 }

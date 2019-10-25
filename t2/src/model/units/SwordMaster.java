@@ -19,7 +19,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class SwordMaster extends AbstractUnit {
+public class SwordMaster extends AbstractNormalUnit {
 
   public SwordMaster(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {

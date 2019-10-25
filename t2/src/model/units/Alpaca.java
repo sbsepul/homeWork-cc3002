@@ -20,7 +20,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Alpaca extends AbstractUnit {
+public class Alpaca extends AbstractNormalUnit {
 
   /**
    * Creates a new Alpaca.

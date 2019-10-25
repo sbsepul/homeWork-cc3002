@@ -2,6 +2,7 @@ package controller;
 
 import model.map.Field;
 import model.units.IUnit;
+import model.units.NormalUnit;
 import model.units.factoryUnit.IFactoryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,6 @@ public class TacticianTest {
         String name = "Player 0";
         assertEquals(name, tactician.getName());
         assertEquals(0,tactician.getUnits().size());
-        assertEquals(0,tactician.getTacticianStatus().getPropertyChangeListeners().length);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TacticianTest {
         assertNull(tactician.getCurrentUnit());
         tactician.setCurrentUnit(unit);
         assertNull(tactician.getCurrentUnit());
-        tactician.addUnitInventory(unit);
+        tactician.addUnitInventory((NormalUnit) unit);
         assertEquals(1,tactician.getUnits().size());
         tactician.setCurrentUnit(unit);
         assertEquals(unit.getClass(),tactician.getCurrentUnit().getClass());
@@ -42,10 +42,18 @@ public class TacticianTest {
     @Test
     public void removeUnit(){
         IFactoryUnit fab = controller.getArcherFab();
-        tactician.addUnitInventory(fab.createUnit());
+        IUnit unit1 = fab.createUnit();
+        tactician.addUnitInventory((NormalUnit) unit1);
         assertEquals(1,tactician.getUnits().size());
-        tactician.addUnitInventory(fab.createUnit());
-
+        assertTrue(tactician.getUnits().contains(unit1));
+        IUnit unit2 = fab.createUnit();
+        tactician.addUnitInventory((NormalUnit) unit2);
+        assertEquals(2,tactician.getUnits().size());
+        assertTrue(tactician.getUnits().contains(unit2));
+        tactician.removeUnit((NormalUnit) unit1);
+        assertEquals(1,tactician.getUnits().size());
+        assertFalse(tactician.getUnits().contains(unit1));
+        assertTrue(tactician.getUnits().contains(unit2));
     }
     @Test
     public void addUnit(){
@@ -61,5 +69,8 @@ public class TacticianTest {
 
     }
 
+    @Test
+    public void selectUnit(){
+    }
 
 }

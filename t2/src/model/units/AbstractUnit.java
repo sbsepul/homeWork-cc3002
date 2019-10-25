@@ -3,6 +3,8 @@ package model.units;
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,7 @@ import model.map.Location;
  * units.
  *
  * @author Sebastian Sepulveda
+ * @version 2.0
  * @since 1.0
  */
 public abstract class AbstractUnit implements IUnit{
@@ -32,6 +35,8 @@ public abstract class AbstractUnit implements IUnit{
   private final int movement;
   private final int maxItems;
   private final double maxHitPoints;
+  private static final double EPSILON=1e-7;
+  protected PropertyChangeSupport changeSupport= new PropertyChangeSupport(this);
 
   /**
    * Creates a new Unit.
@@ -121,8 +126,11 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void receiveAttack(IEquipableItem attack){
+  public void receiveAttack(IEquipableItem attack) {
+    double init = getCurrentHitPoints();
     this.currentHitPoints -= attack.getPower();
+    changeSupport.firePropertyChange(
+            new PropertyChangeEvent(this,"normal-attack", init, currentHitPoints));
   }
 
   @Override
@@ -215,13 +223,6 @@ public abstract class AbstractUnit implements IUnit{
         && targetLocation.getUnit() == null) {
       setLocation(targetLocation);
     }
-  }
-  //&& ((IUnit) obj).getEquippedItem().equals(equippedItem)
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof IUnit && ((IUnit) obj).getCurrentHitPoints() == currentHitPoints
-            && ((IUnit) obj).getLocation().equals(location)
-            && ((IUnit) obj).getMovement()==movement && ((IUnit) obj).getItems().equals(items);
   }
 
   /**

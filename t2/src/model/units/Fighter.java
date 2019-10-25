@@ -18,7 +18,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Fighter extends AbstractUnit {
+public class Fighter extends AbstractNormalUnit {
 
   /**
    * Create a Fighter with HP, movement, location and items

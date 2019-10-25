@@ -19,7 +19,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Archer extends AbstractUnit {
+public class Archer extends AbstractNormalUnit {
 
   /**
    * Creates a new archer

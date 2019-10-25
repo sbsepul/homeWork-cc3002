@@ -14,7 +14,7 @@ import model.map.Location;
  * @since 1.0
  */
 
-public class Sorcerer extends AbstractUnit{
+public class Sorcerer extends AbstractNormalUnit{
 
     /**
      * Creates a new Unit.

@@ -710,5 +710,18 @@ public abstract class AbstractTestUnit implements ITestUnit {
     double hp_new = 50 - getAxe().getPower()*1.5;
     assertEquals(hp_new, getTestUnit().getCurrentHitPoints(), EPSILON);
   }
+  /*
+  @Test
+  public void isLiveTest(){
+    assertEquals(50, getTestUnit().getCurrentHitPoints());
+    getTestUnit().receiveAttack(getBow());
+    assertEquals(30, getTestUnit().getCurrentHitPoints());
+    assertTrue(getTestUnit().isLive());
+    getTestUnit().receiveAttack(getBow());
+    assertTrue(getTestUnit().isLive());
+    getTestUnit().receiveAttack(getBow());
+    assertFalse(getTestUnit().isLive());
+  }
+   */
 
 }

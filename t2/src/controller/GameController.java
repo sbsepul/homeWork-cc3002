@@ -4,6 +4,7 @@ import model.items.factoryItem.*;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
 import model.units.Hero;
+import model.units.NormalUnit;
 import model.units.factoryUnit.*;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -34,8 +35,6 @@ public class GameController {
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
   private List<ResponseStatusTactician> responseStatusTactician = new ArrayList<>();
-  private List<ResponseHeroes> responseHeroes = new ArrayList<>();
-
   /**
    * Creates the controller for a new game.
    *
@@ -69,10 +68,17 @@ public class GameController {
     this.map = createNewMap();
   }
 
+    /**
+     * @return random number for create news rounds
+     */
   public Random getRandom() {
     return random;
   }
 
+    /**
+     * Setter the seed of the random number of map
+     * @param seedMap long number
+     */
   public void setSeedMap(long seedMap) {
     this.seedMap = seedMap;
   }
@@ -129,7 +135,6 @@ public class GameController {
     }
     int index=0;
     for(Tactician t : tact){
-      t.addResponseStatusTactician(responseStatusTactician.get(index));
       index++;
     }
     return tact;
@@ -279,25 +284,35 @@ public class GameController {
    * @return the winner of this game, if the match ends in a draw returns a list of all the winners
    */
   public List<String> getWinners() {
-    if(getMaxRounds()==-1){
-      return getNamePlayers();
-    }
-    if(getRoundNumber()>getMaxRounds()){
+    if(getRoundNumber()>getMaxRounds() || getMaxRounds()==-1){
       return getNamePlayers();
     }
     return null;
   }
 
-  /**
-   * @return the current player's selected unit
-   */
+    /**
+     * @return the current player's unit
+     */
+    public IUnit getCurrentUnit() {
+        return getTurnOwner().getCurrentUnit();
+    }
+
+    /**
+     * @param currentUnit that it will be selected in the player's inventory
+     */
+    public void setCurrentUnit(IUnit currentUnit) {
+        getTurnOwner().setCurrentUnit(currentUnit);
+    }
+
+    /**
+    * @return the current player's selected unit
+    */
   public IUnit getSelectedUnit() {
     return selectedUnit;
   }
 
   /**
-   *
-   * @param newUnit
+   * @param newUnit selected in the map of the game
    */
   public void setSelectedUnit(IUnit newUnit){
     selectedUnit = newUnit;
@@ -313,10 +328,8 @@ public class GameController {
    */
   public void selectUnitIn(int x, int y) {
      IUnit selectedUnit = map.getCell(x,y).getUnit();
-     if(selectedUnit != null){
-       this.setSelectedUnit(selectedUnit);
-     }
-     else this.setSelectedUnit(null);
+     setCurrentUnit(selectedUnit);
+     this.setSelectedUnit(selectedUnit);
   }
 
   /**
@@ -348,7 +361,10 @@ public class GameController {
   public void useItemOn(int x, int y) {
     IUnit enemy = getGameMap().getCell(x,y).getUnit();
     if(enemy!=null && getSelectedUnit()!=null) {
-      getSelectedUnit().attack(getGameMap().getCell(x,y).getUnit());
+      if(getSelectedUnit().equals(getCurrentUnit())){
+        getTurnOwner().generateAttack(getGameMap().getCell(x,y).getUnit());
+      }
+      else getSelectedUnit().attack(getGameMap().getCell(x,y).getUnit());
     }
   }
 
@@ -379,27 +395,33 @@ public class GameController {
    *     vertical position of the target
    */
   public void giveItemTo(int x, int y) {
-    //si la unidad actual tiene el item equipado
     if(getGameMap().getCell(x,y).getUnit()!=null && getSelectedUnit()!=null){
-      getSelectedUnit().giveItem(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
+      if(getSelectedUnit().equals(getCurrentUnit())) {
+        getTurnOwner().giveItemToUnit(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
+      }
+      else {
+        getSelectedUnit().giveItem(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
+      }
     }
   }
 
   // Factories process
 
   /**
-   *
-   * @param unit
+   * @param unit added to the player's inventory of units
    */
-  public void addUnitToTactician(IUnit unit){
+  public void addUnitToTactician(NormalUnit unit) {
     getTurnOwner().addUnitInventory(unit);
   }
 
   /**
    * Add a Hero without items to current tactician.
+   *
+   * Add a ResponseHeroes
    */
   public void addHeroToTactician(){
-    getTurnOwner().addUnitHero((Hero) this.getHeroFab().createUnit());
+    Hero hero = this.getHeroFab().createUnit();
+    getTurnOwner().addUnitHero(hero);
   }
 
   /**
@@ -415,17 +437,42 @@ public class GameController {
     }
   }
 
+  public void addBowToSelectedUnit(){ getSelectedUnit().addItem(getBowFab().createItem()); }
+
+  public void addAxeToSelectedUnit(){ getSelectedUnit().addItem(getAxeFab().createItem());}
+
+  public void addDarknessToSelectedUnit(){ getSelectedUnit().addItem(getSwordFab().createItem());}
+
+  public void addLightToSelectedUnit() { getSelectedUnit().addItem(getLightFab().createItem());}
+
+  public void addSoulToSelectedUnit() { getSelectedUnit().addItem(getSoulFab().createItem());}
+
+  public void addStaffToSelectedUnit() { getSelectedUnit().addItem(getStaffFab().createItem());}
+
+  public void addSpearToSelectedUnit() { getSelectedUnit().addItem(getSpearFab().createItem());}
+
+    /**
+     * Move to position (x,y) of the GameMap
+     * to the current unit selected
+     *
+     * @param x position of the rows in the map
+     * @param y position of the column in the map
+     */
+  public void moveToSelectedUnit(int x, int y){
+      getSelectedUnit().moveTo(getGameMap().getCell(x,y));
+  }
+
   /**
    * assign random units and items for each player in the game
    * each unit have a hero with his item
    */
   public void assignUnitRandom(){
+    //getHeroFab(),
     List<IFactoryUnit> fabUnit =
             List.of(
                     getAlpacaFab(),
                     getArcherFab(),
                     getClericFab(),
-                    getHeroFab(),
                     getSorcererFab(),
                     getSwordMasterFab(),
                     getFighterFab()
@@ -436,7 +483,7 @@ public class GameController {
       List<IFactoryUnit> subFabUnit = fabUnit.subList(i,j);
       for (int index = 0; index < 3; index++) {
         subFabUnit.get(index).addItemForDefault();
-        t.addUnitInventory(subFabUnit.get(index).createUnit());
+        t.addUnitInventory((NormalUnit) subFabUnit.get(index).createUnit());
       }
       i++; j++;
       if(j==fabUnit.size()) {
@@ -480,7 +527,7 @@ public class GameController {
   /**
    * @return Factory from Hero <b>IUnit</b>
    */
-  public IFactoryUnit getHeroFab(){ return new HeroFactory(); }
+  public HeroFactory getHeroFab(){ return new HeroFactory(); }
   /**
    * @return Factory from Sorcerer <b>IUnit</b>
    */

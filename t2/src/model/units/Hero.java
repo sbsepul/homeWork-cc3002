@@ -1,14 +1,8 @@
 package model.units;
 
+import model.units.handlers.ResponseSpecialUnit;
 import model.items.*;
-import model.items.Axe;
-import model.items.Bow;
 import model.items.Spear;
-import model.items.Staff;
-import model.items.Sword;
-import model.items.magic.Darkness;
-import model.items.magic.Light;
-import model.items.magic.Soul;
 import model.map.Location;
 
 /**
@@ -19,7 +13,7 @@ import model.map.Location;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Hero extends AbstractUnit {
+public class Hero extends AbstractSpecialUnit{
 
   /**
    * Creates a new Unit.
@@ -32,6 +26,7 @@ public class Hero extends AbstractUnit {
   public Hero(final int hitPoints, final int movement, final Location location,
       IEquipableItem... items) {
     super(hitPoints, movement, location, 3, items);
+    changeSupport.addPropertyChangeListener(new ResponseSpecialUnit(this));
   }
 
   @Override

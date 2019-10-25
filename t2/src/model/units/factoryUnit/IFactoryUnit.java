@@ -4,6 +4,15 @@ import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.IUnit;
 
+
+/***
+ *
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ *
+ */
 public interface IFactoryUnit {
     /**
      *
