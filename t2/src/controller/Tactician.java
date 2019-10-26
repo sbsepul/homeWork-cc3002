@@ -37,17 +37,14 @@ import model.units.handlers.ResponseNormalUnit;
 import model.units.handlers.ResponseSpecialUnit;
 
 /**
- * A Tactician is the interface for the interaction between the user and the model of the game.
- * In the developer of the code, a tactician represent to a player, so it must to know
+ *
+ * Tactician represent to a player, so it know
  * all the features of the units and the quantity of units that have.
  *
  * Besides, a tactician have a reference to the unit currently selected
  *
- *
- *
- *
  * @author Sebastian Sepulveda
- * @version 2.0
+ * @version 1.0
  * @since 2.0
  *
  */

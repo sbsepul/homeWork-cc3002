@@ -81,8 +81,7 @@ public abstract class AbstractFactoryUnit implements IFactoryUnit {
     public void addItemForDefault() {
         Map<String, IFactoryItem> factoryItemMap = factoryItemProvider.createItemMap();
         this.itemAll = new IEquipableItem[]{
-                factoryItemMap.get("bow").createItem(),
-                factoryItemMap.get("axe").createItem()
+                factoryItemMap.get("bow").createItem()
         };
     }
 }

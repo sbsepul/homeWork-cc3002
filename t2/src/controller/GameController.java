@@ -29,8 +29,8 @@ import controller.handler.SpecialUnitLoseHandler;
 import model.items.factoryItem.*;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
-import model.units.Hero;
 import model.units.NormalUnit;
+import model.units.SpecialUnit;
 import model.units.factoryUnit.*;
 import model.items.IEquipableItem;
 import model.map.Field;
@@ -52,11 +52,12 @@ public class GameController {
   private long seedMap = 0;
   private long maxRounds;
   private int numRounds;
-  private int turnCurrent=0;
+  private int turnCurrent = 0;
   private final int numPlayers;
   private final int tamMap;
   private Field map;
   private List<Tactician> players;
+  private List<Tactician> initPlayerStatus = new ArrayList<>();
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
@@ -87,11 +88,32 @@ public class GameController {
   }
 
   /**
+   * Create a list of Tacticians
+   *
+   * @param numTacticians that begin in the game
+   * @return a list of tacticians without units
+   */
+  public List<Tactician> createTacticians(int numTacticians){
+    List<Tactician> tacticianList = new ArrayList<Tactician>(numTacticians);
+    for(int i=0; i<numTacticians; i++){
+      StringBuilder builder = new StringBuilder();
+      builder.append("Player ");
+      builder.append(i);
+      Tactician pTactician = new Tactician(builder.toString());
+      pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
+      pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
+      pTactician.addObserverStatus(new ResponseStatusTactician(this));
+      tacticianList.add(pTactician);
+    }
+    return tacticianList;
+  }
+
+  /**
    * Reset the game to the beginning
    */
   public void resetController(){
-    this.players = createTacticians(this.numPlayers);
     this.map = createNewMap();
+    this.players = new ArrayList<>(getInitPlayerStatus());
   }
 
     /**
@@ -139,31 +161,9 @@ public class GameController {
   }
 
   /**
-   * Create a list of Tacticians
-   *
-   * @param numTacticians that begin in the game
-   * @return a list of tacticians without units
+   * @return the index of the current player
    */
-  public List<Tactician> createTacticians(int numTacticians){
-    List<Tactician> tacticianList = new ArrayList<Tactician>(numTacticians);
-    for(int i=0; i<numTacticians; i++){
-      StringBuilder builder = new StringBuilder();
-      builder.append("Player ");
-      builder.append(i);
-      Tactician pTactician = new Tactician(builder.toString());
-      pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
-      pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
-      pTactician.addObserverStatus(new ResponseStatusTactician(this));
-      tacticianList.add(pTactician);
-    }
-    return tacticianList;
-  }
-
-  /**
-   * Getter the position of the current player of the list of Tacticians
-   * @return a integer of current player
-   */
-  public int getPosTurnOwner(){
+  public int getTurnCurrent() {
     return turnCurrent;
   }
 
@@ -182,7 +182,19 @@ public class GameController {
   }
 
   /**
-   *
+   * @return The status initial of the players
+   *         The units return to their init status
+   */
+  public List<Tactician> getInitPlayerStatus() {
+    return List.copyOf(initPlayerStatus);
+  }
+
+  /**
+   * @return the number of players in the init Game
+   */
+  public int getInitNumPlayer(){ return numPlayers; }
+
+  /**
    * @return a Random order for the tactician in a new Round
    */
   public void createNewRound(){
@@ -208,10 +220,10 @@ public class GameController {
    * the next turn begin in the start
    *
    */
-  private void changeToNextTurn(){
+  public void changeToNextTurn(){
     int nPlayers = getTacticians().size();
     if(turnCurrent==nPlayers-1){
-      createNewRound();
+      if(numRounds>1) createNewRound();
       this.turnCurrent=0;
     }
     else this.turnCurrent++;
@@ -249,14 +261,13 @@ public class GameController {
    *  the maximum number of turns the game can last
    */
   public void initGame(final int maxTurns) {
+    if(this.numRounds==0 && getInitNumPlayer()==getTacticians().size()) {
+      this.initPlayerStatus.addAll(players);
+    }
     this.maxRounds = maxTurns;
     this.numRounds = 1;
     this.turnCurrent = 0;
     this.resetController();
-  }
-
-  private int getPlayersInit() {
-    return numPlayers;
   }
 
   /**
@@ -432,8 +443,7 @@ public class GameController {
    *
    * Add a ResponseHeroes
    */
-  public void addHeroToTactician(){
-    Hero hero = this.getHeroFab().createUnit();
+  public void addHeroToTactician(SpecialUnit hero){
     getTurnOwner().addUnitHero(hero);
   }
 
@@ -475,8 +485,14 @@ public class GameController {
    */
   public void addSoulToSelectedUnit() { getSelectedUnit().addItem(getSoulFab().createItem());}
 
+    /**
+     * Add a Staff to unit selected
+     */
   public void addStaffToSelectedUnit() { getSelectedUnit().addItem(getStaffFab().createItem());}
 
+    /**
+     * Add a Spear to unit selected
+     */
   public void addSpearToSelectedUnit() { getSelectedUnit().addItem(getSpearFab().createItem());}
 
     /**
@@ -528,34 +544,40 @@ public class GameController {
   public IFactoryUnit getSwordMasterFab(){
     return new SwordMasterFactory();
   }
+
   /**
    * @return Factory from Archer <b>IUnit</b>
    */
   public IFactoryUnit getArcherFab(){
     return new ArcherFactory();
   }
+
   /**
    * @return Factory from Cleric <b>IUnit</b>
    */
   public IFactoryUnit getClericFab(){
     return new ClericFactory();
   }
+
   /**
    * @return Factory from Alpaca <b>IUnit</b>
    */
   public IFactoryUnit getAlpacaFab(){
     return new AlpacaFactory();
   }
+
   /**
    * @return Factory from Fighter <b>IUnit</b>
    */
   public IFactoryUnit getFighterFab(){
     return new FighterFactory();
   }
+
   /**
    * @return Factory from Hero <b>IUnit</b>
    */
   public HeroFactory getHeroFab(){ return new HeroFactory(); }
+
   /**
    * @return Factory from Sorcerer <b>IUnit</b>
    */
@@ -571,42 +593,49 @@ public class GameController {
   public IFactoryItem getSwordFab(){
     return new SwordFactoryItem();
   }
+
   /**
    * @return Factory from Bow <b>IEquipableItem</b>
    */
   public IFactoryItem getBowFab(){
     return new BowFactoryItem();
   }
+
   /**
    * @return Factory from Axe <b>IEquipableItem</b>
    */
   public IFactoryItem getAxeFab(){
     return new AxeFactoryItem();
   }
+
   /**
    * @return Factory from Darkness <b>IEquipableItem</b>
    */
   public IFactoryItem getDarknessFab(){
     return new DarknessFactoryItem();
   }
+
   /**
    * @return Factory from Soul <b>IEquipableItem</b>
    */
   public IFactoryItem getSoulFab(){
     return new SoulFactoryItem();
   }
+
   /**
    * @return Factory from Light <b>IEquipableItem</b>
    */
   public IFactoryItem getLightFab(){
     return new LightFactoryItem();
   }
+
   /**
    * @return Factory from Staff <b>IEquipableItem</b>
    */
   public IFactoryItem getStaffFab(){
     return new StaffFactoryItem();
   }
+
   /**
    * @return Factory from Spear <b>IEquipableItem</b>
    */

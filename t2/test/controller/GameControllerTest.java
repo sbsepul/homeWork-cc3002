@@ -36,7 +36,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -109,6 +111,8 @@ class GameControllerTest {
   @Test
   public void getRoundNumber() {
     controller.initGame(10);
+    // Round where the tactician chose to the units
+    // IntStream.range(0, 4).forEach(i -> controller.endTurn()); // added
     for (int i = 1; i < 10; i++) {
       assertEquals(i, controller.getRoundNumber());
       for (int j = 0; j < 4; j++) {
@@ -149,12 +153,14 @@ class GameControllerTest {
     Tactician secondPlayer = new Tactician("Player 1"); // <- Deben cambiar esto (!)
     assertNotEquals(secondPlayer.getName(), firstPlayer.getName());
     controller.endTurn();
+
     assertNotEquals(firstPlayer.getName(), controller.getTurnOwner().getName());
     assertEquals(secondPlayer.getName(), controller.getTurnOwner().getName());
     IntStream.range(0,2).forEach(i->controller.endTurn());
     Tactician lastPlayer = new Tactician("Player 3");
     assertEquals("Player 3", controller.getTurnOwner().getName());
     controller.endTurn();
+
     assertFalse(lastPlayer.getName().equals(controller.getTurnOwner().getName()));
   }
 
@@ -179,6 +185,8 @@ class GameControllerTest {
   @Test
   public void getWinners() {
     controller.initGame(2);
+    // Round where the tactician chose to the units
+    // IntStream.range(0, 4).forEach(i -> controller.endTurn()); //added
     IntStream.range(0, 8).forEach(i -> controller.endTurn());
     assertEquals(3, controller.getRoundNumber());
     assertEquals(4, controller.getWinners().size());
@@ -186,6 +194,8 @@ class GameControllerTest {
         .forEach(player -> Assertions.assertTrue(testTacticians.contains(player)));
 
     controller.initGame(2);
+    // Round where the tactician chose to the units
+    // IntStream.range(0, 4).forEach(i -> controller.endTurn()); //added
     IntStream.range(0, 4).forEach(i -> controller.endTurn());
     assertNull(controller.getWinners());
     controller.removeTactician("Player 0");
@@ -208,7 +218,7 @@ class GameControllerTest {
   public void addUnitToTacticianTest(){
     IUnit hero = controller.getHeroFab().createUnit();
     IUnit unit = controller.getArcherFab().createUnit();
-    controller.addHeroToTactician();
+    controller.addHeroToTactician(controller.getHeroFab().createUnit());
     assertEquals(1, controller.getTurnOwner().getUnits().size());
     assertEquals(hero.getClass(), controller.getTurnOwner().getUnits().get(0).getClass());
     controller.addUnitToTactician((NormalUnit) unit);
@@ -313,17 +323,10 @@ class GameControllerTest {
     assertEquals(3, controller.getNumPlayers());
   }
 
+
   @Test
   public void useItemOn() {
-    IFactoryUnit archer = controller.getArcherFab();
-    IFactoryUnit fighter = controller.getFighterFab();
-    IFactoryUnit master = controller.getSwordMasterFab();
-    archer.addItemForDefault();
-    fighter.addItemForDefault();
-    master.addItemForDefault();
-    controller.putUnitInMap(archer.createUnit(), 6,0);
-    controller.putUnitInMap(fighter.createUnit(),5,1);
-    controller.putUnitInMap(master.createUnit(), 5,0);
+    putInPosition();
     // System.out.println(controller.getGameMap().toString());
     controller.selectUnitIn(6,0);
     assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
@@ -397,6 +400,83 @@ class GameControllerTest {
     assertEquals(1,controller.getSelectedUnit().getItems().size());
   }
 
+  /**
+   *  #  #  #  #  #  #  #
+   * #o  +##+  +  +##+##+#
+   * #o##o  +##+  +  +##+#
+   * #+##+  +##+  +##+  +#
+   * #+  +##+  +##+  +  +#
+   * #+  +  +  +##+##+##+#
+   * #+  +  +##+##+  +  +#
+   * #+  +  +  +  +  +  +#
+   *  #  #  #  #  #  #  #
+   */
+  @Test
+  public void moveToUnit(){
+    putInPosition();
+    System.out.println(controller.getGameMap().toString());
+    controller.selectUnitIn(6,0);
+    IUnit unitSelected = controller.getSelectedUnit();
+    controller.moveToSelectedUnit(5,1);
+    assertFalse(unitSelected.equals(controller.getGameMap().getCell(5,1).getUnit()));
+    assertEquals(unitSelected.getLocation(), controller.getSelectedUnit().getLocation());
+
+    controller.selectUnitIn(5,1);
+    IUnit unitMoved = controller.getSelectedUnit();
+    controller.moveToSelectedUnit(4,2);
+    assertEquals(unitMoved,controller.getGameMap().getCell(4,2).getUnit());
+    assertFalse(unitMoved.getLocation().equals(controller.getSelectedUnit()));
+    System.out.println(controller.getGameMap().toString());
+
+    controller.selectUnitIn(5,0);
+    IUnit unitMovedOverOther =  controller.getSelectedUnit();
+    controller.moveToSelectedUnit(6,1);
+    assertEquals(unitMovedOverOther, controller.getGameMap().getCell(6,1).getUnit());
+    System.out.println(controller.getGameMap().toString());
+    assertNull(controller.getGameMap().getCell(5,0).getUnit());
+  }
+
+  /**
+   * STATUS INITIAL
+   *
+   *  #  #  #  #  #  #  #
+   * #3  +##+  +  +##+##+#
+   * #3##3  +##4  4  4##+#
+   * #+##+  +##+  +##+  +#
+   * #+  +##+  +##+  +  +#
+   * #+  +  +  +##2##+##+#
+   * #1  +  +##+##2  2  +#
+   * #1  1  +  +  +  +  +#
+   *  #  #  #  #  #  #  #
+   *
+   * STATUS FINAL
+   *
+   *    #  #  #  #  #  #  #
+   * 6 #3  +##+  +  +##+##+#
+   * 5 #3##3  +##4  4  4##+#
+   * 4 #+##+  +##+  +##+  +#
+   * 3 #+  +##+  +##+  +  +#
+   * 2 #+  +  +  +##2##+##+#
+   * 1 #1  +  +##+##2  2  +#
+   * 0 #1  1  +  +  +  +  +#
+   *    #  #  #  #  #  #  #
+   *    0  1  2  3  4  5  6
+   */
+  @Test
+  public void gameNormal(){
+    assignUnitToTactician();
+    assertEquals(0, controller.getTurnCurrent());
+    assertEquals(0, controller.getRoundNumber());
+    controller.initGame(3);
+    System.out.println(controller.getGameMap().toString());
+    assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
+    controller.selectUnitIn(1,5);
+    assertNull(controller.getCurrentUnit());
+    controller.selectUnitIn(0,0);
+    assertEquals(controller.getSelectedUnit(), controller.getCurrentUnit());
+    controller.moveToSelectedUnit(2,0);
+  }
+
   @Test
   public void getFabUnits(){
     IUnit unit1 = controller.getSwordMasterFab().createUnit();
@@ -433,6 +513,73 @@ class GameControllerTest {
     assertEquals(Light.class, item7.getClass());
     IEquipableItem item8 = controller.getSoulFab().createItem();
     assertEquals(Soul.class, item8.getClass());
+  }
+
+
+  /**
+   * Add three units with equip items in the map
+   */
+  private void putInPosition(){
+    IFactoryUnit archer = controller.getArcherFab();
+    IFactoryUnit fighter = controller.getFighterFab();
+    IFactoryUnit master = controller.getSwordMasterFab();
+    archer.addItemForDefault();
+    fighter.addItemForDefault();
+    master.addItemForDefault();
+    controller.putUnitInMap(archer.createUnit(), 6,0);
+    controller.putUnitInMap(fighter.createUnit(),5,1);
+    controller.putUnitInMap(master.createUnit(), 5,0);
+  }
+
+  /**
+   * Assign units with items and positions in the game for each player
+   */
+  private void assignUnitToTactician(){
+    Map<String, IFactoryUnit> fabMap = new HashMap<>();
+    fabMap.put("archer", controller.getArcherFab());
+    fabMap.put("alpaca", controller.getAlpacaFab());
+    fabMap.put("cleric", controller.getClericFab());
+    fabMap.put("sorcerer", controller.getSorcererFab());
+    fabMap.put("sm", controller.getSwordMasterFab());
+    fabMap.put("hero", controller.getHeroFab());
+    fabMap.put("fighter", controller.getFighterFab());
+    fabMap.forEach((k,v) -> v.addItemForDefault());
+
+    controller.addUnitToTactician((NormalUnit) fabMap.get("archer").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("alpaca").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("sorcerer").createUnit());
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 0,0);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 1,0);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(2), 0,1);
+
+    controller.changeToNextTurn();
+
+    controller.addHeroToTactician((SpecialUnit) fabMap.get("hero").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("fighter").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("cleric").createUnit());
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 1,6);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 1,5);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(2), 2,5);
+
+    controller.changeToNextTurn();
+
+    controller.addHeroToTactician((SpecialUnit) fabMap.get("hero").createUnit());
+    controller.addHeroToTactician((SpecialUnit) fabMap.get("hero").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("fighter").createUnit());
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 6,0);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 5,0);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(2), 5,1);
+
+    controller.changeToNextTurn();
+
+    controller.addUnitToTactician((NormalUnit) fabMap.get("sorcerer").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("sm").createUnit());
+    controller.addUnitToTactician((NormalUnit) fabMap.get("fighter").createUnit());
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 5,5);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 5,4);
+    controller.putUnitInMap(controller.getTurnOwner().getUnits().get(2), 5,3);
+
+    controller.changeToNextTurn();
   }
 
 

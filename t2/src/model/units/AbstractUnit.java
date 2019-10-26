@@ -245,7 +245,9 @@ public abstract class AbstractUnit implements IUnit{
   public void moveTo(final Location targetLocation) {
     if (getLocation().distanceTo(targetLocation) <= getMovement()
         && targetLocation.getUnit() == null) {
+      getLocation().setUnit(null);
       setLocation(targetLocation);
+      targetLocation.setUnit(this);
     }
   }
 

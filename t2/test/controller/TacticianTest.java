@@ -24,6 +24,8 @@
 
 package controller;
 
+import model.items.IEquipableItem;
+import model.items.factoryItem.IFactoryItem;
 import model.map.Field;
 import model.units.IUnit;
 import model.units.NormalUnit;
@@ -44,22 +46,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TacticianTest {
     private Tactician tactician01;
-    private Tactician tactician02;
-    private Field mapTactician;
-    private Field map;
     private GameController controller;
 
     @BeforeEach
     public void setUp(){
         controller = new GameController(2,9);
         tactician01 = new Tactician("Player 0");
-        tactician02 = new Tactician("Player 1");
     }
 
     @Test
     public void constructorTactician(){
         String name = "Player 0";
         assertEquals(name, tactician01.getName());
+        assertTrue(tactician01.getStatus());
     }
 
     @Test
@@ -167,17 +166,50 @@ public class TacticianTest {
     public void getHitPoints(){
         NormalUnit sorcerer = (NormalUnit) controller.getSorcererFab().createUnit();
         NormalUnit cleric = (NormalUnit) controller.getClericFab().createUnit();
-        
+        tactician01.addUnitInventory(sorcerer);
+        tactician01.addUnitInventory(cleric);
+        tactician01.setCurrentUnit(sorcerer);
+        assertEquals(50, tactician01.hitPointsCurrentUnit());
+        assertEquals(tactician01.maxHitPointsCurrentUnit(), tactician01.hitPointsCurrentUnit());
+        tactician01.setCurrentUnit(cleric);
+        assertEquals(50, tactician01.hitPointsCurrentUnit());
+        assertEquals(tactician01.maxHitPointsCurrentUnit(), tactician01.hitPointsCurrentUnit());
     }
 
     @Test
     public void getItems(){
-
+        IUnit swordmaster = controller.getSwordMasterFab().createUnit();
+        tactician01.addUnitInventory((NormalUnit) swordmaster);
+        tactician01.setCurrentUnit(swordmaster);
+        assertEquals(0, tactician01.getItemsCurrentUnit().size());
+        IEquipableItem sword = controller.getSwordFab().createItem();
+        IEquipableItem staff = controller.getStaffFab().createItem();
+        tactician01.getCurrentUnit().addItem(sword);
+        tactician01.getCurrentUnit().addItem(staff);
+        assertEquals(2, tactician01.getItemsCurrentUnit().size());
+        assertEquals(sword, tactician01.getItemsCurrentUnit().get(0));
+        assertEquals(staff, tactician01.getItemsCurrentUnit().get(1));
     }
 
     @Test
     public void getEquippedItem(){
+        tacticianUnits();
+        assertNull(tactician01.getEquipItemCurrentUnit());
+        IFactoryItem fabBow = controller.getBowFab();
+        IEquipableItem bow01 = fabBow.createItem();
+        tactician01.getCurrentUnit().addItem(bow01);
+        tactician01.setEquipItem(bow01);
+        assertEquals(bow01, tactician01.getEquipItemCurrentUnit());
+        IEquipableItem bow02 = fabBow.createItem();
+        tactician01.getCurrentUnit().addItem(bow02);
+        tactician01.setEquipItem(bow02);
+        assertEquals(bow02, tactician01.getEquipItemCurrentUnit());
+    }
 
+    private void tacticianUnits(){
+        IUnit archer = controller.getArcherFab().createUnit();
+        tactician01.addUnitInventory((NormalUnit) archer);
+        tactician01.setCurrentUnit(archer);
     }
 
 }
