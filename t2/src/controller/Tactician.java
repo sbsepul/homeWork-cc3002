@@ -1,3 +1,27 @@
+/*
+ * The MIT License
+ *
+ * Copyright (c) 2019 Google, Inc. http://angularjs.org
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package controller;
 
 import java.beans.PropertyChangeEvent;
@@ -44,13 +68,11 @@ public class Tactician {
      * Constructor to specify an alternative source of moves
      *
      * @param markName name for mark to player
-     * @param unitSet Tactician's firsts units in the start game.
      *
      */
-    public Tactician(final String markName, IUnit... unitSet){
+    public Tactician(final String markName){
         this.mark = markName;
         this.status = true;
-        this.units.addAll(Arrays.asList(unitSet));
     }
 
     /**
@@ -112,7 +134,7 @@ public class Tactician {
      * @param unitAdded added with hp full
      */
     public void addUnitInventory(NormalUnit unitAdded) {
-        ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
+        final ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
         unitAdded.addObserver(respNormalUnit);
         units.add(unitAdded);
     }
@@ -122,19 +144,10 @@ public class Tactician {
      * @param unitHero added
      */
     public void addUnitHero(SpecialUnit unitHero) {
-        ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
+        final ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
         unitHero.addObserver(respSpecialUnit);
         units.add(unitHero);
     }
-
-
-    /**
-     * @return true if a player can play, otherwise false
-     */
-    public boolean canPlay() { return this.status; }
-
-
-    public String getNameCurrentUnit(){ return getCurrentUnit().getEquippedItem().getName();}
 
     /**
      * @return getter the item equipped in the current unit of tactician
