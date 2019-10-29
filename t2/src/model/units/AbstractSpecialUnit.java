@@ -43,7 +43,8 @@ public abstract class AbstractSpecialUnit extends AbstractUnit implements Specia
         super(hitPoints, movement, location, maxItems, items);
     }
 
-    public void addObserver(ResponseSpecialUnit plc){
+    @Override
+    public void addResponseSpecialUnit(ResponseSpecialUnit plc){
         changeSupport.addPropertyChangeListener(plc);
     }
 }

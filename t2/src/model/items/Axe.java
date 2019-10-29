@@ -82,7 +82,9 @@ public class Axe extends AbstractAttack implements IAttack{
   public void receiveLightAttack(Light attackLight) { super.receiveMagicAttack(attackLight); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveMagicAttack(attackDarkness); }
+  public void receiveDarknessAttack(Darkness attackDarkness) {
+    super.receiveMagicAttack(attackDarkness);
+  }
 
   @Override
   public boolean equals(Object obj) {

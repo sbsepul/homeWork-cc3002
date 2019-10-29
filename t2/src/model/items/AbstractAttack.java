@@ -36,6 +36,7 @@ public abstract class AbstractAttack extends AbstractItem implements IAttack {
     public AbstractAttack(String name, int power, int minRange, int maxRange) {
         super(name, power, minRange, maxRange);
     }
+    @Override
     public void receiveAttackNormal(IAttack itemNormal){
         this.receiveUnitAttack(itemNormal);
         if(this.canAttack(itemNormal)){
@@ -43,13 +44,15 @@ public abstract class AbstractAttack extends AbstractItem implements IAttack {
         }
     }
 
+    @Override
     public void receiveWeakAttack(IAttack attackStrong) {
         this.receiveUnitWeaknessAttack(attackStrong);
-        if(this.canAttack(attackStrong)){
+        if(this.canAttack(attackStrong)) {
             attackStrong.receiveUnitResistantAttack(this);
         }
     }
 
+    @Override
     public void receiveSoftAttack(IAttack attackSoft) {
         this.receiveUnitResistantAttack(attackSoft);
         if(this.canAttack(attackSoft)){
@@ -64,4 +67,5 @@ public abstract class AbstractAttack extends AbstractItem implements IAttack {
             attackMagic.receiveUnitWeaknessAttack(this);
         }
     }
+
 }

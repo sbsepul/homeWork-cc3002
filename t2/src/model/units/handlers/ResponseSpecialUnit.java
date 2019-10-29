@@ -58,6 +58,7 @@ public class ResponseSpecialUnit implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("HP change of: " +  evt.getOldValue() + " to: " + evt.getNewValue());
         if((double) evt.getNewValue() <= 0) player.removeSpecialUnit((SpecialUnit) evt.getSource());
     }
 

@@ -1,0 +1,80 @@
+Estimado,
+
+--------------------------------------------------------------------------------
+Combate: 1 / 1.0
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Intercambio: 0.5 / 0.5
+--------------------------------------------------------------------------------
+
+================================================================================
+Funcionalidad: 1.5 / 1.5
+================================================================================
+
+No utiliza interfaces para distinguir objetos que pueden atacar de los que no: -0.5x1 = -0.5
+================================================================================
+Diseño: 2 / 2.5
+================================================================================
+
+################################################################################
+Código Fuente: 3.5 / 4
+################################################################################
+
+Porcentaje de coverage: 63.0% = -0.75
+################################################################################
+Coverage: 0.25 / 1
+################################################################################
+
+################################################################################
+Javadoc: 0.5 / 0.5
+################################################################################
+
+################################################################################
+Resumen: 0.5 / 0.5
+################################################################################
+
+################################################################################
+Adicionales: 0
+################################################################################
+
+Comentarios: No usas interfaces para diferenciar objetos que pueden atacar con los que no.
+Corrector: Marco Caballero
+
+
+
+Tengo las siguientes consultas en la revision de la tarea:
+
+1) >> No utiliza interfaces para distinguir objetos que pueden atacar de los que no: -0.5x1 = -0.5.
+
+Comprendo que al utilizar interfaces uno puede diferenciar entre los objetos que pueden atacar con los que no
+como lo son el staff que no ataca pero cura. Lo que no entiendo es porque crear una interfaz es necesario, y cual es
+la diferencia entre colocar métodos que hagan que un item cure, o que uno unidad ataque, al final esto también es suficiente
+y no es necesario crear nuevas clases que representen a estos objetos. Si se añade un nuevo objeto que cura, es posible
+crear un nuevo método que haga la curacion necesaria.
+
+
+2) >> Codigo fuente
+
+No aparecen comentarios de qué cosas son las que estan mal en el codigo fuente, no entiendo porque hay menos punto ahi si ya
+hay un descuento en la nota por el diseño y el coverage.
+
+3) >> Coverage
+
+Como se supone que ven el coverage?? Al probar mis test desde el package de units, items y map me enfoqué en revisar que tenia cubiertos todos los métodos.
+Necesito saber que cosas no probé, y ese coverage está demasiado bajo, tenia 100% cuando lo probé la ultima vez.
+
+
+Saludos
+
+
+
+Hola slater:
+
+Tenia una duda sobre la implementación que estoy llevando y no la queria
+
+Respecto a la creacion de unidades, en mi implementación estoy ocupando un factory provider que es una clase que ocupa una clase enum que contiene los tipos de las unidades disponilbles, lo mismo hice con los items. Esta clase solo se encarga de crear un FactoryUnit segun el tipo de unidad que se recibe de parametro, o de item. 
+
+Mi duda va porque cuando le quiero dar a un tactician cierta unidad lo que hago es crear un selectUnit(TipodeUnidad) y luego con eso basta para crear la unidad, pero nose si eso esta bien, porque si bien no hago instance of ni hago if else, le paso de parametro un "tipo" asumiendo que un jugador va a seleccionar una unidad sabiendo el tipo de unidad que hay, y en particular su nombre.
+
+Otra idea que tenia era hacer double dispatch, creando metodos selectUnitTipo() en tactician, y que en un parametro global que sea fabrica, se cambie el valor a la fabricaArrow() por ejemplo, de esta manera se puede mandar un mensaje a controller para que cambie el tipo de fabrica que se selecciona, luego crea la unidad respecto al cambio que se le realiza. Este proceso es mucho más complicado y engorrozo porque habria que hacer un firePropertyChange para avisar que se cambia la fabrica y al momento de cambiarla crear esa unidad.

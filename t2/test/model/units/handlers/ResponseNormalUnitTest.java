@@ -22,14 +22,17 @@
  * THE SOFTWARE.
  */
 
-package model.units;
+package model.units.handlers;
 
-import model.units.handlers.ResponseNormalUnit;
+import org.junit.jupiter.api.BeforeEach;
 
-public interface NormalUnit extends IUnit {
-    /**
-     *
-     * @param plc
-     */
-    void addResponseNormalUnit(ResponseNormalUnit plc);
+import static org.junit.jupiter.api.Assertions.*;
+
+class ResponseNormalUnitTest {
+
+    @BeforeEach
+    void setUp(){
+
+    }
+
 }

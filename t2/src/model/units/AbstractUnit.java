@@ -28,6 +28,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +61,9 @@ public abstract class AbstractUnit implements IUnit{
   private final int maxItems;
   private final double maxHitPoints;
   private static final double EPSILON=1e-7;
-  protected PropertyChangeSupport changeSupport= new PropertyChangeSupport(this);
+  protected PropertyChangeSupport
+          changeSupport= new PropertyChangeSupport(this),
+          changeMovedSupport = new PropertyChangeSupport(this);
 
   /**
    * Creates a new Unit.
@@ -95,10 +98,12 @@ public abstract class AbstractUnit implements IUnit{
     }
   }
 
+
+
   @Override
   public boolean initCombat(IUnit unitEnemy) {
     return this.getCurrentHitPoints()>0 && unitEnemy.getCurrentHitPoints()>0
-            && this.getEquippedItem()!=null && this.isInRange(unitEnemy);
+            && this.getEquippedItem()!=null && isInRange(unitEnemy);
   }
 
   @Override
@@ -180,10 +185,15 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public boolean isInRange(IUnit unit) {
-    int maxRange = this.getEquippedItem().getMaxRange();
-    int minRange = this.getEquippedItem().getMinRange();
-    double distance = this.getLocation().distanceTo(unit.getLocation());
-    if(minRange <= distance  &&  maxRange >= distance){
+    int distance = (int) this.getLocation().distanceTo(unit.getLocation());
+    this.equippedItem.setDistance(distance);
+    return getEquippedItem().inRangeItem();
+  }
+
+  @Override
+  public boolean canCounterAttack(int distance) {
+    if(this.equippedItem!=null){
+      equippedItem.setDistance(distance);
       return true;
     }
     return false;
@@ -243,12 +253,21 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void moveTo(final Location targetLocation) {
+    Location oldLocation = getLocation();
     if (getLocation().distanceTo(targetLocation) <= getMovement()
         && targetLocation.getUnit() == null) {
       getLocation().setUnit(null);
       setLocation(targetLocation);
       targetLocation.setUnit(this);
+      changeMovedSupport.firePropertyChange(
+              new PropertyChangeEvent(this, "unit-moved", oldLocation, targetLocation)
+      );
     }
+  }
+
+  @Override
+  public void addObserverMovement(PropertyChangeListener plc) {
+    changeMovedSupport.addPropertyChangeListener(plc);
   }
 
   /**

@@ -29,6 +29,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.map.InvalidLocation;
+import model.map.Location;
 import model.units.*;
 import model.units.factoryUnit.*;
 import model.map.Field;
@@ -379,10 +380,12 @@ class GameControllerTest {
     cleric.addItemForDefault();
     assertEquals(1,cleric.getItemAll().length);
     alpaca.addItemForDefault();
-    assertEquals(2,alpaca.getItemAll().length);
+    IUnit uAlpaca = alpaca.createUnit();
+    uAlpaca.addItem(controller.getSpearFab().createItem());
     controller.putUnitInMap(sorcerer.createUnit(),6,1);
     controller.putUnitInMap(cleric.createUnit(),6,0);
-    controller.putUnitInMap(alpaca.createUnit(),5,1);
+    controller.putUnitInMap(uAlpaca,5,1);
+    // select cleric
     controller.selectUnitIn(6,0);
     controller.selectItem(0);
     assertEquals(1,controller.getSelectedUnit().getItems().size());
@@ -390,6 +393,7 @@ class GameControllerTest {
     assertEquals(0,controller.getSelectedUnit().getItems().size());
     controller.selectUnitIn(6,1);
     assertEquals(2, controller.getSelectedUnit().getItems().size());
+    // select alpaca
     controller.selectUnitIn(5,1);
     controller.selectItem(0);
     controller.giveItemTo(6,1);
@@ -413,7 +417,9 @@ class GameControllerTest {
    */
   @Test
   public void moveToUnit(){
+    // put 3 units in positions: (6,0) ; (5,0) ; (5,1)
     putInPosition();
+    // test moving a unit to position occupied
     System.out.println(controller.getGameMap().toString());
     controller.selectUnitIn(6,0);
     IUnit unitSelected = controller.getSelectedUnit();
@@ -421,6 +427,7 @@ class GameControllerTest {
     assertFalse(unitSelected.equals(controller.getGameMap().getCell(5,1).getUnit()));
     assertEquals(unitSelected.getLocation(), controller.getSelectedUnit().getLocation());
 
+    // test moving unit to max movement
     controller.selectUnitIn(5,1);
     IUnit unitMoved = controller.getSelectedUnit();
     controller.moveToSelectedUnit(4,2);
@@ -428,6 +435,7 @@ class GameControllerTest {
     assertFalse(unitMoved.getLocation().equals(controller.getSelectedUnit()));
     System.out.println(controller.getGameMap().toString());
 
+    // test move unit to position valid and there are not duplicate
     controller.selectUnitIn(5,0);
     IUnit unitMovedOverOther =  controller.getSelectedUnit();
     controller.moveToSelectedUnit(6,1);
@@ -439,28 +447,29 @@ class GameControllerTest {
   /**
    * STATUS INITIAL
    *
-   *  #  #  #  #  #  #  #
-   * #3  +##+  +  +##+##+#
-   * #3##3  +##4  4  4##+#
-   * #+##+  +##+  +##+  +#
-   * #+  +##+  +##+  +  +#
-   * #+  +  +  +##2##+##+#
-   * #1  +  +##+##2  2  +#
-   * #1  1  +  +  +  +  +#
-   *  #  #  #  #  #  #  #
+   *     #  #  #  #  #  #  #
+   * 6 # 3  +##+  +  +##+##+#
+   * 5 # 3##3  +##4  4  4##+#
+   * 4 # +##+  +##+  +##+  +#
+   * 3 # +  +##+  +##+  +  +#
+   * 2 # +  +  +  +##2##+##+#
+   * 1 # 1  +  +##+##2  2  +#
+   * 0 # 1  1  +  +  +  +  +#
+   *     #  #  #  #  #  #  #
+   *     0  1  2  3  4  5  6
    *
    * STATUS FINAL
    *
-   *    #  #  #  #  #  #  #
-   * 6 #3  +##+  +  +##+##+#
-   * 5 #3##3  +##4  4  4##+#
-   * 4 #+##+  +##+  +##+  +#
-   * 3 #+  +##+  +##+  +  +#
-   * 2 #+  +  +  +##2##+##+#
-   * 1 #1  +  +##+##2  2  +#
-   * 0 #1  1  +  +  +  +  +#
-   *    #  #  #  #  #  #  #
-   *    0  1  2  3  4  5  6
+   *     #  #  #  #  #  #  #
+   * 6 # 3  +##+  +  +##+##+#
+   * 5 # 3##3  +##4  4  4##+#
+   * 4 # +##+  +##+  +##+  +#
+   * 3 # +  +##+  +##+  +  +#
+   * 2 # +  +  +  +##2##+##+#
+   * 1 # 1  +  +##+##2  2  +#
+   * 0 # 1  1  +  +  +  +  +#
+   *     #  #  #  #  #  #  #
+   *     0  1  2  3  4  5  6
    */
   @Test
   public void gameNormal(){
@@ -472,9 +481,104 @@ class GameControllerTest {
     assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
     controller.selectUnitIn(1,5);
     assertNull(controller.getCurrentUnit());
+
+    // test move current unit first time
+    // select archer
     controller.selectUnitIn(0,0);
+    controller.equipItem(0);
     assertEquals(controller.getSelectedUnit(), controller.getCurrentUnit());
     controller.moveToSelectedUnit(2,0);
+    assertNull(controller.getGameMap().getCell(0,0).getUnit());
+
+    // test move current unit second time
+    controller.moveToSelectedUnit(2,1);
+    Location locNew0 = controller.getGameMap().getCell(2,0);
+    assertEquals(locNew0, controller.getSelectedUnit().getLocation());
+
+    // test move second unit of tactician
+    // select alpaca
+    controller.selectUnitIn(1,0);
+    controller.moveToSelectedUnit(1,1);
+    Location locNew1 = controller.getGameMap().getCell(1,0);
+    assertNull(locNew1.getUnit());
+
+    // test move third unit of tactician
+    // select sorcerer
+    controller.selectUnitIn(0,1);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(0,3);
+    Location locNew2 = controller.getGameMap().getCell(1,0);
+    assertNull(locNew2.getUnit());
+    System.out.println(controller.getGameMap().toString());
+
+    controller.endTurn();
+
+    //select fighter
+    controller.selectUnitIn(1,5);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(0,4);
+
+    //select cleric
+    controller.selectUnitIn(2,5);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(3,5);
+
+    //select hero
+    controller.selectUnitIn(1,6);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(3,6);
+
+    controller.endTurn();
+
+    //select fighter
+    controller.selectUnitIn(5,1);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(3,1);
+
+    //select hero
+    controller.selectUnitIn(6,0);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(5,1);
+
+    //select hero
+    controller.selectUnitIn(5,0);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(3,0);
+
+
+    controller.endTurn();
+
+    //select sorcerer
+    controller.selectUnitIn(5,5);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(4,6);
+
+    //select sm
+    controller.selectUnitIn(5,4);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(4,5);
+    controller.useItemOn(3,5);
+    System.out.println(controller.getGameMap().toString());
+    //assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+
+
+    //select sorcerer
+    controller.selectUnitIn(4,6);
+    controller.useItemOn(3,6);
+    //assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+
+    //select fighter
+    controller.selectUnitIn(5,3);
+    controller.equipItem(0);
+    controller.moveToSelectedUnit(3,3);
+
+    controller.endTurn();
+    System.out.println(controller.getGameMap().toString());
+    assertEquals(2, controller.getRoundNumber());
+    assertEquals(0, controller.getTurnCurrent());
+
+
+
   }
 
   @Test

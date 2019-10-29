@@ -40,6 +40,7 @@ public abstract class AbstractItem implements IEquipableItem {
   protected int maxRange;
   protected int minRange;
   private IUnit owner;
+  protected int distance;
 
   /**
    * Constructor for a default item without any special behaviour.
@@ -64,10 +65,15 @@ public abstract class AbstractItem implements IEquipableItem {
   @Override
   public boolean canAttack(IEquipableItem itemEnemy) {
     if(itemEnemy.getOwner()!=null){
-      return this.getOwner().getCurrentHitPoints()>0 && this.getOwner().isInRange(itemEnemy.getOwner())
-              && itemEnemy.getOwner().getCurrentHitPoints()>0;
+      return this.getOwner().getCurrentHitPoints()>0 && itemEnemy.getOwner().getCurrentHitPoints()>0
+              && inRangeItem();
     }
     return false;
+  }
+
+  @Override
+  public boolean inRangeItem(){
+    return (this.minRange<=this.distance && this.maxRange >= this.distance);
   }
 
   @Override
@@ -119,5 +125,15 @@ public abstract class AbstractItem implements IEquipableItem {
 
   @Override
   public void giveMagicAttack(IEquipableItem itemMagic){ }
+
+  @Override
+  public int getDistance() {
+    return this.distance;
+  }
+
+  @Override
+  public void setDistance(int distance) {
+    this.distance = distance;
+  }
 
 }

@@ -35,6 +35,7 @@ import model.units.NormalUnit;
 import model.units.SpecialUnit;
 import model.units.handlers.ResponseNormalUnit;
 import model.units.handlers.ResponseSpecialUnit;
+import model.units.handlers.ResponseUnitMovement;
 
 /**
  *
@@ -59,7 +60,8 @@ public class Tactician {
     private PropertyChangeSupport
             changesNormalUnit = new PropertyChangeSupport(this),
             changesSpecialUnit = new PropertyChangeSupport(this),
-            changesStatusTactician = new PropertyChangeSupport(this);
+            changesStatusTactician = new PropertyChangeSupport(this),
+            changeMovementUnit = new PropertyChangeSupport(this);
 
     /**
      * Constructor to specify an alternative source of moves
@@ -132,7 +134,9 @@ public class Tactician {
      */
     public void addUnitInventory(NormalUnit unitAdded) {
         final ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
-        unitAdded.addObserver(respNormalUnit);
+        final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
+        unitAdded.addResponseNormalUnit(respNormalUnit);
+        unitAdded.addObserverMovement(responseUnitMovement);
         units.add(unitAdded);
     }
 
@@ -142,7 +146,9 @@ public class Tactician {
      */
     public void addUnitHero(SpecialUnit unitHero) {
         final ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
-        unitHero.addObserver(respSpecialUnit);
+        final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
+        unitHero.addResponseSpecialUnit(respSpecialUnit);
+        unitHero.addObserverMovement(responseUnitMovement);
         units.add(unitHero);
     }
 
@@ -205,7 +211,6 @@ public class Tactician {
 
     /**
      * Set the item equipped to other item
-     *
      * @param item
      */
     public void setEquipItem(IEquipableItem item) {
@@ -214,7 +219,6 @@ public class Tactician {
 
     /**
      * The current unit generate a attack to a target unit
-     *
      * @param enemy
      */
     public void generateAttack(IUnit enemy){
@@ -254,8 +258,32 @@ public class Tactician {
         changesSpecialUnit.addPropertyChangeListener(plc);
     }
 
+    /**
+     * Add a listener in the change in the tactician's status
+     * @param plc
+     */
     public void addObserverStatus(PropertyChangeListener plc){
         changesStatusTactician.addPropertyChangeListener(plc);
     }
 
+    /**
+     * Add a listener in the change in the current unit's position
+     * @param plc
+     */
+    public void addObserverUnitMoved(PropertyChangeListener plc) { changeMovementUnit.addPropertyChangeListener(plc); }
+
+    /**
+     * Add a unit to the list of units moved for the player
+     * @param unitMoved only can to move it one time
+     */
+    public void addUnitMoved(IUnit unitMoved){
+        changeMovementUnit.firePropertyChange(
+                new PropertyChangeEvent(
+                        this,
+                        "unit-moved",
+                        null,
+                        unitMoved
+                )
+        );
+    }
 }

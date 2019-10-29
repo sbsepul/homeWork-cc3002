@@ -81,13 +81,16 @@ public class Sword extends AbstractAttack implements IAttack {
   }
 
   @Override
-  public void receiveSoulAttack(Soul attackSoul) { receiveMagicAttack(attackSoul); }
+  public void receiveSoulAttack(Soul attackSoul)
+  { receiveMagicAttack(attackSoul); }
 
   @Override
-  public void receiveLightAttack(Light attackLight) { receiveMagicAttack(attackLight); }
+  public void receiveLightAttack(Light attackLight)
+  { receiveMagicAttack(attackLight); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { receiveMagicAttack(attackDarkness); }
+  public void receiveDarknessAttack(Darkness attackDarkness)
+  { receiveMagicAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {

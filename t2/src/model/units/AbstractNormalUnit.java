@@ -42,7 +42,8 @@ public abstract class AbstractNormalUnit extends AbstractUnit implements NormalU
         super(hitPoints, movement, location, maxItems, items);
     }
 
-    public void addObserver(ResponseNormalUnit plc){
+    @Override
+    public void addResponseNormalUnit(ResponseNormalUnit plc){
         changeSupport.addPropertyChangeListener(plc);
     }
 }

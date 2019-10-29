@@ -24,6 +24,7 @@
 
 package model.units;
 
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import model.items.*;
@@ -164,6 +165,12 @@ public interface IUnit {
    */
   void moveTo(Location targetLocation);
 
+  /**
+   * Add a Listener that review a change in
+   * @param plc
+   */
+  void addObserverMovement(PropertyChangeListener plc);
+
   /* END LOCATION SECTION */
 
   /* BEGIN HIT POINTS SECTION */
@@ -261,5 +268,6 @@ public interface IUnit {
   boolean canExchange(IUnit unit, IEquipableItem item);
 
 
+  boolean canCounterAttack(int distance);
 }
 

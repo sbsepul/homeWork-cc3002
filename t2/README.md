@@ -11,7 +11,9 @@ Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos d
 
 ## Patterns Design
 
-Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del jeugo en cierto instante, como las acciones realizadas por los tacticians, a traves del patron de Observer Pattern
+Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del juego en cierto instante, como las acciones realizadas por los tacticians, a través del patron de Observer Pattern.
+
+En las siguientes seccione se explicará 
 
 ## Factory Pattern
 
@@ -25,9 +27,9 @@ Para las unidades y los items se estructuró una fabrica desde una interfaz `IFa
 
 ![UML for items](C:\Users\Sebastian\Desktop\Screenshot_4.png)
 
-Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto impide la reutilización de codigo que facilita realizando el abstract class.
+Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto genera duplicación de código, pero que es posible solucionarlo utilizando el patrón de diseño **Template Method** creando un `abstract class`.
 
-Otra clase que fue implementada fue `FactoryProvider<Object>`, que se creo utilizando una `class enum Type<Object>`. La finalidad del Provider es poder entregarle como parámetro el tipo de la clase del objeto que se desea crear para que de esta manera el provider pueda devolver el objeto correspondiente. En este caso `FactoryProvider<Object>` devuelve la fabrica que se encarga de crear el tipo de unidad o item que se desea. 
+Otra clase que fue implementada fue `FactoryProvider<Object>` utilizando una `class enum Type<Object>`. La finalidad del Provider es poder entregarle como parámetro el tipo de la clase del objeto que se desea crear para que de esta manera el provider pueda devolver el objeto correspondiente. En este caso `FactoryProvider<Object>` devuelve la fabrica que se encarga de crear el tipo de unidad o item que se desea. 
 
 
 
@@ -49,11 +51,15 @@ La idea del diseño se basa en que al momento de seleccionarse una cierta unidad
 
 ## Observer Pattern
 
-
-
 Se utiliza para generar la interacción entre el controlador y los cambios generados sobre los jugadores de la partida y sus unidades.
 
+En java 12 la utilización de las clases Observer y Observable están deprecadas y no se recomiendo su uso. Por tanto, el diseño utilizado para la implementación de este patrón fue a través del uso de la interfaz `PropertyChangeListener` haciendo el trabajo de la interfaz Observer (el objeto que observa), y de la clase `PropertyChangeSupport` haciendo el trabajo del Observable (el objeto observado). 
+
+
+
 <insertar  una imagen uml>
+
+
 
 
 
@@ -65,7 +71,13 @@ El Observer Pattern se ocupa principalmente en los cambios del estado de los atr
 * Cuando se llega a una cantidad maxima de partidas deberia existir una notificacion que se deben retornar a los ganadores. 
 * Cuando un jugador ocupa a todas sus unidades se debe enviar un mensaje.
 * Cuando se seleccionan las unidades se debe "pasar"
-* 
+* Al momento de mover a las unidades de cada tactician debe existir un observador del cambio, de esta manera es posible asegurarse que cada tactician mueva a su unidad solamente 1 vez
+
+
+
+
+
+
 
 
 

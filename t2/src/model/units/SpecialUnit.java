@@ -31,5 +31,5 @@ public interface SpecialUnit extends IUnit {
      *
      * @param plc
      */
-    void addObserver(ResponseSpecialUnit plc);
+    void addResponseSpecialUnit(ResponseSpecialUnit plc);
 }

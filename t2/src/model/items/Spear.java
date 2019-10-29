@@ -63,7 +63,9 @@ public class Spear extends AbstractAttack implements IAttack {
   }
 
   @Override
-  public void receiveBowAttack(Bow attackBow) { super.receiveAttackNormal(attackBow); }
+  public void receiveBowAttack(Bow attackBow) {
+    super.receiveAttackNormal(attackBow);
+  }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
@@ -71,19 +73,24 @@ public class Spear extends AbstractAttack implements IAttack {
   }
 
   @Override
-  public void receiveSwordsAttack(Sword attackSword) {  super.receiveSoftAttack(attackSword);  }
+  public void receiveSwordsAttack(Sword attackSword)
+  {  super.receiveSoftAttack(attackSword);  }
 
   @Override
-  public void receiveAxeAttack(Axe attackAxe) {  super.receiveWeakAttack(attackAxe);  }
+  public void receiveAxeAttack(Axe attackAxe)
+  {  super.receiveWeakAttack(attackAxe);  }
 
   @Override
-  public void receiveSoulAttack(Soul attackSoul) { super.receiveMagicAttack(attackSoul); }
+  public void receiveSoulAttack(Soul attackSoul)
+  { super.receiveMagicAttack(attackSoul); }
 
   @Override
-  public void receiveLightAttack(Light attackLight) { super.receiveMagicAttack(attackLight); }
+  public void receiveLightAttack(Light attackLight)
+  { super.receiveMagicAttack(attackLight); }
 
   @Override
-  public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveMagicAttack(attackDarkness); }
+  public void receiveDarknessAttack(Darkness attackDarkness)
+  { super.receiveMagicAttack(attackDarkness); }
 
   @Override
   public boolean equals(Object obj) {

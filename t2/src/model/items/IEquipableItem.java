@@ -54,6 +54,8 @@ public interface IEquipableItem {
    */
   public void setOwner(IUnit unit);
 
+  boolean inRangeItem();
+
   /**
    * @return the unit that has currently equipped this item
    */
@@ -155,5 +157,9 @@ public interface IEquipableItem {
    * @param enemyAttack is the enemy's item
    */
   void giveMagicAttack(IEquipableItem enemyAttack);
+
+  int getDistance();
+
+  void setDistance(int distance);
   /* END COMBAT SECTION */
 }

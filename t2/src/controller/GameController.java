@@ -26,6 +26,7 @@ package controller;
 
 import controller.handler.NormalUnitLoseHandler;
 import controller.handler.SpecialUnitLoseHandler;
+import controller.handler.UnitMovedHandler;
 import model.items.factoryItem.*;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
@@ -61,6 +62,7 @@ public class GameController {
   private IUnit selectedUnit;
   private IEquipableItem selectedItem;
   private IFactoryMap factoryMap;
+  private List<IUnit> unitsMoved = new ArrayList<>();
 
   /**
    * Creates the controller for a new game.
@@ -103,6 +105,7 @@ public class GameController {
       pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
       pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
       pTactician.addObserverStatus(new ResponseStatusTactician(this));
+      pTactician.addObserverUnitMoved(new UnitMovedHandler(this));
       tacticianList.add(pTactician);
     }
     return tacticianList;
@@ -112,7 +115,7 @@ public class GameController {
    * Reset the game to the beginning
    */
   public void resetController(){
-    this.map = createNewMap();
+    // this.map = createNewMap();
     this.players = new ArrayList<>(getInitPlayerStatus());
   }
 
@@ -168,6 +171,13 @@ public class GameController {
   }
 
   /**
+   * @return list of units moved
+   */
+  public List<IUnit> getUnitsMoved() {
+    return unitsMoved;
+  }
+
+  /**
    * @return the number of rounds since the start of the game.
    */
   public int getRoundNumber() {
@@ -193,6 +203,13 @@ public class GameController {
    * @return the number of players in the init Game
    */
   public int getInitNumPlayer(){ return numPlayers; }
+
+  /**
+   * @return the map initial with the units in the map
+   */
+  //public Field getInitMap() {
+  //  return initMap;
+  //}
 
   /**
    * @return a Random order for the tactician in a new Round
@@ -264,10 +281,10 @@ public class GameController {
     if(this.numRounds==0 && getInitNumPlayer()==getTacticians().size()) {
       this.initPlayerStatus.addAll(players);
     }
+    else this.resetController();
     this.maxRounds = maxTurns;
     this.numRounds = 1;
     this.turnCurrent = 0;
-    this.resetController();
   }
 
   /**
@@ -503,7 +520,16 @@ public class GameController {
      * @param y position of the column in the map
      */
   public void moveToSelectedUnit(int x, int y){
+    if(!getUnitsMoved().contains(getSelectedUnit())){
       getSelectedUnit().moveTo(getGameMap().getCell(x,y));
+    }
+  }
+
+  /**
+   * @param unitMoved
+   */
+  public void addUnitMoved(IUnit unitMoved){
+    this.unitsMoved.add(unitMoved);
   }
 
   /**

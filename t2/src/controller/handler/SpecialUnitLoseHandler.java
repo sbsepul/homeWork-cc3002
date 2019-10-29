@@ -33,8 +33,8 @@ import java.beans.PropertyChangeListener;
 public class SpecialUnitLoseHandler implements PropertyChangeListener {
     private GameController controller;
 
-    public SpecialUnitLoseHandler(GameController game){
-        this.controller = game;
+    public SpecialUnitLoseHandler(GameController gameController){
+        this.controller = gameController;
     }
 
     /**

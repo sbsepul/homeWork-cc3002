@@ -22,14 +22,31 @@
  * THE SOFTWARE.
  */
 
-package model.units;
+package controller.handler;
 
-import model.units.handlers.ResponseNormalUnit;
+import controller.GameController;
+import controller.Tactician;
+import model.units.IUnit;
 
-public interface NormalUnit extends IUnit {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class UnitMovedHandler implements PropertyChangeListener {
+    GameController controller;
+
+    public UnitMovedHandler(GameController gameController){
+        this.controller = gameController;
+    }
+
     /**
+     * This method gets called when a bound property is changed.
      *
-     * @param plc
+     * @param evt A PropertyChangeEvent object describing the event source
+     *            and the property that has changed.
      */
-    void addResponseNormalUnit(ResponseNormalUnit plc);
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        IUnit unitMoved = (IUnit) evt.getNewValue();
+        controller.addUnitMoved(unitMoved);
+    }
 }

@@ -22,14 +22,30 @@
  * THE SOFTWARE.
  */
 
-package model.units;
+package model.units.handlers;
 
-import model.units.handlers.ResponseNormalUnit;
+import controller.Tactician;
+import model.units.IUnit;
 
-public interface NormalUnit extends IUnit {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ResponseUnitMovement implements PropertyChangeListener {
+    private Tactician player;
+
+    public ResponseUnitMovement(Tactician tactician){
+        this.player = tactician;
+    }
+
     /**
+     * This method gets called when a bound property is changed.
      *
-     * @param plc
+     * @param evt A PropertyChangeEvent object describing the event source
+     *            and the property that has changed.
      */
-    void addResponseNormalUnit(ResponseNormalUnit plc);
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        IUnit unitMoved = (IUnit) evt.getSource();
+        player.addUnitMoved(unitMoved);
+    }
 }

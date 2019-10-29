@@ -68,7 +68,7 @@ public class Archer extends AbstractNormalUnit {
   @Override
   public void attack(IUnit enemy){
     if(this.initCombat(enemy)){
-      if(enemy.getEquippedItem()!=null){
+      if(enemy.canCounterAttack(this.equippedItem.getDistance())){
         enemy.getEquippedItem().receiveBowAttack((Bow) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());
