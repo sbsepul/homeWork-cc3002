@@ -86,6 +86,7 @@ public abstract class AbstractUnit implements IUnit{
     this.movement = movement;
     this.maxItems = maxItems;
     this.location = location;
+    if(location!=null) location.setUnit(this);
     this.items.addAll(Arrays.asList(items).subList(0, min(maxItems, items.length)));
   }
 
@@ -243,6 +244,7 @@ public abstract class AbstractUnit implements IUnit{
   }
   @Override
   public void setLocation(final Location location) {
+    if(location!=null) location.setUnit(this);
     this.location = location;
   }
 

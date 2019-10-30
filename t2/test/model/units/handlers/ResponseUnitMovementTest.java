@@ -24,46 +24,26 @@
 
 package model.units.handlers;
 
-import controller.Tactician;
-import model.units.SpecialUnit;
+import org.junit.jupiter.api.Test;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Listener of the special unit's status in the player's inventory
- *
- * @author Sebastian Sepulveda
- * @version 1.0
- * @since 2.0
- *
- */
-public class ResponseSpecialUnit implements IResponseToTactician {
-    private Tactician player;
+class ResponseUnitMovementTest extends AbstractResponse{
+    private ResponseUnitMovement responseUnitMovement;
 
-    /**
-     * @param tactician the special unit in the game.
-     *             This listener observe to a special unit
-     *             If this unit dies, the player loses
-     */
-    public ResponseSpecialUnit(Tactician tactician) {
-        this.player = tactician;
-    }
-
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        //System.out.println("HP change of: " +  evt.getOldValue() + " to: " + evt.getNewValue());
-        if((double) evt.getNewValue() <= 0) player.removeSpecialUnit((SpecialUnit) evt.getSource());
+    public void setResponse() {
+        responseUnitMovement = new ResponseUnitMovement(tacticianTest);
     }
 
     @Override
-    public Tactician getResponse() {
-        return player;
+    public IResponseToTactician getListener() {
+        return responseUnitMovement;
     }
+
+    @Test
+    public void moveUnitTest(){
+        getTacticianTest().setCurrentUnit(getNormalUnitTest());
+    }
+
 }

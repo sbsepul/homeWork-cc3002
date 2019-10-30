@@ -26,19 +26,19 @@ package model.units.handlers;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class ResponseNormalUnitTest extends AbstractResponse{
-    private ResponseNormalUnit responseNormalUnit;
+class ResponseSpecialUnitTest extends AbstractResponse {
+    ResponseSpecialUnit responseSpecialUnit;
 
     @Override
     public void setResponse() {
-        responseNormalUnit = new ResponseNormalUnit(tacticianTest);
+        responseSpecialUnit = new ResponseSpecialUnit(tacticianTest);
     }
 
     @Override
     public IResponseToTactician getListener() {
-        return responseNormalUnit;
+        return responseSpecialUnit;
     }
 
     @Test
@@ -46,31 +46,30 @@ class ResponseNormalUnitTest extends AbstractResponse{
         assertEquals(2, getTacticianTest().getUnits().size());
         assertEquals(2, getTacticianTarget().getUnits().size());
 
-        getTacticianTest().setCurrentUnit(getTacticianTest().getUnits().get(0));
-        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
+        getTacticianTest().setCurrentUnit(getTacticianTest().getUnits().get(1));
+        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(1));
         assertEquals(40, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
-        assertEquals(40, getTacticianTarget().getUnits().get(0).getCurrentHitPoints());
+        assertEquals(40, getTacticianTarget().getUnits().get(1).getCurrentHitPoints());
 
         assertEquals(2, getTacticianTest().getUnits().size());
         //30
-        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
+        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(1));
         assertEquals(30, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
-        assertEquals(30, getTacticianTarget().getUnits().get(0).getCurrentHitPoints());
+        assertEquals(30, getTacticianTarget().getUnits().get(1).getCurrentHitPoints());
         //20
-        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
+        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(1));
         assertEquals(20, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
-        assertEquals(20, getTacticianTarget().getUnits().get(0).getCurrentHitPoints());
+        assertEquals(20, getTacticianTarget().getUnits().get(1).getCurrentHitPoints());
         //10
-        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
+        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(1));
         assertEquals(10, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
-        assertEquals(10, getTacticianTarget().getUnits().get(0).getCurrentHitPoints());
+        assertEquals(10, getTacticianTarget().getUnits().get(1).getCurrentHitPoints());
 
         //0
-        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
+        getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(1));
         assertEquals(10, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
         assertEquals(2, getTacticianTest().getUnits().size());
         assertEquals(1, getTacticianTarget().getUnits().size());
-        assertEquals(true, getTacticianTarget().getStatus());
+        assertEquals(false, getTacticianTarget().getStatus());
     }
-
 }

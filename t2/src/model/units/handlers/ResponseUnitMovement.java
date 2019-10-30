@@ -30,7 +30,7 @@ import model.units.IUnit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ResponseUnitMovement implements PropertyChangeListener {
+public class ResponseUnitMovement implements IResponseToTactician {
     private Tactician player;
 
     public ResponseUnitMovement(Tactician tactician){
@@ -47,5 +47,10 @@ public class ResponseUnitMovement implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         IUnit unitMoved = (IUnit) evt.getSource();
         player.addUnitMoved(unitMoved);
+    }
+
+    @Override
+    public Tactician getResponse() {
+        return player;
     }
 }

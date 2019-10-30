@@ -114,14 +114,16 @@ public class Tactician {
      */
     public void removeSpecialUnit(SpecialUnit specialUnit) {
         if(units.contains(specialUnit)) {
-            int initSize = getUnits().size();
-            specialUnit.getLocation().setUnit(null);
+            for(IUnit u: units){
+                u.getLocation().setUnit(null);
+            }
             units.remove(specialUnit);
+            status = false;
             changesSpecialUnit.firePropertyChange(
                     new PropertyChangeEvent(
                             this,
                             "Special Unit deleted",
-                            initSize,
+                            null,
                             getUnits()
                     )
             );
@@ -194,11 +196,12 @@ public class Tactician {
      * Retire a tactician of the game
      */
     public void retire(){
+        this.status = false;
         changesStatusTactician.firePropertyChange(
                 new PropertyChangeEvent(
                         this,
                         "change-status",
-                        this.getStatus(),
+                        true,
                         false
                 )
         );

@@ -473,7 +473,6 @@ public class GameController {
   public void putUnitInMap(IUnit unit, int x, int y){
     if(getGameMap().getCell(x,y).getUnit()==null){
       unit.setLocation(getGameMap().getCell(x,y));
-      this.getGameMap().getCell(x,y).setUnit(unit);
     }
   }
 

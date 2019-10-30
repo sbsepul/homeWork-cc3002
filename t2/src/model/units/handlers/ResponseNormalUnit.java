@@ -41,7 +41,7 @@ import java.beans.PropertyChangeSupport;
  * @since 2.0
  *
  */
-public class ResponseNormalUnit implements PropertyChangeListener {
+public class ResponseNormalUnit implements IResponseToTactician {
     private Tactician player;
 
     /**
@@ -61,8 +61,12 @@ public class ResponseNormalUnit implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("HP change of: " +  evt.getOldValue() + " to: " + evt.getNewValue());
-        if((double) evt.getNewValue() <= 0) player.removeUnit((NormalUnit) evt.getNewValue());
+        //System.out.println("HP change of: " +  evt.getOldValue() + " to: " + evt.getNewValue());
+        if((double) evt.getNewValue() <= 0) player.removeUnit((NormalUnit) evt.getSource());
     }
 
+    @Override
+    public Tactician getResponse() {
+        return player;
+    }
 }
