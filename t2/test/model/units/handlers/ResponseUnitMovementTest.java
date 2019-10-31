@@ -41,9 +41,21 @@ class ResponseUnitMovementTest extends AbstractResponse{
         return responseUnitMovement;
     }
 
+    /**
+     * # - - - #
+     * # TaN TaE - #
+     * # TN TE - #
+     */
+
     @Test
     public void moveUnitTest(){
+
         getTacticianTest().setCurrentUnit(getNormalUnitTest());
+        getNormalUnitTest().moveTo(getField().getCell(0,2));
+
+        assertEquals(1, getTacticianTest().getMoves().size());
+
+        getTacticianTarget().setCurrentUnit(getNormalUnitTarget());
     }
 
 }

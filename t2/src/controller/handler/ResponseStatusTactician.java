@@ -22,37 +22,29 @@
  * THE SOFTWARE.
  */
 
-package model.units.factoryUnit;
+package controller.handler;
 
-import model.items.IEquipableItem;
-import model.items.factoryItem.IFactoryItem;
-import model.items.factoryItem.SpearFactoryItem;
-import model.map.InvalidLocation;
-import model.units.Hero;
+import controller.GameController;
+import controller.Tactician;
 
-public class HeroFactTest extends AbstractFactoryUnitTest {
-    private IFactoryUnit factory;
-    private IFactoryItem fabSpear = new SpearFactoryItem();
-    private IEquipableItem spear;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-    @Override
-    public void setEquippedItem() {
-        spear = fabSpear.createItem();
+public class ResponseStatusTactician implements PropertyChangeListener {
+    private GameController controller;
+
+    public ResponseStatusTactician(GameController game){
+        this.controller = game;
     }
-
+    /**
+     * This method gets called when a bound property is changed.
+     *
+     * @param evt A PropertyChangeEvent object describing the event source
+     *            and the property that has changed.
+     */
     @Override
-    public IEquipableItem getArmyDefault() {
-        return spear;
-    }
-
-    @Override
-    protected void setFactory() {
-        unitCreated = new Hero(50,2,new InvalidLocation());
-        factory = new HeroFactory();
-    }
-
-    @Override
-    protected IFactoryUnit getFactory() {
-        return factory;
+    public void propertyChange(PropertyChangeEvent evt) {
+        Tactician player = (Tactician) evt.getSource();
+        controller.removeTactician(player.getName());
     }
 }

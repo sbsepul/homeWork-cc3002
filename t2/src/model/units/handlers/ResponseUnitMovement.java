@@ -28,7 +28,6 @@ import controller.Tactician;
 import model.units.IUnit;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class ResponseUnitMovement implements IResponseToTactician {
     private Tactician player;

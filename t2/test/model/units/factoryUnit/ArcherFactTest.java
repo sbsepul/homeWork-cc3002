@@ -26,6 +26,7 @@ package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
 import model.items.factoryItem.AxeFactoryItem;
+import model.items.factoryItem.BowFactoryItem;
 import model.items.factoryItem.IFactoryItem;
 import model.map.InvalidLocation;
 import model.map.Location;
@@ -34,6 +35,18 @@ import model.units.IUnit;
 
 public class ArcherFactTest extends AbstractFactoryUnitTest {
     private IFactoryUnit factory;
+    private IFactoryItem fabBow = new BowFactoryItem();
+    private IEquipableItem bow;
+
+    @Override
+    public void setEquippedItem() {
+        bow = fabBow.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return bow;
+    }
 
     @Override
     protected void setFactory() {

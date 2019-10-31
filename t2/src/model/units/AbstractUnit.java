@@ -165,7 +165,7 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void receiveAttackWeakness(IEquipableItem attack){
-    this.currentHitPoints -= (int) (attack.getPower() *1.5);
+    this.currentHitPoints -= attack.getPower() *1.5;
   }
 
   @Override
@@ -209,18 +209,11 @@ public abstract class AbstractUnit implements IUnit{
   public IEquipableItem getEquippedItem() { return equippedItem; }
 
   @Override
-  public int setEquippedItem(IEquipableItem item) {
-    if(item==null){
+  public void setEquippedItem(IEquipableItem item) {
+    if(item==null) {
       this.equippedItem = null;
-      return 0;
     }
-    this.equipItem(item);
-    if(this.getEquippedItem()!=null){
-      if(this.getEquippedItem().equals(item)){
-        return 0;
-      }
-    }
-    return -1;
+    else this.equipItem(item);
   }
 
   @Override
@@ -244,7 +237,7 @@ public abstract class AbstractUnit implements IUnit{
   }
   @Override
   public void setLocation(final Location location) {
-    if(location!=null) location.setUnit(this);
+    if(location.getUnit()==null) location.setUnit(this);
     this.location = location;
   }
 
@@ -260,7 +253,7 @@ public abstract class AbstractUnit implements IUnit{
         && targetLocation.getUnit() == null) {
       getLocation().setUnit(null);
       setLocation(targetLocation);
-      targetLocation.setUnit(this);
+      //targetLocation.setUnit(this);
       changeMovedSupport.firePropertyChange(
               new PropertyChangeEvent(this, "unit-moved", oldLocation, targetLocation)
       );

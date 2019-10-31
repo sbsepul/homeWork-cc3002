@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public abstract class AbstractFactoryUnitTest {
+public abstract class AbstractFactoryUnitTest implements ITestFactoryUnit {
     protected int expectedHP;
     protected int expectedMovement;
     protected Location expectedLocation;
@@ -46,16 +46,36 @@ public abstract class AbstractFactoryUnitTest {
     protected IFactoryItem factoryItem2 = new SwordFactoryItem();
     protected IFactoryItem factoryItem3 = new BowFactoryItem();
     protected IFactoryItem factoryItem4 = new StaffFactoryItem();
+    protected IEquipableItem armyDefault;
 
     @BeforeEach
     public void setUp() {
         setFactory();
+        setEquippedItem();
         expectedHP = 50;
         expectedLocation = new InvalidLocation();
         expectedMovement = 2;
         expectedInventory = new IEquipableItem[]{factoryItem1.createItem()
                 ,factoryItem2.createItem(),factoryItem3.createItem()};
         expectedItem = factoryItem4.createItem();
+    }
+
+    @Override
+    public void setEquippedItem() {
+        armyDefault = factoryItem3.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return armyDefault;
+    }
+
+    @Test
+    public void addEquippedItemTest(){
+        getFactory().addItemForDefault();
+        IUnit unitCreated = getFactory().createUnit();
+        assertEquals(1, unitCreated.getItems().size());
+        assertEquals(getArmyDefault().getClass(), unitCreated.getItems().get(0).getClass());
     }
 
     public IEquipableItem getExpectedItem() {

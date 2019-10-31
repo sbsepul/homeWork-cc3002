@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -477,7 +478,7 @@ class GameControllerTest {
     assertEquals(0, controller.getTurnCurrent());
     assertEquals(0, controller.getRoundNumber());
     controller.initGame(3);
-    System.out.println(controller.getGameMap().toString());
+    //System.out.println(controller.getGameMap().toString());
     assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
     controller.selectUnitIn(1,5);
     assertNull(controller.getCurrentUnit());
@@ -509,7 +510,7 @@ class GameControllerTest {
     controller.moveToSelectedUnit(0,3);
     Location locNew2 = controller.getGameMap().getCell(1,0);
     assertNull(locNew2.getUnit());
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
 
     controller.endTurn();
 
@@ -557,15 +558,20 @@ class GameControllerTest {
     controller.selectUnitIn(5,4);
     controller.equipItem(0);
     controller.moveToSelectedUnit(4,5);
-    controller.useItemOn(3,5);
-    System.out.println(controller.getGameMap().toString());
-    //assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
-
-
-    //select sorcerer
-    controller.selectUnitIn(4,6);
+    assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(4,5));
+    assertEquals(controller.getGameMap().getCell(4,5).getUnit(), controller.getSelectedUnit());
+    // sm attack to hero
     controller.useItemOn(3,6);
-    //assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+    controller.selectUnitIn(3,6);
+    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(35, controller.getCurrentUnit().getCurrentHitPoints());
+
+    // select sorcerer
+    controller.selectUnitIn(4,6);
+    // sorcerer attack to hero
+    controller.useItemOn(3,6);
+    assertEquals(35, controller.getGameMap().getCell(3,6).getUnit().getCurrentHitPoints());
+    assertEquals(35, controller.getSelectedUnit().getCurrentHitPoints());
 
     //select fighter
     controller.selectUnitIn(5,3);
@@ -576,9 +582,8 @@ class GameControllerTest {
     System.out.println(controller.getGameMap().toString());
     assertEquals(2, controller.getRoundNumber());
     assertEquals(0, controller.getTurnCurrent());
-
-
-
+    assertFalse(controller.getTurnOwner().getName().equals("Player 0"));
+    System.out.println(controller.getNamePlayers().toString());
   }
 
   @Test
@@ -667,8 +672,11 @@ class GameControllerTest {
 
     controller.changeToNextTurn();
 
+    fabMap.get("hero").addItemForDefault();
     controller.addHeroToTactician((SpecialUnit) fabMap.get("hero").createUnit());
+    fabMap.get("hero").addItemForDefault();
     controller.addHeroToTactician((SpecialUnit) fabMap.get("hero").createUnit());
+    fabMap.get("fighter").addItemForDefault();
     controller.addUnitToTactician((NormalUnit) fabMap.get("fighter").createUnit());
     controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 6,0);
     controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 5,0);
@@ -676,8 +684,10 @@ class GameControllerTest {
 
     controller.changeToNextTurn();
 
+    fabMap.get("sorcerer").addItemForDefault();
     controller.addUnitToTactician((NormalUnit) fabMap.get("sorcerer").createUnit());
     controller.addUnitToTactician((NormalUnit) fabMap.get("sm").createUnit());
+    fabMap.get("fighter").addItemForDefault();
     controller.addUnitToTactician((NormalUnit) fabMap.get("fighter").createUnit());
     controller.putUnitInMap(controller.getTurnOwner().getUnits().get(0), 5,5);
     controller.putUnitInMap(controller.getTurnOwner().getUnits().get(1), 5,4);

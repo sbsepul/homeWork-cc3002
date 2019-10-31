@@ -22,26 +22,14 @@
  * THE SOFTWARE.
  */
 
-package controller;
+package model.units.factoryUnit;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import model.items.IEquipableItem;
 
-public class ResponseStatusTactician implements PropertyChangeListener {
-    private GameController controller;
+public interface ITestFactoryUnit {
 
-    public ResponseStatusTactician(GameController game){
-        this.controller = game;
-    }
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        Tactician player = (Tactician) evt.getSource();
-        controller.removeTactician(player.getName());
-    }
+
+    void setEquippedItem();
+
+    IEquipableItem getArmyDefault();
 }

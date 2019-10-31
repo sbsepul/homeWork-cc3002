@@ -24,11 +24,28 @@
 
 package model.units.factoryUnit;
 
+import model.items.IEquipableItem;
+import model.items.factoryItem.DarknessFactoryItem;
+import model.items.factoryItem.IFactoryItem;
+import model.items.factoryItem.LightFactoryItem;
+import model.items.magic.Light;
 import model.map.InvalidLocation;
 import model.units.Sorcerer;
 
 public class SorcererFactTest extends AbstractFactoryUnitTest {
     private IFactoryUnit factory;
+    private IFactoryItem fabDarkness = new DarknessFactoryItem();
+    private IEquipableItem darkness;
+
+    @Override
+    public void setEquippedItem() {
+        darkness = fabDarkness.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return darkness;
+    }
 
     @Override
     protected void setFactory() {

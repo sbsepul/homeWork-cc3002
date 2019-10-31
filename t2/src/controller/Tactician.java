@@ -62,6 +62,7 @@ public class Tactician {
             changesSpecialUnit = new PropertyChangeSupport(this),
             changesStatusTactician = new PropertyChangeSupport(this),
             changeMovementUnit = new PropertyChangeSupport(this);
+    private List<IUnit> moves = new ArrayList<>();
 
     /**
      * Constructor to specify an alternative source of moves
@@ -86,6 +87,13 @@ public class Tactician {
      */
     public List<IUnit> getUnits(){
         return units;
+    }
+
+    /**
+     * @return list of units moved
+     */
+    public List<IUnit> getMoves() {
+        return moves;
     }
 
     /**
@@ -280,6 +288,7 @@ public class Tactician {
      * @param unitMoved only can to move it one time
      */
     public void addUnitMoved(IUnit unitMoved){
+        moves.add(unitMoved);
         changeMovementUnit.firePropertyChange(
                 new PropertyChangeEvent(
                         this,

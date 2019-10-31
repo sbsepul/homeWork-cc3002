@@ -25,6 +25,7 @@
 package controller;
 
 import controller.handler.NormalUnitLoseHandler;
+import controller.handler.ResponseStatusTactician;
 import controller.handler.SpecialUnitLoseHandler;
 import controller.handler.UnitMovedHandler;
 import model.items.factoryItem.*;
@@ -403,7 +404,7 @@ public class GameController {
     IUnit enemy = getGameMap().getCell(x,y).getUnit();
     if(enemy!=null && getSelectedUnit()!=null) {
       if(getSelectedUnit().equals(getCurrentUnit())){
-        getTurnOwner().generateAttack(getGameMap().getCell(x,y).getUnit());
+        getTurnOwner().generateAttack(enemy);
       }
       else getSelectedUnit().attack(getGameMap().getCell(x,y).getUnit());
     }

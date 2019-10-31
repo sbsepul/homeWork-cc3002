@@ -24,12 +24,26 @@
 
 package model.units.factoryUnit;
 
+import model.items.IEquipableItem;
+import model.items.factoryItem.BowFactoryItem;
+import model.items.factoryItem.IFactoryItem;
 import model.map.InvalidLocation;
 import model.units.Alpaca;
 import model.units.IUnit;
 
 public class AlpacaFactTest extends AbstractFactoryUnitTest {
     IFactoryUnit factory;
+    IFactoryItem fabBow = new BowFactoryItem();
+
+    @Override
+    public void setEquippedItem() {
+        super.setEquippedItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return super.getArmyDefault();
+    }
 
     @Override
     protected void setFactory() {

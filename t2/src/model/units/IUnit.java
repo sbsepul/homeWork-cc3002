@@ -239,7 +239,7 @@ public interface IUnit {
    * @param item new that will be equipped
    * @return
    */
-  int setEquippedItem(IEquipableItem item);
+  void setEquippedItem(IEquipableItem item);
 
   /**
    * change the item equipped in the unit if this have,

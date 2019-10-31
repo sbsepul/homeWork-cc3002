@@ -32,6 +32,8 @@ import model.units.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FactoryProviderUnitTest {
@@ -91,5 +93,11 @@ public class FactoryProviderUnitTest {
             thrown = true;
         }
         assertTrue(thrown);
+    }
+
+    @Test
+    public void createUnitPackTest(){
+        List<IFactoryUnit> pack = factory.createUnitPack();
+        assertEquals(6, pack.size());
     }
 }

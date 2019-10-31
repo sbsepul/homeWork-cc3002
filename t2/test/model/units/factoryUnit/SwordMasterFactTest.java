@@ -25,11 +25,25 @@
 package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
+import model.items.factoryItem.IFactoryItem;
+import model.items.factoryItem.SwordFactoryItem;
 import model.map.InvalidLocation;
 import model.units.SwordMaster;
 
 public class SwordMasterFactTest extends AbstractFactoryUnitTest {
     private IFactoryUnit factory;
+    private IFactoryItem fabSword = new SwordFactoryItem();
+    private IEquipableItem sword;
+
+    @Override
+    public void setEquippedItem() {
+        sword = fabSword.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return sword;
+    }
 
     @Override
     protected void setFactory() {

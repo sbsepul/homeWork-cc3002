@@ -24,11 +24,27 @@
 
 package model.units.factoryUnit;
 
+import model.items.IEquipableItem;
+import model.items.factoryItem.IFactoryItem;
+import model.items.factoryItem.StaffFactTest;
+import model.items.factoryItem.StaffFactoryItem;
 import model.map.InvalidLocation;
 import model.units.Cleric;
 
 public class ClericFactTest extends AbstractFactoryUnitTest {
     private IFactoryUnit factory;
+    private IFactoryItem fabStaff = new StaffFactoryItem();
+    private IEquipableItem staff;
+
+    @Override
+    public void setEquippedItem() {
+        staff = fabStaff.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return staff;
+    }
 
     @Override
     protected void setFactory() {

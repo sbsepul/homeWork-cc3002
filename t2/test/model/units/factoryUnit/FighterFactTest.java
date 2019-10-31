@@ -24,11 +24,26 @@
 
 package model.units.factoryUnit;
 
+import model.items.IEquipableItem;
+import model.items.factoryItem.AxeFactoryItem;
+import model.items.factoryItem.IFactoryItem;
 import model.map.InvalidLocation;
 import model.units.Fighter;
 
 public class FighterFactTest extends AbstractFactoryUnitTest {
     private IFactoryUnit factory;
+    private IFactoryItem fabAxe = new AxeFactoryItem();
+    private IEquipableItem axe;
+
+    @Override
+    public void setEquippedItem() {
+        axe = fabAxe.createItem();
+    }
+
+    @Override
+    public IEquipableItem getArmyDefault() {
+        return axe;
+    }
 
     @Override
     protected void setFactory() {

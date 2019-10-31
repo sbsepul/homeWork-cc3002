@@ -219,6 +219,7 @@ public abstract class AbstractTestItem {
     assertFalse(getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));
     assertFalse(getTestItem().canAttack(getTestSecondEnemyWrong().getEquippedItem()));
     assertEquals(2, getTestItem().getOwner().getLocation().distanceTo(getTestEnemy().getLocation()));
+    getTestItem().setDistance((int) getTestUnit().getLocation().distanceTo(getTestEnemy().getLocation()));
     assertTrue(getTestItem().canAttack(getTestEnemy().getEquippedItem()));
   }
   /**
