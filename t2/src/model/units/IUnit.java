@@ -27,6 +27,7 @@ package model.units;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import controller.Tactician;
 import model.items.*;
 import model.items.Axe;
 import model.items.Bow;
@@ -268,6 +269,16 @@ public interface IUnit {
   boolean canExchange(IUnit unit, IEquipableItem item);
 
 
+  /**
+   *
+   * @param distance
+   * @return
+   */
   boolean canCounterAttack(int distance);
+
+  Tactician getTactician();
+
+  void setTactician(Tactician tactician);
+
 }
 

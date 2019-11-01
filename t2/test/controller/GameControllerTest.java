@@ -478,7 +478,7 @@ class GameControllerTest {
     assertEquals(0, controller.getTurnCurrent());
     assertEquals(0, controller.getRoundNumber());
     controller.initGame(3);
-    //System.out.println(controller.getGameMap().toString());
+    System.out.println(controller.getGameMap().toString());
     assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
     controller.selectUnitIn(1,5);
     assertNull(controller.getCurrentUnit());
@@ -488,7 +488,7 @@ class GameControllerTest {
     controller.selectUnitIn(0,0);
     controller.equipItem(0);
     assertEquals(controller.getSelectedUnit(), controller.getCurrentUnit());
-    controller.moveToSelectedUnit(2,0);
+    controller.moveToSelectedUnit(1,1);
     assertNull(controller.getGameMap().getCell(0,0).getUnit());
 
     // test move current unit second time
@@ -499,7 +499,7 @@ class GameControllerTest {
     // test move second unit of tactician
     // select alpaca
     controller.selectUnitIn(1,0);
-    controller.moveToSelectedUnit(1,1);
+    controller.moveToSelectedUnit(2,0);
     Location locNew1 = controller.getGameMap().getCell(1,0);
     assertNull(locNew1.getUnit());
 
@@ -583,7 +583,13 @@ class GameControllerTest {
     assertEquals(2, controller.getRoundNumber());
     assertEquals(0, controller.getTurnCurrent());
     assertFalse(controller.getTurnOwner().getName().equals("Player 0"));
+    // player 1, player 2, player 0, player 3
+
+    assertEquals("Player 1" , controller.getTurnOwner().getName());
+    controller.selectUnitIn(3,5);
     System.out.println(controller.getNamePlayers().toString());
+
+
   }
 
   @Test

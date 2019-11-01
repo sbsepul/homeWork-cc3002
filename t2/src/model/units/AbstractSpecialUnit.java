@@ -28,7 +28,7 @@ import model.units.handlers.ResponseSpecialUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
 
-public abstract class AbstractSpecialUnit extends AbstractUnit implements SpecialUnit {
+public abstract class AbstractSpecialUnit extends AbstractUnitAttack implements SpecialUnit {
 
     /**
      * Creates a new Unit.

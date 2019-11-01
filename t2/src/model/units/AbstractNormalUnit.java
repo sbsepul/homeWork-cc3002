@@ -28,7 +28,7 @@ import model.units.handlers.ResponseNormalUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
 
-public abstract class AbstractNormalUnit extends AbstractUnit implements NormalUnit {
+public abstract class AbstractNormalUnit extends AbstractUnitAttack implements NormalUnit {
     /**
      * Creates a new Unit.
      *
@@ -46,4 +46,5 @@ public abstract class AbstractNormalUnit extends AbstractUnit implements NormalU
     public void addResponseNormalUnit(ResponseNormalUnit plc){
         changeSupport.addPropertyChangeListener(plc);
     }
+
 }

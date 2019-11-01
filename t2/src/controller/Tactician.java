@@ -283,6 +283,10 @@ public class Tactician {
      */
     public void addObserverUnitMoved(PropertyChangeListener plc) { changeMovementUnit.addPropertyChangeListener(plc); }
 
+    public void removeAllMove() {
+        this.moves.clear();
+    }
+
     /**
      * Add a unit to the list of units moved for the player
      * @param unitMoved only can to move it one time

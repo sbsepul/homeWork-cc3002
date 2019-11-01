@@ -41,6 +41,8 @@ La idea del diseño se basa en que al momento de seleccionarse una cierta unidad
 
 
 
+
+
 ### Test
 
 
@@ -58,6 +60,30 @@ En java 12 la utilización de las clases Observer y Observable están deprecadas
 
 
 <insertar  una imagen uml>
+
+
+
+
+
+El patron se ocupa para saber el estado de las unidades de cada jugador, como tambien para conocer el estado del tactician (HAY QUE VERIFICAR QUE CADA TACTICIAN DEBE TENER UNA )
+
+
+
+
+
+
+
+`moveToSelectedUnit()` Se asume que la unidad del jugador actual puede moverse sobre otras unidades (incluso la del rival) [ES ESTO VALIDO???]
+
+Una unidad puede atacar o intercambiar objetos mas de una vez en esta implementacion, pero deberia poder intercambiarlos solamente 1 vez.
+
+
+
+La responsabilidad de que en una celda no hayan dos unidades es responsabilidad del modelo al momento de asignar una posicion a una unidad, la posicion no  deberia tener una unidad.
+
+
+
+Se asume que las unidades deben conocer al tactician al que pertenecen, los items conocen a la unidad que lo posee, por lo que puede conocer al tactician que lo conoce (un item no deberia estar en otra unidad).
 
 
 
@@ -111,6 +137,12 @@ Si el héroe de un jugador es derrotado en el turno de cualquier otro, entonces 
 
 
 
+
+
+La unidad que recupera el cleric debe ser del mismo equipo??
+
+
+
 ### Test
 
 
@@ -122,6 +154,12 @@ Si el héroe de un jugador es derrotado en el turno de cualquier otro, entonces 
 El controller es una pieza fundamental para manejar el estado del juego en cierto instante y para interactuar con el jugador actual, generando acciones entre sus unidades
 
 
+
+
+
+
+
+El controller debe ser capaz de conocer todo respecto al jugador actual o puede saber todo de los demás jugadores? , respecto a esto mismo, el controller puede mover las unidades de un jugador a pesar que no es el jugador actual que deberia jugar?? En mi implementacion asumi que el controller puede seleccionar la unidad que quiera en el mapa, de esta manera puede intercambiar con quien sea, moverse adonde el controller diga. La cosa es que en caso que la unidad seleccionada esté en el inventario de unidades del tactician, entonces se modifica una 
 
 ## Ganar un Juego
 

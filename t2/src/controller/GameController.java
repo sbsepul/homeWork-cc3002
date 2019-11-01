@@ -253,6 +253,8 @@ public class GameController {
   public void endTurn() {
     if(turnCurrent == getTacticians().size()-1) this.numRounds++;
     this.changeToNextTurn();
+    this.getTacticians().get(getTurnCurrent()).removeAllMove();
+    this.unitsMoved.clear();
   }
 
   /**
@@ -286,6 +288,7 @@ public class GameController {
     this.maxRounds = maxTurns;
     this.numRounds = 1;
     this.turnCurrent = 0;
+    this.unitsMoved.clear();
   }
 
   /**

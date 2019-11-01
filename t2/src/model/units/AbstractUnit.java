@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import controller.Tactician;
 import model.items.*;
 import model.items.magic.Darkness;
 import model.items.magic.Light;
@@ -64,6 +65,7 @@ public abstract class AbstractUnit implements IUnit{
   protected PropertyChangeSupport
           changeSupport= new PropertyChangeSupport(this),
           changeMovedSupport = new PropertyChangeSupport(this);
+  protected Tactician tacticianOwner;
 
   /**
    * Creates a new Unit.
@@ -98,8 +100,6 @@ public abstract class AbstractUnit implements IUnit{
       }
     }
   }
-
-
 
   @Override
   public boolean initCombat(IUnit unitEnemy) {
@@ -226,8 +226,14 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void giveItem(IUnit unit, IEquipableItem item) {
     if(canExchange(unit,item)){
-      this.removeItem(item);
-      unit.addItem(item);
+      if(this.tacticianOwner==null){
+        this.removeItem(item);
+        unit.addItem(item);
+      }
+      else if (this.tacticianOwner.getUnits().contains(unit)){
+        this.removeItem(item);
+        unit.addItem(item);
+      }
     }
   }
 
@@ -254,7 +260,7 @@ public abstract class AbstractUnit implements IUnit{
       getLocation().setUnit(null);
       setLocation(targetLocation);
       //targetLocation.setUnit(this);
-      changeMovedSupport.firePropertyChange(
+      this.changeMovedSupport.firePropertyChange(
               new PropertyChangeEvent(this, "unit-moved", oldLocation, targetLocation)
       );
     }
@@ -262,7 +268,17 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void addObserverMovement(PropertyChangeListener plc) {
-    changeMovedSupport.addPropertyChangeListener(plc);
+    this.changeMovedSupport.addPropertyChangeListener(plc);
+  }
+
+  @Override
+  public Tactician getTactician() {
+    return this.tacticianOwner;
+  }
+
+  @Override
+  public void setTactician(Tactician tactician) {
+    this.tacticianOwner = tactician;
   }
 
   /**
