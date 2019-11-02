@@ -111,7 +111,6 @@ public abstract class AbstractItem implements IEquipableItem {
     this.getOwner().receiveAttackWeakness(attack);
   }
 
-
   @Override
   public void receiveUnitResistantAttack(IEquipableItem attack) {
     this.getOwner().receiveAttackResistant(attack);

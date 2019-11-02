@@ -68,7 +68,7 @@ public class Soul extends AbstractItemMagic implements IAttack {
     }
 
     @Override
-    public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveWeakAttack(attackDarkness); }
+    public void receiveDarknessAttack(Darkness attackDarkness) { super.receiveStrongAttack(attackDarkness); }
 
     @Override
     public void receiveLightAttack(Light attackLight) { super.receiveSoftAttack(attackLight); }

@@ -27,7 +27,14 @@ package model.units.factoryUnit;
 import model.map.Location;
 import model.units.Alpaca;
 
-
+/**
+ * This class represent to a Factory of Alpaca units
+ * A Alpaca factory can equip a bow to the alpaca for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class AlpacaFactory extends AbstractFactoryUnit {
     public AlpacaFactory(){
         super();

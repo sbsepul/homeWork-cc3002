@@ -30,6 +30,14 @@ import model.items.magic.Darkness;
 import model.map.Location;
 import model.units.Sorcerer;
 
+/**
+ * This class represent to a Factory of Sorcerer units
+ * A Sorcerer factory can equip a Darkness to the Sorcerer for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class SorcererFactory extends AbstractFactoryUnit{
     public SorcererFactory(){
         super();

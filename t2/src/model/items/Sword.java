@@ -77,7 +77,7 @@ public class Sword extends AbstractAttack implements IAttack {
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) {
-    receiveWeakAttack(attackSpears);
+    receiveStrongAttack(attackSpears);
   }
 
   @Override

@@ -39,13 +39,12 @@ import java.beans.PropertyChangeSupport;
  * @author Sebastian Sepulveda
  * @version 1.0
  * @since 2.0
- *
  */
 public class ResponseNormalUnit implements IResponseToTactician {
     private Tactician player;
 
     /**
-     * @param tactician is the player in the game.
+     * @param tactician is the player in the game, owner of this normal unit
      *             This listener observe to a normal unit
      *             if a normal unit die, this unit is remove of the game
      */

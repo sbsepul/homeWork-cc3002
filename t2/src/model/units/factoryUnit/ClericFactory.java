@@ -29,6 +29,14 @@ import model.items.factoryItem.StaffFactoryItem;
 import model.map.Location;
 import model.units.Cleric;
 
+/**
+ * This class represent to a Factory of Cleric units
+ * A Cleric factory can equip a staff to the cleric for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class ClericFactory extends AbstractFactoryUnit {
     public ClericFactory(){
         super();

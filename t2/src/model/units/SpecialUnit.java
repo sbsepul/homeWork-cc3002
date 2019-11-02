@@ -26,9 +26,19 @@ package model.units;
 
 import model.units.handlers.ResponseSpecialUnit;
 
+/**
+ * This interface represents all units in the game.
+ * <p>
+ * The signature of all the common methods that a unit can execute are defined here. All units
+ * except some special ones can carry at most 3 weapons.
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public interface SpecialUnit extends IUnit {
     /**
-     *
+     * Add a listener to the change in the special unit's hit points
      * @param plc
      */
     void addResponseSpecialUnit(ResponseSpecialUnit plc);

@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.Bow;
 
+/**
+ * This class represent to a Factory of Bow item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class BowFactoryItem extends AbstractFactoryItem {
     public BowFactoryItem() {
         super("bow",10,2,3);

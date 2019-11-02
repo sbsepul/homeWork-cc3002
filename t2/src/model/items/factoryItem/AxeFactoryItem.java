@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.Axe;
 
+/**
+ * This class represent to a Factory of Axe item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class AxeFactoryItem extends AbstractFactoryItem {
 
     public AxeFactoryItem() {

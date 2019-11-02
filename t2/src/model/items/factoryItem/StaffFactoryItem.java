@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.Staff;
 
+/**
+ * This class represent to a Factory of Staff item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class StaffFactoryItem extends AbstractFactoryItem {
 
     public StaffFactoryItem() {

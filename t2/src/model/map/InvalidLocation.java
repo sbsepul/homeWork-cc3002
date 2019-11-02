@@ -47,8 +47,4 @@ public class InvalidLocation extends Location {
   protected void addTo(final Location location) {
   }
 
-  @Override
-  public boolean isValid() {
-    return false;
-  }
 }

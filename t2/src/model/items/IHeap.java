@@ -24,15 +24,25 @@
 
 package model.items;
 
+/**
+ * This interface represent the <i>attack weapon</i>.
+ * All this items can not attack when a unit equip them
+ * but can heal to other units
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public interface IHeap extends IEquipableItem {
     /**
-     * Receive a attack of a item not magic
-     * @param itemAnything
+     * Receive a attack of a normal item
+     * @param itemAnything of the enemy unit
      */
     public void receiveAttackNormalDamage(IAttack itemAnything);
 
     /**
-     * @param itemMagic
+     * Receive a attack of a magic item
+     * @param itemMagic of the enemy unit
      */
     void receiveAttackMagic(IAttack itemMagic);
 }

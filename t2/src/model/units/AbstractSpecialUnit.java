@@ -28,6 +28,14 @@ import model.units.handlers.ResponseSpecialUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
 
+/**
+ * Abstract class that defines common method for the special units
+ * this units can add a ResponseSpecialUnit like listener
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public abstract class AbstractSpecialUnit extends AbstractUnitCombative implements SpecialUnit {
 
     /**

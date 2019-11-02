@@ -31,9 +31,21 @@ import model.units.IUnit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Handler for the change of the position of the player's current unit.
+ * When a unit is moved the player can not move this unit again
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class UnitMovedHandler implements PropertyChangeListener {
     GameController controller;
 
+    /**
+     * Constructor have reference to the game controller
+     * @param gameController that receive the response
+     */
     public UnitMovedHandler(GameController gameController){
         this.controller = gameController;
     }

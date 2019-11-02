@@ -33,24 +33,31 @@ import model.items.IEquipableItem;
  * @author Sebastian Sepulveda
  * @version 1.0
  * @since 2.0
- *
  */
 public interface IFactoryItem {
+    /**
+     * @return the item created for the factory
+     */
     public IEquipableItem createItem();
 
+    /**
+     * @return the name of the item.
+     *         for default the name is the type of item
+     */
     String getName();
 
+    /**
+     * @return the max range of the item
+     */
     int getMaxRange();
 
+    /**
+     * @return the min range of the item
+     */
     int getMinRange();
 
+    /**
+     * @return the power of damage of the item
+     */
     int getPower();
-
-    void setMaxRange(int maxRange);
-
-    void setMinRange(int minRange);
-
-    void setName(String name);
-
-    void setPower(int power);
 }

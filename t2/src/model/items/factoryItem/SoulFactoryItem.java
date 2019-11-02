@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.magic.Soul;
 
+/**
+ * This class represent to a Factory of Soul item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class SoulFactoryItem extends AbstractFactoryItem {
     public SoulFactoryItem() {
         super("soul");

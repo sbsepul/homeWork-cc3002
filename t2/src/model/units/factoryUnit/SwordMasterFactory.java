@@ -29,6 +29,14 @@ import model.items.factoryItem.SwordFactoryItem;
 import model.map.Location;
 import model.units.SwordMaster;
 
+/**
+ * This class represent to a Factory of SwordMaster units
+ * A SwordMaster factory can equip a Sword to the SwordMaster for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class SwordMasterFactory extends AbstractFactoryUnit {
     public SwordMasterFactory(){
         super();

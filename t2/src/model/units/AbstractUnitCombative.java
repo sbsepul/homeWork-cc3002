@@ -27,6 +27,14 @@ package model.units;
 import model.items.IEquipableItem;
 import model.map.Location;
 
+/**
+ * Abstract class that defines common behavior for the units that can attack
+ * this units can attack to a unit that does not belong to tactician owner
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public abstract class AbstractUnitCombative extends AbstractUnit implements IUnit{
     /**
      * Creates a new Unit.

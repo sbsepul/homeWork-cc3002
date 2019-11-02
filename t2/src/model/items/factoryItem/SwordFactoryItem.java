@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.Sword;
 
+/**
+ * This class represent to a Factory of Sword item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class SwordFactoryItem extends AbstractFactoryItem {
 
     public SwordFactoryItem() {

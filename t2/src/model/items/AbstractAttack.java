@@ -24,6 +24,14 @@
 
 package model.items;
 
+/**
+ * Abstract class that define common information
+ * between the items that can attack
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public abstract class AbstractAttack extends AbstractItem implements IAttack {
     /**
      * Constructor for a default item without any special behaviour.
@@ -45,7 +53,7 @@ public abstract class AbstractAttack extends AbstractItem implements IAttack {
     }
 
     @Override
-    public void receiveWeakAttack(IAttack attackStrong) {
+    public void receiveStrongAttack(IAttack attackStrong) {
         this.receiveUnitWeaknessAttack(attackStrong);
         if(this.canAttack(attackStrong)) {
             attackStrong.receiveUnitResistantAttack(this);

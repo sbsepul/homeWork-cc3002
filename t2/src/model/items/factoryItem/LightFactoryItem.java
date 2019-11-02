@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.magic.Light;
 
+/**
+ * This class represent to a Factory of Light item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class LightFactoryItem extends AbstractFactoryItem {
     public LightFactoryItem() {
         super("light");

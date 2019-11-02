@@ -198,7 +198,4 @@ public class Location {
   public int getColumn() {
     return column;
   }
-
-  public boolean isValid() { return true; }
-
 }

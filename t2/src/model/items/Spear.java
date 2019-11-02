@@ -78,7 +78,7 @@ public class Spear extends AbstractAttack implements IAttack {
 
   @Override
   public void receiveAxeAttack(Axe attackAxe)
-  {  super.receiveWeakAttack(attackAxe);  }
+  {  super.receiveStrongAttack(attackAxe);  }
 
   @Override
   public void receiveSoulAttack(Soul attackSoul)

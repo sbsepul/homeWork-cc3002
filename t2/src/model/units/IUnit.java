@@ -46,6 +46,7 @@ import model.map.Location;
  * except some special ones can carry at most 3 weapons.
  *
  * @author Sebastian Sepulveda
+ * @version 2.0
  * @since 1.0
  */
 public interface IUnit {
@@ -53,7 +54,6 @@ public interface IUnit {
   /* BEGIN ITEM SECTION */
 
   /**
-   *
    * @param item
    * to equip a unit with a item
    */
@@ -68,14 +68,12 @@ public interface IUnit {
   void equipItemDarkness(Darkness item);
 
   /**
-   *
    * @param item
    * to equip a Light to Sorcerer, item magic
    */
   void equipItemLight(Light item);
 
   /**
-   *
    * @param item
    * to equip a Soul to Sorcerer, item magic
    */
@@ -88,7 +86,6 @@ public interface IUnit {
   void equipItemBow(Bow item);
 
   /**
-   *
    * @param item
    * to equip Axe to Fighter
    */
@@ -270,14 +267,21 @@ public interface IUnit {
 
 
   /**
-   *
-   * @param distance
-   * @return
+   * Revise if a unit can counterattack or not
+   * @param distance to the target unit
+   * @return true if the target unit is in the range of the item equipped, false otherwise
    */
   boolean canCounterAttack(int distance);
 
+  /**
+   * @return the tactician owner of the unit
+   */
   Tactician getTactician();
 
+  /**
+   * Setter the tactician owner of the unit
+   * @param tactician new
+   */
   void setTactician(Tactician tactician);
 
 }

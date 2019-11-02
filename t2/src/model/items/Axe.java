@@ -70,7 +70,7 @@ public class Axe extends AbstractAttack implements IAttack{
   public void receiveAxeAttack(Axe attackAxe) { super.receiveAttackNormal(attackAxe); }
 
   @Override
-  public void receiveSwordsAttack(Sword attackSword) { super.receiveWeakAttack(attackSword);  }
+  public void receiveSwordsAttack(Sword attackSword) { super.receiveStrongAttack(attackSword);  }
 
   @Override
   public void receiveSpearsAttack(Spear attackSpears) { super.receiveSoftAttack(attackSpears);  }

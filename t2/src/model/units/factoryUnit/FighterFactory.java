@@ -29,6 +29,14 @@ import model.items.factoryItem.AxeFactoryItem;
 import model.map.Location;
 import model.units.Fighter;
 
+/**
+ * This class represent to a Factory of Fighter units
+ * A Fighter factory can equip a Axe to the Fighter for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class FighterFactory extends AbstractFactoryUnit {
     public FighterFactory(){
         super();

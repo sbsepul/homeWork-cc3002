@@ -30,6 +30,14 @@ import model.items.factoryItem.ItemType;
 import model.map.Location;
 import model.units.Archer;
 
+/**
+ * This class represent to a Factory of Archer units
+ * A Archer factory can equip a bow to the archer for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class ArcherFactory extends AbstractFactoryUnit {
     public ArcherFactory(){
         super();

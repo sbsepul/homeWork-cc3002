@@ -30,9 +30,21 @@ import controller.Tactician;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Handler for the change of the special units of the player.
+ * if the special unit die then the player lose and is removed
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class SpecialUnitLoseHandler implements PropertyChangeListener {
     private GameController controller;
 
+    /**
+     * Constructor have reference to the game controller.
+     * @param gameController that receive the response
+     */
     public SpecialUnitLoseHandler(GameController gameController){
         this.controller = gameController;
     }

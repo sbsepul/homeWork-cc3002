@@ -32,7 +32,7 @@ import model.units.IUnit;
 /**
  * This class represents an <i>Bow</i>.
  * <p>
- * Bow don't have strong and weak
+ * Bow don't have strong and weak <p/>
  * @author Sebastian Sepulveda
  * @since
  */

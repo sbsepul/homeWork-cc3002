@@ -36,13 +36,12 @@ import java.beans.PropertyChangeListener;
  * @author Sebastian Sepulveda
  * @version 1.0
  * @since 2.0
- *
  */
 public class ResponseSpecialUnit implements IResponseToTactician {
     private Tactician player;
 
     /**
-     * @param tactician the special unit in the game.
+     * @param tactician is the player in the game, owner of this special unit.
      *             This listener observe to a special unit
      *             If this unit dies, the player loses
      */

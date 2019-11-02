@@ -26,9 +26,19 @@ package model.units;
 
 import model.units.handlers.ResponseNormalUnit;
 
+/**
+ * This interface represents all the normal units in the game.
+ * <p>
+ * This units don't define the victory in a player,
+ * so have a Normal Handler for
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public interface NormalUnit extends IUnit {
     /**
-     *
+     * Add a listener to the change in the normal unit's hit points
      * @param plc
      */
     void addResponseNormalUnit(ResponseNormalUnit plc);

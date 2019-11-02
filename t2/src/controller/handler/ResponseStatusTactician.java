@@ -30,11 +30,23 @@ import controller.Tactician;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Handler for the change of status of the player.
+ * if the player lose then the status is false and is removed of the game
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class ResponseStatusTactician implements PropertyChangeListener {
     private GameController controller;
 
-    public ResponseStatusTactician(GameController game){
-        this.controller = game;
+    /**
+     * Constructor have the reference of the game controller.
+     * @param gameController that receive the response
+     */
+    public ResponseStatusTactician(GameController gameController){
+        this.controller = gameController;
     }
     /**
      * This method gets called when a bound property is changed.

@@ -49,8 +49,6 @@ import model.units.handlers.ResponseUnitMovement;
  * @since 2.0
  *
  */
-
-
 public class Tactician {
 
     private boolean status;
@@ -66,9 +64,7 @@ public class Tactician {
 
     /**
      * Constructor to specify an alternative source of moves
-     *
      * @param markName name for mark to player
-     *
      */
     public Tactician(final String markName){
         this.mark = markName;
@@ -114,7 +110,6 @@ public class Tactician {
             );
         }
     }
-
 
     /**
      * Remove a special unit die and set the unit in location to null
@@ -285,6 +280,9 @@ public class Tactician {
      */
     public void addObserverUnitMoved(PropertyChangeListener plc) { changeMovementUnit.addPropertyChangeListener(plc); }
 
+    /**
+     * Remove all the units moved for the tactician
+     */
     public void removeAllMove() {
         this.moves.clear();
     }

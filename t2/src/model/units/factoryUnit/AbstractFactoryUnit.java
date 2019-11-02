@@ -35,6 +35,13 @@ import model.map.Location;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract class that defines common behavior for the factory of units
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public abstract class AbstractFactoryUnit implements IFactoryUnit {
     protected final int hp;
     protected final int move;

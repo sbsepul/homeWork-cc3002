@@ -27,7 +27,7 @@ package model.units.factoryUnit;
 import java.util.List;
 
 /**
- * Types of units
+ * This class can create the factory units define in UnitType
  *
  * @author Sebastian Sepulveda
  * @version 2.0

@@ -28,6 +28,14 @@ import model.units.handlers.ResponseNormalUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
 
+/**
+ * Abstract class that defines common method for the normal units
+ * this units can add a ResponseNormalUnit like listener
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public abstract class AbstractNormalUnit extends AbstractUnitCombative implements NormalUnit {
     /**
      * Creates a new Unit.

@@ -24,25 +24,37 @@
 
 package model.items;
 
+/**
+ * This interface represent the <i>attack weapon</i>.
+ * All this items can attack when a unit equip them.
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public interface IAttack extends IEquipableItem{
 
     /**
-     * @param itemNormal
+     * Simulate a attack normal to the owner unit
+     * @param itemNormal of the enemy unit
      */
     public void receiveAttackNormal(IAttack itemNormal);
 
     /**
-     * @param attackStrong
+     * Simulate a attack strong to the owner unit
+     * @param attackStrong of the enemy unit
      */
-    public void receiveWeakAttack(IAttack attackStrong);
+    public void receiveStrongAttack(IAttack attackStrong);
 
     /**
-     * @param attackSoft
+     * Simulate a attack weak to the owner unit
+     * @param attackSoft of the enemy unit
      */
     public void receiveSoftAttack(IAttack attackSoft);
 
     /**
-     * @param attackMagic
+     * Simulate a attack magic to the owner unit
+     * @param attackMagic of the enemy unit
      */
     public void receiveMagicAttack(IAttack attackMagic);
 }

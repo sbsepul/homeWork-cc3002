@@ -29,9 +29,20 @@ import model.units.IUnit;
 
 import java.beans.PropertyChangeEvent;
 
+/**
+ * Handler for the change in the position of the unit
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class ResponseUnitMovement implements IResponseToTactician {
     private Tactician player;
 
+    /**
+     * Constructor have reference to the player in the game
+     * @param tactician that receive the response
+     */
     public ResponseUnitMovement(Tactician tactician){
         this.player = tactician;
     }

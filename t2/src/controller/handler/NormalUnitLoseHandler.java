@@ -30,9 +30,21 @@ import controller.Tactician;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Handler for the change of the units of the player.
+ * if the total of units die then the player lose and is removed
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public class NormalUnitLoseHandler implements PropertyChangeListener {
     private GameController controller;
 
+    /**
+     * Constructor have the reference of the game controller.
+     * @param gameController that receive the response
+     */
     public NormalUnitLoseHandler(GameController gameController){
         this.controller = gameController;
     }

@@ -24,6 +24,13 @@
 
 package model.units.factoryUnit;
 
+/**
+ * Class that define the type of units that can create the Factory Provider
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public enum UnitType {
     ALPACA, ARCHER, CLERIC, FIGHTER, HERO, SORCERER, SWORDMASTER, OTHER;
 }

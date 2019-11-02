@@ -29,7 +29,14 @@ import model.items.factoryItem.SpearFactoryItem;
 import model.map.Location;
 import model.units.Hero;
 
-
+/**
+ * This class represent to a Factory of Hero units
+ * A Hero factory can equip a Spear to the Hero for default
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class HeroFactory extends AbstractFactoryUnit {
     public HeroFactory(){
         super();

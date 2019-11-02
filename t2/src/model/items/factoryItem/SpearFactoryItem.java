@@ -26,6 +26,13 @@ package model.items.factoryItem;
 
 import model.items.Spear;
 
+/**
+ * This class represent to a Factory of Spear item
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public class SpearFactoryItem extends AbstractFactoryItem {
 
     public SpearFactoryItem() {

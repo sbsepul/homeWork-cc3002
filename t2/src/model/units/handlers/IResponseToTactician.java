@@ -28,6 +28,18 @@ import controller.Tactician;
 
 import java.beans.PropertyChangeListener;
 
+/**
+ * Interface that represent all the Listener that a IUnit have
+ * when change a property
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public interface IResponseToTactician extends PropertyChangeListener {
+    /**
+     *
+     * @return
+     */
     public Tactician getResponse();
 }

@@ -24,6 +24,14 @@
 
 package model.items;
 
+/**
+ * Abstract class that define common information
+ * between the items that can heal
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since 2.0
+ */
 public abstract class AbstractHeap extends AbstractItem implements IHeap {
     /**
      * Constructor for a default item without any special behaviour.

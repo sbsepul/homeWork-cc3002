@@ -24,6 +24,9 @@
 
 package model.items.factoryItem;
 
+/**
+ *
+ */
 public abstract class AbstractFactoryItem implements IFactoryItem {
     protected String name;
     protected int power;
@@ -69,21 +72,5 @@ public abstract class AbstractFactoryItem implements IFactoryItem {
     @Override
     public int getPower() {
         return power;
-    }
-    @Override
-    public void setMaxRange(int maxRange) {
-        this.maxRange = maxRange;
-    }
-    @Override
-    public void setMinRange(int minRange) {
-        this.minRange = minRange;
-    }
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-    @Override
-    public void setPower(int power) {
-        this.power = power;
     }
 }

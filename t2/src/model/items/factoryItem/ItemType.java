@@ -24,6 +24,13 @@
 
 package model.items.factoryItem;
 
+/**
+ * Class that define the type of items that can create the Factory Provider
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public enum ItemType {
         AXE, BOW, SPEAR, STAFF, SWORD, DARKNESS, LIGHT, SOUL, OTHER
 }

@@ -28,6 +28,15 @@ import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.handlers.ResponseNormalUnit;
 
+/**
+ * Abstract class that defines common behavior for the units that can heal
+ * but can not attack
+ * this units can heal to a unit that belong to tactician owner
+ *
+ * @author Sebastian Sepulveda
+ * @version 1.0
+ * @since v2.0
+ */
 public abstract class AbstractUnitHealingNormal extends AbstractUnit implements NormalUnit {
     /**
      * Creates a new Unit.

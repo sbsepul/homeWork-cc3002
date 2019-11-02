@@ -72,7 +72,7 @@ public class Darkness extends AbstractItemMagic implements IAttack {
 
     @Override
     public void receiveLightAttack(Light attackLight) {
-        super.receiveWeakAttack(attackLight);
+        super.receiveStrongAttack(attackLight);
     }
 
     @Override

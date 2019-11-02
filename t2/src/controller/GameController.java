@@ -120,17 +120,17 @@ public class GameController {
     this.players = new ArrayList<>(getInitPlayerStatus());
   }
 
-    /**
-     * @return random number for create news rounds
-     */
+  /**
+   * @return random number for create news rounds
+   */
   public Random getRandom() {
     return random;
   }
 
-    /**
-     * Setter the seed of the random number of map
-     * @param seedMap long number
-     */
+  /**
+   * Setter the seed of the random number of map
+   * @param seedMap long number
+   */
   public void setSeedMap(long seedMap) {
     this.seedMap = seedMap;
   }
@@ -204,13 +204,6 @@ public class GameController {
    * @return the number of players in the init Game
    */
   public int getInitNumPlayer(){ return numPlayers; }
-
-  /**
-   * @return the map initial with the units in the map
-   */
-  //public Field getInitMap() {
-  //  return initMap;
-  //}
 
   /**
    * @return a Random order for the tactician in a new Round
@@ -325,6 +318,7 @@ public class GameController {
     }
     return win;
   }
+
   /**
    * @return the winner of this game, if the match ends in a draw returns a list of all the winners
    */
@@ -335,23 +329,23 @@ public class GameController {
     return null;
   }
 
-    /**
-     * @return the current player's unit
-     */
-    public IUnit getCurrentUnit() {
-        return getTurnOwner().getCurrentUnit();
-    }
+  /**
+   * @return the current player's unit
+   */
+  public IUnit getCurrentUnit() {
+      return getTurnOwner().getCurrentUnit();
+  }
 
-    /**
-     * @param currentUnit that it will be selected in the player's inventory
-     */
-    public void setCurrentUnit(IUnit currentUnit) {
-        getTurnOwner().setCurrentUnit(currentUnit);
-    }
+  /**
+   * @param currentUnit that it will be selected in the player's inventory
+   */
+  public void setCurrentUnit(IUnit currentUnit) {
+      getTurnOwner().setCurrentUnit(currentUnit);
+  }
 
-    /**
-    * @return the current player's selected unit
-    */
+  /**
+  * @return the current player's selected unit
+  */
   public IUnit getSelectedUnit() {
     return selectedUnit;
   }
@@ -525,12 +519,12 @@ public class GameController {
   public void addSwordToSelectedUnit(){ getSelectedUnit().addItem(getSwordFab().createItem());}
 
   /**
-     * Move to position (x,y) of the GameMap
-     * to the current unit selected
-     *
-     * @param x position of the rows in the map
-     * @param y position of the column in the map
-     */
+   * Move to position (x,y) of the GameMap
+   * to the current unit selected
+   *
+   * @param x position of the rows in the map
+   * @param y position of the column in the map
+   */
   public void moveToSelectedUnit(int x, int y){
     if(!getUnitsMoved().contains(getSelectedUnit())){
       getSelectedUnit().moveTo(getGameMap().getCell(x,y));
@@ -538,6 +532,7 @@ public class GameController {
   }
 
   /**
+   * A unit moved can not be moved again in the same turn
    * @param unitMoved
    */
   public void addUnitMoved(IUnit unitMoved){
