@@ -421,7 +421,7 @@ class GameControllerTest {
     // put 3 units in positions: (6,0) ; (5,0) ; (5,1)
     putInPosition();
     // test moving a unit to position occupied
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
     controller.selectUnitIn(6,0);
     IUnit unitSelected = controller.getSelectedUnit();
     controller.moveToSelectedUnit(5,1);
@@ -434,14 +434,14 @@ class GameControllerTest {
     controller.moveToSelectedUnit(4,2);
     assertEquals(unitMoved,controller.getGameMap().getCell(4,2).getUnit());
     assertFalse(unitMoved.getLocation().equals(controller.getSelectedUnit()));
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
 
     // test move unit to position valid and there are not duplicate
     controller.selectUnitIn(5,0);
     IUnit unitMovedOverOther =  controller.getSelectedUnit();
     controller.moveToSelectedUnit(6,1);
     assertEquals(unitMovedOverOther, controller.getGameMap().getCell(6,1).getUnit());
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
     assertNull(controller.getGameMap().getCell(5,0).getUnit());
   }
 
@@ -480,7 +480,7 @@ class GameControllerTest {
     controller.initGame(3);
     // PLAYER 0
 
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
     assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
     controller.selectUnitIn(1,5);
     assertNull(controller.getCurrentUnit());
@@ -608,7 +608,7 @@ class GameControllerTest {
     ///////////           ROUND 2               /////////////////
     /////////////////////////////////////////////////////////////
 
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
     assertEquals(2, controller.getRoundNumber());
     assertEquals(0, controller.getTurnCurrent());
     assertFalse(controller.getTurnOwner().getName().equals("Player 0"));
@@ -620,7 +620,8 @@ class GameControllerTest {
     controller.selectUnitIn(3,5);
     assertEquals(1, controller.getGameMap().getCell(3,6).getUnit().getItems().size());
     assertEquals(1, controller.getGameMap().getCell(3,4).getUnit().getItems().size());
-    System.out.println(controller.getNamePlayers().toString());
+
+    // System.out.println(controller.getNamePlayers().toString());
     controller.addSoulToSelectedUnit();
     // cleric with 2 items
     assertEquals(2, controller.getSelectedUnit().getItems().size());
@@ -664,7 +665,7 @@ class GameControllerTest {
     controller.useItemOn(1,1);
     assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
     assertEquals(30, controller.getGameMap().getCell(1,1).getUnit().getCurrentHitPoints());
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
 
     controller.endTurn();
     // PLAYER 0
@@ -685,7 +686,7 @@ class GameControllerTest {
     assertEquals(5, controller.getGameMap().getCell(0,4).getUnit().getCurrentHitPoints());
     controller.moveToSelectedUnit(1,2);
 
-    System.out.println(controller.getGameMap().toString());
+    // System.out.println(controller.getGameMap().toString());
 
     controller.selectUnitIn(2,0);
     controller.moveToSelectedUnit(0,0);
@@ -724,8 +725,8 @@ class GameControllerTest {
     ///////////           ROUND 3               /////////////////
     /////////////////////////////////////////////////////////////
 
-    System.out.println(controller.getGameMap().toString());
-    controller.getTacticians().forEach(i -> System.out.println(i.getName()));
+    // System.out.println(controller.getGameMap().toString());
+    // controller.getTacticians().forEach(i -> System.out.println(i.getName()));
 
     // Player 1
     controller.selectUnitIn(0,1);
