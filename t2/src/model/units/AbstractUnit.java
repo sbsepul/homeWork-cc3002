@@ -165,15 +165,23 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void receiveAttackWeakness(IEquipableItem attack){
+    double init = getCurrentHitPoints();
     this.currentHitPoints -= attack.getPower() *1.5;
+    changeSupport.firePropertyChange(
+            new PropertyChangeEvent(this, "critical-attack", init, currentHitPoints)
+    );
   }
 
   @Override
   public void receiveAttackResistant(IEquipableItem attack) {
+      double init = getCurrentHitPoints();
     double power = attack.getPower() - 20;
     if(power>=0){
       this.currentHitPoints -= attack.getPower() - 20;
     }
+    changeSupport.firePropertyChange(
+            new PropertyChangeEvent(this, "resistant-attack", init, currentHitPoints)
+    );
   }
 
   @Override
@@ -226,14 +234,8 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void giveItem(IUnit unit, IEquipableItem item) {
     if(canExchange(unit,item)){
-      if(this.tacticianOwner==null){
-        this.removeItem(item);
-        unit.addItem(item);
-      }
-      else if (this.tacticianOwner.getUnits().contains(unit)){
-        this.removeItem(item);
-        unit.addItem(item);
-      }
+      this.removeItem(item);
+      unit.addItem(item);
     }
   }
 

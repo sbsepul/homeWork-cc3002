@@ -242,7 +242,14 @@ Casos bordes:
 * En el enunciado aparece que al jugador se le asigna un área de inicio donde debe situar sus unidades
 * Si un metodo retorna un valor cualquiera, es valido que en algun caso retorne nulo? por ejemplo cree un mapa que guarda en las llaves la posicion del hero en la lista de unidades de tactician, y en los valores guarda un boleano que representa el estado del hero (true vivo, false muerto). Esto hace mas facil revisar cuando un jugador perdió o ganó, porque si no habria que revisar cada HP de cada unidad siempre que se termina una batalla.
 * Se asume que las unidades parten con un HP, movement??
+
+
+
 * Tiene sentido definir como class static a la fabrica de unit e items?
+* Una unidad puede atacar e intercambiar solo 1 vez en las siguientes entregas? un Cleric puede recuperar a toda unidad que quiera o tiene que ser de su equipo?  Se puede intercambiar con quien sea? https://www.u-cursos.cl/ingenieria/2019/2/CC3002/1/foro/o/23985016
+* Como se añade un item a una unidad?
+* el controller debe poder mover todo lo que quiera cuando quiera o depende del jugador que esta jugando actualmente?? https://www.u-cursos.cl/ingenieria/2019/2/CC3002/1/foro/o/23994416
+* La unidad del jugador actual se puede mover encima de la unidad de otro jugador? o debe ser una restricción del juego?
 
 
 

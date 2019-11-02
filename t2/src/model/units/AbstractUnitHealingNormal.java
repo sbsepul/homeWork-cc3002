@@ -28,7 +28,7 @@ import model.items.IEquipableItem;
 import model.map.Location;
 import model.units.handlers.ResponseNormalUnit;
 
-public abstract class AbstractNormalUnitRecovery extends AbstractUnit implements NormalUnit {
+public abstract class AbstractUnitHealingNormal extends AbstractUnit implements NormalUnit {
     /**
      * Creates a new Unit.
      *
@@ -38,7 +38,7 @@ public abstract class AbstractNormalUnitRecovery extends AbstractUnit implements
      * @param maxItems  maximum amount of items this unit can carry
      * @param items
      */
-    protected AbstractNormalUnitRecovery(int hitPoints, int movement, Location location, int maxItems, IEquipableItem... items) {
+    protected AbstractUnitHealingNormal(int hitPoints, int movement, Location location, int maxItems, IEquipableItem... items) {
         super(hitPoints, movement, location, maxItems, items);
     }
 

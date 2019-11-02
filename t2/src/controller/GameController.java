@@ -444,8 +444,12 @@ public class GameController {
       if(getSelectedUnit().equals(getCurrentUnit())) {
         getTurnOwner().giveItemToUnit(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
       }
-      else {
+      else if (getSelectedUnit().getTactician()==null){
         getSelectedUnit().giveItem(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
+      }
+      else if (getTacticians().contains(getSelectedUnit().getTactician())) {
+        getSelectedUnit().getTactician().setCurrentUnit(getSelectedUnit());
+        getSelectedUnit().getTactician().giveItemToUnit(getGameMap().getCell(x,y).getUnit(),getSelectedItem());
       }
     }
   }
@@ -493,7 +497,7 @@ public class GameController {
   /**
    * Add a Darkness to unit selected
    */
-  public void addDarknessToSelectedUnit(){ getSelectedUnit().addItem(getSwordFab().createItem());}
+  public void addDarknessToSelectedUnit(){ getSelectedUnit().addItem(getDarknessFab().createItem());}
 
   /**
    * Add a Light to unit selected
@@ -515,7 +519,12 @@ public class GameController {
      */
   public void addSpearToSelectedUnit() { getSelectedUnit().addItem(getSpearFab().createItem());}
 
-    /**
+  /**
+   * Add a Sword to unit selected
+   */
+  public void addSwordToSelectedUnit(){ getSelectedUnit().addItem(getSwordFab().createItem());}
+
+  /**
      * Move to position (x,y) of the GameMap
      * to the current unit selected
      *
@@ -535,35 +544,6 @@ public class GameController {
     this.unitsMoved.add(unitMoved);
   }
 
-  /**
-   * assign random units and items for each player in the game
-   * each unit have a hero with his item
-   */
-  public void assignUnitRandom(){
-    //getHeroFab(),
-    List<IFactoryUnit> fabUnit =
-            List.of(
-                    getAlpacaFab(),
-                    getArcherFab(),
-                    getClericFab(),
-                    getSorcererFab(),
-                    getSwordMasterFab(),
-                    getFighterFab()
-            );
-    int i=0, j=3;
-    for(Tactician t : this.getTacticians()){
-      //Collections.shuffle(fabUnit, getRandom());
-      List<IFactoryUnit> subFabUnit = fabUnit.subList(i,j);
-      for (int index = 0; index < 3; index++) {
-        subFabUnit.get(index).addItemForDefault();
-        t.addUnitInventory((NormalUnit) subFabUnit.get(index).createUnit());
-      }
-      i++; j++;
-      if(j==fabUnit.size()) {
-        i=0; j=3;
-      }
-    }
-  }
 
   // FACTORY UNIT
 

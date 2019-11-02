@@ -27,6 +27,7 @@ package model.units.handlers;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ResponseNormalUnitTest extends AbstractResponse{
     private ResponseNormalUnit responseNormalUnit;
@@ -56,6 +57,11 @@ class ResponseNormalUnitTest extends AbstractResponse{
         getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
         assertEquals(30, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
         assertEquals(30, getTacticianTarget().getUnits().get(0).getCurrentHitPoints());
+
+        //attack to unit own
+        getTacticianTest().generateAttack(getTacticianTest().getUnits().get(1));
+        assertEquals(30, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
+        assertEquals(50, getTacticianTest().getUnits().get(1).getCurrentHitPoints());
         //20
         getTacticianTest().generateAttack(getTacticianTarget().getUnits().get(0));
         assertEquals(20, getTacticianTest().getCurrentUnit().getCurrentHitPoints());
@@ -71,6 +77,37 @@ class ResponseNormalUnitTest extends AbstractResponse{
         assertEquals(2, getTacticianTest().getUnits().size());
         assertEquals(1, getTacticianTarget().getUnits().size());
         assertEquals(true, getTacticianTarget().getStatus());
+    }
+
+    @Test
+    public void healingUnit(){
+        assertEquals(2, getTacticianTest().getUnits().size());
+        assertEquals(2, getTacticianTarget().getUnits().size());
+
+        getTacticianTest().addUnitInventory(getCleric());
+
+        assertEquals(getTacticianTest(),getCleric().getTactician());
+
+        assertEquals(3, getTacticianTest().getUnits().size());
+        assertEquals(2, getTacticianTarget().getUnits().size());
+
+        getTacticianTest().getUnits().forEach(i -> assertEquals(50, i.getCurrentHitPoints()));
+
+        getTacticianTest().setCurrentUnit(getSpecialUnitTest());
+        getTacticianTest().generateAttack(getSpecialUnitTarget());
+        assertEquals(40, getSpecialUnitTest().getCurrentHitPoints());
+        assertEquals(40, getSpecialUnitTarget().getCurrentHitPoints());
+
+        getTacticianTest().setCurrentUnit(getCleric());
+        assertTrue(getTacticianTest().getCurrentUnit().isInRange(getSpecialUnitTarget()));
+        getTacticianTest().generateAttack(getSpecialUnitTarget());
+        assertEquals(40, getSpecialUnitTarget().getCurrentHitPoints());
+        assertEquals(50, getCleric().getCurrentHitPoints());
+
+        assertTrue(getTacticianTest().getCurrentUnit().isInRange(getSpecialUnitTest()));
+        getTacticianTest().generateAttack(getSpecialUnitTest());
+        assertEquals(50, getSpecialUnitTest().getCurrentHitPoints());
+        assertEquals(50, getCleric().getCurrentHitPoints());
     }
 
 }

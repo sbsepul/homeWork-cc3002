@@ -110,7 +110,7 @@ public class Tactician {
                             this,
                             "Normal Unit deleted",
                             initSize,
-                            getUnits())
+                            getUnits().size())
             );
         }
     }
@@ -147,6 +147,7 @@ public class Tactician {
         final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
         unitAdded.addResponseNormalUnit(respNormalUnit);
         unitAdded.addObserverMovement(responseUnitMovement);
+        unitAdded.setTactician(this);
         units.add(unitAdded);
     }
 
@@ -159,6 +160,7 @@ public class Tactician {
         final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
         unitHero.addResponseSpecialUnit(respSpecialUnit);
         unitHero.addObserverMovement(responseUnitMovement);
+        unitHero.setTactician(this);
         units.add(unitHero);
     }
 

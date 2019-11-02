@@ -478,6 +478,8 @@ class GameControllerTest {
     assertEquals(0, controller.getTurnCurrent());
     assertEquals(0, controller.getRoundNumber());
     controller.initGame(3);
+    // PLAYER 0
+
     System.out.println(controller.getGameMap().toString());
     assertEquals(controller.getTacticians().size(), controller.getInitPlayerStatus().size());
     controller.selectUnitIn(1,5);
@@ -486,14 +488,15 @@ class GameControllerTest {
     // test move current unit first time
     // select archer
     controller.selectUnitIn(0,0);
-    controller.equipItem(0);
+    controller.getTurnOwner().getUnits().forEach(i -> i.equipItem(i.getItems().get(0)));
+    //controller.equipItem(0);
     assertEquals(controller.getSelectedUnit(), controller.getCurrentUnit());
     controller.moveToSelectedUnit(1,1);
     assertNull(controller.getGameMap().getCell(0,0).getUnit());
 
     // test move current unit second time
     controller.moveToSelectedUnit(2,1);
-    Location locNew0 = controller.getGameMap().getCell(2,0);
+    Location locNew0 = controller.getGameMap().getCell(1,1);
     assertEquals(locNew0, controller.getSelectedUnit().getLocation());
 
     // test move second unit of tactician
@@ -506,35 +509,56 @@ class GameControllerTest {
     // test move third unit of tactician
     // select sorcerer
     controller.selectUnitIn(0,1);
-    controller.equipItem(0);
+    //controller.equipItem(0);
     controller.moveToSelectedUnit(0,3);
     Location locNew2 = controller.getGameMap().getCell(1,0);
     assertNull(locNew2.getUnit());
     // System.out.println(controller.getGameMap().toString());
 
     controller.endTurn();
+    // PLAYER 1
+
+    controller.getTurnOwner().getUnits().forEach(i -> i.equipItem(i.getItems().get(0)));
 
     //select fighter
     controller.selectUnitIn(1,5);
-    controller.equipItem(0);
     controller.moveToSelectedUnit(0,4);
+    controller.useItemOn(0,3);
+    assertEquals(35, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(35, controller.getGameMap().getCell(0,3).getUnit().getCurrentHitPoints());
 
     //select cleric
     controller.selectUnitIn(2,5);
-    controller.equipItem(0);
     controller.moveToSelectedUnit(3,5);
 
     //select hero
     controller.selectUnitIn(1,6);
-    controller.equipItem(0);
     controller.moveToSelectedUnit(3,6);
 
+    // controller change items with a player different of the current
+
+    controller.selectUnitIn(6,0);
+    assertEquals(1, controller.getSelectedUnit().getItems().size());
+    assertEquals(1, controller.getGameMap().getCell(5,0).getUnit().getItems().size());
+    controller.addSpearToSelectedUnit();
+    assertEquals(2, controller.getSelectedUnit().getItems().size());
+    controller.selectItem(1);
+    controller.giveItemTo(5,0);
+    assertEquals(1,controller.getSelectedUnit().getItems().size());
+    assertEquals(2, controller.getGameMap().getCell(5,0).getUnit().getItems().size());
+
     controller.endTurn();
+    // PLAYER 2
+
+    controller.getTurnOwner().getUnits().forEach(i -> i.equipItem(i.getItems().get(0)));
 
     //select fighter
     controller.selectUnitIn(5,1);
-    controller.equipItem(0);
+    //controller.equipItem(0);
     controller.moveToSelectedUnit(3,1);
+    controller.useItemOn(1,1);
+    assertEquals(40, controller.getGameMap().getCell(1,1).getUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
 
     //select hero
     controller.selectUnitIn(6,0);
@@ -545,26 +569,25 @@ class GameControllerTest {
     controller.selectUnitIn(5,0);
     controller.equipItem(0);
     controller.moveToSelectedUnit(3,0);
-
+    assertEquals(controller.getUnitsMoved().size(), controller.getTurnOwner().getMoves().size());
 
     controller.endTurn();
+    assertEquals(0, controller.getUnitsMoved().size());
+
+    // PLAYER 3
+    controller.getTurnOwner().getUnits().forEach(i -> i.equipItem(i.getItems().get(0)));
 
     //select sorcerer
     controller.selectUnitIn(5,5);
-    controller.equipItem(0);
+    //controller.equipItem(0);
     controller.moveToSelectedUnit(4,6);
 
     //select sm
     controller.selectUnitIn(5,4);
-    controller.equipItem(0);
-    controller.moveToSelectedUnit(4,5);
-    assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(4,5));
-    assertEquals(controller.getGameMap().getCell(4,5).getUnit(), controller.getSelectedUnit());
-    // sm attack to hero
-    controller.useItemOn(3,6);
-    controller.selectUnitIn(3,6);
-    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
-    assertEquals(35, controller.getCurrentUnit().getCurrentHitPoints());
+    //controller.equipItem(0);
+    controller.moveToSelectedUnit(3,4);
+    assertEquals(controller.getSelectedUnit().getLocation(), controller.getGameMap().getCell(3,4));
+    assertEquals(controller.getGameMap().getCell(3,4).getUnit(), controller.getSelectedUnit());
 
     // select sorcerer
     controller.selectUnitIn(4,6);
@@ -575,21 +598,157 @@ class GameControllerTest {
 
     //select fighter
     controller.selectUnitIn(5,3);
-    controller.equipItem(0);
+    //controller.equipItem(0);
     controller.moveToSelectedUnit(3,3);
 
+    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
+
     controller.endTurn();
+    /////////////////////////////////////////////////////////////
+    ///////////           ROUND 2               /////////////////
+    /////////////////////////////////////////////////////////////
+
     System.out.println(controller.getGameMap().toString());
     assertEquals(2, controller.getRoundNumber());
     assertEquals(0, controller.getTurnCurrent());
     assertFalse(controller.getTurnOwner().getName().equals("Player 0"));
-    // player 1, player 2, player 0, player 3
-
+    // player 1, player 2, player 0, player 3 (Game with seed)
     assertEquals("Player 1" , controller.getTurnOwner().getName());
+
+    // select to cleric in Player 1
+    // give a item to other unit (not contained in current player's inventory)
     controller.selectUnitIn(3,5);
+    assertEquals(1, controller.getGameMap().getCell(3,6).getUnit().getItems().size());
+    assertEquals(1, controller.getGameMap().getCell(3,4).getUnit().getItems().size());
     System.out.println(controller.getNamePlayers().toString());
+    controller.addSoulToSelectedUnit();
+    // cleric with 2 items
+    assertEquals(2, controller.getSelectedUnit().getItems().size());
+
+    controller.selectItem(1);
+    controller.giveItemTo(3,4);
+    assertEquals(2, controller.getSelectedUnit().getItems().size());
+    // give a item to own unit
+    controller.giveItemTo(3,6);
+    assertEquals(1,controller.getSelectedUnit().getItems().size());
+    assertEquals(2, controller.getGameMap().getCell(3,6).getUnit().getItems().size());
+
+    // hero attack to sorcerer
+    controller.selectUnitIn(3,6);
+    controller.useItemOn(4,6);
+    assertEquals(20, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(20, controller.getGameMap().getCell(4,6).getUnit().getCurrentHitPoints());
+
+    // fighter P1 attack to sorcerer P0
+    controller.selectUnitIn(0,4);
+    controller.useItemOn(0,3);
+    assertEquals(20, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(20, controller.getGameMap().getCell(0,3).getUnit().getCurrentHitPoints());
+
+    controller.endTurn();
+
+    // select to fighter Player 2
+    controller.selectUnitIn(3,1);
+    // fighter move to (4,2)
+    // fighter search the way more close to attack
+    controller.moveToSelectedUnit(4,2);
+    assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+    // fighter attack to fighter in (3,3)
+    controller.useItemOn(3,3);
+    assertEquals(30, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getGameMap().getCell(3,3).getUnit().getCurrentHitPoints());
+
+    // hero move to (3,1) and attack to archer in (1,1)
+    controller.selectUnitIn(5,1);
+    controller.moveToSelectedUnit(3,1);
+    controller.useItemOn(1,1);
+    assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(30, controller.getGameMap().getCell(1,1).getUnit().getCurrentHitPoints());
+    System.out.println(controller.getGameMap().toString());
+
+    controller.endTurn();
+    // PLAYER 0
+
+    // archer attack to hero in (1,2) (Player 2)
+    controller.selectUnitIn(1,1);
+    controller.useItemOn(3,0);
+    assertEquals(30, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(40, controller.getGameMap().getCell(3,0).getUnit().getCurrentHitPoints());
+    controller.moveToSelectedUnit(0,1);
+
+    // select sorcerer
+    // sorcerer attack to fighter
+    controller.selectUnitIn(0,3);
+    assertEquals(20, controller.getSelectedUnit().getCurrentHitPoints());
+    controller.useItemOn(0,4);
+    assertEquals(5, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(5, controller.getGameMap().getCell(0,4).getUnit().getCurrentHitPoints());
+    controller.moveToSelectedUnit(1,2);
+
+    System.out.println(controller.getGameMap().toString());
+
+    controller.selectUnitIn(2,0);
+    controller.moveToSelectedUnit(0,0);
+
+    controller.endTurn();
+    // PLAYER 3
+
+    // sw of player 3 attack to fighter of player 1
+    controller.selectUnitIn(3,4);
+    controller.moveToSelectedUnit(1,4);
+    controller.useItemOn(0,4);
+    assertEquals(50, controller.getSelectedUnit().getCurrentHitPoints());
+    assertNull(controller.getGameMap().getCell(0,4).getUnit());
+    assertEquals(4, controller.getTacticians().size());
+    for(Tactician t : controller.getTacticians()){
+      if(t.getName().equals("Player 1")){
+        assertEquals(2,t.getUnits().size());
+      }
+    }
+
+    // sorcerer P3 attack to hero P1
+    controller.selectUnitIn(4,6);
+    controller.useItemOn(3,6);
+    assertEquals(5, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(5, controller.getGameMap().getCell(3,6).getUnit().getCurrentHitPoints());
+
+    // select fighter P3 attack to hero P2
+    controller.selectUnitIn(3,3);
+    controller.moveToSelectedUnit(2,2);
+    controller.useItemOn(3,1);
+    assertEquals(40, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(25, controller.getGameMap().getCell(3,1).getUnit().getCurrentHitPoints());
+
+    controller.endTurn();
+    /////////////////////////////////////////////////////////////
+    ///////////           ROUND 3               /////////////////
+    /////////////////////////////////////////////////////////////
+
+    System.out.println(controller.getGameMap().toString());
+    controller.getTacticians().forEach(i -> System.out.println(i.getName()));
+
+    // Player 1
+    controller.selectUnitIn(0,1);
+    controller.useItemOn(3,1);
+    assertEquals(30, controller.getSelectedUnit().getCurrentHitPoints());
+    assertEquals(15, controller.getGameMap().getCell(3,1).getUnit().getCurrentHitPoints());
 
 
+    controller.endTurn();
+
+    controller.selectUnitIn(4,6);
+    controller.useItemOn(3,6);
+    assertEquals(3, controller.getTacticians().size());
+
+    controller.selectUnitIn(2,2);
+    controller.useItemOn(3,1);
+    assertEquals(2, controller.getTacticians().size());
+
+    controller.endTurn();
+
+    assertEquals(2, controller.getWinners().size());
+    assertEquals("Player 0", controller.getWinners().get(0));
+    assertEquals("Player 3", controller.getWinners().get(1));
   }
 
   @Test
@@ -628,6 +787,37 @@ class GameControllerTest {
     assertEquals(Light.class, item7.getClass());
     IEquipableItem item8 = controller.getSoulFab().createItem();
     assertEquals(Soul.class, item8.getClass());
+  }
+
+  @Test
+  public void addItems(){
+    IUnit alpaca = controller.getAlpacaFab().createUnit();
+    controller.putUnitInMap(alpaca, 0, 0);
+    controller.selectUnitIn(0,0);
+    controller.addAxeToSelectedUnit();
+    assertEquals(1, controller.getSelectedUnit().getItems().size());
+    assertEquals(Axe.class, controller.getItems().get(0).getClass());
+    controller.addBowToSelectedUnit();
+    assertEquals(2, controller.getSelectedUnit().getItems().size());
+    assertEquals(Bow.class, controller.getItems().get(1).getClass());
+    controller.addDarknessToSelectedUnit();
+    assertEquals(3, controller.getSelectedUnit().getItems().size());
+    assertEquals(Darkness.class, controller.getItems().get(2).getClass());
+    controller.addLightToSelectedUnit();
+    assertEquals(4, controller.getSelectedUnit().getItems().size());
+    assertEquals(Light.class, controller.getItems().get(3).getClass());
+    controller.addSoulToSelectedUnit();
+    assertEquals(5, controller.getSelectedUnit().getItems().size());
+    assertEquals(Soul.class, controller.getItems().get(4).getClass());
+    controller.addSpearToSelectedUnit();
+    assertEquals(6, controller.getSelectedUnit().getItems().size());
+    assertEquals(Spear.class, controller.getItems().get(5).getClass());
+    controller.addSwordToSelectedUnit();
+    assertEquals(7, controller.getSelectedUnit().getItems().size());
+    assertEquals(Sword.class, controller.getItems().get(6).getClass());
+    controller.addStaffToSelectedUnit();
+    assertEquals(8, controller.getSelectedUnit().getItems().size());
+    assertEquals(Staff.class, controller.getItems().get(7).getClass());
   }
 
 

@@ -51,7 +51,7 @@ class ResponseUnitMovementTest extends AbstractResponse{
     public void moveUnitTest(){
 
         getTacticianTest().setCurrentUnit(getNormalUnitTest());
-        getNormalUnitTest().moveTo(getField().getCell(0,2));
+        getNormalUnitTest().moveTo(getField().getCell(2,0));
 
         assertEquals(1, getTacticianTest().getMoves().size());
 

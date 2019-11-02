@@ -28,7 +28,7 @@ import model.units.handlers.ResponseNormalUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
 
-public abstract class AbstractNormalUnit extends AbstractUnitAttack implements NormalUnit {
+public abstract class AbstractNormalUnit extends AbstractUnitCombative implements NormalUnit {
     /**
      * Creates a new Unit.
      *

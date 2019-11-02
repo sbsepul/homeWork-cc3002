@@ -28,6 +28,7 @@ import controller.Tactician;
 import model.items.factoryItem.AxeFactoryItem;
 import model.items.factoryItem.IFactoryItem;
 import model.items.factoryItem.SpearFactoryItem;
+import model.items.factoryItem.StaffFactoryItem;
 import model.map.Field;
 import model.map.Location;
 import model.map.factoryMap.FactoryMap;
@@ -45,12 +46,14 @@ public abstract class AbstractResponse {
     protected Tactician tacticianTarget;
     protected NormalUnit
             normalUnitTest,
-            normalUnitTarget;
+            normalUnitTarget,
+            cleric;
     protected SpecialUnit
             specialUnitTest,
             specialUnitTarget;
     protected IFactoryItem fabAxe = new AxeFactoryItem();
     protected IFactoryItem fabSpear = new SpearFactoryItem();
+    protected IFactoryItem fabStaff = new StaffFactoryItem();
 
 
     @BeforeEach
@@ -66,8 +69,15 @@ public abstract class AbstractResponse {
     public void setEquipUnit(){
         getTacticianTest().addUnitInventory(getNormalUnitTest());
         getTacticianTest().addUnitHero(getSpecialUnitTest());
+
+        assertEquals(getTacticianTest(), getNormalUnitTest().getTactician());
+        assertEquals(getTacticianTest(), getSpecialUnitTest().getTactician());
+
         getTacticianTarget().addUnitInventory(getNormalUnitTarget());
         getTacticianTarget().addUnitHero(getSpecialUnitTarget());
+
+        assertEquals(getTacticianTarget(), getNormalUnitTarget().getTactician());
+        assertEquals(getTacticianTarget(), getSpecialUnitTarget().getTactician());
     }
 
     public void setTactician(){
@@ -107,8 +117,17 @@ public abstract class AbstractResponse {
 
         specialUnitTarget.addItem(fabSpear.createItem());
         specialUnitTarget.equipItem(specialUnitTarget.getItems().get(0));
+
+        cleric = new Cleric(
+                50,2,getField().getCell(0,2)
+        );
+        cleric.addItem(fabStaff.createItem());
+        cleric.equipItem(cleric.getItems().get(0));
     }
 
+    public NormalUnit getCleric() {
+        return cleric;
+    }
 
     public NormalUnit getNormalUnitTest() {
         return normalUnitTest;
@@ -140,4 +159,5 @@ public abstract class AbstractResponse {
     public Tactician getTacticianTarget() {
         return tacticianTarget;
     }
+
 }

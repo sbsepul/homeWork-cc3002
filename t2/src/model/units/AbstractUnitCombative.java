@@ -27,7 +27,7 @@ package model.units;
 import model.items.IEquipableItem;
 import model.map.Location;
 
-public abstract class AbstractUnitAttack extends AbstractUnit implements IUnit{
+public abstract class AbstractUnitCombative extends AbstractUnit implements IUnit{
     /**
      * Creates a new Unit.
      *
@@ -37,7 +37,7 @@ public abstract class AbstractUnitAttack extends AbstractUnit implements IUnit{
      * @param maxItems  maximum amount of items this unit can carry
      * @param items
      */
-    protected AbstractUnitAttack(int hitPoints, int movement, Location location, int maxItems, IEquipableItem... items) {
+    protected AbstractUnitCombative(int hitPoints, int movement, Location location, int maxItems, IEquipableItem... items) {
         super(hitPoints, movement, location, maxItems, items);
     }
 
