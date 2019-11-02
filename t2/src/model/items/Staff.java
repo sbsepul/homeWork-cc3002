@@ -28,6 +28,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a <i>Staff</i> type item.
@@ -56,7 +57,7 @@ public class Staff extends AbstractHeap implements IHeap {
   }
 
   @Override
-  public void equipTo(IUnit unit) {
+  public void equipTo(@NotNull IUnit unit) {
     unit.equipItemStaff(this);
     this.setOwner(unit);
   }
@@ -96,9 +97,4 @@ public class Staff extends AbstractHeap implements IHeap {
     receiveAttackMagic(attackSoul);
   }
 
-
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof Staff && super.equals(obj);
-  }
 }

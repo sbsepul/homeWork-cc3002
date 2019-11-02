@@ -28,6 +28,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a <i>Sword</i> type item.
@@ -56,7 +57,7 @@ public class Sword extends AbstractAttack implements IAttack {
   }
 
   @Override
-  public void equipTo(IUnit unit) {
+  public void equipTo(@NotNull IUnit unit) {
     unit.equipItemSword(this);
     this.setOwner(unit);
   }
@@ -91,10 +92,5 @@ public class Sword extends AbstractAttack implements IAttack {
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness)
   { receiveMagicAttack(attackDarkness); }
-
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof Sword && super.equals(obj);
-  }
 
 }

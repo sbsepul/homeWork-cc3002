@@ -38,7 +38,6 @@ import model.units.handlers.ResponseSpecialUnit;
 import model.units.handlers.ResponseUnitMovement;
 
 /**
- *
  * Tactician represent to a player, so it know
  * all the features of the units and the quantity of units that have.
  *
@@ -47,7 +46,6 @@ import model.units.handlers.ResponseUnitMovement;
  * @author Sebastian Sepulveda
  * @version 1.0
  * @since 2.0
- *
  */
 public class Tactician {
 

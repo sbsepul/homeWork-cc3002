@@ -24,6 +24,8 @@
 
 package model.map;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -51,7 +53,7 @@ public class Field {
    * @param cells
    *     the locations that are going to be added to the map
    */
-  public void addCells(final boolean connectAll, final Location... cells) {
+  public void addCells(final boolean connectAll, @NotNull final Location... cells) {
     // Seed inserted
     for (Location cell : cells) {
       addCell(cell);
@@ -95,7 +97,7 @@ public class Field {
   /**
    * Creates a connection between 2 cells
    */
-  private void addConnection(Location cell1, Location cell2) {
+  private void addConnection(@NotNull Location cell1, Location cell2) {
     cell1.addNeighbour(cell2);
   }
 
@@ -120,6 +122,7 @@ public class Field {
    *     the column of the cell
    * @return a string of the form (row, col)
    */
+  @NotNull
   private String generateID(final int row, final int col) {
     builder.setLength(0);
     builder.append("(").append(row).append(", ").append(col).append(")");
@@ -158,7 +161,7 @@ public class Field {
   /**
    * Removes a connection from two locations of the field
    */
-  public void removeConnection(final Location cell1, final Location cell2) {
+  public void removeConnection(@NotNull final Location cell1, final Location cell2) {
     if (cell1.getNeighbours().size() > 1 && cell2.getNeighbours().size() > 1) {
       cell1.removeNeighbour(cell2);
     }
@@ -167,7 +170,7 @@ public class Field {
   /**
    * Checks if two cells of the map are connected
    */
-  public boolean checkConnection(final Location cell1, final Location cell2) {
+  public boolean checkConnection(@NotNull final Location cell1, final Location cell2) {
     return cell1.isNeighbour(cell2);
   }
 
@@ -180,7 +183,7 @@ public class Field {
     return (int) Math.sqrt(getMap().size());
   }
 
-  public Map<Integer, StringBuilder> toStringGetAdjacent(Location cell){
+  public Map<Integer, StringBuilder> toStringGetAdjacent(@NotNull Location cell){
     Map<Integer, StringBuilder> newMap = new HashMap<>();
     StringBuilder str1 = new StringBuilder();
     StringBuilder str2 = new StringBuilder();

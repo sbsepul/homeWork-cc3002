@@ -49,17 +49,20 @@ public interface IEquipableItem {
   public void equipTo(IUnit unit);
 
   /**
-   * Set the owner of the army
-   * @param unit
+   * @return true if the item is in range of attack, false otherwise
    */
-  public void setOwner(IUnit unit);
-
   boolean inRangeItem();
 
   /**
    * @return the unit that has currently equipped this item
    */
   public IUnit getOwner();
+
+  /**
+   * Set the owner of the army
+   * @param unit
+   */
+  public void setOwner(IUnit unit);
 
   /**
    * @return the name of the item
@@ -134,13 +137,11 @@ public interface IEquipableItem {
   void receiveUnitAttack(IEquipableItem attack);
 
   /**
-   *
    * @param attackDarkness is the type of damage received for a Darkness
    */
   void receiveDarknessAttack(Darkness attackDarkness);
 
   /**
-   *
    * @param attackLight is the type of damage received for a Light
    */
   void receiveLightAttack(Light attackLight);
@@ -158,8 +159,14 @@ public interface IEquipableItem {
    */
   void giveMagicAttack(IEquipableItem enemyAttack);
 
+  /**
+   * @return the distance to the target unit equipped
+   */
   int getDistance();
 
+  /**
+   * @param distance new with the target unit equipped
+   */
   void setDistance(int distance);
   /* END COMBAT SECTION */
 }

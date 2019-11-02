@@ -28,6 +28,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a <i>spear</i>.
@@ -57,7 +58,7 @@ public class Spear extends AbstractAttack implements IAttack {
 
 
   @Override
-  public void equipTo(IUnit unit) {
+  public void equipTo(@NotNull IUnit unit) {
       unit.equipItemSpear(this);
       this.setOwner(unit);
   }
@@ -91,10 +92,5 @@ public class Spear extends AbstractAttack implements IAttack {
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness)
   { super.receiveMagicAttack(attackDarkness); }
-
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof Spear && super.equals(obj);
-  }
 
 }

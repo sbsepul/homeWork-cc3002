@@ -171,11 +171,14 @@ public abstract class AbstractTestUnit implements ITestUnit {
   public void checkEquippedItem(IEquipableItem item) {
     assertNull(getTestUnit().getEquippedItem());
     assertEquals(0, getTestUnit().getItems().size());
+
     getTestUnit().equipItem(item);
     assertEquals(0,getTestUnit().getItems().size());
     assertNull(getTestUnit().getEquippedItem());
+
     getTestUnit().addItem(item);
     assertEquals(1, getTestUnit().getItems().size());
+
     getTestUnit().equipItem(item);
     assertNull(getTestUnit().getEquippedItem());
   }

@@ -474,10 +474,10 @@ class GameControllerTest {
    */
   @Test
   public void gameNormal(){
-    assignUnitToTactician();
     assertEquals(0, controller.getTurnCurrent());
     assertEquals(0, controller.getRoundNumber());
     controller.initGame(3);
+    assignUnitToTactician();
     // PLAYER 0
 
     // System.out.println(controller.getGameMap().toString());

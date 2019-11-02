@@ -3,15 +3,15 @@
 
 La segunda etapa del proyecto del juego `Alpaca Emblem` consiste en programar la funcionalidad de la interacción entre el usuario y el modelo, es decir la conexión lógica entre la vista y el modelo, creando dos entidades relevantes:
 
-* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberán tener conocimiento de las unidades que poseen, el estado de sus unidades, entre otras cosas. 
-
+* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberán tener conocimiento de las unidades que poseen, el estado de sus unidad
+* es, entre otras cosas. 
 * **Controller**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego.  
 
 Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos durante el curso y que son necesarios para obtener la funcionalidad que es solicitada.
 
 ## Patterns Design
 
-Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del juego en cierto instante, como las acciones realizadas por los tacticians, a través del patron de Observer Pattern.
+Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del juego en cierto instante, como las acciones realizadas por los tacticians, a través de Observer Pattern.
 
 En las siguientes seccione se explicará 
 
@@ -25,7 +25,7 @@ Se utiliza para crear los items, unidades y el mapa del juego.
 
 Para las unidades y los items se estructuró una fabrica desde una interfaz `IFactory<Object>`  y un `AbstractFactory<Object>` para aprovechar la herencia de métodos y poder realizar llamadas `super()` al constructor del `AbstractFactory<Object>` para la creación de los objetos. 
 
-![UML for items](C:\Users\Sebastian\Desktop\Screenshot_4.png)
+![UML for items](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/img/factory_pattern.png)
 
 Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto genera duplicación de código, pero que es posible solucionarlo utilizando el patrón de diseño **Template Method** creando un `abstract class`.
 

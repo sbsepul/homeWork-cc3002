@@ -25,6 +25,7 @@
 package model.items;
 
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Abstract class that defines some common information and behaviour between all items normals.
@@ -37,10 +38,10 @@ public abstract class AbstractItem implements IEquipableItem {
 
   private final String name;
   private final int power;
-  protected int maxRange;
-  protected int minRange;
   private IUnit owner;
   protected int distance;
+  protected int maxRange;
+  protected int minRange;
 
   /**
    * Constructor for a default item without any special behaviour.
@@ -61,9 +62,8 @@ public abstract class AbstractItem implements IEquipableItem {
     this.maxRange = Math.max(maxRange, this.minRange);
   }
 
-
   @Override
-  public boolean canAttack(IEquipableItem itemEnemy) {
+  public boolean canAttack(@NotNull IEquipableItem itemEnemy) {
     if(itemEnemy.getOwner()!=null){
       return this.getOwner().getCurrentHitPoints()>0 && itemEnemy.getOwner().getCurrentHitPoints()>0
               && inRangeItem();

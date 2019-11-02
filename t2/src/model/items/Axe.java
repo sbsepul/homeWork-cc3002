@@ -28,6 +28,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents an Axe.
@@ -56,7 +57,7 @@ public class Axe extends AbstractAttack implements IAttack{
   }
 
   @Override
-    public void equipTo(IUnit unit) {
+    public void equipTo(@NotNull IUnit unit) {
       unit.equipItemAxe(this);
       this.setOwner(unit);
     }
@@ -84,11 +85,6 @@ public class Axe extends AbstractAttack implements IAttack{
   @Override
   public void receiveDarknessAttack(Darkness attackDarkness) {
     super.receiveMagicAttack(attackDarkness);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return obj instanceof Axe && super.equals(obj);
   }
 
 }

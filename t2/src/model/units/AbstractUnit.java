@@ -82,7 +82,7 @@ public abstract class AbstractUnit implements IUnit{
    *     items that the unit not use but can carry
    */
   protected AbstractUnit(final int hitPoints, final int movement,
-      final Location location, final int maxItems, final IEquipableItem... items) {
+                         final Location location, final int maxItems, final IEquipableItem... items) {
     this.maxHitPoints = hitPoints;
     this.currentHitPoints = hitPoints;
     this.movement = movement;
@@ -94,10 +94,8 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void equipItem(IEquipableItem item){
-    if(item!=null){
-      if(items.contains(item)){
-        item.equipTo(this);
-      }
+    if(items.contains(item)){
+      item.equipTo(this);
     }
   }
 
@@ -172,7 +170,7 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public void receiveAttackResistant(IEquipableItem attack) {
-      double init = getCurrentHitPoints();
+    double init = getCurrentHitPoints();
     double power = attack.getPower() - 20;
     if(power>=0){
       this.currentHitPoints -= attack.getPower() - 20;

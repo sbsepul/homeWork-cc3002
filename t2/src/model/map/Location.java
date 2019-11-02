@@ -28,6 +28,8 @@ import java.beans.PropertyChangeSupport;
 import java.util.HashSet;
 import java.util.Set;
 import model.units.IUnit;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a <i>location</i> in the game's map.
@@ -76,6 +78,7 @@ public class Location {
    *     the object to compare this location to
    * @return <code>true</code> if the id's match; <code>false</code> otherwise
    */
+  @Contract(value = "null -> false", pure = true)
   @Override
   public boolean equals(final Object other) {
     return other instanceof Location && row == ((Location) other).row
@@ -93,7 +96,7 @@ public class Location {
    * @param neighbour
    *     the location to be added
    */
-  public void addNeighbour(final Location neighbour) {
+  public void addNeighbour(@NotNull final Location neighbour) {
     neighbour.addTo(this);
     neighbour.neighbours.add(this);
   }
@@ -104,7 +107,7 @@ public class Location {
    * @param location
    *     location to add this as neighbour
    */
-  protected void addTo(final Location location) {
+  protected void addTo(@NotNull final Location location) {
     location.neighbours.add(this);
   }
 
@@ -170,7 +173,7 @@ public class Location {
    *
    * @return the distance between the nodes
    */
-  private double shortestPathTo(final Location otherNode, final Set<Location> visited) {
+  private double shortestPathTo(@NotNull final Location otherNode, final Set<Location> visited) {
     if (otherNode.equals(this)) {
       return 0;
     }
