@@ -25,10 +25,11 @@
 package model.units;
 
 import model.items.IEquipableItem;
+import model.items.ItemNull;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Alpaca unit
@@ -61,7 +62,7 @@ public class AlpacaTest extends AbstractTestUnit {
     alpaca.addItem(sword);
     assertEquals(1, alpaca.getItems().size());
     alpaca.equipItem(sword);
-    assertNull(alpaca.getEquippedItem());
+    assertFalse(alpaca.getEquippedItem().isUtil());
     getTargetFighter().attack(alpaca);
     assertEquals(30, alpaca.getCurrentHitPoints(),EPSILON);
     assertEquals(50,getTargetFighter().getCurrentHitPoints(),EPSILON);
@@ -90,7 +91,7 @@ public class AlpacaTest extends AbstractTestUnit {
     //test unit with inventory
     alpaca.addItem(getAxe());
     alpaca.equipItem(getAxe());
-    assertNull(alpaca.getEquippedItem());
+    assertFalse(alpaca.getEquippedItem().isUtil());
     getTargetSorcerer().addItem(getLight());
     getTargetSorcerer().equipItem(getLight());
     assertEquals(getLight(),getTargetSorcerer().getEquippedItem());
@@ -104,74 +105,74 @@ public class AlpacaTest extends AbstractTestUnit {
 
   @Override
   public IEquipableItem getTestItem() {
-    return null;
+    return new ItemNull();
   }
 
   @Test
   public void equipItemBow(){
     getTestUnit().addItem(getBow());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemBow(getBow());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
   @Test
   public void equipItemAxe(){
     getTestUnit().addItem(getAxe());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemAxe(getAxe());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
   @Test
   public void equipItemLight(){
     getTestUnit().addItem(getLight());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemLight(getLight());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
   @Test
   public void equipItemDarkness(){
     getTestUnit().addItem(getDarkness());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemDarkness(getDarkness());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
   @Test
   public void equipItemSoul(){
     getTestUnit().addItem(getSoul());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemSoul(getSoul());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
   @Test
   public void equipItemSword(){
     getTestUnit().addItem(getSword());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemSword(getSword());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
 
   @Test
   public void equipItemStaff(){
     getTestUnit().addItem(getStaff());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemStaff(getStaff());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
 
   @Test
   public void equipItemSpear(){
     getTestUnit().addItem(getSpear());
     assertEquals(1,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     getTestUnit().equipItemSpear(getSpear());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
   }
 
   @Test

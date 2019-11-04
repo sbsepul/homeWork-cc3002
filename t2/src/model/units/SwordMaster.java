@@ -51,12 +51,12 @@ public class SwordMaster extends AbstractNormalUnit {
   }
 
   @Override
-  public void equipItemSword(Sword item) { equippedItem=item; }
+  public void equipItemSword(Sword item) { equippedItem = item; }
 
   @Override
   public void attack(IUnit enemy) {
     if (this.initCombat(enemy)){
-      if(enemy.canCounterAttack(this.equippedItem.getDistance())){
+      if(enemy.canCounterAttack(getEquippedItem().getDistance())){
         enemy.getEquippedItem().receiveSwordsAttack((Sword) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());

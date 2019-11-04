@@ -24,12 +24,12 @@
 
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import model.items.IEquipableItem;
 import model.items.Staff;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Cleric unit
@@ -61,9 +61,9 @@ public class ClericTest extends AbstractTestUnit {
   @Test
   @Override
   public void equipStaffTest() {
-    assertNull(cleric.getEquippedItem());
+    assertFalse(cleric.getEquippedItem().isUtil());
     cleric.equipItem(staff);
-    assertNull(cleric.getEquippedItem());
+    assertFalse(cleric.getEquippedItem().isUtil());
     cleric.addItem(staff);
     cleric.equipItem(staff);
     assertEquals(staff, cleric.getEquippedItem());
@@ -79,13 +79,13 @@ public class ClericTest extends AbstractTestUnit {
   @Test
   @Override
   public void giveToUnitClericTest() {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(getTargetArcherTrade(), staff_p);
     assertEquals(2, getTargetArcherTrade().getItems().size());
     assertEquals(false, getTargetArcherTrade().getItems().contains(staff_p));
     getTestUnit().addItem(staff_p);
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(staff_p));
     getTestUnit().equipItem(staff_p);
@@ -93,7 +93,7 @@ public class ClericTest extends AbstractTestUnit {
     getTestUnit().giveItem(getTargetArcherTrade(),staff_p);
     assertEquals(0,getTestUnit().getItems().size());
     //verify that staff_p equipped isn't
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(3,getTargetArcherTrade().getItems().size());
     assertEquals(true, getTargetArcherTrade().getItems().contains(staff_p));
     getTestUnit().addItem(getAxeTrade());

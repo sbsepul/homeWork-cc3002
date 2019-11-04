@@ -76,6 +76,7 @@ public abstract class AbstractTestUnit implements ITestUnit {
   protected Field field;
   protected static final double EPSILON = 1e-6;
 
+
   /**
    * Set up the units that help to prove attacks and exchanges
    */
@@ -151,7 +152,8 @@ public abstract class AbstractTestUnit implements ITestUnit {
     assertEquals(50, getTestUnit().getMaxCurrentHitPoints());
     assertEquals(new Location(0, 0), getTestUnit().getLocation());
     assertTrue(getTestUnit().getItems().isEmpty());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
+    assertTrue(getTestUnit().isEquipable());
   }
 
   /**
@@ -169,18 +171,22 @@ public abstract class AbstractTestUnit implements ITestUnit {
    */
   @Override
   public void checkEquippedItem(IEquipableItem item) {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
 
     getTestUnit().equipItem(item);
     assertEquals(0,getTestUnit().getItems().size());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
 
     getTestUnit().addItem(item);
     assertEquals(1, getTestUnit().getItems().size());
 
     getTestUnit().equipItem(item);
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
+  }
+
+  public void checkEquipNull(){
+
   }
 
   /**
@@ -191,13 +197,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
    */
   @Override
   public void checkGiveItem(IUnit unit) {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(unit, getBow());
     assertEquals(2, unit.getItems().size());
     assertEquals(false, unit.getItems().contains(getBow()));
     getTestUnit().addItem(getBow());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(getBow()));
     getTestUnit().giveItem(unit,getBow());
@@ -250,13 +256,13 @@ public abstract class AbstractTestUnit implements ITestUnit {
   @Test
   @Override
   public void giveToUnitAlpacaTest() {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(getTargetAlpacaTrade(), getBow());
     assertEquals(2, getTargetAlpacaTrade().getItems().size());
     assertEquals(false, getTargetAlpacaTrade().getItems().contains(getBow()));
     getTestUnit().addItem(getBow());
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(getBow()));
     getTestUnit().giveItem(getTargetAlpacaTrade(),getBow());

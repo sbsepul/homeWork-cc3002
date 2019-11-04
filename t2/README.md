@@ -3,17 +3,32 @@
 
 La segunda etapa del proyecto del juego `Alpaca Emblem` consiste en programar la funcionalidad de la interacción entre el usuario y el modelo, es decir la conexión lógica entre la vista y el modelo, creando dos entidades relevantes:
 
-* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberán tener conocimiento de las unidades que poseen, el estado de sus unidad
-* es, entre otras cosas. 
-* **Controller**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego.  
+* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberá tener conocimiento de las unidades que poseen, el estado de sus unidades, sus caracteristicas y las acciones que puede realizar
+* **Controller**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego. Tiene la capacidad de reiniciar el juego cada vez que se requiera.
 
 Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos durante el curso y que son necesarios para obtener la funcionalidad que es solicitada.
 
+## Mejoras respecto a v1.0
+
+Tras la revisión de [versión 1.0](https://github.com/sesepulveda17/homeWork-cc3002/tree/master/t1) se mejoraron ciertos problemas de diseño que existían en la presente versión 2.0.
+
+Lo primero que se modificó fue el uso de interfaces para diferenciar a los items que atacaban con los items que pueden recuperar. La principal desventaja de no ocupar interfaces es hacer un código que no se extensible, por lo que si se desea añadir nuevos items que sirvan para recuperar, para atacar o incluso algún item que sea para otro fin, no existe una diferencia en el formato hecho anteriormente.
+
+Para una mejor visualización de los resultados logrados con este cambio se muestra el diagrama de clases de la versión anterior comparada a la actual versión:
+
+<version anterior>
+
+
+
+<actual version>
+
+
+
 ## Patterns Design
 
-Para esta tarea se ocuparon 2 patrones de diseño **(en primera instancia)** para lograr obtener los resultados que se deseaban para la creacion de las unidades, items, y mapa (con factory pattern) y poder detectar el estado del juego en cierto instante, como las acciones realizadas por los tacticians, a través de Observer Pattern.
+Para esta tarea se ocuparon principalmente 2 patrones de diseño para lograr obtener los resultados que se deseaban para la creación de las unidades, items, y mapa (con `Factory Pattern`) y poder detectar el estado del juego en cierto instante, como las acciones realizadas por los tacticians, a través de `Observer Pattern`.
 
-En las siguientes seccione se explicará 
+En las siguientes secciones se explicará cada uno de los patrones de diseño mencionados y en qué se ocuparon.
 
 ## Factory Pattern
 
@@ -21,7 +36,7 @@ El Factory Pattern es el encargado de crear objetos sin exponer la lógica de in
 
 Se utiliza para crear los items, unidades y el mapa del juego. 
 
-### Units y Items
+### Estructura Factory en Units y Items
 
 Para las unidades y los items se estructuró una fabrica desde una interfaz `IFactory<Object>`  y un `AbstractFactory<Object>` para aprovechar la herencia de métodos y poder realizar llamadas `super()` al constructor del `AbstractFactory<Object>` para la creación de los objetos. 
 
@@ -29,7 +44,28 @@ Para las unidades y los items se estructuró una fabrica desde una interfaz `IFa
 
 Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto genera duplicación de código, pero que es posible solucionarlo utilizando el patrón de diseño **Template Method** creando un `abstract class`.
 
-Otra clase que fue implementada fue `FactoryProvider<Object>` utilizando una `class enum Type<Object>`. La finalidad del Provider es poder entregarle como parámetro el tipo de la clase del objeto que se desea crear para que de esta manera el provider pueda devolver el objeto correspondiente. En este caso `FactoryProvider<Object>` devuelve la fabrica que se encarga de crear el tipo de unidad o item que se desea. 
+Otra clase que fue implementada fue `FactoryProvider<Object>` utilizando una `class enum Type<Object>`. La finalidad del Provider es poder obtener un tipo de fabrica de manera simple, entregándole como parámetro el tipo de la clase del objeto que se desea crear. Sin embargo, esta clase sólo es testeada para verificar su funcionamiento y no es utilizada en el resto de código, siguiendo los requerimientos de la tarea.
+
+Por último, antes de crear cada objeto de su respectiva fabrica, el usuario debe ser capaz de conocer los parámetros por defecto que van a crear los objetos, por los que se crean métodos `getters` de estos parámetros para conocerlos.
+
+#### Items
+
+La fabrica de items debe ser capaz de generar un item con los parámetros por defectos definidos en el inicio del proyecto, estos parámetros fueron: 
+
+* Name: nombre del objeto en minúsculas
+
+  Ejemplo: Axe  
+
+* Power: 10 
+
+* Min-Max Range:
+
+  * min: 1 - max: 2 para items de corto alcance
+  * min: 2 - max: 3 para item `bow` 
+
+Dado a que en esta etapa no se solicita cambiar los parámetros de los items creados no se crean métodos *setters*, y en esta implementación solo es posible revisar los ajustes por defecto.
+
+
 
 
 

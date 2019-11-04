@@ -49,5 +49,7 @@ class FactoryMapTest {
     @Test
     void createMap() {
         assertEquals(factory.createMap().getClass(),Field.class);
+        factory.setNumLong(100);
+        assertEquals(100, factory.getLong());
     }
 }

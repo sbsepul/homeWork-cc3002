@@ -165,7 +165,7 @@ public abstract class AbstractTestItem {
    */
   @Test
   public void equippedToTest() {
-    assertNull(getTestItem().getOwner());
+    assertFalse(getTestItem().getOwner().isEquipable());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
     assertEquals(true , unit.equals(getTestItem().getOwner()));
@@ -213,7 +213,7 @@ public abstract class AbstractTestItem {
   @Test
   public void canAttackTest(){
     assertFalse(getTestItem().canAttack(getTestItem()));
-    assertNull(getTestItem().getOwner());
+    assertFalse(getTestItem().getOwner().isEquipable());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
     assertFalse(getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));

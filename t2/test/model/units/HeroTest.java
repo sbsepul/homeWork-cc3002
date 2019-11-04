@@ -24,12 +24,12 @@
 
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import model.items.IEquipableItem;
 import model.items.Spear;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Hero unit
@@ -61,9 +61,9 @@ public class HeroTest extends AbstractTestUnit {
   @Test
   @Override
   public void equipSpearTest() {
-    assertNull(hero.getEquippedItem());
+    assertFalse(hero.getEquippedItem().isUtil());
     hero.equipItem(spear);
-    assertNull(hero.getEquippedItem());
+    assertFalse(hero.getEquippedItem().isUtil());
     hero.addItem(spear);
     hero.equipItem(spear);
     assertEquals(spear, hero.getEquippedItem());
@@ -79,13 +79,13 @@ public class HeroTest extends AbstractTestUnit {
   @Test
   @Override
   public void giveToUnitHeroTest() {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(getTargetArcherTrade(), spear_p);
     assertEquals(2, getTargetArcherTrade().getItems().size());
     assertEquals(false, getTargetArcherTrade().getItems().contains(spear_p));
     getTestUnit().addItem(spear_p);
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(spear_p));
     getTestUnit().equipItem(spear_p);
@@ -93,7 +93,7 @@ public class HeroTest extends AbstractTestUnit {
     getTestUnit().giveItem(getTargetArcherTrade(),spear_p);
     assertEquals(0,getTestUnit().getItems().size());
     //verify that spear_p equipped isn't
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(3,getTargetArcherTrade().getItems().size());
     assertEquals(true, getTargetArcherTrade().getItems().contains(spear_p));
     getTestUnit().addItem(getAxeTrade());

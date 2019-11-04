@@ -61,7 +61,7 @@ public class Fighter extends AbstractNormalUnit {
   @Override
   public void attack(IUnit enemy) {
     if (this.initCombat(enemy)){
-      if(enemy.canCounterAttack(this.equippedItem.getDistance())){
+      if(enemy.canCounterAttack(getEquippedItem().getDistance())){
         enemy.getEquippedItem().receiveAxeAttack((Axe) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());

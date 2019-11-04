@@ -194,7 +194,7 @@ public class TacticianTest {
     @Test
     public void getEquippedItem(){
         tacticianUnits();
-        assertNull(tactician01.getEquipItemCurrentUnit());
+        assertFalse(tactician01.getEquipItemCurrentUnit().isUtil());
         IFactoryItem fabBow = controller.getBowFab();
         IEquipableItem bow01 = fabBow.createItem();
         tactician01.getCurrentUnit().addItem(bow01);

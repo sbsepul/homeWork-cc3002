@@ -24,12 +24,12 @@
 
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import model.items.Axe;
 import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Fighter unit
@@ -64,9 +64,9 @@ public class FighterTest extends AbstractTestUnit {
   @Test
   @Override
   public void equipAxeTest() {
-    assertNull(fighter.getEquippedItem());
+    assertFalse(fighter.getEquippedItem().isUtil());
     fighter.equipItem(axe);
-    assertNull(fighter.getEquippedItem());
+    assertFalse(fighter.getEquippedItem().isUtil());
     fighter.addItem(axe);
     fighter.equipItem(axe);
     assertEquals(axe, fighter.getEquippedItem());
@@ -82,13 +82,13 @@ public class FighterTest extends AbstractTestUnit {
   @Test
   @Override
   public void giveToUnitFighterTest() {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(getTargetClericTrade(), axe_p);
     assertEquals(2, getTargetClericTrade().getItems().size());
     assertEquals(false, getTargetClericTrade().getItems().contains(axe_p));
     getTestUnit().addItem(axe_p);
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(axe_p));
     getTestUnit().equipItem(axe_p);
@@ -96,7 +96,7 @@ public class FighterTest extends AbstractTestUnit {
     getTestUnit().giveItem(getTargetClericTrade(),axe_p);
     assertEquals(0,getTestUnit().getItems().size());
     //verify that axe_p equipped isn't
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(3,getTargetClericTrade().getItems().size());
     assertEquals(true, getTargetClericTrade().getItems().contains(axe_p));
     getTestUnit().addItem(getAxeTrade());

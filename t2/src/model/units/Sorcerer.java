@@ -52,20 +52,20 @@ public class Sorcerer extends AbstractNormalUnit{
 
     @Override
     public void equipItemDarkness(Darkness item) {
-        equippedItem=item;
+        equippedItem = item;
     }
     @Override
     public void equipItemLight(Light item) {
-        equippedItem=item;
+        equippedItem = item;
     }
     @Override
     public void equipItemSoul(Soul item) {
-        equippedItem=item;
+        equippedItem = item;
     }
     @Override
     public void attack(IUnit enemy) {
         if (this.initCombat(enemy)){
-            if(enemy.canCounterAttack(this.equippedItem.getDistance())) {
+            if(enemy.canCounterAttack(getEquippedItem().getDistance())) {
                 this.getEquippedItem().giveMagicAttack(enemy.getEquippedItem());
             }
             else enemy.receiveAttack(this.getEquippedItem());

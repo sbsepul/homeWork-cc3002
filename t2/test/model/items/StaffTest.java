@@ -30,8 +30,7 @@ import model.units.IUnit;
 import model.units.SwordMaster;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test set for staffs
@@ -76,7 +75,7 @@ public class StaffTest extends AbstractTestItem {
   @Test
   @Override
   public void canAttackTest() {
-    assertNull(getTestItem().getOwner());
+    assertFalse(getTestItem().getOwner().isEquipable());
     IUnit unit = getTestUnit();
     getTestItem().equipTo(unit);
     assertEquals(false, getTestItem().canAttack(getTestFirstEnemyWrong().getEquippedItem()));

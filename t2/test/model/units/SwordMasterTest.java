@@ -28,8 +28,8 @@ import model.items.IEquipableItem;
 import model.items.Sword;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -71,9 +71,9 @@ public class SwordMasterTest extends AbstractTestUnit {
   @Test
   @Override
   public void equipSwordTest() {
-    assertNull(swordMaster.getEquippedItem());
+    assertFalse(swordMaster.getEquippedItem().isUtil());
     swordMaster.equipItem(sword);
-    assertNull(swordMaster.getEquippedItem());
+    assertFalse(swordMaster.getEquippedItem().isUtil());
     swordMaster.addItem(sword);
     swordMaster.equipItem(sword);
     assertEquals(sword, swordMaster.getEquippedItem());
@@ -88,13 +88,13 @@ public class SwordMasterTest extends AbstractTestUnit {
 
   @Override
   public void giveToUnitSwordMasterTest() {
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(0, getTestUnit().getItems().size());
     getTestUnit().giveItem(getTargetArcherTrade(), sword_p);
     assertEquals(2, getTargetArcherTrade().getItems().size());
     assertEquals(false, getTargetArcherTrade().getItems().contains(sword_p));
     getTestUnit().addItem(sword_p);
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(1, getTestUnit().getItems().size());
     assertEquals(true, getTestUnit().getItems().contains(sword_p));
     getTestUnit().equipItem(sword_p);
@@ -102,7 +102,7 @@ public class SwordMasterTest extends AbstractTestUnit {
     getTestUnit().giveItem(getTargetArcherTrade(),sword_p);
     assertEquals(0,getTestUnit().getItems().size());
     //verify that sword_p equipped isn't
-    assertNull(getTestUnit().getEquippedItem());
+    assertFalse(getTestUnit().getEquippedItem().isUtil());
     assertEquals(3,getTargetArcherTrade().getItems().size());
     assertEquals(true, getTargetArcherTrade().getItems().contains(sword_p));
     getTestUnit().addItem(getAxeTrade());

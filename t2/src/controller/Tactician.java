@@ -36,6 +36,7 @@ import model.units.SpecialUnit;
 import model.units.handlers.ResponseNormalUnit;
 import model.units.handlers.ResponseSpecialUnit;
 import model.units.handlers.ResponseUnitMovement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Tactician represent to a player, so it know
@@ -135,7 +136,7 @@ public class Tactician {
      * Added a unit to the inventory of unit from player
      * @param unitAdded added with hp full
      */
-    public void addUnitInventory(NormalUnit unitAdded) {
+    public void addUnitInventory(@NotNull NormalUnit unitAdded) {
         final ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
         final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
         unitAdded.addResponseNormalUnit(respNormalUnit);
@@ -148,7 +149,7 @@ public class Tactician {
      * Add a hero to the inventory of units from player
      * @param unitHero added
      */
-    public void addUnitHero(SpecialUnit unitHero) {
+    public void addUnitHero(@NotNull SpecialUnit unitHero) {
         final ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
         final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
         unitHero.addResponseSpecialUnit(respSpecialUnit);
@@ -216,7 +217,7 @@ public class Tactician {
     public boolean getStatus() { return this.status; }
 
     /**
-     * Set the item equipped to other item
+     * Set the item equipped to other item in the inventory
      * @param item
      */
     public void setEquipItem(IEquipableItem item) {

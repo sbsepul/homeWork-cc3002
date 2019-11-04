@@ -24,12 +24,12 @@
 
 package model.units;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import model.items.Bow;
 import model.items.IEquipableItem;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Archer unit.
@@ -67,9 +67,9 @@ public class ArcherTest extends AbstractTestUnit {
   @Test
   @Override
   public void equipBowTest() {
-    assertNull(archer.getEquippedItem());
+    assertFalse(archer.getEquippedItem().isUtil());
     archer.equipItem(bow);
-    assertNull(archer.getEquippedItem());
+    assertFalse(archer.getEquippedItem().isUtil());
     archer.addItem(bow);
     archer.equipItem(bow);
     assertEquals(bow, archer.getEquippedItem());
@@ -87,13 +87,13 @@ public class ArcherTest extends AbstractTestUnit {
   @Test
   @Override
   public void giveToUnitArcherTest() {
-    assertNull(archer.getEquippedItem());
+    assertFalse(archer.getEquippedItem().isUtil());
     assertEquals(0, archer.getItems().size());
     archer.giveItem(getTargetArcherTrade(), bow_p);
     assertEquals(2, getTargetArcherTrade().getItems().size());
     assertEquals(false, getTargetArcherTrade().getItems().contains(bow_p));
     archer.addItem(bow_p);
-    assertNull(archer.getEquippedItem());
+    assertFalse(archer.getEquippedItem().isUtil());
     assertEquals(1, archer.getItems().size());
     assertEquals(true, archer.getItems().contains(bow_p));
     archer.equipItem(bow_p);
@@ -101,7 +101,7 @@ public class ArcherTest extends AbstractTestUnit {
     archer.giveItem(getTargetArcherTrade(),bow_p);
     assertEquals(0,archer.getItems().size());
     //verify that bow_p equipped isn't
-    assertNull(archer.getEquippedItem());
+    assertFalse(archer.getEquippedItem().isUtil());
     assertEquals(3,getTargetArcherTrade().getItems().size());
     assertEquals(true, getTargetArcherTrade().getItems().contains(bow_p));
     archer.addItem(getAxeTrade());

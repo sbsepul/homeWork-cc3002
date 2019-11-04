@@ -59,7 +59,7 @@ public class Hero extends AbstractSpecialUnit{
   @Override
   public void attack(IUnit enemy) {
     if (this.initCombat(enemy)){
-      if(enemy.canCounterAttack(this.equippedItem.getDistance())){
+      if(enemy.canCounterAttack(getEquippedItem().getDistance())){
         enemy.getEquippedItem().receiveSpearsAttack((Spear) this.getEquippedItem());
       }
       else enemy.receiveAttack(this.getEquippedItem());

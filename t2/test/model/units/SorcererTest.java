@@ -30,8 +30,8 @@ import model.items.magic.Light;
 import model.items.magic.Soul;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test set for the Sorcerer unit
@@ -64,9 +64,9 @@ public class SorcererTest extends AbstractTestUnit {
     @Test
     @Override
     public void equipDarknessTest() {
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.equipItem(darkness);
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.addItem(darkness);
         sorcerer.equipItem(darkness);
         assertEquals(darkness, sorcerer.getEquippedItem());
@@ -85,9 +85,9 @@ public class SorcererTest extends AbstractTestUnit {
     @Test
     @Override
     public void equipLightTest() {
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.equipItem(light);
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.addItem(light);
         sorcerer.equipItem(light);
         assertEquals(light, sorcerer.getEquippedItem());
@@ -106,9 +106,9 @@ public class SorcererTest extends AbstractTestUnit {
     @Test
     @Override
     public void equipSoulTest() {
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.equipItem(soul);
-        assertNull(sorcerer.getEquippedItem());
+        assertFalse(sorcerer.getEquippedItem().isUtil());
         sorcerer.addItem(soul);
         sorcerer.equipItem(soul);
         assertEquals(soul, sorcerer.getEquippedItem());
@@ -127,13 +127,13 @@ public class SorcererTest extends AbstractTestUnit {
     @Test
     @Override
     public void giveToUnitSorcererTest() {
-        assertNull(getTestUnit().getEquippedItem());
+        assertFalse(getTestUnit().getEquippedItem().isUtil());
         assertEquals(0, getTestUnit().getItems().size());
         getTestUnit().giveItem(getTargetArcherTrade(), light_p);
         assertEquals(2, getTargetArcherTrade().getItems().size());
         assertEquals(false, getTargetArcherTrade().getItems().contains(light_p));
         getTestUnit().addItem(light_p);
-        assertNull(getTestUnit().getEquippedItem());
+        assertFalse(getTestUnit().getEquippedItem().isUtil());
         assertEquals(1, getTestUnit().getItems().size());
         assertEquals(true, getTestUnit().getItems().contains(light_p));
         getTestUnit().equipItem(light_p);
@@ -141,7 +141,7 @@ public class SorcererTest extends AbstractTestUnit {
         getTestUnit().giveItem(getTargetArcherTrade(),light_p);
         assertEquals(0,getTestUnit().getItems().size());
         //verify that light_p equipped isn't
-        assertNull(getTestUnit().getEquippedItem());
+        assertFalse(getTestUnit().getEquippedItem().isUtil());
         assertEquals(3,getTargetArcherTrade().getItems().size());
         assertEquals(true, getTargetArcherTrade().getItems().contains(light_p));
         getTestUnit().addItem(getAxeTrade());

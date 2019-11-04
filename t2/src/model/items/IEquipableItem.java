@@ -169,4 +169,6 @@ public interface IEquipableItem {
    */
   void setDistance(int distance);
   /* END COMBAT SECTION */
+
+  boolean isUtil();
 }

@@ -284,5 +284,10 @@ public interface IUnit {
    */
   void setTactician(Tactician tactician);
 
+  /**
+   * @return
+   */
+  boolean isEquipable();
+
 }
 

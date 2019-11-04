@@ -40,6 +40,7 @@ import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.map.Location;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents an abstract unit.
@@ -54,8 +55,8 @@ import model.map.Location;
  */
 public abstract class AbstractUnit implements IUnit{
 
-  protected final List<IEquipableItem> items = new ArrayList<>();
-  protected IEquipableItem equippedItem;
+  private final List<IEquipableItem> items = new ArrayList<>();
+  protected IEquipableItem equippedItem = new ItemNull();
   private Location location;
   private double currentHitPoints;
   private final int movement;
@@ -93,7 +94,8 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void equipItem(IEquipableItem item){
+  public void equipItem(@NotNull IEquipableItem item){
+    if(!item.isUtil()) equippedItem = item;
     if(items.contains(item)){
       item.equipTo(this);
     }
@@ -102,7 +104,7 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public boolean initCombat(IUnit unitEnemy) {
     return this.getCurrentHitPoints()>0 && unitEnemy.getCurrentHitPoints()>0
-            && this.getEquippedItem()!=null && isInRange(unitEnemy);
+            && this.getEquippedItem().isUtil() && isInRange(unitEnemy);
   }
 
   @Override
@@ -112,7 +114,7 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public double getMaxCurrentHitPoints() {
-    return this.maxHitPoints;
+    return maxHitPoints;
   }
 
   /**
@@ -122,8 +124,8 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void addItem(IEquipableItem item) {
     int n = items.size();
-    if(n<this.maxItems){
-      if(item.getOwner()==null){
+    if(n<this.maxItems && item.isUtil()){
+      if(!item.getOwner().isEquipable()){
         this.items.add(item);
         item.setOwner(this);
       }
@@ -133,9 +135,9 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void removeItem(IEquipableItem item) {
     if(!items.isEmpty() && this.items.contains(item)){
-      if(item.equals(this.getEquippedItem())) this.setEquippedItem(null);
+      if(item.equals(this.getEquippedItem())) this.setEquippedItem(new ItemNull());
       items.remove(item);
-      item.setOwner(null);
+      item.setOwner(new UnitNull());
     }
   }
 
@@ -152,7 +154,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void receiveAttack(IEquipableItem attack) {
+  public void receiveAttack(@NotNull IEquipableItem attack) {
     double init = getCurrentHitPoints();
     this.currentHitPoints -= attack.getPower();
     changeSupport.firePropertyChange(
@@ -160,7 +162,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void receiveAttackWeakness(IEquipableItem attack){
+  public void receiveAttackWeakness(@NotNull IEquipableItem attack){
     double init = getCurrentHitPoints();
     this.currentHitPoints -= attack.getPower() *1.5;
     changeSupport.firePropertyChange(
@@ -169,7 +171,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void receiveAttackResistant(IEquipableItem attack) {
+  public void receiveAttackResistant(@NotNull IEquipableItem attack) {
     double init = getCurrentHitPoints();
     double power = attack.getPower() - 20;
     if(power>=0){
@@ -181,7 +183,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public void receiveRecovery(IEquipableItem recovery){
+  public void receiveRecovery(@NotNull IEquipableItem recovery){
     this.currentHitPoints += recovery.getPower();
     if(this.currentHitPoints>this.maxHitPoints){
       this.currentHitPoints = this.maxHitPoints;
@@ -189,7 +191,7 @@ public abstract class AbstractUnit implements IUnit{
   }
 
   @Override
-  public boolean isInRange(IUnit unit) {
+  public boolean isInRange(@NotNull IUnit unit) {
     int distance = (int) this.getLocation().distanceTo(unit.getLocation());
     this.equippedItem.setDistance(distance);
     return getEquippedItem().inRangeItem();
@@ -197,7 +199,7 @@ public abstract class AbstractUnit implements IUnit{
 
   @Override
   public boolean canCounterAttack(int distance) {
-    if(this.equippedItem!=null){
+    if(this.equippedItem.isUtil()){
       equippedItem.setDistance(distance);
       return true;
     }
@@ -213,12 +215,7 @@ public abstract class AbstractUnit implements IUnit{
   public IEquipableItem getEquippedItem() { return equippedItem; }
 
   @Override
-  public void setEquippedItem(IEquipableItem item) {
-    if(item==null) {
-      this.equippedItem = null;
-    }
-    else this.equipItem(item);
-  }
+  public void setEquippedItem(IEquipableItem item) { this.equipItem(item); }
 
   @Override
   public boolean canExchange(IUnit unit, IEquipableItem item) {
@@ -239,8 +236,9 @@ public abstract class AbstractUnit implements IUnit{
   public Location getLocation() {
     return location;
   }
+
   @Override
-  public void setLocation(final Location location) {
+  public void setLocation(@NotNull final Location location) {
     if(location.getUnit()==null) location.setUnit(this);
     this.location = location;
   }
@@ -304,5 +302,9 @@ public abstract class AbstractUnit implements IUnit{
   @Override
   public void equipItemSpear(Spear item) { }
 
+  @Override
+  public boolean isEquipable() {
+    return true;
+  }
 }
 

@@ -25,6 +25,7 @@
 package model.items;
 
 import model.units.IUnit;
+import model.units.UnitNull;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +39,7 @@ public abstract class AbstractItem implements IEquipableItem {
 
   private final String name;
   private final int power;
-  private IUnit owner;
+  private IUnit owner = new UnitNull();
   protected int distance;
   protected int maxRange;
   protected int minRange;
@@ -64,11 +65,8 @@ public abstract class AbstractItem implements IEquipableItem {
 
   @Override
   public boolean canAttack(@NotNull IEquipableItem itemEnemy) {
-    if(itemEnemy.getOwner()!=null){
-      return this.getOwner().getCurrentHitPoints()>0 && itemEnemy.getOwner().getCurrentHitPoints()>0
-              && inRangeItem();
-    }
-    return false;
+    return this.getOwner().getCurrentHitPoints()>0 && itemEnemy.getOwner().getCurrentHitPoints()>0
+            && inRangeItem();
   }
 
   @Override
@@ -135,4 +133,8 @@ public abstract class AbstractItem implements IEquipableItem {
     this.distance = distance;
   }
 
+  @Override
+  public boolean isUtil() {
+    return true;
+  }
 }

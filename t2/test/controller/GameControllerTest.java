@@ -303,9 +303,9 @@ class GameControllerTest {
     controller.selectUnitIn(1,1);
     assertEquals(archer, controller.getSelectedUnit());
     assertEquals(3, controller.getSelectedUnit().getItems().size());
-    assertNull(controller.getSelectedUnit().getEquippedItem());
+    assertFalse(controller.getSelectedUnit().getEquippedItem().isUtil());
     controller.equipItem(0);
-    assertNull(controller.getSelectedUnit().getEquippedItem());
+    assertFalse(controller.getSelectedUnit().getEquippedItem().isUtil());
     controller.equipItem(1);
     IEquipableItem bow = controller.getBowFab().createItem();
     assertEquals(

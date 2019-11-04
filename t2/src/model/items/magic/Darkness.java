@@ -26,6 +26,7 @@ package model.items.magic;
 
 import model.items.*;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents an <i>Darkness</i>.
@@ -55,13 +56,13 @@ public class Darkness extends AbstractItemMagic implements IAttack {
     }
 
     @Override
-    public void equipTo(IUnit unit) {
+    public void equipTo(@NotNull IUnit unit) {
         unit.equipItemDarkness(this);
         this.setOwner(unit);
     }
 
     @Override
-    public void giveMagicAttack(IEquipableItem enemyAttack){
+    public void giveMagicAttack(@NotNull IEquipableItem enemyAttack){
         enemyAttack.receiveDarknessAttack(this);
     }
 
