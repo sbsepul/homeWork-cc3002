@@ -26,6 +26,8 @@ package controller.handler;
 
 import controller.GameController;
 import controller.Tactician;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -45,6 +47,7 @@ public class SpecialUnitLoseHandler implements PropertyChangeListener {
      * Constructor have reference to the game controller.
      * @param gameController that receive the response
      */
+    @Contract(pure = true)
     public SpecialUnitLoseHandler(GameController gameController){
         this.controller = gameController;
     }
@@ -56,7 +59,7 @@ public class SpecialUnitLoseHandler implements PropertyChangeListener {
      *            and the property that has changed.
      */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(@NotNull PropertyChangeEvent evt) {
         Tactician player = (Tactician) evt.getSource();
         controller.removeTactician(player.getName());
     }

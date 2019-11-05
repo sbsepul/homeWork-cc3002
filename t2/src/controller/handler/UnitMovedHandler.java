@@ -27,6 +27,7 @@ package controller.handler;
 import controller.GameController;
 import controller.Tactician;
 import model.units.IUnit;
+import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -57,7 +58,7 @@ public class UnitMovedHandler implements PropertyChangeListener {
      *            and the property that has changed.
      */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(@NotNull PropertyChangeEvent evt) {
         IUnit unitMoved = (IUnit) evt.getNewValue();
         controller.addUnitMoved(unitMoved);
     }

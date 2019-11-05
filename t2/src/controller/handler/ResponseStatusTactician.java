@@ -26,6 +26,7 @@ package controller.handler;
 
 import controller.GameController;
 import controller.Tactician;
+import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -55,7 +56,7 @@ public class ResponseStatusTactician implements PropertyChangeListener {
      *            and the property that has changed.
      */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(@NotNull PropertyChangeEvent evt) {
         Tactician player = (Tactician) evt.getSource();
         controller.removeTactician(player.getName());
     }
