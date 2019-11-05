@@ -12,17 +12,31 @@ Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos d
 
 Tras la revisión de [versión 1.0](https://github.com/sesepulveda17/homeWork-cc3002/tree/master/t1) se mejoraron ciertos problemas de diseño que existían en la presente versión 2.0.
 
-Lo primero que se modificó fue el uso de interfaces para diferenciar a los items que atacaban con los items que pueden recuperar. La principal desventaja de no ocupar interfaces es hacer un código que no se extensible, por lo que si se desea añadir nuevos items que sirvan para recuperar, para atacar o incluso algún item que sea para otro fin, no existe una diferencia en el formato hecho anteriormente.
+Lo primero que se modificó fue el uso de interfaces para diferenciar a los items que atacaban con los items que pueden recuperar. La principal desventaja de no ocupar interfaces es hacer un código que no sea extensible, por lo que si se desea añadir nuevos items que sirvan para recuperar, para atacar o incluso algún item que sea para otro fin, no existe una diferencia de tipos. Con el nuevo diseño es posible diferenciar entre los items y a la vez generar clases abstractas para no duplicar código
 
 Para una mejor visualización de los resultados logrados con este cambio se muestra el diagrama de clases de la versión anterior comparada a la actual versión:
 
-<version anterior>
+**Versión 1.0**
 
+![]( https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/img/version1/pack_items.png )
 
+**Versión 2.0**
 
-<actual version>
+![](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/img/pack_itemsv2.png)
 
+Un procedimiento similar se realizó con las unidades. En este caso sin embargo, fue distinto el motivo pues el problema que originó el cambio nació tras las condiciones del juego, que se detallan en [detalle aquí](https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/enunciado_controlador.pdf), que explican que existe una unidad especial ***Hero*** que en caso de que un Tactician **tenga esta unidad y la pierda**, entonces automáticamente este jugador **pierde**. Caso distinto es si solo tiene unidades que no son Hero, pues el jugador puede perder más de una de estas, pero puede seguir jugando. 
 
+Por tanto, se crean dos interfaces `SpecialUnit` y `NormalUnit`para especificar esta diferencia entre las unidades. La principal diferencia entre los dos tipos de unidad se especifica en [observer pattern](#Observer Pattern), mientras que en las siguientes imágenes se muestran las diferencias entre la versión anterior y la actual:
+
+**Versión 1.0**
+
+![]( https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/img/version1/pack_unit.png )
+
+**Versión 2.0**
+
+<insertar image>
+
+Por último, se añade un objeto null en `IUnit` y `IEquipableItem` siguiendo `Null Pattern`. Este cambio se realizó dado a la cantidad de condiciones necesarias para verificar que los objetos no eran nulos y los problemas que generaba este hecho, como `Exception nullpointerexception`. Para más detalles revisar [Null Pattern](#Null Pattern)
 
 ## Patterns Design
 
@@ -120,6 +134,12 @@ La responsabilidad de que en una celda no hayan dos unidades es responsabilidad 
 
 
 Se asume que las unidades deben conocer al tactician al que pertenecen, los items conocen a la unidad que lo posee, por lo que puede conocer al tactician que lo conoce (un item no deberia estar en otra unidad).
+
+
+
+
+
+## Null Pattern
 
 
 
