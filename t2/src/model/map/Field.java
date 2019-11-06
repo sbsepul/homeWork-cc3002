@@ -27,7 +27,6 @@ package model.map;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 /**
  * This class represents the map where the units are located and the game is played.

@@ -25,12 +25,9 @@
 package model.units.handlers;
 
 import controller.Tactician;
-import model.units.IUnit;
 import model.units.NormalUnit;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 
 /**

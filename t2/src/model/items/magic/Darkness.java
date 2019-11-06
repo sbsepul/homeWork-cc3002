@@ -24,7 +24,8 @@
 
 package model.items.magic;
 
-import model.items.*;
+import model.items.IAttack;
+import model.items.IEquipableItem;
 import model.units.IUnit;
 import org.jetbrains.annotations.NotNull;
 

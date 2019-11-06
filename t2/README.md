@@ -3,8 +3,8 @@
 
 La segunda etapa del proyecto del juego `Alpaca Emblem` consiste en programar la funcionalidad de la interacción entre el usuario y el modelo, es decir la conexión lógica entre la vista y el modelo, creando dos entidades relevantes:
 
-* **Tactician**: Es la entidad que representará a los jugadores del juego y que deberá tener conocimiento de las unidades que poseen, el estado de sus unidades, sus caracteristicas y las acciones que puede realizar
-* **Controller**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego. Tiene la capacidad de reiniciar el juego cada vez que se requiera.
+* **`Tactician`**: Es la entidad que representará a los jugadores del juego y que deberá tener conocimiento de las unidades que poseen, el estado de sus unidades, sus caracteristicas y las acciones que puede realizar
+* **`Controller`**: Es la entidad encargada de manejar el estado del juego en todo momento y de interactuar con el jugador del juego. Tiene la capacidad de reiniciar el juego cada vez que se requiera.
 
 Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos durante el curso y que son necesarios para obtener la funcionalidad que es solicitada.
 
@@ -12,7 +12,9 @@ Durante el desarrollo del juego se hará uso de patrones de diseño aprendidos d
 
 Tras la revisión de [versión 1.0](https://github.com/sesepulveda17/homeWork-cc3002/tree/master/t1) se mejoraron ciertos problemas de diseño que existían en la presente versión 2.0.
 
-Lo primero que se modificó fue el uso de interfaces para diferenciar a los items que atacaban con los items que pueden recuperar. La principal desventaja de no ocupar interfaces es hacer un código que no sea extensible, por lo que si se desea añadir nuevos items que sirvan para recuperar, para atacar o incluso algún item que sea para otro fin, no existe una diferencia de tipos. Con el nuevo diseño es posible diferenciar entre los items y a la vez generar clases abstractas para no duplicar código
+Lo primero que se modificó fue el uso de interfaces para diferenciar a los items que atacaban con los items que pueden recuperar. La principal desventaja de no ocupar interfaces es hacer un código que no sea extensible, por lo que si se desea añadir nuevos items que sirvan para recuperar, para atacar o incluso algún item que sea para otro fin, no existe una diferencia de tipos. Con el nuevo diseño es posible diferenciar entre los items y a la vez generar clases abstractas para no duplicar código. 
+
+Los items `IAttack` son aquellos que pueden atacar, donde está incluido también los items mágicos. Mientras que los items `IHeap` son aquellos que solo pueden recuperar, y por tanto no realizan contraataque y reciben un daño normal excepto de las unidades mágicas, de las cuales reciben un daño crítico.
 
 Para una mejor visualización de los resultados logrados con este cambio se muestra el diagrama de clases de la versión anterior comparada a la actual versión:
 
@@ -34,7 +36,7 @@ Por tanto, se crean dos interfaces `SpecialUnit` y `NormalUnit`para especificar 
 
 **Versión 2.0**
 
-<insertar image>
+![]( https://github.com/sesepulveda17/homeWork-cc3002/blob/master/t2/img/pack_unitsv2.png )
 
 Por último, se añade un objeto null en `IUnit` y `IEquipableItem` siguiendo `Null Pattern`. Este cambio se realizó dado a la cantidad de condiciones necesarias para verificar que los objetos no eran nulos y los problemas que generaba este hecho, como `Exception nullpointerexception`. Para más detalles revisar [Null Pattern](#Null Pattern)
 
@@ -58,86 +60,151 @@ Para las unidades y los items se estructuró una fabrica desde una interfaz `IFa
 
 Otra manera de realizar este procedimiento era creando solamente una interfaz con las clases que implementaran esta interfaz para cada tipo de unidad o item, sin embargo esto genera duplicación de código, pero que es posible solucionarlo utilizando el patrón de diseño **Template Method** creando un `abstract class`.
 
-Otra clase que fue implementada fue `FactoryProvider<Object>` utilizando una `class enum Type<Object>`. La finalidad del Provider es poder obtener un tipo de fabrica de manera simple, entregándole como parámetro el tipo de la clase del objeto que se desea crear. Sin embargo, esta clase sólo es testeada para verificar su funcionamiento y no es utilizada en el resto de código, siguiendo los requerimientos de la tarea.
+Otra clase que fue implementada fue `FactoryProvider<Object>` utilizando una `class enum Type<Object>`. La finalidad del Provider es poder obtener un tipo de fabrica de manera simple, entregándole como parámetro el tipo de la clase del objeto que se desea crear. Sin embargo, esta clase sólo es testeada para verificar su funcionamiento y *no es utilizada en el resto de código*, siguiendo los requerimientos de la tarea.
 
 Por último, antes de crear cada objeto de su respectiva fabrica, el usuario debe ser capaz de conocer los parámetros por defecto que van a crear los objetos, por los que se crean métodos `getters` de estos parámetros para conocerlos.
 
-#### Items
+#### Factory Item
 
 La fabrica de items debe ser capaz de generar un item con los parámetros por defectos definidos en el inicio del proyecto, estos parámetros fueron: 
 
-* Name: nombre del objeto en minúsculas
+* Name (String): nombre del objeto en minúsculas
 
-  Ejemplo: Axe  
+  Ejemplo: "axe"  
 
-* Power: 10 
+* Power (int): 10 
 
-* Min-Max Range:
+* Min-Max Range (int):
 
-  * min: 1 - max: 2 para items de corto alcance
-  * min: 2 - max: 3 para item `bow` 
+  * (min: 1 - max: 2) para items de corto alcance
+  * (min: 2 - max: 3) para item `bow` 
 
 Dado a que en esta etapa no se solicita cambiar los parámetros de los items creados no se crean métodos *setters*, y en esta implementación solo es posible revisar los ajustes por defecto.
 
 
 
+#### Factory Unit
 
+La fabrica de units es capaz de crear unidades con los parámetros por defectos definidos en el inicio del proyecto, los parámetros son:
 
+* HitPoint (double): 50
+* Movement (int): 2
+* Location: `InvalidLocation()`
+* itemsAll: Coleccion de `IEquipableitem `de tamaño 0
 
-
-
-
-La idea del diseño se basa en que al momento de seleccionarse una cierta unidad, el controlador debe ser capaz de poder asignarsela a un tactician
-
-
-
-
+Además de los métodos `getters` además se creó un método `AddItemForDefault()` donde en cada fábrica se **crea un item** y se añade a la unidad que va a ser creada algún item que pueda equiparse. Para aquellas unidades que no pueden equiparse item, como la alpaca, se añade un `bow` por defecto. 
 
 ### Test
 
+Para verificar el correcto funcionamiento de las fabricas se crearon test que verifican si la clase de la unidad o item creado por la fabrica es igual a la clase de la unidad o item esperado. Se utiliza un `AbstractFactoryTest` para que realizar los test sin duplicación de código.
 
+### Factory Map
 
+Además de realizar fabricas de las unidades y los items, se prefirió añadir una fabrica para el mapa pues esto facilitaba el no tener exceso de código y que el diseño del mapa fuera independiente del controlador. De esta manera también es posible generar mapas aleatorios, el mismo mapa o mapas con formas distintas, solo depende de la configuración que se tenga en el Factory.
 
-
-
+En el caso de esta versión, el mapa es un conjunto de `Location` conectados en un `Field` aleatoriamente, y que su forma es cuadrada (tamaño es especificado y significa el lado del cuadrado).
 
 ## Observer Pattern
 
 Se utiliza para generar la interacción entre el controlador y los cambios generados sobre los jugadores de la partida y sus unidades.
 
-En java 12 la utilización de las clases Observer y Observable están deprecadas y no se recomiendo su uso. Por tanto, el diseño utilizado para la implementación de este patrón fue a través del uso de la interfaz `PropertyChangeListener` haciendo el trabajo de la interfaz Observer (el objeto que observa), y de la clase `PropertyChangeSupport` haciendo el trabajo del Observable (el objeto observado). 
+En java 12 la utilización de las clases Observer y Observable ***están deprecadas*** y no se recomienda su uso. Por tanto, el diseño utilizado para la implementación de este patrón fue a través del uso de la interfaz `PropertyChangeListener` haciendo el trabajo de la interfaz Observer (el objeto que observa), y de la clase `PropertyChangeSupport` haciendo el trabajo del Observable (el objeto observado). En los textos el Observer es llamado `Handler` o `Response`. En esta versión se consideran lo mismo, pero se ocupan para diferenciar los `listener` de los cambios en una unidad (Response), con respecto a los `listener` de los cambios de un `Tactician` (Handler). Por tanto, en adelante se ocuparan estos nombres para diferenciar de qué se está hablando en la implementación.
+
+#### Observer Unit 
+
+La implementación del patrón `observer` en las unidades está pensado para que los `observers `envien el mensaje de cambio a `Tactician`, el cual con algún método haga el cambio correspondiente a su estado. Así, cada `Response` debe tener referencia al `Tactician` que contiene a la unidad. Esta referencia se realiza al momento que la unidad es añadida al inventario de `Tactician`. 
+
+```java
+public void addUnitInventory(@NotNull NormalUnit unitAdded) {    
+    final ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
+    final ResponseMovementUnit responseMovementUnit = new ResponseMovementUnit(this);
+    unitAdded.addResponseNormalUnit(respNormalUnit);
+    unitAdded.addObserverMovement(responseMovementUnit);
+    unitAdded.setTactician(this);    
+    units.add(unitAdded);
+}
+```
+
+Se asume que una unidad no puede ser cambiada hacia otro `Tactician`, por lo que cada unidad además tiene referencia al `Tactician` que lo posee.
+
+Las unidades son los objetos primordiales en el juego, y es necesario conocer algunos estados en cada instante, o por lo menos en su punto critico. Es por ello que se crean:
+
+* `ResponseNormalUnit`: Revisa el estado de vida de la unidad `normal`. Si el estado de vida es menor o igual a 0 entonces la unidad es eliminada del inventario del `Tactician` que lo contiene. 
+
+  ```java
+  public void propertyChange(PropertyChangeEvent evt) {
+        if((double) evt.getNewValue() <= 0) 
+            player.removeUnit((NormalUnit) evt.getSource());
+    }
+  ```
+
+* `ResponseSpecialUnit`: Revisa el estado de vida de la unidad `special`. Si el estado de vida es menor o  igual a 0, entonces la unidad es eliminada del inventario del `Tactician`. A diferencia del `Response` anterior, si el `Tactician` pierde esta unidad, entonces pierde el juego. 
+
+  Para esta versión se asume que al momento de perder el juego, el `Tactician` debe ser removido del juego, por lo que en este Response se cambia el estado de `Tactician` a `false` para que sea removido. 
+
+  ```java
+  public void propertyChange(PropertyChangeEvent evt) {
+      if((double) evt.getNewValue() <= 0) 
+          player.removeSpecialUnit((SpecialUnit) evt.getSource());
+  }
+  ```
+
+* `ResponseMovementUnit`: Revisa el movimiento que realiza una unidad. Si la unidad es movida 1 vez, esto es notificado al `Response` el cual genera un mensaje al `Tactician` que contiene a la unidad, para que sea añadida a la lista de unidades movidas.
+
+```java
+public void propertyChange(PropertyChangeEvent evt) {    
+    IUnit unitMoved = (IUnit) evt.getSource();    
+    player.addUnitMoved(unitMoved);
+}
+```
+
+#### Test
+
+Para realizar los test de estos `Observers` fue necesario crear una interfaz `IResponseToTactician`, para poder añadir a cada `observer` de la unidad un `getTactician`, para verificar que efectivamente se realizaba el cambio afectando al `Tactician` propietario de la unidad 
+
+#### Observer Tactician
+
+Dado a que los cambios generados en la unidad provocan un cambio en el estado del `Tactician` este debe notificarlo al `Controller` para que realice los cambios necesarios para continuar el juego. Es por ello que, al igual que con la unidad, se crean `Observers` para notificar desde el `Tactician` los cambios generados sobre sus unidades. Para esto se crearon los siguientes `Handlers`:
+
+* `NormalUnitLoseHandler`: Es el encargado de detectar el cambio en la cantidad de unidades normales de la unidad. Si una unidad normal muere, entonces esto es notificado al `controller`el cual decide qué hacer con el `Tactician`. En este caso, solo si la cantidad de unidades normales es 0, entonces se elimina al `Tactician` del juego.
+
+```java
+public void propertyChange(@NotNull PropertyChangeEvent evt) {
+        Tactician player = (Tactician) evt.getSource();
+        if((int) evt.getNewValue()==0) controller.removeTactician(player.getName());
+    }
+```
+
+* `SpecialUnitLoseHandler:` Es el encargado de detectar el cambio en la cantidad de unidades especiales del `Tactician`. Si el `Tactician` pierde una unidad especial, inmediatamente es removido del juego
+
+```java
+public void propertyChange(@NotNull PropertyChangeEvent evt) {
+        Tactician player = (Tactician) evt.getSource();
+        controller.removeTactician(player.getName());
+    }
+```
+
+* `StatusTacticianHandler`: Es el encargado de notificar el cambio en el estado del `Tactician`. Dado a que el estado inicial del `Tactician` es `true`, el cambio de estado provoca que el `Tactician` se retire del juego, por tanto es removido.
+
+```java
+public void propertyChange(@NotNull PropertyChangeEvent evt) {
+        Tactician player = (Tactician) evt.getSource();
+        controller.removeTactician(player.getName());
+    }
+```
+
+* `UnitMovedHandler`: Es el encargado de notificar al `controller` las unidades movidas por el `Tactician`, las cuales no se pueden mover más de una vez por turno. Este `observer` añade a la lista de unidades movidas del controller a la unidad movida.
+
+```java
+public void propertyChange(@NotNull PropertyChangeEvent evt) {
+        IUnit unitMoved = (IUnit) evt.getNewValue();
+        controller.addUnitMoved(unitMoved);
+    }
+```
 
 
 
 <insertar  una imagen uml>
-
-
-
-
-
-El patron se ocupa para saber el estado de las unidades de cada jugador, como tambien para conocer el estado del tactician (HAY QUE VERIFICAR QUE CADA TACTICIAN DEBE TENER UNA )
-
-
-
-
-
-
-
-`moveToSelectedUnit()` Se asume que la unidad del jugador actual puede moverse sobre otras unidades (incluso la del rival) [ES ESTO VALIDO???]
-
-Una unidad puede atacar o intercambiar objetos mas de una vez en esta implementacion, pero deberia poder intercambiarlos solamente 1 vez.
-
-
-
-La responsabilidad de que en una celda no hayan dos unidades es responsabilidad del modelo al momento de asignar una posicion a una unidad, la posicion no  deberia tener una unidad.
-
-
-
-Se asume que las unidades deben conocer al tactician al que pertenecen, los items conocen a la unidad que lo posee, por lo que puede conocer al tactician que lo conoce (un item no deberia estar en otra unidad).
-
-
-
-
 
 ## Null Pattern
 
@@ -339,3 +406,7 @@ Si la vida del hero llega a 0, entonces directamente el jugador pierde y sale de
 
 Para el caso de tener
 
+
+```
+
+```

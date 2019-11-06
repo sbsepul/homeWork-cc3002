@@ -24,12 +24,12 @@
 
 package model.map;
 
-import java.beans.PropertyChangeSupport;
-import java.util.HashSet;
-import java.util.Set;
 import model.units.IUnit;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class represents a <i>location</i> in the game's map.

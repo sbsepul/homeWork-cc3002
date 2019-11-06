@@ -26,8 +26,6 @@ package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
 import model.items.factoryItem.DarknessFactoryItem;
-import model.items.magic.Darkness;
-import model.map.Location;
 import model.units.Sorcerer;
 
 /**

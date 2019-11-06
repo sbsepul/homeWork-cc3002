@@ -26,14 +26,8 @@ package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
 import model.items.factoryItem.BowFactoryItem;
-import model.items.factoryItem.FactoryItemProvider;
-import model.items.factoryItem.IFactoryItem;
-import model.items.factoryItem.ItemType;
 import model.map.InvalidLocation;
 import model.map.Location;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Abstract class that defines common behavior for the factory of units

@@ -24,20 +24,15 @@
 
 package model.units;
 
-import java.beans.PropertyChangeListener;
-import java.util.List;
-
 import controller.Tactician;
 import model.items.*;
-import model.items.Axe;
-import model.items.Bow;
-import model.items.Spear;
-import model.items.Staff;
-import model.items.Sword;
 import model.items.magic.Darkness;
 import model.items.magic.Light;
 import model.items.magic.Soul;
 import model.map.Location;
+
+import java.beans.PropertyChangeListener;
+import java.util.List;
 
 /**
  * This interface represents all units in the game.

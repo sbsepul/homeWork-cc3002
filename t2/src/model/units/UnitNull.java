@@ -25,7 +25,7 @@
 package model.units;
 
 import controller.Tactician;
-import model.items.*;
+import model.items.IEquipableItem;
 import model.map.Location;
 
 import java.beans.PropertyChangeListener;

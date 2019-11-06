@@ -24,9 +24,9 @@
 
 package model.units;
 
-import model.units.handlers.ResponseSpecialUnit;
 import model.items.IEquipableItem;
 import model.map.Location;
+import model.units.handlers.ResponseSpecialUnit;
 
 /**
  * Abstract class that defines common method for the special units

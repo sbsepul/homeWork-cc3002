@@ -26,7 +26,6 @@ package model.units.factoryUnit;
 
 import model.items.IEquipableItem;
 import model.items.factoryItem.StaffFactoryItem;
-import model.map.Location;
 import model.units.Cleric;
 
 /**

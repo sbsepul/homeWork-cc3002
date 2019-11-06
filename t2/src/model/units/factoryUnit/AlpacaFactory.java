@@ -24,7 +24,6 @@
 
 package model.units.factoryUnit;
 
-import model.map.Location;
 import model.units.Alpaca;
 
 /**

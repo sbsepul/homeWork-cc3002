@@ -25,13 +25,6 @@
 package model.items.factoryItem;
 
 
-import model.items.factoryItem.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
-
 /**
  * This class can create the factory items define in ItemsType
  *

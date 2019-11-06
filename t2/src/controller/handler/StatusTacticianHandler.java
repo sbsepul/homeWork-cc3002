@@ -39,14 +39,14 @@ import java.beans.PropertyChangeListener;
  * @version 1.0
  * @since 2.0
  */
-public class ResponseStatusTactician implements PropertyChangeListener {
+public class StatusTacticianHandler implements PropertyChangeListener {
     private GameController controller;
 
     /**
      * Constructor have the reference of the game controller.
      * @param gameController that receive the response
      */
-    public ResponseStatusTactician(GameController gameController){
+    public StatusTacticianHandler(GameController gameController){
         this.controller = gameController;
     }
     /**

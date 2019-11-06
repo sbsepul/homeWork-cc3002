@@ -24,7 +24,6 @@
 
 package model.items.magic;
 
-import model.items.AbstractItem;
 import model.items.IAttack;
 import model.items.IEquipableItem;
 import model.units.IUnit;

@@ -29,7 +29,7 @@ import model.items.IEquipableItem;
 import model.items.factoryItem.BowFactoryItem;
 import model.items.factoryItem.IFactoryItem;
 import model.map.Location;
-import model.units.handlers.ResponseUnitMovement;
+import model.units.handlers.ResponseMovementUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -86,7 +86,7 @@ class UnitNullTest {
         unitNull.changeEquippedItem(item);
         unitNull.giveItem(unitNormal,item);
         unitNull.removeItem(item);
-        unitNull.addObserverMovement(new ResponseUnitMovement(new Tactician("")));
+        unitNull.addObserverMovement(new ResponseMovementUnit(new Tactician("")));
         unitNull.moveTo(new Location(1,0));
         assertNull(unitNull.getLocation());
     }

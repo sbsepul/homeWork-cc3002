@@ -25,7 +25,6 @@
 package controller.handler;
 
 import controller.GameController;
-import controller.Tactician;
 import model.units.IUnit;
 import org.jetbrains.annotations.NotNull;
 

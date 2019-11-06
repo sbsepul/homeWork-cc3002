@@ -28,7 +28,6 @@ import controller.Tactician;
 import model.units.SpecialUnit;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Listener of the special unit's status in the player's inventory

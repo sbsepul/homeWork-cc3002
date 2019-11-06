@@ -24,43 +24,38 @@
 
 package model.units.handlers;
 
-import controller.Tactician;
-import model.units.IUnit;
+import org.junit.jupiter.api.Test;
 
-import java.beans.PropertyChangeEvent;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Handler for the change in the position of the unit
- *
- * @author Sebastian Sepulveda
- * @version 1.0
- * @since 2.0
- */
-public class ResponseUnitMovement implements IResponseToTactician {
-    private Tactician player;
+class ResponseMovementUnitTest extends AbstractResponse{
+    private ResponseMovementUnit responseMovementUnit;
 
-    /**
-     * Constructor have reference to the player in the game
-     * @param tactician that receive the response
-     */
-    public ResponseUnitMovement(Tactician tactician){
-        this.player = tactician;
-    }
-
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        IUnit unitMoved = (IUnit) evt.getSource();
-        player.addUnitMoved(unitMoved);
+    public void setResponse() {
+        responseMovementUnit = new ResponseMovementUnit(tacticianTest);
     }
 
     @Override
-    public Tactician getResponse() {
-        return player;
+    public IResponseToTactician getListener() {
+        return responseMovementUnit;
     }
+
+    /**
+     * # - - - #
+     * # TaN TaE - #
+     * # TN TE - #
+     */
+
+    @Test
+    public void moveUnitTest(){
+
+        getTacticianTest().setCurrentUnit(getNormalUnitTest());
+        getNormalUnitTest().moveTo(getField().getCell(2,0));
+
+        assertEquals(1, getTacticianTest().getMoves().size());
+
+        getTacticianTarget().setCurrentUnit(getNormalUnitTarget());
+    }
+
 }

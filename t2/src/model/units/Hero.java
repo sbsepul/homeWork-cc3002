@@ -24,8 +24,7 @@
 
 package model.units;
 
-import model.units.handlers.ResponseSpecialUnit;
-import model.items.*;
+import model.items.IEquipableItem;
 import model.items.Spear;
 import model.map.Location;
 

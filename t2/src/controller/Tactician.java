@@ -24,19 +24,20 @@
 
 package controller;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.*;
-
 import model.items.IEquipableItem;
 import model.units.IUnit;
 import model.units.NormalUnit;
 import model.units.SpecialUnit;
+import model.units.handlers.ResponseMovementUnit;
 import model.units.handlers.ResponseNormalUnit;
 import model.units.handlers.ResponseSpecialUnit;
-import model.units.handlers.ResponseUnitMovement;
 import org.jetbrains.annotations.NotNull;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tactician represent to a player, so it know
@@ -138,9 +139,9 @@ public class Tactician {
      */
     public void addUnitInventory(@NotNull NormalUnit unitAdded) {
         final ResponseNormalUnit respNormalUnit = new ResponseNormalUnit(this);
-        final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
+        final ResponseMovementUnit responseMovementUnit = new ResponseMovementUnit(this);
         unitAdded.addResponseNormalUnit(respNormalUnit);
-        unitAdded.addObserverMovement(responseUnitMovement);
+        unitAdded.addObserverMovement(responseMovementUnit);
         unitAdded.setTactician(this);
         units.add(unitAdded);
     }
@@ -151,9 +152,9 @@ public class Tactician {
      */
     public void addUnitHero(@NotNull SpecialUnit unitHero) {
         final ResponseSpecialUnit respSpecialUnit = new ResponseSpecialUnit(this);
-        final ResponseUnitMovement responseUnitMovement = new ResponseUnitMovement(this);
+        final ResponseMovementUnit responseMovementUnit = new ResponseMovementUnit(this);
         unitHero.addResponseSpecialUnit(respSpecialUnit);
-        unitHero.addObserverMovement(responseUnitMovement);
+        unitHero.addObserverMovement(responseMovementUnit);
         unitHero.setTactician(this);
         units.add(unitHero);
     }

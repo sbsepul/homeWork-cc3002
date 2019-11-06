@@ -24,8 +24,13 @@
 
 package model.units;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.min;
+import controller.Tactician;
+import model.items.*;
+import model.items.magic.Darkness;
+import model.items.magic.Light;
+import model.items.magic.Soul;
+import model.map.Location;
+import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -34,13 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import controller.Tactician;
-import model.items.*;
-import model.items.magic.Darkness;
-import model.items.magic.Light;
-import model.items.magic.Soul;
-import model.map.Location;
-import org.jetbrains.annotations.NotNull;
+import static java.lang.Math.min;
 
 /**
  * This class represents an abstract unit.

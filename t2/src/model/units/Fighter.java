@@ -24,15 +24,8 @@
 
 package model.units;
 
-import model.items.*;
 import model.items.Axe;
-import model.items.Bow;
-import model.items.Spear;
-import model.items.Staff;
-import model.items.Sword;
-import model.items.magic.Darkness;
-import model.items.magic.Light;
-import model.items.magic.Soul;
+import model.items.IEquipableItem;
 import model.map.Location;
 
 /**

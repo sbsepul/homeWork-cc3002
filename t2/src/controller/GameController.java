@@ -25,20 +25,22 @@
 package controller;
 
 import controller.handler.NormalUnitLoseHandler;
-import controller.handler.ResponseStatusTactician;
 import controller.handler.SpecialUnitLoseHandler;
+import controller.handler.StatusTacticianHandler;
 import controller.handler.UnitMovedHandler;
+import model.items.IEquipableItem;
 import model.items.factoryItem.*;
+import model.map.Field;
 import model.map.factoryMap.FactoryMap;
 import model.map.factoryMap.IFactoryMap;
+import model.units.IUnit;
 import model.units.NormalUnit;
 import model.units.SpecialUnit;
 import model.units.factoryUnit.*;
-import model.items.IEquipableItem;
-import model.map.Field;
-import model.units.IUnit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Controller of the game.
@@ -105,7 +107,7 @@ public class GameController {
       Tactician pTactician = new Tactician(builder.toString());
       pTactician.addObserverNormalUnit(new NormalUnitLoseHandler(this));
       pTactician.addObserverSpecialUnit(new SpecialUnitLoseHandler(this));
-      pTactician.addObserverStatus(new ResponseStatusTactician(this));
+      pTactician.addObserverStatus(new StatusTacticianHandler(this));
       pTactician.addObserverUnitMoved(new UnitMovedHandler(this));
       tacticianList.add(pTactician);
     }
