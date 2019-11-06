@@ -234,9 +234,13 @@ class GameControllerTest {
     controller.addUnitToTactician((NormalUnit) alpaca.createUnit());
     assertEquals(3, controller.getTurnOwner().getUnits().size());
     controller.endTurn();
+    controller.addUnitToTactician((NormalUnit) alpaca.createUnit());
+    controller.addUnitToTactician((NormalUnit) alpaca.createUnit());
+    controller.addUnitToTactician((NormalUnit) alpaca.createUnit());
     controller.endTurn();
-    assertEquals("Player 2",controller.getWinners().get(0));
-    assertEquals(1, controller.getWinners().size());
+    List<String> winners = controller.getWinners();
+    assertTrue(List.of("Player 2", "Player 3").containsAll(winners));
+    assertEquals(2, controller.getWinners().size());
   }
 
 
