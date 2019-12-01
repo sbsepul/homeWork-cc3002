@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Staff extends AbstractHeap implements IHeap {
+public class Staff extends AbstractHeap  {
 
   /**
    * Creates a new Staff item.

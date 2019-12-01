@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.0
  */
 
-public class Soul extends AbstractItemMagic implements IAttack {
+public class Soul extends AbstractItemMagic {
     /**
      * Create a new Soul item
      *

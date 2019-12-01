@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Sword extends AbstractAttack implements IAttack {
+public class Sword extends AbstractAttack {
 
   /**
    * Creates a new Sword.

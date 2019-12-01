@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Sebastian Sepulveda
  * @since 1.0
  */
-public class Spear extends AbstractAttack implements IAttack {
+public class Spear extends AbstractAttack {
 
   /**
    * Creates a new Axe item

@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Sebastian Sepulveda
  * @since
  */
-public class Bow extends AbstractAttack implements IAttack {
+public class Bow extends AbstractAttack {
 
   /**
    * Creates a new bow.

@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.0
  */
 
-public class Light extends AbstractItemMagic implements IAttack {
+public class Light extends AbstractItemMagic {
     /**
      * Create a new Light item
      *
