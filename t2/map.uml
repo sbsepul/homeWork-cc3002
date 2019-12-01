@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model.map</OriginalElement>
+  <nodes>
+    <node x="114.78084415584416" y="152.0">model.map.Field</node>
+    <node x="123.1112012987013" y="0.0">model.map.Location</node>
+    <node x="94.78084415584416" y="228.0">model.map.factoryMap</node>
+    <node x="0.0" y="76.0">model.map.InvalidLocation</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.map.factoryMap" target="model.map.Field">
+      <point x="-58.5" y="-13.0" />
+      <point x="114.28084415584416" y="203.0" />
+      <point x="135.03084415584416" y="203.0" />
+      <point x="-20.25" y="13.0" />
+    </edge>
+    <edge source="model.map.Field" target="model.map.Location">
+      <point x="-10.125" y="-13.0" />
+      <point x="145.15584415584416" y="122.0" />
+      <point x="161.5" y="122.0" />
+      <point x="161.5" y="56.0" />
+      <point x="159.53977272727275" y="56.0" />
+      <point x="-14.571428571428555" y="13.0" />
+    </edge>
+    <edge source="model.map.InvalidLocation" target="model.map.Location">
+      <point x="37.75" y="-13.0" />
+      <point x="113.25" y="56.0" />
+      <point x="144.96834415584416" y="56.0" />
+      <point x="-29.14285714285714" y="13.0" />
+    </edge>
+    <edge source="model.map.factoryMap" target="model.map.Location">
+      <point x="58.5" y="-13.0" />
+      <point x="231.28084415584416" y="203.0" />
+      <point x="217.3336038961039" y="203.0" />
+      <point x="43.71428571428572" y="13.0" />
+    </edge>
+    <edge source="model.map.Field" target="model.map.InvalidLocation">
+      <point x="-30.375" y="-13.0" />
+      <point x="124.90584415584416" y="132.0" />
+      <point x="75.5" y="132.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.map.factoryMap" target="model.map.factoryMap">
+      <point x="-39.0" y="13.0" />
+      <point x="133.78084415584416" y="274.0" />
+      <point x="74.78084415584416" y="274.0" />
+      <point x="74.78084415584416" y="247.5" />
+      <point x="-78.0" y="6.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="142.0" y="157.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

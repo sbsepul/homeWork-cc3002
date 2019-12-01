@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model.items</OriginalElement>
+  <nodes>
+    <node x="0.0" y="76.0">model.items.IHeap</node>
+    <node x="523.0" y="425.0">model.items.BowTest</node>
+    <node x="408.30263157894734" y="76.0">model.items.IAttack</node>
+    <node x="397.30263157894734" y="258.0">model.items.Spear</node>
+    <node x="208.0" y="496.0">model.items.ItemNullTest</node>
+    <node x="425.25" y="329.0">model.items.AbstractTestItem</node>
+    <node x="244.00000000000003" y="425.0">model.items.StaffTest</node>
+    <node x="129.0" y="425.0">model.items.AxeTest</node>
+    <node x="585.3026315789473" y="258.0">model.items.Sword</node>
+    <node x="14.898684210526255" y="258.0">model.items.Staff</node>
+    <node x="889.0" y="425.0">model.items.LightTest</node>
+    <node x="324.55263157894734" y="172.0">model.items.AbstractAttack</node>
+    <node x="161.6736842105263" y="76.0">model.items.AbstractItem</node>
+    <node x="256.30263157894734" y="258.0">model.items.magic</node>
+    <node x="523.3026315789474" y="76.0">model.items.ItemNull</node>
+    <node x="498.30263157894734" y="258.0">model.items.Bow</node>
+    <node x="767.0" y="425.0">model.items.SoulTest</node>
+    <node x="32.125" y="172.0">model.items.AbstractHeap</node>
+    <node x="638.0" y="425.0">model.items.SwordTest</node>
+    <node x="0.0" y="496.0">model.items.factoryItem</node>
+    <node x="169.30263157894734" y="258.0">model.items.Axe</node>
+    <node x="373.0" y="425.0">model.items.DarknessTest</node>
+    <node x="240.844298245614" y="0.0">model.items.IEquipableItem</node>
+    <node x="0.0" y="425.0">model.items.SpearTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.items.Spear" target="model.items.AbstractAttack">
+      <point x="-20.25" y="-13.0" />
+      <point x="417.55263157894734" y="238.0" />
+      <point x="396.55263157894734" y="238.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.items.magic" target="model.items.AbstractAttack">
+      <point x="30.25" y="-13.0" />
+      <point x="347.05263157894734" y="238.0" />
+      <point x="367.75263157894733" y="238.0" />
+      <point x="-28.80000000000001" y="13.0" />
+    </edge>
+    <edge source="model.items.Staff" target="model.items.AbstractHeap">
+      <point x="20.25" y="-13.0" />
+      <point x="75.64868421052626" y="238.0" />
+      <point x="97.125" y="238.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.items.SoulTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="818.0" y="385.0" />
+      <point x="553.625" y="385.0" />
+      <point x="49.375" y="13.0" />
+    </edge>
+    <edge source="model.items.AbstractAttack" target="model.items.AbstractItem">
+      <point x="-36.0" y="-13.0" />
+      <point x="360.55263157894734" y="122.0" />
+      <point x="259.1736842105263" y="122.0" />
+      <point x="32.5" y="13.0" />
+    </edge>
+    <edge source="model.items.LightTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="943.5" y="375.0" />
+      <point x="573.375" y="375.0" />
+      <point x="69.125" y="13.0" />
+    </edge>
+    <edge source="model.items.Bow" target="model.items.AbstractAttack">
+      <point x="-16.75" y="-13.0" />
+      <point x="515.0526315789473" y="228.0" />
+      <point x="425.35263157894735" y="228.0" />
+      <point x="28.80000000000001" y="13.0" />
+    </edge>
+    <edge source="model.items.magic" target="model.items.IAttack">
+      <point x="-30.25" y="-13.0" />
+      <point x="286.55263157894734" y="142.0" />
+      <point x="432.05263157894734" y="142.0" />
+      <point x="-23.75" y="13.0" />
+    </edge>
+    <edge source="model.items.Axe" target="model.items.AbstractAttack">
+      <point x="16.75" y="-13.0" />
+      <point x="219.55263157894734" y="238.0" />
+      <point x="338.9526315789473" y="238.0" />
+      <point x="-57.60000000000002" y="13.0" />
+    </edge>
+    <edge source="model.items.AbstractAttack" target="model.items.IAttack">
+      <point x="36.0" y="-13.0" />
+      <point x="432.55263157894734" y="152.0" />
+      <point x="447.88596491228066" y="152.0" />
+      <point x="-7.916666666666686" y="13.0" />
+    </edge>
+    <edge source="model.items.Sword" target="model.items.AbstractAttack">
+      <point x="-20.25" y="-13.0" />
+      <point x="605.5526315789473" y="218.0" />
+      <point x="454.15263157894736" y="218.0" />
+      <point x="57.60000000000002" y="13.0" />
+    </edge>
+    <edge source="model.items.DarknessTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="438.0" y="405.0" />
+      <point x="494.375" y="405.0" />
+      <point x="-9.875" y="13.0" />
+    </edge>
+    <edge source="model.items.SpearTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="54.5" y="375.0" />
+      <point x="435.125" y="375.0" />
+      <point x="-69.125" y="13.0" />
+    </edge>
+    <edge source="model.items.Axe" target="model.items.IAttack">
+      <point x="-16.75" y="-13.0" />
+      <point x="186.05263157894734" y="132.0" />
+      <point x="416.219298245614" y="132.0" />
+      <point x="-39.583333333333314" y="13.0" />
+    </edge>
+    <edge source="model.items.IHeap" target="model.items.IEquipableItem">
+      <point x="0.0" y="-13.0" />
+      <point x="40.5" y="46.0" />
+      <point x="258.844298245614" y="46.0" />
+      <point x="-54.0" y="13.0" />
+    </edge>
+    <edge source="model.items.Bow" target="model.items.IAttack">
+      <point x="16.75" y="-13.0" />
+      <point x="548.5526315789473" y="142.0" />
+      <point x="479.55263157894734" y="142.0" />
+      <point x="23.75" y="13.0" />
+    </edge>
+    <edge source="model.items.AbstractHeap" target="model.items.IHeap">
+      <point x="-32.5" y="-13.0" />
+      <point x="64.625" y="152.0" />
+      <point x="60.75" y="152.0" />
+      <point x="20.25" y="13.0" />
+    </edge>
+    <edge source="model.items.ItemNull" target="model.items.IEquipableItem">
+      <point x="0.0" y="-13.0" />
+      <point x="574.3026315789474" y="46.0" />
+      <point x="366.84429824561397" y="46.0" />
+      <point x="53.99999999999997" y="13.0" />
+    </edge>
+    <edge source="model.items.AxeTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="176.5" y="385.0" />
+      <point x="454.875" y="385.0" />
+      <point x="-49.375" y="13.0" />
+    </edge>
+    <edge source="model.items.StaffTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="298.5" y="395.0" />
+      <point x="474.625" y="395.0" />
+      <point x="-29.625" y="13.0" />
+    </edge>
+    <edge source="model.items.Staff" target="model.items.IHeap">
+      <point x="-20.25" y="-13.0" />
+      <point x="35.148684210526255" y="238.0" />
+      <point x="19.0" y="238.0" />
+      <point x="19.0" y="152.0" />
+      <point x="20.25" y="152.0" />
+      <point x="-20.25" y="13.0" />
+    </edge>
+    <edge source="model.items.AbstractHeap" target="model.items.AbstractItem">
+      <point x="32.5" y="-13.0" />
+      <point x="129.625" y="122.0" />
+      <point x="194.1736842105263" y="122.0" />
+      <point x="-32.5" y="13.0" />
+    </edge>
+    <edge source="model.items.AbstractItem" target="model.items.IEquipableItem">
+      <point x="0.0" y="-13.0" />
+      <point x="226.6736842105263" y="56.0" />
+      <point x="294.844298245614" y="56.0" />
+      <point x="-18.0" y="13.0" />
+    </edge>
+    <edge source="model.items.IAttack" target="model.items.IEquipableItem">
+      <point x="0.0" y="-13.0" />
+      <point x="455.80263157894734" y="56.0" />
+      <point x="330.844298245614" y="56.0" />
+      <point x="18.0" y="13.0" />
+    </edge>
+    <edge source="model.items.SwordTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="692.5" y="395.0" />
+      <point x="533.875" y="395.0" />
+      <point x="29.625" y="13.0" />
+    </edge>
+    <edge source="model.items.Spear" target="model.items.IAttack">
+      <point x="20.25" y="-13.0" />
+      <point x="458.05263157894734" y="238.0" />
+      <point x="479.05263157894734" y="238.0" />
+      <point x="479.05263157894734" y="152.0" />
+      <point x="463.719298245614" y="152.0" />
+      <point x="7.916666666666686" y="13.0" />
+    </edge>
+    <edge source="model.items.Sword" target="model.items.IAttack">
+      <point x="20.25" y="-13.0" />
+      <point x="646.0526315789473" y="132.0" />
+      <point x="495.3859649122807" y="132.0" />
+      <point x="39.58333333333337" y="13.0" />
+    </edge>
+    <edge source="model.items.BowTest" target="model.items.AbstractTestItem">
+      <point x="0.0" y="-13.0" />
+      <point x="570.5" y="405.0" />
+      <point x="514.125" y="405.0" />
+      <point x="9.875" y="13.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.888015717092338" x="499.0" y="261.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

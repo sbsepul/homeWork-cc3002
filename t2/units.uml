@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model.units</OriginalElement>
+  <nodes>
+    <node x="614.829761904762" y="162.0">model.units.NormalUnit</node>
+    <node x="161.68452380952385" y="314.0">model.units.Alpaca</node>
+    <node x="269.68452380952385" y="314.0">model.units.Fighter</node>
+    <node x="380.0" y="461.0">model.units.AbstractTestUnit</node>
+    <node x="123.41666666666663" y="162.0">model.units.AbstractUnitCombative</node>
+    <node x="774.9119047619047" y="86.0">model.units.AbstractUnit</node>
+    <node x="691.7464285714286" y="238.0">model.units.AbstractUnitHealingNormal</node>
+    <node x="506.68452380952385" y="314.0">model.units.Archer</node>
+    <node x="15.184523809523853" y="238.0">model.units.AbstractSpecialUnit</node>
+    <node x="404.5" y="385.0">model.units.ITestUnit</node>
+    <node x="349.68452380952385" y="238.0">model.units.AbstractNormalUnit</node>
+    <node x="395.0" y="618.0">model.units.UnitNullTest</node>
+    <node x="850.4119047619047" y="162.0">model.units.UnitNull</node>
+    <node x="614.6845238095239" y="314.0">model.units.SwordMaster</node>
+    <node x="537.0" y="547.0">model.units.ClericTest</node>
+    <node x="572.0595238095239" y="0.0">model.units.IUnit</node>
+    <node x="0.0" y="618.0">model.units.factoryUnit</node>
+    <node x="758.2464285714286" y="314.0">model.units.Cleric</node>
+    <node x="823.0" y="547.0">model.units.SwordMasterTest</node>
+    <node x="265.0" y="547.0">model.units.ArcherTest</node>
+    <node x="122.0" y="547.0">model.units.FighterTest</node>
+    <node x="673.0" y="547.0">model.units.SorcererTest</node>
+    <node x="0.0" y="86.0">model.units.SpecialUnit</node>
+    <node x="67.68452380952385" y="314.0">model.units.Hero</node>
+    <node x="401.0" y="547.0">model.units.AlpacaTest</node>
+    <node x="0.0" y="547.0">model.units.HeroTest</node>
+    <node x="384.68452380952385" y="314.0">model.units.Sorcerer</node>
+    <node x="208.0" y="618.0">model.units.handlers</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.units.ArcherTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="323.0" y="527.0" />
+      <point x="436.42857142857144" y="527.0" />
+      <point x="-22.571428571428555" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractSpecialUnit" target="model.units.SpecialUnit">
+      <point x="-44.75" y="-13.0" />
+      <point x="59.93452380952385" y="213.0" />
+      <point x="61.5" y="213.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractUnitHealingNormal" target="model.units.AbstractUnit">
+      <point x="55.25" y="-13.0" />
+      <point x="857.4964285714286" y="213.0" />
+      <point x="839.9119047619047" y="213.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractUnitCombative" target="model.units.AbstractUnit">
+      <point x="48.25" y="-13.0" />
+      <point x="268.16666666666663" y="137.0" />
+      <point x="796.5785714285714" y="137.0" />
+      <point x="-43.33333333333337" y="13.0" />
+    </edge>
+    <edge source="model.units.Alpaca" target="model.units.AbstractNormalUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="205.68452380952385" y="284.0" />
+      <point x="366.8845238095238" y="284.0" />
+      <point x="-68.80000000000001" y="13.0" />
+    </edge>
+    <edge source="model.units.Archer" target="model.units.AbstractNormalUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="550.6845238095239" y="294.0" />
+      <point x="470.08452380952383" y="294.0" />
+      <point x="34.400000000000034" y="13.0" />
+    </edge>
+    <edge source="model.units.SpecialUnit" target="model.units.IUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="61.5" y="56.0" />
+      <point x="580.1595238095239" y="56.0" />
+      <point x="-32.39999999999998" y="13.0" />
+    </edge>
+    <edge source="model.units.Cleric" target="model.units.AbstractUnitHealingNormal">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.ClericTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="595.0" y="527.0" />
+      <point x="481.57142857142856" y="527.0" />
+      <point x="22.571428571428555" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractUnit" target="model.units.IUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="839.9119047619047" y="56.0" />
+      <point x="628.7595238095239" y="56.0" />
+      <point x="16.200000000000045" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractTestUnit" target="model.units.ITestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractNormalUnit" target="model.units.NormalUnit">
+      <point x="43.0" y="-13.0" />
+      <point x="478.68452380952385" y="213.0" />
+      <point x="643.829761904762" y="213.0" />
+      <point x="-29.0" y="13.0" />
+    </edge>
+    <edge source="model.units.UnitNull" target="model.units.IUnit">
+      <point x="25.5" y="-13.0" />
+      <point x="926.9119047619047" y="46.0" />
+      <point x="644.9595238095238" y="46.0" />
+      <point x="32.39999999999998" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractNormalUnit" target="model.units.AbstractUnitCombative">
+      <point x="-43.0" y="-13.0" />
+      <point x="392.68452380952385" y="213.0" />
+      <point x="268.16666666666663" y="213.0" />
+      <point x="48.25" y="13.0" />
+    </edge>
+    <edge source="model.units.AlpacaTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.SwordMaster" target="model.units.AbstractNormalUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="676.1845238095239" y="284.0" />
+      <point x="504.4845238095238" y="284.0" />
+      <point x="68.79999999999995" y="13.0" />
+    </edge>
+    <edge source="model.units.Hero" target="model.units.AbstractSpecialUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.SwordMasterTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="898.5" y="507.0" />
+      <point x="526.7142857142857" y="507.0" />
+      <point x="67.71428571428567" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractSpecialUnit" target="model.units.AbstractUnitCombative">
+      <point x="44.75" y="-13.0" />
+      <point x="149.43452380952385" y="213.0" />
+      <point x="171.66666666666663" y="213.0" />
+      <point x="-48.25" y="13.0" />
+    </edge>
+    <edge source="model.units.Fighter" target="model.units.AbstractNormalUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="317.18452380952385" y="294.0" />
+      <point x="401.2845238095239" y="294.0" />
+      <point x="-34.39999999999998" y="13.0" />
+    </edge>
+    <edge source="model.units.HeroTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="51.0" y="507.0" />
+      <point x="391.2857142857143" y="507.0" />
+      <point x="-67.71428571428572" y="13.0" />
+    </edge>
+    <edge source="model.units.FighterTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="183.5" y="517.0" />
+      <point x="413.85714285714283" y="517.0" />
+      <point x="-45.14285714285717" y="13.0" />
+    </edge>
+    <edge source="model.units.NormalUnit" target="model.units.IUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="672.829761904762" y="66.0" />
+      <point x="612.5595238095239" y="66.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractUnitCombative" target="model.units.IUnit">
+      <point x="-48.25" y="-13.0" />
+      <point x="171.66666666666663" y="66.0" />
+      <point x="596.3595238095238" y="66.0" />
+      <point x="-16.200000000000045" y="13.0" />
+    </edge>
+    <edge source="model.units.SorcererTest" target="model.units.AbstractTestUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="738.0" y="517.0" />
+      <point x="504.1428571428571" y="517.0" />
+      <point x="45.14285714285711" y="13.0" />
+    </edge>
+    <edge source="model.units.Sorcerer" target="model.units.AbstractNormalUnit">
+      <point x="0.0" y="-13.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="model.units.AbstractUnitHealingNormal" target="model.units.NormalUnit">
+      <point x="-55.25" y="-13.0" />
+      <point x="746.9964285714286" y="213.0" />
+      <point x="701.829761904762" y="213.0" />
+      <point x="29.0" y="13.0" />
+    </edge>
+    <edge source="model.units.UnitNull" target="model.units.AbstractUnit">
+      <point x="-25.5" y="-13.0" />
+      <point x="875.9119047619047" y="137.0" />
+      <point x="883.2452380952382" y="137.0" />
+      <point x="43.33333333333337" y="13.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8780120481927711" x="487.0" y="322.0" />
+  <SelectedNodes>
+    <node>model.units.Sorcerer</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

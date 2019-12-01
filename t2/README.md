@@ -353,3 +353,8 @@ Para revisar el `coverage` en los test se debe presionar botón derecho sobre el
 * La unidad del jugador actual se puede mover encima de la unidad de otro jugador? o debe ser una restricción del juego?
 * Al selecccionar una unidad esta debe pertenecer al equipo del jugador. No deberia poder seleccionar a otra unidad que no sea de su equipo. MENTIRA, la unidad seleccionada no necesariamente pertenece al jugador actual
 * Se puede asumir que los `Tactician` deben partir con 1 unidad minimo? yo asumí que pueden estar sin unidades porque en los test proporcionados no hay una asignación de unidades.
+
+
+
+
+

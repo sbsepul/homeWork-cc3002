@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>controller</OriginalElement>
+  <nodes>
+    <node x="196.98828125" y="248.0">controller.TacticianTest</node>
+    <node x="109.30078125" y="172.0">controller.GameController</node>
+    <node x="67.29296875" y="86.0">controller.handler</node>
+    <node x="169.81640625" y="0.0">controller.Tactician</node>
+    <node x="0.0" y="248.0">controller.GameControllerTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="controller.TacticianTest" target="controller.GameController">
+      <point x="-17.125" y="-13.0" />
+      <point x="248.36328125" y="223.0" />
+      <point x="235.30078125" y="223.0" />
+      <point x="54.0" y="13.0" />
+    </edge>
+    <edge source="controller.GameController" target="controller.handler">
+      <point x="-60.0" y="-13.0" />
+      <point x="121.30078125" y="152.0" />
+      <point x="89.79296875" y="152.0" />
+      <point x="-45.0" y="13.0" />
+    </edge>
+    <edge source="controller.handler" target="controller.Tactician">
+      <point x="0.0" y="-13.0" />
+      <point x="134.79296875" y="66.0" />
+      <point x="203.87890625" y="66.0" />
+      <point x="-20.4375" y="13.0" />
+    </edge>
+    <edge source="controller.TacticianTest" target="controller.Tactician">
+      <point x="51.375" y="-13.0" />
+      <point x="316.86328125" y="223.0" />
+      <point x="296.08984375" y="223.0" />
+      <point x="296.08984375" y="56.0" />
+      <point x="272.00390625" y="56.0" />
+      <point x="47.6875" y="13.0" />
+    </edge>
+    <edge source="controller.GameControllerTest" target="controller.GameController">
+      <point x="64.5" y="-13.0" />
+      <point x="150.5" y="223.0" />
+      <point x="163.30078125" y="223.0" />
+      <point x="-18.0" y="13.0" />
+    </edge>
+    <edge source="controller.handler" target="controller.GameController">
+      <point x="45.0" y="13.0" />
+      <point x="179.79296875" y="152.0" />
+      <point x="169.30078125" y="152.0" />
+      <point x="-12.0" y="-13.0" />
+    </edge>
+    <edge source="controller.GameControllerTest" target="controller.Tactician">
+      <point x="-21.5" y="-13.0" />
+      <point x="64.5" y="223.0" />
+      <point x="40.50390625" y="223.0" />
+      <point x="40.50390625" y="56.0" />
+      <point x="190.25390625" y="56.0" />
+      <point x="-34.0625" y="13.0" />
+    </edge>
+    <edge source="controller.GameController" target="controller.Tactician">
+      <point x="12.0" y="-13.0" />
+      <point x="193.30078125" y="132.0" />
+      <point x="212.79296875" y="132.0" />
+      <point x="212.79296875" y="66.0" />
+      <point x="217.50390625" y="66.0" />
+      <point x="-6.8125" y="13.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="144.5" y="119.5" />
+  <SelectedNodes>
+    <node>controller.TacticianTest</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
