@@ -266,7 +266,7 @@ Un jugador debe tener la capacidad de **ver los datos** de sus unidades (HP curr
 
 #### Unidades de Tactician
 
-La pieza más importante de un Tactician es su heroe. Como se menciona en [Mejoras respecto a v1.0](#Mejoras respecto a v1.0) esta unidad está clasificada como `SpecialUnit`.
+La pieza más importante de un Tactician es su héroe. Como se menciona en [Mejoras respecto a v1.0](#Mejoras respecto a v1.0) esta unidad está clasificada como `SpecialUnit`.
 
 Si el héroe de un jugador es derrotado en el turno de cualquier otro, entonces este jugador **pierde la partida y se retira del juego** junto con todas sus unidades. Si el héroe es derrotado en el turno del mismo jugador al que pertenece entonces **se termina su turno antes de ser excluido de la partida**. Un usuario puede tener más de un héroe en juego, en cuyo caso pierde la partida si cualquiera de estos es derrotado.
 
@@ -274,15 +274,15 @@ Si el `Tactician` solo posee `NormalUnit` entonces perderá la partida al moment
 
 ##### Restricciones en el juego
 
-La unidad de un `Tactician` no puede intercambiar items con otra unidad que no esté en el inventario de unidades del `Tactician` correspondiente.
+* La unidad de un `Tactician` no puede intercambiar items con otra unidad que no esté en el inventario de unidades del `Tactician` correspondiente.
 
-Las unidades que combaten no pueden atacar a las unidades del mismo `Tactician`.
+* Las unidades que combaten no pueden atacar a las unidades del mismo `Tactician`.
 
-Las unidades que recuperan no pueden recuperar a las unidades de otro `Tactician`.
+* Las unidades que recuperan no pueden recuperar a las unidades de otro `Tactician`.
 
-Las unidades no pueden moverse hacia una posición ocupada por otra unidad.
+* Las unidades no pueden moverse hacia una posición ocupada por otra unidad.
 
-Se asume que las unidades pueden pasar por sobre cualquier otra al momento de moverse.
+* Se asume que las unidades pueden pasar por sobre cualquier otra al momento de moverse.
 
 ### Test
 
@@ -339,20 +339,6 @@ En `getWinnersMaxUnit()` se complementa a `getWinners()` para verificar que los 
 ## Modo de uso
 
 Para revisar el `coverage` en los test se debe presionar botón derecho sobre el package que contiene a los test. Por ejemplo, para revisar los test de `Unit` , `Item`, `Map` hay que seleccionar al package `model` que los contiene. Lo mismo hay que realizar con `controller`. En ambos paquetes están presentes los test para los `Listener` y las nuevas clases creadas.
-
-## Dudas
-
-
-
-* El lugar del mapa que se le asigna a un Tactician se debe realizar en la siguiente entrega?
-* Asumiendo que tener 0 unidades significa perder, pensé en crear un hero en el constructor de tactician para que tenga sentido que el juego no inicie con todos perdiendo, por ejemplo si el jugador no selecciona a un hero al inicio. Tengo la duda si esto esta bien y si el area que se le asigna al jugador debe ser aleatorio o eso es algo arbitrario? 
-
-* Una unidad puede atacar e intercambiar solo 1 vez en las siguientes entregas? un Cleric puede recuperar a toda unidad que quiera o tiene que ser de su equipo?  Se puede intercambiar con quien sea? https://www.u-cursos.cl/ingenieria/2019/2/CC3002/1/foro/o/23985016
-* Como se añade un item a una unidad?
-* el controller debe poder mover todo lo que quiera cuando quiera o depende del jugador que esta jugando actualmente?? https://www.u-cursos.cl/ingenieria/2019/2/CC3002/1/foro/o/23994416
-* La unidad del jugador actual se puede mover encima de la unidad de otro jugador? o debe ser una restricción del juego?
-* Al selecccionar una unidad esta debe pertenecer al equipo del jugador. No deberia poder seleccionar a otra unidad que no sea de su equipo. MENTIRA, la unidad seleccionada no necesariamente pertenece al jugador actual
-* Se puede asumir que los `Tactician` deben partir con 1 unidad minimo? yo asumí que pueden estar sin unidades porque en los test proporcionados no hay una asignación de unidades.
 
 
 
