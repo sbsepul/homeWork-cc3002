@@ -78,3 +78,99 @@ Respecto a la creacion de unidades, en mi implementación estoy ocupando un fact
 Mi duda va porque cuando le quiero dar a un tactician cierta unidad lo que hago es crear un selectUnit(TipodeUnidad) y luego con eso basta para crear la unidad, pero nose si eso esta bien, porque si bien no hago instance of ni hago if else, le paso de parametro un "tipo" asumiendo que un jugador va a seleccionar una unidad sabiendo el tipo de unidad que hay, y en particular su nombre.
 
 Otra idea que tenia era hacer double dispatch, creando metodos selectUnitTipo() en tactician, y que en un parametro global que sea fabrica, se cambie el valor a la fabricaArrow() por ejemplo, de esta manera se puede mandar un mensaje a controller para que cambie el tipo de fabrica que se selecciona, luego crea la unidad respecto al cambio que se le realiza. Este proceso es mucho más complicado y engorrozo porque habria que hacer un firePropertyChange para avisar que se cambia la fabrica y al momento de cambiarla crear esa unidad.
+
+"Informe: 
+No hay un análisis de la complejidad del algoritmo"
+
+"Informe: 
+(-1,5) Análisis de costo computacional ambiguo. 
+Faltó concluir la solución del problema, o sugerir alguna solución.
+(-1,0) No se presentan resultados"
+
+"Informe: 
+(-1,0) No añade costo computacional. 
+Observación: Como se señala en el informe, test no pasa para una gran cantidad de cursos"
+
+
+"Código:
+(-0,5) Duplicación de números en salida"
+
+
+"Informe:
+(-0.5) Uso excesivo de primero persona
+(-0,5) No se presenta anexo
+(-1,5) En la solución del informe no se explica complejidad de los métodos implementados. 
+Además no se evidencia el resultado de cada método con test.
+(-1,5) No se presentan resultados generales de lo solicitado.
+
+Código:
+(-4,0) No es posible probar métodos por partes. No se entrega el resultado solicitado"
+
+
+"Informe:
+(-1,5) En la solución del informe no se explica complejidad de los métodos implementados. 
+Además no se evidencia el resultado de cada método con test.
+(-1,5) No se presentan resultados generales de lo solicitado.
+
+Código:
+(-4,0) No se realizan test de métodos, por tanto no es posible verificar su utilidad. 
+	   No se entrega el resultado solicitado."
+
+
+"Informe:
+(-2,5) No se presenta solución al problema.
+(-1,5) No hay resultados del código.
+
+Código:
+(-4,0) No se entrega el resultado solicitado."
+
+
+"Informe:
+(-0,5) Uso excesivo de primera persona
+(-0,5) Descripción del problema exiguo. Falta explicar casos bordes.
+(-1,5) En el enunciado se describe una forma eficiente de realizar la tarea. 
+El objetivo era realizarlo con listas enlazadas.  
+No se añade complejidad de algoritmo.
+(-1,5) No se presentan resultados
+
+Código:
+(-3,0) Sólo se entrega resultado requerido en test de enunciado, se cae en los otros test. 
+Problema con eficiencia en el código.
+"
+
+"Informe:
+(-0,5) No hay un orden en las secciones del informe
+(-2,5) No se describe cómo se llegó a la solución del problema. 
+(-1,5) No existen resultados de lo solicitado.
+
+Código:
+(-4,0) No se resuelve el problema. El algoritmo no entrega el resultado esperado."
+
+
+"No se presenta informe.
+
+Código:
+(-4,0) No se resuelve el problema. No hay una explicación de lo que hace cada función.
+(-1,0) No existe funcionalidad en el código"
+
+
+"Informe: 
+(-1,0) No hay análisis en la complejidad del algoritmo.
+(-0,5) No se incluye una conclusión de cómo se soluciona lo pedido.
+(-1,5) No incluye resultados
+
+
+Código:
+(-4,0) No se entrega el resultado solicitado.
+"
+
+
+"Informe:
+(-0,5) Faltó explicar más en cómo se llegó a la solución, y cual es uso de cada función creada. Cómo se obtuvo el costo de complejidad?
+(-0,5) No se añaden resultados de otros casos o casos bordes
+
+Código:
+(-3,0) Se obtiene un error al probar el código,
+sin embargo existe resultados en el informe.
+Favor explicar cómo se ejecuta el código.
+"

@@ -2,27 +2,12 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement>model.map</OriginalElement>
-  <nodes>
-    <node x="0.0" y="481.0">model.map.FieldTest</node>
-    <node x="350.0" y="0.0">model.map.Field</node>
-    <node x="0.0" y="0.0">model.map.Location</node>
-    <node x="258.0" y="481.0">model.map.LocationTest</node>
-    <node x="50.5" y="364.0">model.map.InvalidLocation</node>
-  </nodes>
+  <nodes />
   <notes />
-  <edges>
-    <edge source="model.map.InvalidLocation" target="model.map.Location">
-      <point x="0.0" y="-36.0" />
-      <point x="0.0" y="157.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="390.0" y="182.5" />
-  <SelectedNodes>
-    <node>model.map.Location</node>
-  </SelectedNodes>
-  <Categories>
-    <Category>Methods</Category>
-  </Categories>
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="501.0" y="291.5" />
+  <SelectedNodes />
+  <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
