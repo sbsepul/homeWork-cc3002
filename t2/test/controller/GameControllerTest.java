@@ -85,7 +85,7 @@ class GameControllerTest {
     Field gameMap = controller.getGameMap();
     assertEquals(7, gameMap.getSize()); // getSize deben definirlo || ok
     assertTrue(controller.getGameMap().isConnected());
-    Random testRandom = new Random(randomSeed);
+      Random testRandom = new Random(randomSeed);
      // System.out.println(gameMap.toString());
 
     controller.setSeedMap(testRandom.nextLong());
